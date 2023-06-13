@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification</title>
+    <link rel="stylesheet" href="../css/root.css">
+    <link rel="stylesheet" href="../css/notification.css">
+    <script src="../script/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <p>Notification</p>
+            <p>June 12 Mon Transactions</p>
+        </div>
+        <div class="notifications">
+
+            <div class="entry">
+                <div class="entryImages">
+                    <img src="../notification_img/grocery.jpg" alt="An Image">
+                </div>
+                <div class="info">
+                    <p>ROBINSON MALL</p>
+                    <div class="details">
+                        <div class="names">
+                            <p>discount:</p>
+                            <p>price:</p>
+                            <p>time:</p>
+                        </div>
+                        <div class="amounts">
+                            <p>20%</p>
+                            <p>P1200</p>
+                            <p>2:43PM</p>
+                        </div>
+                    </div>
+                    <button class="paynow " id="paynowBtn">PAY NOW</button>
+                </div>
+            </div>
+            <div class="entry">
+                <div class="entryImages">
+                    <img src="../notification_img/receipt.jpeg" alt="An Image">
+                </div>
+                <div class="info">
+                    <p>ROBINSON MALL</p>
+                    <div class="details">
+                        <div class="names">
+                            <p>discount:</p>
+                            <p>price:</p>
+                            <p>time:</p>
+                        </div>
+                        <div class="amounts">
+                            <p>20%</p>
+                            <p>P1200</p>
+                            <p>2:43PM</p>
+                        </div>
+                    </div>
+                    <button class=" completed" id="paynowBtn">COMPLETED</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttonNav">
+            <button class="active" onclick="goPage('notification')">NOTIFICATION</button>
+            <button class="notActive"onclick="goPage('profile')">PROFILE</button>
+        </div>
+        
+    </div>
+</body>
+</html>

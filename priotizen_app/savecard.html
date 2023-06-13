@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="card-container">
+        <!-- Your profile card content here -->
+      </div>
+      
+      <button id="download-button">Download</button>
+      
+      <script>
+        const downloadButton = document.getElementById('download-button');
+        const cardContainer = document.getElementById('card-container');
+      
+        downloadButton.addEventListener('click', function () {
+          const canvas = document.createElement('canvas');
+          canvas.width = cardContainer.offsetWidth;
+          canvas.height = cardContainer.offsetHeight;
+      
+          const context = canvas.getContext('2d');
+          context.drawSvg(cardContainer.innerHTML, 0, 0, canvas.width, canvas.height);
+      
+          const link = document.createElement('a');
+          link.href = canvas.toDataURL();
+          link.download = 'profile-card.png';
+      
+          link.click();
+        });
+      </script>
+      
+</body>
+</html>

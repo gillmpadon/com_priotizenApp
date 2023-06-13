@@ -1,0 +1,23 @@
+body{
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.container{
+    height: 13em;
+    width: 15em;
+    margin: auto;
+    text-align: center;
+    color: white;
+    line-height: 0;
+}
+.container svg{
+    height: 10em;
+    width: 10em;
+}
+

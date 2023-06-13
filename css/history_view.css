@@ -1,0 +1,81 @@
+body{
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+.container{
+    height: 99%;
+    width: 100%;
+    margin: auto;
+}
+.head{
+    width: 90%;
+    color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+}
+.svgHead{
+    color:var(--svgColor);
+    background-color: var(--inputDiv);
+    height: 2em;
+    width: 2em;
+    border-radius: 150%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.svgHead svg{
+    height: 1em;
+}
+
+
+/* dashboard */
+.dashboard{
+    height: 90%;
+    width: 95%;
+    margin: auto;
+    overflow: auto;
+}
+.receipt{
+    height: 20%;
+    text-transform: uppercase;
+}
+
+#title{
+    text-align: center;
+    margin: 0;
+    font-size: 1.6em;
+    color: white;
+}
+.info{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.info p{
+    margin: 0;
+    color: var(--svgColor);
+    font-size: 1.3em;
+}
+.images{
+    height: 75%;
+    margin-top: 1em;
+}
+.images img{
+    height: 45%;
+    width: 100%;
+    margin-bottom: 1em;
+    border-radius: .5em;
+}
+
+/* responsiveness */
+@media screen and (min-width: 600px) {
+    .container{
+        width: 40em;
+    }
+}

@@ -1,0 +1,123 @@
+body{
+    background-color: var(--bg);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.container{
+    width: 90%;
+    margin: auto;
+    height: 98%;
+    margin-top: 10%;
+    position: relative;
+}
+.head{
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+.avatar{
+    height: 13em;
+    width: 11em;
+    color: white;
+    line-height: 0;
+    margin: auto;
+    text-align: center;
+}
+.avatar img{
+    height: 9em;
+    width: 9em;
+    border-radius: 150%;
+    object-fit: cover;
+}
+.avatar p:first-of-type{
+    font-size: 1.5em;
+}
+.avatar p:last-of-type{
+    color: var(--svgColor);
+}
+
+/* dashboard */
+.dashboard{
+    height: 40%;
+    margin-bottom: 1em;
+}
+.entry{
+    width: 90%;
+    margin: auto;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--svgColor);
+    color: white;
+    margin-bottom: .4em;
+
+}
+.entry svg{
+    height: 2em;
+}
+.entry svg path{
+    fill: var(--svgColor);
+}
+.entry svg:last-of-type:not(:first-child) path {
+    fill: none;
+}
+/* button Nav */
+.buttonNav{
+    height: 10%;
+    width: 80%;
+    display: flex;
+    position: absolute;
+    bottom: 1em;
+    left: 10%;
+}
+.buttonNav button{
+    width: 49.5%;
+    border: none;
+    color: white;
+}
+.buttonNav button:first-child{
+    border-top-left-radius: .5em;
+    border-bottom-left-radius: .5em;
+}
+.buttonNav button:last-child{
+    border-top-right-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+.active{
+    background-color: var(--buttonActive);
+}
+.notActive{
+    background-color: var(--inputDiv);
+}
+
+.notFill svg path:first-of-type{
+    fill: none;
+}
+
+/* responsiveness */
+@media screen and (min-width: 600px) {
+       /* notification */
+       .container{
+        width: 40em;
+        margin-top: 2%;
+    }
+    .entry{
+        height: 3em;
+    }
+    .entry svg{
+        height: 3em;
+    }
+    .entry p,.avatar p{
+        font-size: 1.3em;
+    }
+    .head p{
+        font-size: 2em;
+    }
+}
