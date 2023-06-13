@@ -1,3 +1,10 @@
+<?php
+require('connection.php');
+session_start();
+$id = $_SESSION['account_id'];
+$query = "SELECT * FROM verified where id = $id";
+$assoc = mysqli_fetch_assoc(mysqli_query($conn,$query));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,8 +22,8 @@
         </div>
         <div class="avatar">
             <img src="user_img/gintoki.png" alt="image">
-            <p>Gintoki Sakata</p>
-            <p>09707281718</p>
+            <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
+            <p>0<?php echo $assoc['number'] ?></p>
         </div>
         <div class="dashboard">
             <div class="entry" onclick="goPage('profile_info')">

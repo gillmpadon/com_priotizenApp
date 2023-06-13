@@ -1,3 +1,12 @@
+<?php
+require('connection.php');
+session_start();
+$account_id = $_SESSION['account_id'];
+$query = "SELECT * FROM verified where valid_id = '$account_id'";
+$result = mysqli_query($conn, $query);
+$assoc = mysqli_fetch_assoc($result);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +16,7 @@
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/card_front.css">
     <script src="script/script.js"></script>
-    <script src="../qrcode/qrcode.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -16,36 +25,61 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"/></svg> 
             </div>
             <p>ID INFORMATION</p>
-            <div class="svgHead" style="visibility: hidden;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><g transform="translate(20 0) scale(-1 1)"><path fill="currentColor" d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"/></g></svg>
+            <div class="svgHead" id="download-front">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#7d848d" d="M6 20q-.825 0-1.413-.588T4 18v-3h2v3h12v-3h2v3q0 .825-.588 1.413T18 20H6Zm6-4l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11l-5 5Z"/></svg>
             </div>
         </div>
 
-        <div class="dashboard">
+        <div class="dashboard" id="card-front">
             <div class="logo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"><path fill="white" d="M17.998 8.064L6.003 8.11l-.277-3.325A3 3 0 0 1 8.17 1.482l.789-.143a17.031 17.031 0 0 1 6.086 0l.786.143a3 3 0 0 1 2.443 3.302Z"/><path fill="white" d="M6.009 8.109a5.994 5.994 0 0 0 11.984-.045Z" opacity=".25"/><path fill="white" d="m17.198 13.385l-4.49 4.49a1 1 0 0 1-1.415 0l-4.491-4.49a9.945 9.945 0 0 0-4.736 7.44a1 1 0 0 0 .994 1.108h17.88a1 1 0 0 0 .994-1.108a9.945 9.945 0 0 0-4.736-7.44Z"/><path fill="white" d="M15.69 12.654a6.012 6.012 0 0 1-7.381 0a10.004 10.004 0 0 0-1.507.73l4.491 4.492a1 1 0 0 0 1.414 0l4.491-4.491a10.005 10.005 0 0 0-1.507-.731Z" opacity=".5"/></svg>
                 <p>Priotizen</p>
             </div>
-            <div class="qrContainer" id="qrcode"></div>
+            <div class="images">
+                <img src="user_img/<?php echo $assoc['photo'] ?>" alt="">
+                <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
+                <p><?php echo $assoc['conditions'] ?></p>
+            </div>
             <div class="information">
-                <div class="entry emergency">
-                    <div class="intro" id="contact">
-                        <p>Emergency Contact</p>
-                    </div>
-                </div>
-                <div class="entry emergency">
+                <div class="entry">
                     <div class="intro">
-                        <p>Family Name</p>
+                        <p>ID NO</p>
                         <p>:</p>
                     </div>
-                    <p>Sakata</p>
+                    <p><?php echo $assoc['valid_id']?></p>
                 </div>
-                <div class="entry emergency">
+                <div class="entry">
                     <div class="intro">
-                        <p>Family No.</p>
+                        <p>DOB</p>
                         <p>:</p>
                     </div>
-                    <p>09707281718</p>
+                    <p><?php echo date('m/d/Y', $assoc['bdate']);?></p>
+                </div>
+               
+                <div class="entry">
+                    <div class="intro">
+                        <p>Nationality</p>
+                        <p>:</p>
+                    </div>
+                    <p><?php echo $assoc['nationality']?></p>
+                </div>
+                <div class="entry">
+                    <div class="intro">
+                        <p>Status</p>
+                        <p>:</p>
+                    </div>
+                    <p><?php echo $assoc['status_r']?></p>
+                </div>
+                <div class="entry">
+                    <div class="intro">
+                        <p>Phone</p>
+                        <p>:</p>
+                    </div>
+                    <p>0<?php echo $assoc['number']?></p>
+                </div>
+             
+                <div class="signature">
+                    <p>Signature</p>
                 </div>
             </div>
             <svg id="bgSvg" width="261" height="435" viewBox="0 0 291 490" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,24 +99,22 @@
          
         </div>
         <div class="buttonNav">
-            <button class="notActive"  onclick="goPage('card_front')">FRONT</button>
-            <button class="active"  onclick="goPage('card_back')">BACK</button>
+            <button  class="active"  onclick="goPage('card_front')">FRONT</button>
+            <button class="notActive"  onclick="goPage('card_back')">BACK</button>
         </div>
         
     </div>
     <script>
-        var qrContainer = document.getElementById('qrcode');
-      
-            var text = `index.php`;
-            qrContainer.innerHTML = ""; // Clear existing QR code
-            var qrcode = new QRCode(qrContainer, {
-                text: text,
-                width: 190,
-                height: 190,
-            });
-           
-
-      
+    const downloadButton = document.getElementById('download-front');
+    const cardContainer = document.getElementById('card-front');
+    downloadButton.addEventListener('click', function () {
+        html2canvas(cardContainer).then(function (canvas) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'card-front.png';
+            link.click();
+        });
+    });
     </script>
 </body>
 </html>

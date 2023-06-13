@@ -1,3 +1,12 @@
+<?php
+require('connection.php');
+session_start();
+$id = $_SESSION['account_id'];
+$reciept_id = $_GET['view'];
+$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_product as product, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id and n.id = $reciept_id";
+$queryResults = mysqli_query($conn,$query);
+$assocQuery = mysqli_fetch_assoc($queryResults);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,18 +31,20 @@
 
         <div class="dashboard">
             <div class="receipt">
-                <p id="title">Robinson mall</p>
+                <p id="title"><?php $assocQuery['company'] ?></p>
                 <div class="info">
                     <p>Discount:</p>
-                    <p>20%</p>
+                    <p><?php $assocQuery['discount'] ?>%</p>
                 </div>
                 <div class="info">
                     <p>Cash:</p>
-                    <p>P1200</p>
+                    <p>P<?php $assocQuery['price'] ?></p>
                 </div>
                 <div class="info">
                     <p>Time:</p>
-                    <p>2:43PM</p>
+                    <?php 
+                    $time = date('g:i A', strtotime($assocQuery['time_date'])); ?>
+                    <p><?php echo $time; ?></p>
                 </div>
             </div>
             <div class="images">

@@ -1,3 +1,10 @@
+<?php
+require('connection.php');
+session_start();
+$id = $_SESSION['account_id'];
+$query = "SELECT * FROM verified where id = $id";
+$results = mysqli_fetch_assoc(mysqli_query($conn,$query));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,25 +34,25 @@
                    <div class="info">
                         <p>First Name</p>
                         <div class="input">
-                            <p>Gintoki</p>
+                            <p><?php echo $results['fname'] ?></p>
                         </div>
                    </div>
                    <div class="info">
                     <p>M.I</p>
                     <div class="input">
-                        <p>M</p>
+                        <p><?php echo $results['mi'] ?></p>
                     </div>
                     <div class="info">
                         <p>Last Name</p>
                         <div class="input">
-                            <p>Gintama</p>
+                            <p><?php echo $results['lname'] ?></p>
                         </div>
                     </div>
                 </div>
                
                 </div>
                 <div class="images">
-                    <img src="user_img/gintoki.png" alt="">
+                    <img src="user_img/<?php echo $results['photo'] ?>" alt="">
                 </div>
             </div>
         
@@ -54,33 +61,33 @@
             <div class="entryInfo">
                 <p>Email</p>
                 <div class="entryInfo_entry">
-                    <p>gintokisakata@gmail.com</p>
+                    <p><?php echo $results['email'] ?></p>
                 </div>
             </div>
             <div class="twoEntry">
                 <div class="entryInfo">
                     <p>Birthday</p>
                     <div class="entryInfo_entry">
-                        <p>April 19, 2001</p>
+                        <p><?php echo $date = date('F d, Y', strtotime($results['bdate']) ); ?></p>
                     </div>
                 </div>
                 <div class="entryInfo">
                     <p>Status</p>
                     <div class="entryInfo_entry">
-                        <p>Single</p>
+                        <p><?php echo $results['status_rs'] ?></p>
                     </div>
                 </div>
             </div>
             <div class="entryInfo">
                 <p>Compelete Address</p>
                 <div class="entryInfo_entry">
-                    <p>Brgy. Tiniguiban, Puerto Princesa</p>
+                    <p><?php echo $results['address'] ?></p>
                 </div>
             </div>
             <div class="entryInfo">
                 <p>Mobile Number</p>
                 <div class="entryInfo_entry">
-                    <p>09707281718</p>
+                    <p>0<?php echo $results['number'] ?></p>
                 </div>
             </div>
         </div>
