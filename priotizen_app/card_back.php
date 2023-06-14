@@ -2,7 +2,7 @@
 require('connection.php');
 session_start();
 $account_id = $_SESSION['account_id'];
-$query = "SELECT * FROM verified where valid_id = '$account_id'";
+$query = "SELECT * FROM verified where id = '$account_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 ?>
@@ -54,7 +54,7 @@ $assoc = mysqli_fetch_assoc($result);
                         <p>Family No.</p>
                         <p>:</p>
                     </div>
-                    <p><?php echo $assoc['family_number']; ?></p>
+                    <p><?php echo $assoc['family_contact']; ?></p>
                 </div>
             </div>
             <svg id="bgSvg" width="261" height="435" viewBox="0 0 291 490" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,9 +80,29 @@ $assoc = mysqli_fetch_assoc($result);
         
     </div>
     <script>
+         function shiftDigits(value) {
+            let shiftedValue = "";
+
+            for (let i = 0; i < value.length; i++) {
+                const char = value[i];
+
+                if (char >= "0" && char <= "9") {
+                const digit = parseInt(char);
+                const shiftedDigit = (digit + 5) % 10;
+                shiftedValue += shiftedDigit.toString();
+                } else {
+                shiftedValue += char;
+                }
+            }
+
+            return shiftedValue;
+        }
         var qrContainer = document.getElementById('qrcode');
-            const uniqueID = localStorage.getItem('qrcode_unique');
-            var text = `priomanage.php?searchID=${uniqueID}`;
+            // const valid_id = localStorage.getItem('qrcode_valid_id');
+            // const app_id = localStorage.getItem('qrcode_app_id');
+            // var text = `index.php?app_id=${shiftDigits(app_id)}&valid_id=${shiftDigits(valid_id)}`;
+            var text = "hehehehe";
+            console.log(text);
             qrContainer.innerHTML = ""; // Clear existing QR code
             var qrcode = new QRCode(qrContainer, {
                 text: text,

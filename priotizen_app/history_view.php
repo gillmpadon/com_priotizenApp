@@ -3,7 +3,7 @@ require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
 $reciept_id = $_GET['view'];
-$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_product as product, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id and n.id = $reciept_id";
+$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.receipt_id as receipt_number, r.discount as discount, r.img_product as product, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id and n.id = $reciept_id";
 $queryResults = mysqli_query($conn,$query);
 $assocQuery = mysqli_fetch_assoc($queryResults);
 ?>
@@ -31,14 +31,14 @@ $assocQuery = mysqli_fetch_assoc($queryResults);
 
         <div class="dashboard">
             <div class="receipt">
-                <p id="title"><?php $assocQuery['company'] ?></p>
+                <p id="title"><?php echo $assocQuery['company'] ?></p>
                 <div class="info">
                     <p>Discount:</p>
-                    <p><?php $assocQuery['discount'] ?>%</p>
+                    <p><?php echo $assocQuery['discount'] ?>%</p>
                 </div>
                 <div class="info">
                     <p>Cash:</p>
-                    <p>P<?php $assocQuery['price'] ?></p>
+                    <p>P<?php echo $assocQuery['price'] ?></p>
                 </div>
                 <div class="info">
                     <p>Time:</p>
@@ -46,10 +46,14 @@ $assocQuery = mysqli_fetch_assoc($queryResults);
                     $time = date('g:i A', strtotime($assocQuery['time_date'])); ?>
                     <p><?php echo $time; ?></p>
                 </div>
+                <div class="info">
+                    <p>Receipt:</p>
+                    <p><?php echo $assocQuery['receipt_number'] ?></p>
+                </div>
             </div>
             <div class="images">
-                <img src="notification_img/grocery.jpg" alt="">
-                <img src="notification_img/receipt.jpeg" alt="">
+                <img src="receipt_img/<?php echo $assocQuery['receipt'] ?>" alt="">
+                <img src="product_img/<?php echo $assocQuery['product'] ?>" alt="">
             </div>
             
         </div>

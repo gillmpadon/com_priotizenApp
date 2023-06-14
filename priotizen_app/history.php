@@ -62,7 +62,7 @@ $queryResults = mysqli_query($conn,$query);
                            <div class="info">
                             <p>Time:</p>
                             <?php 
-                            $time = date('F j g:i A', strtotime($row['time_date']));?>
+                            $time = date('g:i A', strtotime($row['time_date']));?>
                             <p><?php echo $time; ?></p>
                            </div>
                         </div>
@@ -80,7 +80,7 @@ $queryResults = mysqli_query($conn,$query);
         </div>
     </div>
     <script>
-        const view = (num) => window.location.href = 'history.php?view='+num;
+        const view = (num) => window.location.href = 'history_view.php?view='+num;
     </script>
 </body>
 </html>

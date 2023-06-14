@@ -21,7 +21,7 @@ $assoc = mysqli_fetch_assoc(mysqli_query($conn,$query));
             <p>Profile</p>
         </div>
         <div class="avatar">
-            <img src="user_img/gintoki.png" alt="image">
+            <img src="user_img/<?php echo $assoc['photo'] ?>" alt="image">
             <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
             <p>0<?php echo $assoc['number'] ?></p>
         </div>
@@ -43,10 +43,10 @@ $assoc = mysqli_fetch_assoc(mysqli_query($conn,$query));
             </div>
             <div class="entry" onclick="goPage('history')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32"><path fill="gray" d="M28 6H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2Zm0 2v3H4V8ZM4 24V13h24v11Z"/><path fill="gray" d="M6 20h10v2H6z"/></svg>
-                <p>Purchase History</p>
+                <p>Purchase</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 512 512"><path fill="none" stroke="gray" stroke-linecap="square" stroke-miterlimit="10" stroke-width="48" d="m184 112l144 144l-144 144"/></svg>
             </div>
-            <div class="entry" onclick="goPage('signin')">
+            <div class="entry" onclick="goPage('logout')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"><path fill="gray" d="M5 11h8v2H5v3l-5-4l5-4v3Zm-1 7h2.708a8 8 0 1 0 0-12H4a9.985 9.985 0 0 1 8-4c5.523 0 10 4.477 10 10s-4.477 10-10 10a9.985 9.985 0 0 1-8-4Z"/></svg>
                 <p>Logout</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 512 512"><path fill="none" stroke="gray" stroke-linecap="square" stroke-miterlimit="10" stroke-width="48" d="m184 112l144 144l-144 144"/></svg>

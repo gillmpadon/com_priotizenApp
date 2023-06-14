@@ -98,7 +98,7 @@ body{
     width: 80%;
     display: flex;
     position: absolute;
-    bottom: 1em;
+    bottom: 2em;
     left: 10%;
 }
 .buttonNav button{

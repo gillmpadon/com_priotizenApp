@@ -2,10 +2,9 @@
 require('connection.php');
 session_start();
 $account_id = $_SESSION['account_id'];
-$query = "SELECT * FROM verified where valid_id = '$account_id'";
+$query = "SELECT * FROM verified where id = '$account_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,14 +45,14 @@ $assoc = mysqli_fetch_assoc($result);
                         <p>ID NO</p>
                         <p>:</p>
                     </div>
-                    <p><?php echo $assoc['valid_id']?></p>
+                    <p><?php echo $assoc['app_id']?></p>
                 </div>
                 <div class="entry">
                     <div class="intro">
                         <p>DOB</p>
                         <p>:</p>
                     </div>
-                    <p><?php echo date('m/d/Y', $assoc['bdate']);?></p>
+                    <p><?php echo date('m/d/Y', strtotime($assoc['bdate']));?></p>
                 </div>
                
                 <div class="entry">
@@ -61,14 +60,14 @@ $assoc = mysqli_fetch_assoc($result);
                         <p>Nationality</p>
                         <p>:</p>
                     </div>
-                    <p><?php echo $assoc['nationality']?></p>
+                    <p style="text-transform: capitalize;"><?php echo $assoc['nationality']?></p>
                 </div>
                 <div class="entry">
                     <div class="intro">
                         <p>Status</p>
                         <p>:</p>
                     </div>
-                    <p><?php echo $assoc['status_r']?></p>
+                    <p style="text-transform: capitalize;"><?php echo $assoc['status_rs']?></p>
                 </div>
                 <div class="entry">
                     <div class="intro">
@@ -107,11 +106,13 @@ $assoc = mysqli_fetch_assoc($result);
     <script>
     const downloadButton = document.getElementById('download-front');
     const cardContainer = document.getElementById('card-front');
+    const info = localStorage.getItem('download_info');
+    console.log(info);
     downloadButton.addEventListener('click', function () {
         html2canvas(cardContainer).then(function (canvas) {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = 'card-front.png';
+            link.download = info+'card-front.png';
             link.click();
         });
     });

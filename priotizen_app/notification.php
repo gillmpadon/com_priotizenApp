@@ -48,7 +48,7 @@ $queryResults = mysqli_query($conn,$query);
                             <p><?php echo $time; ?></p>
                         </div>
                     </div>
-                    <button class="paynow " id="paynowBtn">PAY NOW</button>
+                    <button class="<?php echo ($row['status']=="Pending")? "paynow":"completed"; ?>" id="paynowBtn"><?php echo ($row['status']=="Pending")? "Pay Now":"COMPLETED"; ?></button>
                 </div>
             </div>
         <?php }

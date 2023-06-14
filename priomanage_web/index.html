@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="script.js"></script>
+    <title>Priomanage_web</title>
+</head>
+<body>
+    <script>
+const urlParams = new URLSearchParams(window.location.search);
+let app_id = urlParams.get('app_id');
+let valid_id = urlParams.get('valid_id');
+app_id = unshiftDigits(app_id);
+valid_id = unshiftDigits(valid_id);
+window.location.href=`checkUser.php?app_id=${app_id}&valid_id=${valid_id}`;
+</script>
+</body>
+</html>
