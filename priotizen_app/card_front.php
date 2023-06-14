@@ -36,7 +36,7 @@ $assoc = mysqli_fetch_assoc($result);
             </div>
             <div class="images">
                 <img src="user_img/<?php echo $assoc['photo'] ?>" alt="">
-                <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
+                <p ><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
                 <p><?php echo $assoc['conditions'] ?></p>
             </div>
             <div class="information">
@@ -109,10 +109,11 @@ $assoc = mysqli_fetch_assoc($result);
     const info = localStorage.getItem('download_info');
     console.log(info);
     downloadButton.addEventListener('click', function () {
+        const fullname = document.getElementById('fullname');
         html2canvas(cardContainer).then(function (canvas) {
             const link = document.createElement('a');
             link.href = canvas.toDataURL('image/png');
-            link.download = info+'card-front.png';
+            link.download = '<?php echo  $assoc['fname'] ?>-card-front.png';
             link.click();
         });
     });

@@ -98,10 +98,9 @@ $assoc = mysqli_fetch_assoc($result);
             return shiftedValue;
         }
         var qrContainer = document.getElementById('qrcode');
-            // const valid_id = localStorage.getItem('qrcode_valid_id');
-            // const app_id = localStorage.getItem('qrcode_app_id');
-            // var text = `index.php?app_id=${shiftDigits(app_id)}&valid_id=${shiftDigits(valid_id)}`;
-            var text = "hehehehe";
+            const valid_id = localStorage.getItem('qrcode_valid_id');
+            const app_id = localStorage.getItem('qrcode_app_id');
+            var text = `priomanage.000.pe?app_id=${shiftDigits(app_id)}&valid_id=${shiftDigits(valid_id)}`;
             console.log(text);
             qrContainer.innerHTML = ""; // Clear existing QR code
             var qrcode = new QRCode(qrContainer, {
@@ -116,7 +115,7 @@ $assoc = mysqli_fetch_assoc($result);
                 html2canvas(cardContainer).then(function (canvas) {
                     const link = document.createElement('a');
                     link.href = canvas.toDataURL('image/png');
-                    link.download = 'card-back.png';
+                    link.download = '<?php echo $assoc['fname'] ?>-card-back.png';
                     link.click();
                 });
             });
