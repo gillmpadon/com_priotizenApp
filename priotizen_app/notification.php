@@ -28,7 +28,7 @@ $queryResults = mysqli_query($conn,$query);
         if(mysqli_num_rows($queryResults)>0){
             while($row = mysqli_fetch_assoc($queryResults)) { ?>
         
-            <div class="entry">
+            <div class="entry" >
                 <div class="entryImages">
                     <img src="receipt_img/<?php echo $row['receipt'] ?>" alt="An Image">
                 </div>

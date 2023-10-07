@@ -11,6 +11,7 @@ if(isset($_POST['submit'])) {
       $fetch = mysqli_fetch_array(mysqli_query($conn,$query));
       if($email == $fetch['email'] && $passcode == $fetch['passcode']) {
         $account_valid_id =  $fetch['account_id'];
+        $account_type = $fetch['account_type'];
         $_SESSION['account_id'] = $account_valid_id;
         $getQr = "SELECT * FROM verified where email='$email' and id='$account_valid_id'";
         $resQr = mysqli_query($conn,$getQr);
@@ -19,10 +20,27 @@ if(isset($_POST['submit'])) {
         $uniqueApp_id = $assocQr['app_id'];
         $_SESSION['photo'] = $assocQr['photo'];
         $uniqueDownload = $assocQr['fname']."_".$assocQr['bdate'];
+        echo "<script>localStorage.setItem('account_email','$email')</script>";
+        echo "<script>localStorage.setItem('account_id','$account_valid_id')</script>";
         echo "<script>localStorage.setItem('download_info','$uniqueDownload')</script>";
         echo "<script>localStorage.setItem('qrcode_valid_id','$uniqueValid_id')</script>";
         echo "<script>localStorage.setItem('qrcode_app_id','$uniqueApp_id')</script>";
-        echo "<script>window.location.href='notification.php'</script>";
+        $checkDoc= "SELECT * FROM doc where user_id =".$fetch['account_id'];
+        $checkSql = mysqli_query($conn, $checkDoc);
+        if(mysqli_num_rows($checkSql)>0){
+          echo "<script>window.location.href='notification.php'</script>";
+        }else{
+          if($account_type == "store"){
+            echo "<script>window.location.href='store.php'</script>";
+          }else if ($account_type == "lgu"){
+            echo "<script>window.location.href='lgu.php'</script>";
+          }else{
+            $insertSql = "INSERT INTO doc(user_id) values('$account_valid_id')";
+            $resultSql = mysqli_query($conn, $insertSql);
+            echo "<script>window.location.href='attach_med.php'</script>";
+          }
+     
+        }
       } 
       else {
         echo "<script>alert('No user Found on the credentials')</script>;";
@@ -67,12 +85,12 @@ if(isset($_POST['submit'])) {
             <a id="forget" href="forgot.php">Forget Pasword?</a>
             <div class="buttonSubmit">
                 <button name="submit" type="submit">Sign In</button>
-                <div class="orline">
+                <!-- <div class="orline">
                     <hr>
                     <p>or</p>
                     <hr>
                 </div>
-                <button disabled><a href="signup.php">Sign Up</a></button>
+                <button disabled><a href="signup.php">Sign Up</a></button> -->
             </div>
         </form>
     </div>

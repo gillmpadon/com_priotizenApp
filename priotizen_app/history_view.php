@@ -53,7 +53,6 @@ $assocQuery = mysqli_fetch_assoc($queryResults);
             </div>
             <div class="images">
                 <img src="receipt_img/<?php echo $assocQuery['receipt'] ?>" alt="">
-                <img src="product_img/<?php echo $assocQuery['product'] ?>" alt="">
             </div>
             
         </div>
