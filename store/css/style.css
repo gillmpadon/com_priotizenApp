@@ -1,0 +1,57 @@
+.dash{
+    width: 95%;
+    border-radius: .3em;
+    margin:auto;
+}
+.entrydash{
+
+    background: var(--inputDiv);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    color: white;
+    height: 3em;
+    padding: .3em;
+}
+.text{
+    line-height: .2;
+    font-size: .9em;
+}
+.text p:last-of-type{
+    font-size: .7em;
+}
+.btn{
+    background: var(--inactiveBtn);
+    height: 80%;
+    width: 6em;
+    border-radius: .3em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .7em;
+}
+
+.search{
+    border: 1px solid var(--inputColor);
+    width: 95%;
+    margin:auto;
+    padding: .3em;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .3em;
+}
+.search input{
+    width: 100%;
+    border: none;
+    color: aliceblue;
+    background: transparent;
+}
+.search input:focus{
+    outline: none;
+}
+.search svg{
+    color: var(--svgColor);
+}

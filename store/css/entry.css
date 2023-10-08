@@ -1,0 +1,75 @@
+:root{
+    --bg : #16181F;
+    --inputDiv : #20232D;
+    --svgColor : #7D848D; 
+    --inputColor : #7D848D; 
+    --buttonActive: #0D6EFD;
+    --buttonInactive: #20232D;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    margin: auto;
+}
+
+.head{
+    text-align: center;
+    color:white;
+}
+
+.content{
+    width: 95%;
+    margin: auto;
+    text-align: center;
+}
+
+.entry{
+    height: 3em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    background: var(--inputDiv);
+    margin-bottom: 1em;
+}
+.entrydash{
+    margin-bottom: .5em;
+}
+.entry svg{
+    margin-left: 1em;
+    color: var(--svgColor);
+}
+.entry input{
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #7D848D;
+}
+.entry input:focus{
+    outline: none;
+}
+.entry p{
+    color: var(--svgColor);
+}
+button{
+    width: 100%;
+    height: 3em;
+    background: #0D6EFD;
+    border: none;
+    color: white;
+    border-radius: .3em;
+}
+
+
+.head{
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+}

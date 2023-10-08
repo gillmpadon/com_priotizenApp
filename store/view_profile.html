@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../priotizen_app/css/root.css">
+    <link rel="stylesheet" href="../priotizen_app/css/profile.css">
+    <script src="./script/script.js"></script>
+    <style>
+        body, html{
+            margin: 0;
+            padding: 0;
+        }
+        .dashentry{
+            width: 10em;
+            height: 2.5em;
+            color: gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--inputDiv);
+            margin: auto;
+            margin-bottom:1em;
+            border-radius: .3em;
+        }
+        .modal{
+            background: rgba(0, 0, 0, 1);
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            margin: auto;
+            text-align: center;
+        }
+        .modal img{
+            width: 90%;
+            height: 60%;
+            object-fit: cover;
+        }
+        .modal svg{
+            color: var(--svgColor);
+        }
+        .head{
+            width: 90%;
+            height: 2em;
+            position: relative;
+            margin: auto;
+        }
+        .head p{
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal" style="display: none;">
+        <div class="head" style="display: flex; align-items: center; justify-content: space-between;">
+            <svg onclick="closeModal()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="currentColor" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>
+            <p>Profile</p>
+            <p></p>
+        </div>
+
+        <br>
+        <img id="modalPicture" src="../priotizen_app/receipt_img/receipt1.jpg" alt="">
+    </div>
+    <div class="container">
+       
+        <div class="head" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2em;">
+            <svg onclick="window.history.back()" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"/></svg> 
+            <p>Profile</p>
+            <p></p>
+        </div>
+        <div class="avatar">
+            <img src="../priotizen_app/receipt_img/receipt2.jpg" alt="image" style="border-radius: .5em;">
+            <p>Company</p>
+            <p>@gmail.com</p>
+        </div>
+        <br>
+        <div class="dashboard">
+            <div class="dashentry" onclick="openModal(1)">
+                PSA
+            </div>
+            <div class="dashentry" onclick="openModal(2)">
+                MED CERT
+            </div>
+        </div>
+       
+    </div>
+    <script>
+        const modal = document.querySelector('.modal')
+        const modalPicture = document.querySelector("#modalPicture")
+        const params = new URLSearchParams(window.location.search)
+        const id = params.get('profile')
+        function openModal(num){
+            modal.style.display = 'block';
+            const column = num==1? "psa":"med"
+            fetch(`./backend/user.php?user_id=${encodeURIComponent(id)}&column=${column}`,{
+                method:'GET'
+            })
+            .then( response => response.json())
+            .then( result =>{
+                const srcs = "../priotizen_app/receipt_img/"+result
+                modalPicture.style.src = srcs
+            })
+        }
+        function closeModal(){
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

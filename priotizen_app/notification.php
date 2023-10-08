@@ -3,8 +3,9 @@ require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
 $date = date('F j D');
-$query = "SELECT n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id and DATE(r.date) = CURDATE()";
+$query = "SELECT n.reciept_id as receipt_id, n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id ='$id' and DATE(r.date) = CURDATE()";
 $queryResults = mysqli_query($conn,$query);
+$rid;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +49,10 @@ $queryResults = mysqli_query($conn,$query);
                             <p><?php echo $time; ?></p>
                         </div>
                     </div>
-                    <button class="<?php echo ($row['status']=="Pending")? "paynow":"completed"; ?>" id="paynowBtn"><?php echo ($row['status']=="Pending")? "Pay Now":"COMPLETED"; ?></button>
+                    <?php
+                    $rid =$row['receipt_id'];
+                    ?>
+                    <button <?php echo ($row['status']=="Pending")? "":"disabled"; ?> class="<?php echo "btn".$row['receipt_id'] ?> <?php echo ($row['status']=="Pending")? "paynow":"completed"; ?>"  onclick="payNow('<?php echo $row['receipt_id'] ?>')"><?php echo ($row['status']=="Pending")? "Pay Now":"COMPLETED"; ?></button>
                 </div>
             </div>
         <?php }
@@ -67,7 +71,24 @@ $queryResults = mysqli_query($conn,$query);
         </div>
         
     </div>
- 
+    <script>
+        function payNow(uid){
+            const paynowBtn = document.querySelector(`.btn${uid}`)
+            const formData = new FormData();
+            formData.append('uid',uid);
+            fetch('./backend/paynow.php',{
+                method: "POST",
+                body: formData
+            })
+            .then( response => response.json() )
+            .then( result => {
+                if(result == "Successful"){
+                    paynowBtn.style.background="green";
+                    paynowBtn.innerHTML = "COMPLETED"
+                }
+            });
+        }
+    </script>
 </body>
 </html>
 

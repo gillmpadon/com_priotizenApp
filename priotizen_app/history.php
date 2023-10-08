@@ -3,7 +3,7 @@ require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
 
-$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_product as product, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id ";
+$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price,r.img_receipt as receipt, r.discount as discount, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = '$id' ";
 $queryResults = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -47,7 +47,7 @@ $queryResults = mysqli_query($conn,$query);
             <?php $firstEntry+=1; ?>
                     <div class="entry" onclick="view(<?php echo $row['receipt_id']?>)">
                         <div class="images">
-                            <img src="product_img/<?php echo $row['product'] ?> ?>" alt="">
+                            <img src="receipt_img/<?php echo $row['receipt'] ?> ?>" alt="">
                         </div>
                         <div class="entry_info">
                             <p id="title"><?php echo $row['company'] ?></p>

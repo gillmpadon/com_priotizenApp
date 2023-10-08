@@ -55,7 +55,7 @@ body{
 }
 .info button{
     width: 95%;
-    height: 3em;
+    height: 2.5em;
     border: none;
     border-radius: .3em;
     color: white;
@@ -129,7 +129,7 @@ body{
         margin-top: 2%;
     }
     .entry{
-        height: 11em;
+        height: 12em;
     }
     .info{
         font-size: 2em;
