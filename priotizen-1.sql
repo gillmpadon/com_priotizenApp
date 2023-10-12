@@ -40,7 +40,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `account_id`, `email`, `passcode`) VALUES
-(13, 1, 'juandelacruz1@gmail.com', 'juan'),
+(1, 1, 'juandelacruz1@gmail.com', 'juan'),
 (2, 2, 'mariasantos2@gmail.com', 'password2'),
 (3, 3, 'pedroreyes3@gmail.com', 'password3'),
 (4, 4, 'johndsmith4@gmail.com', 'password4'),

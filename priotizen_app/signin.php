@@ -30,8 +30,8 @@ if(isset($_POST['submit'])) {
         if(mysqli_num_rows($checkSql)>0){
           echo "<script>window.location.href='notification.php'</script>";
         }else{
-          if($account_type == "store"){
-            echo "<script>window.location.href='store.php'</script>";
+          if($account_type == "Store"){
+            echo "<script>window.location.href='../store/entry.php?company_id='$account_type</script>";
           }else if ($account_type == "lgu"){
             echo "<script>window.location.href='lgu.php'</script>";
           }else{

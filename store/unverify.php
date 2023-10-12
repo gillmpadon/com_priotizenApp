@@ -46,9 +46,7 @@
         
     </div>
     <script>
-        function resetTags(){
-
-        }
+   
         function refreshTags(){
             const dash = document.querySelector('.dash');
             while (dash.firstChild) {
