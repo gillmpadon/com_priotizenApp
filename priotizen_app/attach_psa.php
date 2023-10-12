@@ -20,15 +20,20 @@ if($psa!=null ){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/profile.css">
-    <script src="script/script.js"></script>
+    <script src="script/script.js" defer></script>
     <style>
         #fileinput{
             height: 3em;
             border: 1px solid #43689d;
             width: 100%;
             background-color: #43689d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         #fileinput p{
             text-align: center;
@@ -39,6 +44,7 @@ if($psa!=null ){
 </head>
 <body>
     <div class="container">
+        <ul class="notifications"></ul>
         <div class="head" style="display:flex; justify-content:space-around; align-items:center; ">
             <div class="svgHead" onclick="goPage('profile')" style="<?php echo $goHome? "":"visibility: hidden;" ?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"/></svg> 
@@ -48,7 +54,7 @@ if($psa!=null ){
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16"><path fill="currentColor" d="M12.49 7.14L3.44 2.27c-.76-.41-1.64.3-1.4 1.13l1.24 4.34c.05.18.05.36 0 .54l-1.24 4.34c-.24.83.64 1.54 1.4 1.13l9.05-4.87a.98.98 0 0 0 0-1.72Z"/></svg>
             </div>
         </div>
-        <div class="attach" style="width: 100%; height:85%">
+        <div class="attach" style="width: 100%; height:80%">
             <img id="previewImage" src="./documents/<?php echo $checkpsa? $psa :"empty.jpg" ?>" alt="this is an image" style="width: 100%; height:75%; object-fit:cover;">
             <input type="file" name="file" id="file"  style="visibility: hidden;">
             <div id="fileinput">
@@ -79,7 +85,7 @@ if($psa!=null ){
         })
         function sendAttachment(){
             const formData = new FormData();
-            formData.append('name', localStorage.getItem('account_email'))
+            formData.append('name', localStorage.getItem('account_name'))
             formData.append('doc','psa')
             formData.append('user_id', localStorage.getItem('account_id'));
             formData.append('file', file.files[0]);
@@ -89,12 +95,15 @@ if($psa!=null ){
             })
           .then(response => response.json())
           .then( result => {
-            alert(result)
-            window.location.reload()
+            if(result== "Successful"){
+                console.log("okay")
+                createToast("success","Successful Upload")
+            }else{
+                createToast("error","Failed Upload")
+                console.log("not")
+            }
           })
         }
-        console.log(localStorage.getItem('account_id'))
-
     </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "priotizen");
-
+session_start();
 // Check Connection
 if(mysqli_connect_errno()){
     // Connection Failed

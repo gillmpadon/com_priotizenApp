@@ -13,7 +13,7 @@ body{
     margin-top: 10%;
 }
 .logo{
-    line-height: 0;
+    line-height: 1;
     color: white;
     margin: auto;
     text-align: center;
@@ -39,7 +39,7 @@ form{
     background-color: var(--inputDiv);
     border-radius: .3em;
     margin-bottom: 1em;
-    width: 95%;
+    width: 100%;
     padding-left: .5em;
     position: relative;
 }
@@ -69,7 +69,7 @@ form{
 }
 #eyePass{
     position: absolute;
-    right: 0em;
+    right: 1em;
 }
 
 #forget{
@@ -80,11 +80,11 @@ form{
 .buttonSubmit{
     width: 100%;
     position: absolute;
-    bottom: 0;
+    bottom: 1em;
 }
 .buttonSubmit button{
     height: 3em;
-    width: 100%;
+    width: 90%;
     border: none;
     border-radius: .3em;
     letter-spacing: .1em;
@@ -138,4 +138,7 @@ form{
         height: 50%;
     }
 
+}
+.form{
+    margin: auto;
 }

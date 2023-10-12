@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $name = $_REQUEST['name'];
     $status = $_REQUEST['status'];
     $filter = " and account_status like '$status'";
-    $query = "SELECT v.*, a.account_status, v.id as user_id from verified v INNER JOIN account a on v.id = a.account_id ";
+    $query = "SELECT v.*, a.account_status, v.id as user_id from verified v INNER JOIN account a on v.id = a.id ";
     if(empty($name)){
         $query =$query."where account_status like '$status'";
     }else{
@@ -28,7 +28,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             }
             echo json_encode($newArr);
         }else{
-            echo json_encode("Error");
+            echo json_encode($query);
+            
         }
     }
 }

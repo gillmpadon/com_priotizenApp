@@ -4,7 +4,7 @@ if(isset($_GET['company_id'])){
     $_SESSION['company_id'] = $_GET['company_id'];
 }
 $company_id = $_SESSION['company_id'];
-$query = "SELECT n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date , v.lname as lname from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id INNER JOIN verified v on n.user_id = v.id where n.company_id = '$company_id'  ";
+$query = "select r.price, r.discount, r.img_receipt as receipt, v.lname, n.status, DATE(r.date) as date  from receipt r inner join verified v on r.user_id = v.id inner join notification n on r.receipt_id = n.reciept_id where  n.company_id = '$company_id' ";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo  mysqli_error($conn);
@@ -50,10 +50,10 @@ if (!$result) {
                             <p>P<?php echo $discount; ?></p>
                             <p>P<?php echo $price; ?></p>
                             <p><?php
-                            $time = date('g:i A', strtotime($time_date)); 
+                            $time = date('g:i A', strtotime($date)); 
                             echo $time; ?> </p>
                             <p><?php
-                            $formatted_date = date('M d', strtotime($time_date));
+                            $formatted_date = date('M d', strtotime($date));
                             echo $formatted_date; ?> </p>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
-$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN account a on v.id = a.account_id where v.id = $id";
+$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN account a on v.id = a.id where v.id = $id";
 $result = mysqli_query($conn,$query);
 if(!$result){
     echo mysqli_error($conn);

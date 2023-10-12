@@ -16,6 +16,13 @@ body{
     padding: 0;
     background-color: var(--bg);
     margin: auto;
+    width: 100vw;
+    height: 100vh;
+}
+.container{
+    width: 95%;
+    margin: auto;
+    margin-top: 1em;
 }
 
 .head{
@@ -27,6 +34,7 @@ body{
     width: 95%;
     margin: auto;
     text-align: center;
+    margin-top: 1em;
 }
 
 .entry{

@@ -63,7 +63,7 @@
             const entry = document.createElement('div');
             entry.classList.add('entrydash');
             entry.onclick = function() {
-                window.location.href = `view_profile.html?profile=${encodeURIComponent(id)}`;
+                window.location.href = `view_profile.php?profile=${encodeURIComponent(id)}`;
             };
             const text = document.createElement('div');
             text.classList.add('text');
@@ -151,7 +151,7 @@
         });
 
         function goOnePage(id){
-            window.location.href = `view_profile.html?profile=${encodeURIComponent(id)}`;
+            window.location.href = `view_profile.php?profile=${encodeURIComponent(id)}`;
         }
     </script>
  

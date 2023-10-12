@@ -14,7 +14,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $extension = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
     $newFilename = "receipt_".$user_id . "." . $extension;
     $targetFile = $targetDir . $newFilename;
-    $arr = array();
     $query = "INSERT INTO receipt(receipt_id, price, discount, img_receipt, company_id, user_id) values('$uid', '$money','$discount','$newFilename', '$company_id','$user_id')";
     $result = mysqli_query($conn,$query);
     if($result){
@@ -22,18 +21,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $resultNotif = mysqli_query($conn,$queryNotif);
             if($resultNotif){
                 if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-                    $arr[] = "Successfully";
+                    $arr = "Successful";
                 }else{
-                    $arr[] = mysqli_error($conn);
+                    // $arr[] = mysqli_error($conn);
+                    $arr = "Error";
                 }
             }else{
-                // $arr[] = "Error";
-                $arr[] = mysqli_error($conn);
+                $arr = "Error";
+                // $arr[] = mysqli_error($conn);
 
             }
     }else{
-            // $arr[] = "Error";
-            $arr[] = mysqli_error($conn);
+            $arr = "Error";
+            // $arr[] = mysqli_error($conn);
 
     }
     echo json_encode($arr);

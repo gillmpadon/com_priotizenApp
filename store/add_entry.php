@@ -8,10 +8,13 @@ $company_id = json_encode($_SESSION['company_id']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="css/toast.css">
     <link rel="stylesheet" href="css/entry.css">
-    <script src="./script/script.js"></script>
+    <script src="./script/script.js" defer></script>
 </head>
 <body>
+    <ul class="notifications"></ul>
     <div class="container">
         <div class="head">
             <svg onclick="goPage('entry')" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M20.25 10a1.25 1.25 0 1 0-2.5 0h2.5Zm-14 0a1.25 1.25 0 1 0-2.5 0h2.5Zm13.866 2.884a1.25 1.25 0 0 0 1.768-1.768l-1.768 1.768ZM12 3l.884-.884a1.25 1.25 0 0 0-1.768 0L12 3Zm-9.884 8.116a1.25 1.25 0 0 0 1.768 1.768l-1.768-1.768ZM7 22.25h10v-2.5H7v2.5ZM20.25 19v-9h-2.5v9h2.5Zm-14 0v-9h-2.5v9h2.5Zm15.634-7.884l-9-9l-1.768 1.768l9 9l1.768-1.768Zm-10.768-9l-9 9l1.768 1.768l9-9l-1.768-1.768ZM17 22.25A3.25 3.25 0 0 0 20.25 19h-2.5a.75.75 0 0 1-.75.75v2.5Zm-10-2.5a.75.75 0 0 1-.75-.75h-2.5A3.25 3.25 0 0 0 7 22.25v-2.5Z"/></svg>
@@ -77,7 +80,14 @@ $company_id = json_encode($_SESSION['company_id']);
                 body: formData
             })
             .then( response => response.json() )
-            .then( result => console.log( result ) );
+            .then( result => {
+                if(result == "Successful") {
+                    createToast("success","Receipt Added")
+                    setTimeout(()=> window.location.href="entry.php",2000)
+                }else{
+                    createToast("error","Receipt Error")
+                }
+            } );
         }
     </script>
  
