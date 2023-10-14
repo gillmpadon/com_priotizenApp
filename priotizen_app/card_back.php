@@ -2,7 +2,7 @@
 require('connection.php');
 session_start();
 $account_id = $_SESSION['account_id'];
-$query = "SELECT * FROM verified where id = '$account_id'";
+$query = "SELECT * FROM verified where app_id = '$account_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 ?>
@@ -80,29 +80,13 @@ $assoc = mysqli_fetch_assoc($result);
         
     </div>
     <script>
-         function shiftDigits(value) {
-            let shiftedValue = "";
-
-            for (let i = 0; i < value.length; i++) {
-                const char = value[i];
-
-                if (char >= "0" && char <= "9") {
-                const digit = parseInt(char);
-                const shiftedDigit = (digit + 5) % 10;
-                shiftedValue += shiftedDigit.toString();
-                } else {
-                shiftedValue += char;
-                }
-            }
-
-            return shiftedValue;
-        }
+         
         var qrContainer = document.getElementById('qrcode');
             const valid_id = localStorage.getItem('qrcode_valid_id');
             const app_id = localStorage.getItem('qrcode_app_id');
-            var text = `priomanage.000.pe?app_id=${shiftDigits(app_id)}&valid_id=${shiftDigits(valid_id)}`;
+            var text = `http://127.0.0.1/edsa-Priotizen/priomanage_web/index.php?app_id=${encodeURIComponent(app_id)}&valid_id=${encodeURIComponent(valid_id)}`;
             console.log(text);
-            qrContainer.innerHTML = ""; // Clear existing QR code
+            qrContainer.innerHTML = "";
             var qrcode = new QRCode(qrContainer, {
                 text: text,
                 width: 190,

@@ -2,7 +2,7 @@
 require('connection.php');
 $app_id = $_GET['app_id'];
 $valid_id = $_GET['valid_id'];
-$query = "SELECT * FROM verified where app_id = $app_id and valid_id = '$valid_id'";
+$query = "SELECT * FROM verified where app_id = '$app_id' and valid_id = '$valid_id'";
 $results = mysqli_query($conn, $query);
 $verified = false;
 if(mysqli_num_rows($results)>0){
@@ -30,7 +30,7 @@ if(mysqli_num_rows($results)>0){
 <body>
 <div class="container">
         <div class="images">
-            <img src="user_img/<?php echo $photo_res ?>" alt="">
+            <img src="../priotizen_app/user_img/<?php echo $photo_res ?>" alt="">
         </div>
         <div class="info">
             <p><?php echo $fullname_res ?></p>

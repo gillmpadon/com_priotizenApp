@@ -2,7 +2,7 @@
 require('connection.php');
 session_start();
 $account_id = $_SESSION['account_id'];
-$query = "SELECT * FROM verified where id = '$account_id'";
+$query = "SELECT * FROM verified where app_id = '$account_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 ?>

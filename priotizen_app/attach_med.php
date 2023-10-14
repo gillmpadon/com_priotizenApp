@@ -84,10 +84,11 @@ if($med!=null){
             }
         })
         function sendAttachment(){
+            const user_id = <?php echo json_encode($_SESSION['account_id']) ?>;
             const formData = new FormData();
             formData.append('name', localStorage.getItem('account_name'))
             formData.append('doc','med')
-            formData.append('user_id', localStorage.getItem('account_id'));
+            formData.append('user_id', user_id);
             formData.append('file', file.files[0]);
             fetch('./backend/upload.php', {
                 method: 'POST',
