@@ -149,6 +149,7 @@ $result = mysqli_query($conn,$query);
 </div>
 
 <script>
+
     function goToPage(id){
         window.location.href = "user.php?user_id="+id;
     }

@@ -4,6 +4,11 @@ if(isset($_GET['user_id'])){
     $_SESSION['user_id'] = $_GET['user_id'];
     $_SESSION['isLogged'] =true;
 }
+if(!isset($_SESSION['isLogged'])){
+    header('Location: login.php');
+    exit();
+}
+
 
  $query = "SELECT  count(*) as count, conditions from verified GROUP by conditions";
  $result = mysqli_query($conn, $query);

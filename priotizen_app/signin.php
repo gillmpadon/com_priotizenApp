@@ -45,7 +45,7 @@
           if(result.message == "Successful"){
             const account_type = result.account_type
             createToast("success","Login Successful")
-            if(account_type=="User"){
+            if(account_type=="user"){
               const {message, app_id , photo, uniqueDownload, account_id, valid_id, account_type, account_name} = result
               localStorage.setItem('account_id', account_id)
               localStorage.setItem('account_name', account_name)
@@ -55,8 +55,8 @@
               localStorage.setItem('valid_id', valid_id);
               localStorage.setItem('qrcode_valid_id', valid_id);
               localStorage.setItem('qrcode_app_id', app_id);
-              window.location.href = "notification.php";
-            }else if(account_type=="Store"){
+              window.location.href = `notification.php?user_id=${app_id}`;
+            }else if(account_type=="company"){
               const {company_id , ...rest} = result
               window.location.href = `../store/entry.php?company_id=${company_id}`;
             }else{
@@ -66,7 +66,7 @@
           }else{
             createToast("error","No User Found")
           }
-          // console.log(result)
+          console.log(result)
         })
       }
     </script>

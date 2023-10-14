@@ -5,7 +5,7 @@ if(isset($_GET['user_id'])){
 }else{
     $user_id = $_SESSION['user_id'];
 }
-$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.id = v.id inner join doc d on v.id = d.user_id where v.id= '$user_id'";
+$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.account_id = v.app_id inner join doc d on v.app_id = d.user_id  where v.app_id= '$user_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 extract($assoc);
@@ -154,7 +154,7 @@ extract($assoc);
                                         <div class="col-md-6">
                                         <div class="form-group">
                                                 <label>APP ID</label>
-                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" value="<?php echo $app_id ?>" >
+                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" value="<?php echo $app_id ?>"  readonly>
                                             </div>
                                         </div>
                                         
@@ -382,20 +382,24 @@ extract($assoc);
     function goError(){
         demo.goNotif('Error',' Edited','danger','pe-7s-user')
     }
+
+
+    const admin_id = <?php echo json_encode($_SESSION['user_id']) ?>;
     function verifyUser(){
     const formData = new FormData()
     formData.append('verify',id)
-       fetch(`./backend/user.php`,{
+    formData.append('admin_id',admin_id)
+       fetch(`./backend/verified.php`,{
             method: 'POST',
             body: formData
        })
        .then(response => response.json())
        .then( result =>{
-            if(result == "Successful"){
+            if(result == "Success"){
                 goSuccess()
-                setTimeout(()=>[
+                setTimeout(()=>{
                     window.location.reload()
-                ],2000)
+            },2000)
             }else{
                 goError()
             }
@@ -421,7 +425,7 @@ extract($assoc);
         const family_contact = document.getElementById('family_contact').value
 
         const formData = new FormData();
-        formData.append('id', id);
+        formData.append('admin_id', admin_id);
         formData.append('fname', fname);
         formData.append('mi', mi);
         formData.append('lname',lname);
@@ -446,7 +450,9 @@ extract($assoc);
         .then( result => {
             if(result == "Successful"){
                 goSuccess()
-              
+               setTimeout(()=>{
+                window.location.href = `user.php?user_id=${id}`;
+               },2000)
             }else{
                 goError()
             }

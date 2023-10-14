@@ -2,7 +2,7 @@
 require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
-$query = "SELECT * FROM doc where user_id = $id limit 1";
+$query = "SELECT * FROM doc where user_id = '$id' limit 1";
 $assoc = mysqli_fetch_assoc(mysqli_query($conn,$query));
 $goHome = false;
 $med = $assoc['med'];

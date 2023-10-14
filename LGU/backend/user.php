@@ -9,9 +9,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $arr = array();
         if(mysqli_num_rows($result)>0){
             $fetch = mysqli_fetch_array($result);
-            if($fetch['email'] == $email && $fetch['passcode'] == $password && $fetch['account_type'] =="admin"){
+            if($fetch['email'] == $email && $fetch['passcode'] == $password && strtolower($fetch['account_type']) =="admin"){
                 $arr[] = "Successful";
-                $arr[] = $fetch['id'];
+                $arr[] = $fetch['account_id'];
             }else{
                 $arr[] = "Error";
             }
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         if($filter!=""){
             $filter = " and fname like '%$filter%' OR mi like '%$filter%' OR lname like '%$filter%' OR status_rs like '%$filter%' OR gender like '%$filter%' ";
         }
-        $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id where 1=1  ".$filter.$brgy.$condition;
+        $query = "SELECT v.id, v.fname, v.lname, v.brgy, v.mi, a.account_status , v.gender, v.conditions, a.account_id from verified v INNER JOIN account a on v.app_id = a.account_id where 1=1  ".$filter.$brgy.$condition;
 
         $result = mysqli_query($conn,$query);
         if(!$result){
@@ -90,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $family_name = $_POST['family_name'];
         $app_id = $_POST['app_id'];
         $valid_id = $_POST['valid_id'];
-
+        $admin_id = $_POST['admin_id'];
 
         if(isset($_FILES["image"])){
             $images = $_FILES["image"];
@@ -103,13 +103,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $newFilename = "unkown.jpg";
         }
         $arr;
-        $query = "INSERT INTO verified (fname, mi, lname, email, bdate, status_rs, conditions, gender, number, address, photo, valid_id , app_id, family_name, family_contact, brgy ) 
-        VALUES ('$fname', '$mi', '$lname','$email', '$bdate', '$status', '$condition', '$gender', '$number', '$address', '$newFilename', '$valid_id','$app_id','$family_name', '$family_contact','$brgy')";
-        $result = mysqli_query($conn,$query);
+        $query1 = "INSERT INTO verified (fname, mi, lname, email, bdate, status_rs, conditions, gender, number, address, photo, valid_id, app_id, family_name, family_contact, brgy) VALUES ('$fname', '$mi', '$lname', '$email', '$bdate', '$status', '$condition', '$gender', '$number', '$address', '$newFilename', '$valid_id', '$app_id', '$family_name', '$family_contact', '$brgy')";
+        $query2 = "INSERT INTO account (account_id, email, passcode, account_type, account_status) VALUES ('$app_id', '$email', '$lname', 'user', 'Pending')";
+        $query3 = "INSERT INTO user_history (user_id, admin_id) VALUES ('$app_id', '$admin_id')";
+        $query5 = "INSERT INTO doc (user_id) VALUES ('$app_id')";
 
-        $accountQuery = "INSERT INTO account(email, passcode) values('$email','$lname')";
-        $accountResult = mysqli_query($conn,$accountQuery);
-            if($result and $accountResult){
+        $result1 = mysqli_query($conn, $query1);
+        $result2 = mysqli_query($conn, $query2);
+        $result3 = mysqli_query($conn, $query3);
+        $result4 = mysqli_query($conn, $query4);
+
+        if ($result1 && $result2 && $result3 && $result4) {
                 if(isset($_FILES["image"])){
                     if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
                         $arr = "Successful";
@@ -126,16 +130,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-    $action = $_REQUEST['action'];
-    $query = "DELETE FROM verified where conditions like '$action'";
-    $result = mysqli_query($conn, $query);
-    if($result){
-        echo json_encode("Success");
-    }else{
-        echo json_encode("Error");
-    }
-}
 
 
 ?>

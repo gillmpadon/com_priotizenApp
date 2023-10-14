@@ -1,8 +1,8 @@
 <?php
 require('connection.php');
 session_start();
-$id = $_SESSION['account_id'];
-$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN account a on v.id = a.id where v.id = $id";
+$app_id = $_SESSION['account_id'];
+$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN account a on v.app_id = a.account_id where v.app_id = '$app_id'";
 $result = mysqli_query($conn,$query);
 if(!$result){
     echo mysqli_error($conn);
@@ -25,7 +25,15 @@ $assoc = mysqli_fetch_assoc($result);
             <p>Profile</p>
         </div>
         <div class="avatar">
-            <img src="user_img/<?php echo $assoc['photo'] ?>" alt="image">
+            <?php
+                $photo = $assoc['photo'] ;
+                $imagePath = "./user_img/$photo";
+                if(file_exists($imagePath)) {
+                    echo '<img  src="./user_img/'.$photo.'"  alt="..."/>';
+                }else{
+                    echo '<img  src="./user_img/empty.jpg"  alt="..."/>';
+                }
+            ?>
             <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
             <p>0<?php echo $assoc['number'] ?></p>
             <p style="padding-top: .5em;"><?php echo $assoc['account_status'];?></p>

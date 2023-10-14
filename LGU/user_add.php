@@ -37,6 +37,7 @@
     <div class="sidebar" data-color="purple" >
     	    <?php
             include('./backend/connection.php');
+            $admin_id = json_encode($_SESSION['user_id']);
             $class="user_add";
             include('includes/sidebar.php'); ?>
     </div>
@@ -127,7 +128,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>APP ID</label>
-                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" >
+                                                <input readonly type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" >
                                             </div>
                                         </div>
                                         
@@ -383,6 +384,17 @@
             }
     })
 
+    function generateUID() {
+    return Math.random().toString(36).substring(2);
+    }
+    
+    const user_id = generateUID()
+    const admin_id = <?php echo $admin_id ?>;
+    let app_id = document.getElementById('app_id')
+    app_id.value =user_id
+
+    console.log({ user_id, admin_id });
+
     function createProfile(){
     const fname = document.getElementById('fname').value
     const mi = document.getElementById('mi').value;
@@ -397,10 +409,9 @@
     const brgy = document.getElementById('brgy').value
     const family_contact = document.getElementById('family_contact').value
     const family_name = document.getElementById('family_name').value
-    const app_id = document.getElementById('app_id').value
     const valid_id = document.getElementById('valid_id').value
     const image = document.getElementById('imageInput')
-  
+
     const formData = new FormData();
 
     formData.append('fname', fname)
@@ -416,7 +427,8 @@
     formData.append('brgy', brgy)
     formData.append('family_contact', family_contact)
     formData.append('family_name', family_name)
-    formData.append('app_id', app_id)
+    formData.append('app_id', user_id)
+    formData.append('admin_id', admin_id)
     formData.append('valid_id', valid_id)
     formData.append('image', image.files[0]);
 

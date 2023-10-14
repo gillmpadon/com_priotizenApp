@@ -7,11 +7,19 @@ if(isset($_GET['user_id'])){
     $isDeleteBtn = false;
     $user_id = $_SESSION['user_id'];
 }
-$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.id = v.id inner join doc d on v.id = d.user_id where v.id= '$user_id'";
+$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.account_id = v.app_id inner join doc d on v.app_id = d.user_id where a.account_id = '$user_id'";
 $result = mysqli_query($conn, $query);
-$assoc = mysqli_fetch_assoc($result);
-extract($assoc);
 
+$query1 = "SELECT u.action, u.time_edited, a.name as admin_name from user_history u inner join admin a on u.admin_id = a.admin_id where u.user_id = '$user_id' ";
+$result1 = mysqli_query($conn,$query1);
+if($result && $result1 ){
+    $assoc = mysqli_fetch_assoc($result);
+    $assoc1 = mysqli_fetch_assoc($result1);
+    extract($assoc);
+    extract($assoc1);
+}else{
+    echo $query;
+}
 
 
 ?>
@@ -210,9 +218,20 @@ extract($assoc);
                                         <?php
                                         echo ($isDeleteBtn)? '<button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('.$user_id.')">Delete Profile</button>' :' ';
                                         ?>
+
                                         
                                 </div>
                                     <div class="clearfix"></div>
+                                <p>
+                                <?php 
+                                $dateFormat = $time_edited;
+                                $dateTime = new DateTime($dateFormat);
+                                $newDate = $dateTime -> format('F j g:i A');
+                                $text = ($action=="Created"? "Created by ": "Last Edited by "); 
+                                $text =$text.$admin_name. " on ".$newDate;
+                                echo $text;
+                                ?></p>
+
                             </div>
                         </div>
                     </div>
@@ -238,6 +257,17 @@ extract($assoc);
                                          <small><?php echo $email ?></small>
                                       </h4>
                                     </a>
+                                    <?php
+                                    $bdateFormat = $bdate;
+                                    $date = DateTime::createFromFormat('m-d-Y', $bdateFormat);
+                                    if ($date) {
+                                        $currentDate = new DateTime();
+                                        $age = $currentDate->diff($date)->y;
+                                    } else {
+                                        $age = $bdate;
+                                    }
+                                    ?>
+                                    <h5><?php echo $age ?> Yrs Old</h5>
                                     <h5><?php echo $account_status ?></h5>
                                 </div>
                                
@@ -247,6 +277,7 @@ extract($assoc);
                                 <button onclick="showDoc('Psa')" href="#" class="btn btn-simple"><i class="pe-7s-note2"></i> PSA</button>
                                 <button onclick="showDoc('Med')" href="#" class="btn btn-simple"><i class="pe-7s-file"></i> MED</button>
                                 <button onclick="toggleOtherInfo()" href="#" class="btn btn-simple"><i class="pe-7s-id"></i> OTHER</button>
+
                             </div>
                         </div>
                     </div>
@@ -321,6 +352,8 @@ extract($assoc);
 </div>
 
 <script>
+
+
   let showOtherInfo = false;
 
 function toggleOtherInfo() {

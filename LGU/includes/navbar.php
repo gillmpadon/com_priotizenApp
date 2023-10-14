@@ -87,7 +87,7 @@ $notifResult = mysqli_query($conn,$notifQuery);
 
                             <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-user"></i>
+                                    <i class="fa fa-cog"></i>
                                     <b class="caret hidden-sm hidden-xs"></b>
 									<p class="hidden-lg hidden-md">
                                          Settings

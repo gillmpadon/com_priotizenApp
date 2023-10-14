@@ -1,6 +1,6 @@
 <?php
 require('connection.php');
-$query = "SELECT v.id, v.fname, v.lname, v.brgy, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id";
+$query = "SELECT v.id, v.fname, v.lname, v.brgy, v.mi, a.account_status , v.gender, v.conditions, a.account_id from verified v INNER JOIN account a on v.app_id = a.account_id";
 $result = mysqli_query($conn,$query);
 ?>
 <!doctype html>
@@ -124,7 +124,7 @@ $result = mysqli_query($conn,$query);
                                         while($row = mysqli_fetch_assoc($result)){
                                             extract($row);
                                             $color = $account_status!="Pending"? "#943bea ": "#9d65d2";
-                                            echo  "<tr class='row_data' onclick='goToPage($id)'>
+                                            echo "<tr class='row_data' onclick=\"goToPage('$account_id')\">;
                                             <td>$count</td>
                                             <td>$fname $mi $lname</td>
                                             <td>$conditions</td>
@@ -197,7 +197,7 @@ $result = mysqli_query($conn,$query);
     }
     function createElementTag(e,count){
         const tbody = document.querySelector('#tbody')
-        const {id , fname, lname, number, mi, account_status, conditions,gender, brgy} =e
+        const {id , fname, lname, number, mi, account_status, conditions,gender, brgy, account_id} =e
         const tr = document.createElement('tr')
         const td1 = document.createElement('td')
         const td2 = document.createElement('td')
@@ -208,7 +208,7 @@ $result = mysqli_query($conn,$query);
 
         tr.classList.add("row_data")
         tr.onclick= function() {
-            goToPage(id)
+            goToPage(account_id)
         }
         td1.textContent = count
         td2.textContent = `${fname} ${mi} ${lname}`

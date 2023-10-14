@@ -185,6 +185,12 @@
         demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
     }
 
+    const admin_id = <?php echo json_encode($_SESSION['user_id']) ?>;
+    function generateUID() {
+    return Math.random().toString(36).substring(2);
+    }
+    
+    const unique_id = generateUID()
     function createAdmin(){
         const search = new URLSearchParams(window.location.search)
         const account_type = search.get('account_type')
@@ -201,6 +207,8 @@
         formData.append('password', password.value);
         formData.append('image', image.files[0]);
         formData.append('account_type', account_type);
+        formData.append('admin_id', admin_id);
+        formData.append('unique_id', unique_id);
         fetch(`./backend/admin_store.php`,{
             method: 'POST',
             body: formData

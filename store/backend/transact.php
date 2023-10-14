@@ -23,17 +23,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
                     $arr = "Successful";
                 }else{
-                    // $arr[] = mysqli_error($conn);
-                    $arr = "Error";
+                    $arr[] = mysqli_error($conn);
+                    // $arr = "Error";
                 }
             }else{
-                $arr = "Error";
-                // $arr[] = mysqli_error($conn);
+                // $arr = "Error";
+                $arr[] = mysqli_error($conn);
 
             }
     }else{
-            $arr = "Error";
-            // $arr[] = mysqli_error($conn);
+            // $arr = "Error";
+            $arr[] = mysqli_error($conn);
 
     }
     echo json_encode($arr);

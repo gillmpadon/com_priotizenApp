@@ -1,7 +1,7 @@
 <?php
 require('./backend/connection.php');
 $company_id = $_SESSION['company_id'];
-$query = "SELECT * FROM company where id ='$company_id'";
+$query = "SELECT * FROM company where store_id ='$company_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 extract($assoc);

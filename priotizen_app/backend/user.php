@@ -9,8 +9,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if($result){
         if(mysqli_num_rows($result) > 0){
             $assoc = mysqli_fetch_assoc($result);
-            if($assoc['account_type'] == 'User'){
-                $queryVerify = "SELECT v.* , a.account_type, a.id as id from verified v inner join account a on v.email = a.email where v.email = '$email'";
+            if($assoc['account_type'] == 'user'){
+                $queryVerify = "SELECT v.* , a.account_type, a.id as id from verified v inner join account a on v.app_id = a.account_id where v.email  = '$email'";
                 $resultVerify = mysqli_query($conn,$queryVerify);
                 $assoc = mysqli_fetch_assoc($resultVerify);
                 extract($assoc);
@@ -26,17 +26,17 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $_SESSION['account_id'] = $id;
                 
                 echo json_encode($arr);
-            }  else if($assoc['account_type'] == 'Store'){
-                $arr["account_type"] = "Store";
-                $queryAccount = "SELECT c.* FROM company c inner join account a on c.email= a.email where a.email = '$email'";
+            }  else if($assoc['account_type'] == 'company'){
+                $arr["account_type"] = $assoc['account_type'];
+                $queryAccount = "SELECT c.* FROM company c inner join account a on c.store_id= a.account_id where a.email = '$email'";
                 $resultAcccount = mysqli_query($conn, $queryAccount);
                 $assocAccount = mysqli_fetch_assoc($resultAcccount);
                 $arr["message"] = "Successful";
-                $arr['company_id'] = $assocAccount['id'];
+                $arr['company_id'] = $assocAccount['store_id'];
                 echo json_encode($arr);
             }else{
                 $arr["message"] = "Successful";
-                $arr["account_type"] = "LGU";
+                $arr["account_type"] = "admin";
                 $query = "SELECT * FROM account where email = '$email' and passcode = '$password'";
                 $result = mysqli_query($conn,$query);
                 $assoc = mysqli_fetch_assoc($result);

@@ -1,7 +1,7 @@
 <?php
 require('connection.php');
 if($_SERVER["REQUEST_METHOD"] =="POST"){
-    $id = $_POST["id"];
+    $admin_id = $_POST["admin_id"];
     $fname = $_POST["fname"];
     $mi = $_POST["mi"];
     $lname = $_POST["lname"];
@@ -25,24 +25,25 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
         $extension = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
         $newFilename = $fname . "_dp.". $extension;
         $targetFile = $targetDir . $newFilename;
-    }else{
-        $newFilename = "unkown.jpg";
-    }
+            if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
+                $arr = "Successful";
+                $photo = " , photo = '$newFilename' ";
+            }else{
+                $arr = "Error";
+            }
+        }else{
+            $photo = "  ";
+        }
 
         $query = "UPDATE verified set fname = '$fname', mi = '$mi' , lname = '$lname', gender = '$gender',
-        address = '$address' , app_id = '$app_id' , valid_id = '$valid_id', conditions = '$conditions', email = '$email',
-        family_name = '$family_name', family_contact = '$family_contact' , photo = '$newFilename' where id = '$id'";
+        address = '$address' , valid_id = '$valid_id', conditions = '$conditions', email = '$email',
+        family_name = '$family_name', family_contact = '$family_contact'  $photo where app_id = '$app_id'";
         $result = mysqli_query($conn, $query);
-        if($result){
-              if(isset($_FILES["image"])){
-                    if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-                        $arr = "Successful";
-                    }else{
-                        $arr = "Error";
-                    }}
-                else{
-                    $arr = "Successful";
-                }
+        
+        $query2 = "UPDATE user_history set action = 'Edited' , time_edited = NOW(),  admin_id = '$admin_id' where user_id = '$app_id'"; 
+        $result2 = mysqli_query($conn, $query2);
+        if($result && $result2){
+            $arr = "Successful";
         }else{
             $arr = "Error";
         }
@@ -50,15 +51,5 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
         echo json_encode($arr);
 }
 
-if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
-    $action = $_REQUEST['action'];
-    $query = "DELETE FROM verified where conditions like '$action'";
-    $result = mysqli_query($conn, $query);
-    if($result){
-        echo json_encode("Success");
-    }else{
-        echo json_encode("Error");
-    }
-}
 
 ?>

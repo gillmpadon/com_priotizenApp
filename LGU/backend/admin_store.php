@@ -1,6 +1,8 @@
 <?php
 require('connection.php');
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $unique_id = $_POST['unique_id'];
+    $admin_id = $_POST['admin_id'];
     $name = $_POST['name'];
     $email = $_POST['email'];
     $number = $_POST['number'];
@@ -16,26 +18,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }else{
         $newFilename = "unkown.jpg";
     }
-    $account_type = $account_type=="stored" ? "company" : "admin";
-    $query = "INSERT INTO $account_type (`name`, `email`, `number`, `image`) VALUES ('$name', '$email', '$number',  '$newFilename')";
-    $result = mysqli_query($conn, $query);
-    if($result){
-        $account = "INSERT INTO account (email, passcode, account_type) values('$email', '$password', '$account_type')";
-        $result = mysqli_query($conn,$account);
+    $old_account_type =$account_type;
+    $account_type = $account_type=="store"? "company" : "admin";
+    $query1 = "INSERT INTO $account_type (name, email, number, image, ".$old_account_type."_id) VALUES ('$name', '$email', '$number',  '$newFilename','$unique_id')";
+    $query2 = "INSERT INTO account (account_id, email, passcode, account_type) values('$unique_id','$email', '$password', '$account_type')";
+    $result1 = mysqli_query($conn, $query1);
+    $result2 = mysqli_query($conn, $query2);
+    if($result1 && $result2){
         if(isset($_FILES["image"])){
         if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-
             $arr = "Successful";
         }else{
-            // $arr = mysqli_error($conn);
-            $arr = "Error";
+            $arr = mysqli_error($conn);
+            // $arr = "Error";
         }}else{
             $arr = "Successful";
         }
 
     }else{
-        // $arr = mysqli_error($conn);
-        $arr = "Error";
+        $arr = mysqli_error($conn);
+        // $arr = "Error";
     }
     echo json_encode($arr);
 }

@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+                    LGU MANAGEMENT
                 </a>
             </div>
 
@@ -34,21 +34,6 @@
                         <p>Create User</p>
                     </a>
                 </li>
-              
-                <li >
-                    <a href="icons.html">
-                        <i class="pe-7s-science"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-              
-                <li>
-                    <a href="notifications.html">
-                        <i class="pe-7s-bell"></i>
-                        <p>Notifications</p>
-                    </a>
-                </li>
-
                 <?php }else{
                 ?>
                  <li>
@@ -58,11 +43,5 @@
                     </a>
                 </li>
                 <?php } ?>
-				<!-- <li class="active-pro">
-                    <a href="upgrade.html">
-                        <i class="pe-7s-rocket"></i>
-                        <p>Upgrade to PRO</p>
-                    </a>
-                </li> -->
             </ul>
 </div>
