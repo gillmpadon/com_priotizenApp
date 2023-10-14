@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>LGU Managment</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,7 +34,10 @@
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
-        <?php include('includes/sidebar.php'); ?>
+        <?php 
+        require_once('./backend/connection.php');
+        $class="";
+        include('includes/sidebar.php'); ?>
     </div>
 
     <div class="main-panel">
@@ -42,8 +45,8 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-8" style="width: 100%;margin: auto; display: flex;justify-content: center;align-items: center;">
+                <div class="row" style="display:flex;justify-content: center;align-items: center;">
+                    <div class="col-md-6" >
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Login</h4>

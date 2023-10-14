@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>LGU Managment</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,18 +35,14 @@
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
-
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-
-
-    	        <?php include('includes/sidebar.php'); ?>
-
+    	    <?php
+            include('./backend/connection.php');
+            $class="user_add";
+            include('includes/sidebar.php'); ?>
     </div>
 
     <div class="main-panel">
 		    <?php include('includes/navbar.php'); ?>
-
-
 
         <div class="content">
             <div class="container-fluid">
@@ -129,12 +126,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Account Type</label>
-                                                <select name="" class="form-control" id="condition">
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="Store">Store</option>
-                                                </select>
+                                                <label>APP ID</label>
+                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" >
                                             </div>
                                         </div>
                                         

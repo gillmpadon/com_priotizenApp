@@ -10,32 +10,32 @@
                 if(isset($_SESSION['isLogged'])){
                 ?>
                
-                <li>
+                <li <?php echo $class=="dashboard"? "class='active'" :""?>>
                     <a href="dashboard.php">
                         <i class="pe-7s-graph"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="user.php">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
-                    </a>
-                </li>
-                <li>
+                <li <?php echo $class=="table"? "class='active'" :""?>>
                     <a href="table.php">
                         <i class="pe-7s-note2"></i>
-                        <p>Table List</p>
+                        <p>Users List</p>
                     </a>
                 </li>
-                <li>
+                <li <?php echo $class=="table list"? "class='active'" :""?>>
+                    <a href="table_user.php">
+                        <i class="pe-7s-id"></i>
+                        <p>Admin & Store</p>
+                    </a>
+                </li>
+                <li <?php echo $class=="user_add"? "class='active'" :""?>>
                     <a href="user_add.php">
                         <i class="pe-7s-add-user"></i>
                         <p>Create User</p>
                     </a>
                 </li>
               
-                <li>
+                <li >
                     <a href="icons.html">
                         <i class="pe-7s-science"></i>
                         <p>Icons</p>
@@ -58,11 +58,11 @@
                     </a>
                 </li>
                 <?php } ?>
-				<li class="active-pro">
+				<!-- <li class="active-pro">
                     <a href="upgrade.html">
                         <i class="pe-7s-rocket"></i>
                         <p>Upgrade to PRO</p>
                     </a>
-                </li>
+                </li> -->
             </ul>
 </div>

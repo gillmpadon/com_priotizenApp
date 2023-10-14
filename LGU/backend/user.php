@@ -6,13 +6,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $password = $_REQUEST['password'];
         $query = "SELECT * FROM account WHERE email = '$email' AND passcode = '$password'";
         $result = mysqli_query($conn, $query);
-        $fetch = mysqli_fetch_array($result);
         $arr = array();
-        if($fetch['email'] == $email && $fetch['passcode'] == $password){
-            $arr[] = "Successful";
-            $arr[] = $fetch['id'];
-        }else{
-            $arr[] = "Error";
+        if(mysqli_num_rows($result)>0){
+            $fetch = mysqli_fetch_array($result);
+            if($fetch['email'] == $email && $fetch['passcode'] == $password && $fetch['account_type'] =="admin"){
+                $arr[] = "Successful";
+                $arr[] = $fetch['id'];
+            }else{
+                $arr[] = "Error";
+            }
         }
         echo json_encode($arr);
 
@@ -21,29 +23,21 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $filter = $_REQUEST['filter'];
         $brgy = $_REQUEST['brgy'];
         $condition = $_REQUEST['condition'];
-        if($brgy!='' and $filter==''){
-            $brgy = " where brgy like '$brgy'";
-            $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id $brgy ";
-        }else if($condition!='' and $filter!=''){
-            $brgy = " where brgy like '$brgy' ";
-            $condition = " and conditions like '$condition'";
-            $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id $brgy $condition";
-        }else if($condition!='' and $filter==''){
-            $condition = " where conditions like '$condition'";
-            $query = "SELECT v.brgy, v.id,v.fname, v.lname, v.number, v.mi, a.account_status, v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id $condition ";
-        }else if($brgy=='' and $condition==''){
-            $brgy = " ";
-            $condition = " ";
-            $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id 
-        where v.fname like '%$filter%' or v.mi like '%$filter%' or v.lname like '%$filter%' or a.account_status like '%$filter%' or v.gender like '%$filter%' or v.conditions like '%$filter%' $brgy ";
+        if($brgy!=""){
+            $brgy = " and brgy like '$brgy'";
         }
-        if($filter=='' and $brgy=='' and $conditions==''){
-            $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.account_id $brgy ";
+        if($condition!=""){
+            $condition = " and conditions like '%$condition%'";
         }
+        if($filter!=""){
+            $filter = " and fname like '%$filter%' OR mi like '%$filter%' OR lname like '%$filter%' OR status_rs like '%$filter%' OR gender like '%$filter%' ";
+        }
+        $query = "SELECT v.brgy, v.id ,v.fname, v.lname, v.number, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id where 1=1  ".$filter.$brgy.$condition;
+
         $result = mysqli_query($conn,$query);
         if(!$result){
-            // echo json_encode(mysqli_error($conn));
-            echo json_encode($query);
+            echo json_encode(mysqli_error($conn));
+            // echo json_encode($query);
 
         }else{
             if(mysqli_num_rows($result)>0){
@@ -51,10 +45,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 while($row = mysqli_fetch_assoc($result)){
                     $arr[] = $row;
                 }
-                echo json_encode($arr);
+                echo json_encode($arr );
             }else{
-                // echo json_encode("Error");
-                echo json_encode($query);
+                echo json_encode("Error");
+                // echo json_encode($query);
             }
         }
       }
@@ -132,30 +126,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
 
-if($_SERVER["REQUEST_METHOD"] =="PUT"){
-    $data = json_decode(file_get_contents("php://input"),true);
-    if(isset($data['verify'])){
-        $id = $data['verify'];
-        $query = "UPDATE account SET account_status = 'Verified' WHERE account_id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if($result){
-            echo json_encode("Successful");
-        }else{
-            echo json_encode("Error");
-        }
+if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
+    $action = $_REQUEST['action'];
+    $query = "DELETE FROM verified where conditions like '$action'";
+    $result = mysqli_query($conn, $query);
+    if($result){
+        echo json_encode("Success");
     }else{
-        extract($data);
-        $query = "UPDATE verified set fname = '$fname', mi = '$mi' , lname = '$lname', gender = '$gender',
-        address = '$address' , app_id = '$app_id' , valid_id = '$valid_id', conditions = '$conditions', email = '$email',
-        family_name = '$family_name', family_contact = '$family_contact'  where id = '$id'";
-        $result = mysqli_query($conn, $query);
-        if($result){
-            echo json_encode("Success");
-        }else{
-            echo json_encode("Error");
-        }
-
+        echo json_encode("Error");
     }
 }
+
 
 ?>

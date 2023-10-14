@@ -8,13 +8,43 @@ if(isset($_GET['user_id'])){
  $query = "SELECT  count(*) as count, conditions from verified GROUP by conditions";
  $result = mysqli_query($conn, $query);
  $origArr = array();
- while($row = mysqli_fetch_assoc($result)){
-     $arr = array();
-     $arr['count'] = $row['count'];
-     $arr['conditions'] = $row['conditions'];
-     $origArr[] = $arr;
- }
+if($result){
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            $arr = array();
+            $arr['count'] = $row['count'];
+            $arr['conditions'] = $row['conditions'];
+            $origArr[] = $arr;
+        }
+    }else{
+        $origArr[] = "Error";
+    }
+}else{
+    $origArr[] = "Error";
+}
  $origArr = json_encode($origArr);
+
+
+ $brgyQuery ="select count(*) as count, brgy, conditions from verified GROUP by conditions,brgy";
+ $brgyResult = mysqli_query($conn, $brgyQuery);
+ $brgyArr = array();
+ if($brgyResult){
+    if(mysqli_num_rows($brgyResult) > 0){
+        while($row = mysqli_fetch_assoc($brgyResult)){
+            $arr = array();
+            $arr['count'] = $row['count'];
+            $arr['brgy'] = $row['brgy'];
+            $arr['conditions'] = $row['conditions'];
+            $brgyArr[] = $arr;
+        }
+    }else{
+        $brgyArr[] = "Error";
+    }
+ }else{
+    $brgyArr[] = "Error";
+ }
+
+ $brgyArr = json_encode($brgyArr);
 ?>
 <!doctype html>
 <html lang="en">
@@ -23,7 +53,7 @@ if(isset($_GET['user_id'])){
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>LGU Managment</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -36,13 +66,17 @@ if(isset($_GET['user_id'])){
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <!--  Charts Plugin -->
+    <script src="./assets/js/chartist.min.js"></script>
 
 </head>
 <body>
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
-        <?php include('includes/sidebar.php'); ?>
+        <?php 
+        $class="dashboard";
+        include('includes/sidebar.php'); ?>
     </div>
     <div class="main-panel">
         <?php include('includes/navbar.php'); ?>
@@ -56,16 +90,15 @@ if(isset($_GET['user_id'])){
                                 <p class="category">Percentage</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
+                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
                                 <div class="footer">
                                     <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
-                                        <i class="fa fa-circle text-info"></i> Disabled
+                                        <i class="fa fa-circle text-info" ></i> Disabled
                                         <i class="fa fa-circle text-danger"></i> Senior Citizen
                                     </div>
                                     <hr>
                                     <div class="stats" >
-                                        <i class="fa fa-clock-o"></i><span id="totalCount"> </span> 
+                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
                                     </div>
                                 </div>
                             </div>
@@ -75,16 +108,16 @@ if(isset($_GET['user_id'])){
                     <div class="col-md-8">
                         <div class="card ">
                             <div class="header">
-                                <h4 class="title">2014 Sales</h4>
-                                <p class="category">All products including Taxes</p>
+                                <h4 class="title">USERS REPORT</h4>
+                                <p class="category">Categorized via condition each brgy</p>
                             </div>
                             <div class="content">
-                                <div id="chartActivity" class="ct-chart"></div>
+                                <div id="chartActivity" class="ct-chart ct-perfect-fourth"></div>
 
                                 <div class="footer">
-                                    <div class="legend" >
-                                        <i class="fa fa-circle text-info "></i> Tesla Model S
-                                        <i class="fa fa-circle text-danger"></i> BMW 5 Series
+                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
+                                        <i class="fa fa-circle text-info" ></i> Disabled
+                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
                                     </div>
                                     <hr>
                                     <div class="stats">
@@ -134,20 +167,95 @@ if(isset($_GET['user_id'])){
 </div>
 
 <script>
+    const totalCount = document.getElementById("totalCount")
     const arr = <?php echo $origArr  ?>;
     console.log(arr);
-    const verifyPercent = []
-    const verifyLabel = []
-    let totalCount = 0;
-    arr.map( item =>{
-            const str = `${item.count}%`
-            verifyLabel.push(str)
-            const percent = item.count
-            verifyPercent.push(percent)
-            totalCount = totalCount + Number.parseInt( item.count)
-        })
-    const totalCountTag = document.getElementById('totalCount') 
-    totalCountTag.textContent += totalCount+" is the Total Number of User"
+    const label = []
+    const percent = []
+    let count = 0;
+    arr.map(item=>{
+        const str = `${item.count}%`;
+        label.push(str)
+        percent.push(item.count)
+        count += Number.parseInt(item.count)
+    })
+    totalCount.textContent = ` Total Number is ${count}`;
+    
+    var dataPreferences = {
+            series: [
+                [25, 30, 20, 25]
+            ]
+        };
+
+        var optionsPreferences = {
+            donut: true,
+            donutWidth: 40,
+            startAngle: 0,
+            total: 100,
+            showLabel: false,
+            axisX: {
+                showGrid: false
+            },
+        
+        };
+
+        Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
+
+        Chartist.Pie('#chartPreferences', {
+          labels: label,
+          series: percent
+        });
+
+
+
+    // Sample SQL result data
+    const sqlResult = <?php echo $brgyArr ?>;
+    // Create a new object to store the formatted data
+    const formattedData = {};
+
+    // Iterate through the SQL result data
+    sqlResult.map((row) => {
+    if (!formattedData[row.brgy]) {
+        formattedData[row.brgy] = {
+        brgy: row.brgy,
+        disabled: '0',
+        senior: '0',
+        };
+    }
+
+    if (row.conditions === 'Disabled') {
+        formattedData[row.brgy].disabled = row.count;
+    } else if (row.conditions === 'Senior Citizen') {
+        formattedData[row.brgy].senior = row.count;
+    }
+    });
+
+    // Convert the formatted data into an array
+        const resultArray = Object.values(formattedData);
+        const brgyData = resultArray
+
+        // Extract disabled and senior population data
+        const disabledData = brgyData.map((item) => parseInt(item.disabled, 10));
+        const seniorData = brgyData.map((item) => parseInt(item.senior, 10));
+        const brgyLabels = brgyData.map((item) => item.brgy);
+
+        // Create data for the bar graph
+        const data = {
+        labels: brgyLabels,
+        series: [disabledData, seniorData],
+        };
+
+        // Set the options for the bar graph
+        const options = {
+        stackBars: false,
+        axisX: {
+            labelInterpolationFnc: (value) => value, // Display brgy name as labels
+        },
+        };
+
+        // Create the bar graph
+        new Chartist.Bar('#chartActivity', data, options);
+        console.log({"resultArray":resultArray})
 </script>
 
 </body>
@@ -156,8 +264,7 @@ if(isset($_GET['user_id'])){
     <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
-	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	
 
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -169,7 +276,7 @@ if(isset($_GET['user_id'])){
 	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<!-- <script src="assets/js/demo.js"></script> -->
 
 	
 

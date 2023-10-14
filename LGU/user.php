@@ -1,18 +1,18 @@
 <?php
 require('connection.php');
-if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
-}
 if(isset($_GET['user_id'])){
     $user_id = $_GET['user_id'];
     $isDeleteBtn = true;
 }else{
     $isDeleteBtn = false;
+    $user_id = $_SESSION['user_id'];
 }
-$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN  account a on a.id = v.id where v.id= '$user_id'";
+$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.id = v.id inner join doc d on v.id = d.user_id where v.id= '$user_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 extract($assoc);
+
+
 
 ?>
 <!doctype html>
@@ -22,7 +22,7 @@ extract($assoc);
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>LGU Managment</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -51,16 +51,12 @@ extract($assoc);
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
-
-    <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
-        <?php include('includes/sidebar.php'); ?>
+        <?php 
+        $class="user";
+        include('includes/sidebar.php'); ?>
     </div>
-
     <div class="main-panel">
-		    <?php include('includes/navbar.php'); ?>
-
-
-
+		<?php include('includes/navbar.php'); ?>
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -210,9 +206,9 @@ extract($assoc);
                                 </form>
                                 
                                 <div style="display:flex;gap: 1em;">
-                                        <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $id ?>'">Edit Profile</button>
+                                        <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $user_id ?>'">Edit Profile</button>
                                         <?php
-                                        echo ($isDeleteBtn)? '<button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser(<?php echo $id?>)">Delete Profile</button>':''
+                                        echo ($isDeleteBtn)? '<button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('.$user_id.')">Delete Profile</button>' :' ';
                                         ?>
                                         
                                 </div>
@@ -223,13 +219,20 @@ extract($assoc);
                     <div class="col-md-4">
                         <div class="card card-user">
                             <div class="image">
-                                <img style="visibility:hidden"  src="../priotizen_app/user_img/<?php echo $photo ?>" alt="..."/>
+                                <img style="visibility:hidden;"  src="../priotizen_app/user_img/<?php echo $photo ?>" alt="..."/>
                             </div>
                             <div class="content">
                                 <div class="author">
                                      <a href="#">
-                                        
-                                    <img class="avatar border-gray" style="height: 21em; width: 21em" src="../priotizen_app/user_img/<?php echo $photo ?>"  alt="..."/>
+                                     <?php
+                                        $imagePath = "../priotizen_app/user_img/$photo";
+                                        if(file_exists($imagePath)) {
+                                            echo '<img class="avatar border-gray" style="height: 21em; width: 21em" src="../priotizen_app/user_img/'.$photo.'"  alt="..."/>';
+                                        }else{
+                                            echo '<img class="avatar border-gray" style="height: 21em; width: 21em" src="../priotizen_app/user_img/empty.jpg"  alt="..."/>';
+                                        }
+                                      ?>
+                                    
 
                                       <h4 class="title"><?php echo $fname." ".$mi." ".$lname ?><br />
                                          <small><?php echo $email ?></small>
@@ -259,9 +262,9 @@ extract($assoc);
                 <div class="col-md-6" id="docPsa" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">PSA</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/john.png" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/documents/<?php echo $psa ?>" alt="">
                           <div class="flex" style="padding: 1em;">
-                            <button onclick="hideDoc('Psa')" class="btn btn-info btn-fill" style="float: right;">Update</button>
+                            <button onclick="hideDoc('Psa')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>
                           </div>
                         </div>
@@ -269,9 +272,9 @@ extract($assoc);
                     <div class="col-md-6" id="docMed" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">MED</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/john.png" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/documents/<?php echo $med ?>" alt="">
                           <div class="flex" style="padding: 1em;">
-                            <button onclick="hideDoc('Med')" class="btn btn-info btn-fill" style="float: right;">Update</button>
+                            <button onclick="hideDoc('Med')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>
                           </div>
                         </div>
@@ -344,10 +347,10 @@ function toggleOtherInfo() {
     console.log(showOtherInfo);
 }
     function goSuccess(){
-        demo.goNotif('Successfully','Deleted','danger','pe-7s-delete-user')
+        demo.goNotif('Successfully',' Deleted','danger','pe-7s-delete-user')
     }
     function goError(){
-        demo.goNotif('Error','Deleted','danger','pe-7s-junk')
+        demo.goNotif('Error',' Deleted','danger','pe-7s-junk')
     }
     function deleteUser(id){
         fetch(`./backend/user.php?id=${id}`,{
@@ -357,9 +360,9 @@ function toggleOtherInfo() {
         .then( result => {
             if(result=="Success"){
                 goSuccess()
-                setTimeout(()=>[
-                    window.location.reload()
-                ],2000)
+                setTimeout(()=>{
+                    window.location.href = "table.php"
+                },2000)
             }else{
                 goError()
             }

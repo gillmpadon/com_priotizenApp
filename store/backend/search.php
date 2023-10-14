@@ -28,6 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             }
             echo json_encode($newArr);
         }else{
+            // echo json_encode($query);
             echo json_encode($query);
             
         }

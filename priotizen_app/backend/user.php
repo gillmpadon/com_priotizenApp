@@ -31,9 +31,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $queryAccount = "SELECT c.* FROM company c inner join account a on c.email= a.email where a.email = '$email'";
                 $resultAcccount = mysqli_query($conn, $queryAccount);
                 $assocAccount = mysqli_fetch_assoc($resultAcccount);
-                extract($assocAccount);
                 $arr["message"] = "Successful";
-                $arr['company_id'] = $id;
+                $arr['company_id'] = $assocAccount['id'];
                 echo json_encode($arr);
             }else{
                 $arr["message"] = "Successful";
@@ -43,7 +42,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $assoc = mysqli_fetch_assoc($result);
                 $arr["id"] = $assoc['id'];
                 echo json_encode($arr);
-                
             }
         }else{
             echo json_encode(mysqli_error($conn));

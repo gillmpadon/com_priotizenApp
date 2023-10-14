@@ -1,6 +1,8 @@
 <?php
 require('connection.php');
-$query = "SELECT v.id, v.fname, v.lname, v.brgy, v.mi, a.account_status , v.gender, v.conditions from verified v INNER JOIN account a on v.id = a.id";
+$query = "select a.id, a.name, a.email, a.number, ac.account_type from admin a inner join account ac on a.email=ac.email where 1=1 
+UNION
+select a.id, a.name, a.email, a.number , ac.account_type from company a  inner join account ac on a.email=ac.email where 1=1";
 $result = mysqli_query($conn,$query);
 ?>
 <!doctype html>
@@ -40,7 +42,7 @@ $result = mysqli_query($conn,$query);
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
         <?php 
-        $class="table";
+        $class="table list";
         include('includes/sidebar.php'); ?>
     </div>
     <div class="main-panel">
@@ -53,56 +55,14 @@ $result = mysqli_query($conn,$query);
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">User Profile Lists</h4>
+                                <h4 class="title">Admin & Store Lists</h4>
                                 <p class="category">Discover who is among the lists</p>
                                 <div class="col-md-12" style="display:flex; align-items:center; justify-content:center; gap:1em;">
                                     <input type="text" class="form-control" name="" id="search" placeholder="search">
-                                    <select name="" class="form-control" id="brgy"  style="width: 10em;">
-                                    <option value="">Barangay</option>
-                                        <?php
-                                        $barangays = [
-                                            'ALIWEKWEK',
-                                            'BAAY',
-                                            'BALANGOBONG',
-                                            'BALOCOC',
-                                            'BANTAYAN',
-                                            'BASING',
-                                            'CAPANDANAN',
-                                            'DOMALANDAN CENTER',
-                                            'DOMALANDAN EAST',
-                                            'DOMALANDAN WEST',
-                                            'DORONGAN',
-                                            'DULAG',
-                                            'ESTANZA',
-                                            'LASIP',
-                                            'LIBSONG EAST',
-                                            'LIBSONG WEST',
-                                            'MALAWA',
-                                            'MALIMPUEC',
-                                            'MANIBOC',
-                                            'MATALAVA',
-                                            'NAGUELGUEL',
-                                            'NAMOLAN',
-                                            'PANGAPISAN NORTH',
-                                            'PANGAPISAN SUR',
-                                            'POBLACION',
-                                            'QUIBAOL',
-                                            'ROSARIO',
-                                            'SABANGAN',
-                                            'TALOGTOG',
-                                            'TUMBAR',
-                                            'TONTON',
-                                            'WAWA'
-                                        ];
-                                        foreach ($barangays as $barangay) {
-                                            echo "<option value=\"$barangay\">$barangay</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                    <select name="" id="condition" class="form-control" style="width: 10em;">
-                                        <option value="">Condition</option>
-                                        <option value="senior citizen">Senior Citizen</option>
-                                        <option value="disabled">Disabled</option>
+                                    <select name="" id="type" class="form-control" style="width: 10em;">
+                                        <option value="">Account</option>
+                                        <option value="admin">Admin</option>
+                                        <option value="store">Store</option>
                                     </select>
                                 </div>
                             </div>
@@ -111,10 +71,9 @@ $result = mysqli_query($conn,$query);
                                     <thead>
                                         <th>ID</th>
                                     	<th>Name</th>
-                                    	<th>Condition</th>
-                                    	<th style="text-align: center;">STATUS</th>
-                                    	<th>Gender</th>
-                                    	<th>Brgy</th>
+                                    	<th>Email</th>
+                                    	<th>Number</th>
+                                    	<th>Type</th>
                                     </thead>
                                     <tbody id="tbody">
                                     <?php
@@ -123,14 +82,12 @@ $result = mysqli_query($conn,$query);
                                         $count=1;
                                         while($row = mysqli_fetch_assoc($result)){
                                             extract($row);
-                                            $color = $account_status!="Pending"? "#943bea ": "#9d65d2";
                                             echo  "<tr class='row_data' onclick='goToPage($id)'>
                                             <td>$count</td>
-                                            <td>$fname $mi $lname</td>
-                                            <td>$conditions</td>
-                                            <td style='background: $color  ; text-align:center; color:white;'>$account_status</td>
-                                            <td>$gender</td>
-                                            <td>$brgy</td>
+                                            <td>$name</td>
+                                            <td>$email</td>
+                                            <td>$number</td>
+                                            <td>$account_type</td>
                                             </tr>";
                                             $count++;
                                         }
@@ -197,34 +154,28 @@ $result = mysqli_query($conn,$query);
     }
     function createElementTag(e,count){
         const tbody = document.querySelector('#tbody')
-        const {id , fname, lname, number, mi, account_status, conditions,gender, brgy} =e
+        const {id , name, email, account_type , number} = e
         const tr = document.createElement('tr')
         const td1 = document.createElement('td')
         const td2 = document.createElement('td')
         const td3 = document.createElement('td')
         const td4 = document.createElement('td')
         const td5 = document.createElement('td')
-        const td6 = document.createElement('td')
 
         tr.classList.add("row_data")
         tr.onclick= function() {
             goToPage(id)
         }
         td1.textContent = count
-        td2.textContent = `${fname} ${mi} ${lname}`
-        td3.textContent = conditions
-        td4.textContent = account_status
-        td4.style.background = account_status!="Pending"? "#943bea ": "#9d65d2";
-        td4.style.textAlign = "center"
-        td4.style.color = "white"
-        td5.textContent = gender
-        td6.textContent = brgy
+        td2.textContent = `${name}`
+        td3.textContent = email
+        td4.textContent = number
+        td5.textContent = account_type
         tr.appendChild(td1)
         tr.appendChild(td2)
         tr.appendChild(td3)
         tr.appendChild(td4)
         tr.appendChild(td5)
-        tr.appendChild(td6)
         tbody.appendChild(tr)
     }
     function refreshTags(){
@@ -236,9 +187,9 @@ $result = mysqli_query($conn,$query);
 
     const tbody = document.querySelector('#tbody');
 
-function sendRequest(searchValue, brgy, condition) {
+function sendRequest(searchValue, typeValue,) {
   const value = searchValue ? searchValue : "";
-  fetch(`./backend/user.php?filter=${encodeURIComponent(value)}&brgy=${encodeURIComponent(brgy)}&condition=${condition}`, {
+  fetch(`./backend/admin_store.php?filter=${encodeURIComponent(value)}&type=${encodeURIComponent(typeValue)}`, {
     method: 'GET'
   })
     .then(response => response.json())
@@ -265,13 +216,11 @@ function sendRequest(searchValue, brgy, condition) {
 }
 
 const search = document.getElementById('search');
-const brgy = document.getElementById('brgy');
-const condition = document.getElementById('condition');
+const type = document.getElementById('type');
 
 function updateSearch() {
-  const conditionVal = condition.value !== "" ? condition.value : "";
-  const brgyVal = brgy.value !== "" ? brgy.value : "";
-  sendRequest(search.value, brgyVal, conditionVal);
+  const typeVal = type.value !== "" ? type.value : "";
+  sendRequest(search.value, typeVal, );
 }
 
 search.addEventListener('keyup', function (e) {
@@ -279,13 +228,8 @@ search.addEventListener('keyup', function (e) {
   updateSearch();
 });
 
-brgy.addEventListener('change', function (e) {
+type.addEventListener('change', function (e) {
   console.log('change event for brgy triggered');
-  updateSearch();
-});
-
-condition.addEventListener('change', function (e) {
-  console.log('change event for condition triggered');
   updateSearch();
 });
 

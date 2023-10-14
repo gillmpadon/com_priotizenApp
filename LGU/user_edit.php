@@ -5,7 +5,7 @@ if(isset($_GET['user_id'])){
 }else{
     $user_id = $_SESSION['user_id'];
 }
-$query = "SELECT v.*, a.account_status FROM verified v INNER JOIN  account a on a.id = v.id where v.id= '$user_id'";
+$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.id = v.id inner join doc d on v.id = d.user_id where v.id= '$user_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 extract($assoc);
@@ -18,7 +18,7 @@ extract($assoc);
 	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Light Bootstrap Dashboard by Creative Tim</title>
+	<title>LGU Managment</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -51,7 +51,9 @@ extract($assoc);
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
-    	        <?php include('includes/sidebar.php'); ?>
+    	        <?php 
+        $class="dashboard";
+        include('includes/sidebar.php'); ?>
 
     </div>
 
@@ -150,14 +152,9 @@ extract($assoc);
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Account Type</label>
-                                                <select name="" class="form-control" id="condition">
-                                                    <option value="<?php echo $account_type ?>" ><?php echo $account_type ?></option>
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                    <option value="Store">Store</option>
-                                                </select>
+                                        <div class="form-group">
+                                                <label>APP ID</label>
+                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" value="<?php echo $app_id ?>" >
                                             </div>
                                         </div>
                                         
@@ -252,8 +249,8 @@ extract($assoc);
                                         </div>
                                     </div>
                                     <div style="display: flex; gap:1em">
-                                        <button type="submit" class="btn btn-info btn-fill pull-right " onclick="editUser(<?php echo $id?>)">Edit Profile</button>
-                                        <button type="submit" class="btn btn-success btn-fill pull-right " onclick="verifyUser(<?php echo $id?>)" >Verify Profile</button>
+                                        <button type="submit" class="btn btn-info btn-fill pull-right " onclick="editUser()">Edit Profile</button>
+                                        <button type="submit" class="btn btn-success btn-fill pull-right " onclick="verifyUser()" >Verify Profile</button>
                                     </div>
                                     <div class="clearfix"></div>
                             </div>
@@ -266,14 +263,19 @@ extract($assoc);
                             </div>
                             <div class="content">
                                 <div class="author">
-                                     <a href="#">
-                                        
-                                    <img class="avatar border-gray" style="height: 17em; width: 17em" src="../priotizen_app/user_img/<?php echo $photo ?>"  alt="..."/>
+                                    <input type="file" id="imageInput" style="display: none;">
+                                     <?php
+                                        $imagePath = "../priotizen_app/user_img/$photo";
+                                        if(file_exists($imagePath)) {
+                                            echo '<img id="imageFile" class="avatar border-gray" style="height: 21em; width: 21em" src="../priotizen_app/user_img/'.$photo.'"  alt="..."/>';
+                                        }else{
+                                            echo '<img id="imageFile" class="avatar border-gray" style="height: 21em; width: 21em" src="../priotizen_app/user_img/empty.jpg"  alt="..."/>';
+                                        }
+                                      ?>
 
                                       <h4 class="title"><?php echo $fname." ".$mi." ".$lname ?><br />
                                          <small><?php echo $email ?></small>
                                       </h4>
-                                    </a>
                                     <h5><?php echo $account_status ?></h5>
                                 </div>
                                
@@ -297,9 +299,9 @@ extract($assoc);
                 <div class="col-md-6" id="docPsa" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">PSA</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/john.png" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/<?php echo $psa ?>" alt="">
                           <div class="flex" style="padding: 1em;">
-                            <button onclick="hideDoc('Psa')" class="btn btn-info btn-fill" style="float: right;">Update</button>
+                            <button onclick="hideDoc('Psa')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>
                           </div>
                         </div>
@@ -307,9 +309,9 @@ extract($assoc);
                     <div class="col-md-6" id="docMed" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">MED</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/john.png" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/<?php echo $med ?>" alt="">
                           <div class="flex" style="padding: 1em;">
-                            <button onclick="hideDoc('Med')" class="btn btn-info btn-fill" style="float: right;">Update</button>
+                            <button onclick="hideDoc('Med')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>
                           </div>
                         </div>
@@ -355,13 +357,32 @@ extract($assoc);
 </div>
 
 <script>
+    let search = new URLSearchParams(window.location.search)
+    let id = search.get('user_id')
+
+    
+    const imageFile = document.getElementById('imageFile');
+    const imageInput = document.getElementById('imageInput');
+    imageFile.addEventListener('click', (e) => {
+        imageInput.click();
+    })
+
+    imageInput.addEventListener('change', (e) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            imageFile.src = e.target.result;
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    })
+
+
     function goSuccess(){
         demo.goNotif('Successfully',' Edited','success','pe-7s-user')
     }
     function goError(){
         demo.goNotif('Error',' Edited','danger','pe-7s-user')
     }
-    function verifyUser(id){
+    function verifyUser(){
     const formData = new FormData()
     formData.append('verify',id)
        fetch(`./backend/user.php`,{
@@ -381,7 +402,8 @@ extract($assoc);
        })
     }
 
-    function editUser(id){
+    
+    function editUser(){
         const fname = document.getElementById('fname').value
         const mi = document.getElementById('mi').value
         const lname = document.getElementById('lname').value
@@ -397,19 +419,34 @@ extract($assoc);
         const conditions = document.getElementById('conditions').value
         const family_name = document.getElementById('family_name').value
         const family_contact = document.getElementById('family_contact').value
-        
-        fetch('./backend/user.php',{
-            method: 'PUT',
-            body: JSON.stringify({ id,fname, mi , lname, gender, status_rs, bdate, address, email,
-            valid_id, app_id, nationality, number, conditions, family_name, family_contact})
+
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('fname', fname);
+        formData.append('mi', mi);
+        formData.append('lname',lname);
+        formData.append('gender', gender);
+        formData.append('status_rs', status_rs);
+        formData.append('bdate', bdate);
+        formData.append('address', address);
+        formData.append('email', email);
+        formData.append('valid_id', valid_id);
+        formData.append('app_id', app_id);
+        formData.append('nationality', nationality);
+        formData.append('number', number);
+        formData.append('conditions', conditions);
+        formData.append('family_name', family_name);
+        formData.append('family_contact', family_contact);
+        formData.append('image', imageInput.files[0]);
+        fetch('./backend/user_edit_info.php',{
+            method: 'POST',
+            body: formData,
         })
         .then( response => response.json())
         .then( result => {
-            if(result == "Success"){
+            if(result == "Successful"){
                 goSuccess()
-                setTimeout(()=>[
-                    window.location.reload()
-                ],2000)
+              
             }else{
                 goError()
             }
@@ -451,6 +488,8 @@ function toggleOtherInfo() {
         const doc = document.querySelector(`#doc${str}`);
         doc.style.display = "none";
     }
+
+
 </script>
 
 </body>
