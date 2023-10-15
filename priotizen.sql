@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2023 at 01:52 AM
+-- Generation Time: Oct 15, 2023 at 01:50 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `account` (
   `id` int(11) NOT NULL,
-  `account_id` int(11) DEFAULT NULL,
+  `account_id` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   `passcode` varchar(45) DEFAULT NULL,
   `account_type` varchar(10) DEFAULT 'User',
@@ -42,16 +42,34 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `account_id`, `email`, `passcode`, `account_type`, `account_status`) VALUES
-(1, 1, 'gillbertmpadon@gmail.com', 'padon', 'User', 'Pending'),
-(2, 2, 'johndoe@gmail.com', 'johndoe123', 'User', 'Active'),
-(3, 3, 'janedoe@gmail.com', 'janedoe456', 'Store', 'Pending'),
-(4, 4, 'michaelsmith@gmail.com', 'michaelsmith789', 'User', 'Active'),
-(5, 5, 'emilybrown@gmail.com', 'emilybrown123', 'User', 'Pending'),
-(6, 6, 'danielwilson@gmail.com', 'danielwilson456', 'Store', 'Active'),
-(7, 7, 'elladavis@gmail.com', 'elladavis123', 'User', 'Active'),
-(8, 8, 'christopherlee@gmail.com', 'christopherlee456', 'User', 'Pending'),
-(9, 9, 'sarahjones@gmail.com', 'sarahjones123', 'Store', 'Active'),
-(10, 10, 'matthewclark@gmail.com', 'matthewclark456', 'User', 'Active');
+(1, '4lb8i4du698', 'gillbertmpadon@gmail.com', 'padon', 'user', 'Completed'),
+(2, '4lb8i4du700', 'admin@gmail.com', 'admin', 'admin', 'Completed'),
+(5, 'h6zgel8bc1i', 'test@gmail.com', 'test', 'user', 'Pending'),
+(15, 'nd3bq5p45r', 'sm@gmail.com', '12345', 'company', 'Pending'),
+(16, '49oo8unqfq7', '123', '123', 'user', 'Pending');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `image` varchar(200) DEFAULT 'image.png',
+  `number` varchar(20) DEFAULT '1234567910',
+  `admin_id` varchar(45) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `email`, `image`, `number`, `admin_id`) VALUES
+(1, 'gin', 'admin@gmail.com', 'image.png', '1234567910', '4lb8i4du700'),
+(2, '123', '123', '123.jpg', '123', '49oo8unqfq7');
 
 -- --------------------------------------------------------
 
@@ -63,33 +81,17 @@ CREATE TABLE `company` (
   `id` int(11) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `image` varchar(200) DEFAULT 'image.png'
+  `image` varchar(200) DEFAULT 'image.png',
+  `number` varchar(20) DEFAULT '1234567910',
+  `store_id` varchar(45) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `company`
 --
 
-INSERT INTO `company` (`id`, `name`, `email`, `image`) VALUES
-(1, 'SM Mega Mall', 'SM@gmail.com', 'image.png'),
-(2, 'Jollibee', 'Jollibee@gmail.com', 'image.png'),
-(3, 'Robinsons', 'Robinsons@gmail.com', 'image.png'),
-(4, 'Ayala Malls', 'Ayala@gmail.com', 'image.png'),
-(5, 'Mercury Drug', 'Mercury@gmail.com', 'image.png'),
-(6, 'Mang Inasal', 'Mang@gmail.com', 'image.png'),
-(7, 'Puregold', 'Puregold@gmail.com', 'image.png'),
-(8, 'McDonalds', 'McDonalds@gmail.com', 'image.png'),
-(9, 'Gaisano Mall', 'Gaisano@gmail.com', 'image.png'),
-(10, 'Watsons', 'Watsons@gmail.com', 'image.png'),
-(11, 'ABC Electronics', 'abcelectronics@gmail.com', 'electronics.png'),
-(12, 'XYZ Furniture', 'xyzfurniture@gmail.com', 'furniture.png'),
-(13, 'Green Gardens', 'greengardens@gmail.com', 'gardens.png'),
-(14, 'Red Auto Parts', 'redautoparts@gmail.com', 'autoparts.png'),
-(15, 'Sunrise Cafe', 'sunrisecafe@gmail.com', 'cafe.png'),
-(16, 'Healthy Grocers', 'healthygrocers@gmail.com', 'grocers.png'),
-(17, 'Tech Innovators', 'techinnovators@gmail.com', 'tech.png'),
-(18, 'Blue Fashion', 'bluefashion@gmail.com', 'fashion.png'),
-(19, 'City Pharmacy', 'citypharmacy@gmail.com', 'pharmacy.png');
+INSERT INTO `company` (`id`, `name`, `email`, `image`, `number`, `store_id`) VALUES
+(6, 'SM MEGA', 'sm@gmail.com', 'SM MEGA.jpg', '12345', 'nd3bq5p45r');
 
 -- --------------------------------------------------------
 
@@ -99,9 +101,9 @@ INSERT INTO `company` (`id`, `name`, `email`, `image`) VALUES
 
 CREATE TABLE `doc` (
   `id` int(11) NOT NULL,
-  `psa` varchar(200) DEFAULT NULL,
-  `med` varchar(200) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `psa` varchar(150) DEFAULT 'empty.jpg',
+  `med` varchar(150) DEFAULT 'empty.jpg',
+  `user_id` varchar(45) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -109,16 +111,8 @@ CREATE TABLE `doc` (
 --
 
 INSERT INTO `doc` (`id`, `psa`, `med`, `user_id`) VALUES
-(1, 'empty.jpg', 'empty.jpg', 1),
-(2, 'john_psa.png', 'john_med.png', 2),
-(3, 'jane_psa.png', 'jane_med.png', 3),
-(4, 'michael_psa.png', 'michael_med.png', 4),
-(5, 'emily_psa.png', 'emily_med.png', 5),
-(6, 'daniel_psa.png', 'daniel_med.png', 6),
-(7, 'ella_psa.png', 'ella_med.png', 7),
-(8, 'christopher_psa.png', 'christopher_med.png', 8),
-(9, 'sarah_psa.png', 'sarah_med.png', 9),
-(10, 'matthew_psa.png', 'matthew_med.png', 10);
+(1, 'empty.jpg', 'empty.jpg', '4lb8i4du698'),
+(2, 'test_psa.png', 'test_med.png', 'h6zgel8bc1i');
 
 -- --------------------------------------------------------
 
@@ -128,8 +122,8 @@ INSERT INTO `doc` (`id`, `psa`, `med`, `user_id`) VALUES
 
 CREATE TABLE `notification` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `company_id` int(11) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
+  `company_id` varchar(45) DEFAULT NULL,
   `reciept_id` varchar(20) DEFAULT NULL,
   `status` varchar(15) DEFAULT 'Pending'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -139,16 +133,7 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`id`, `user_id`, `company_id`, `reciept_id`, `status`) VALUES
-(1, 1, 1, 'receipt1000', 'Pending'),
-(2, 2, 2, '12345678', 'Pending'),
-(3, 3, 3, '87654321', 'Completed'),
-(4, 4, 4, '98765432', 'Pending'),
-(5, 5, 5, '21098765', 'Completed'),
-(6, 6, 6, '34567890', 'Pending'),
-(7, 7, 7, '43210987', 'Completed'),
-(8, 8, 8, '56789012', 'Pending'),
-(9, 9, 9, '90123456', 'Completed'),
-(10, 10, 10, '65432109', 'Pending');
+(1, 'h6zgel8bc1i', 'nd3bq5p45r', '652a8d8a211b0', 'Completed');
 
 -- --------------------------------------------------------
 
@@ -163,8 +148,8 @@ CREATE TABLE `receipt` (
   `discount` int(11) NOT NULL,
   `img_receipt` varchar(200) NOT NULL,
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `company_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `company_id` varchar(45) DEFAULT NULL,
+  `user_id` varchar(45) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
@@ -172,16 +157,29 @@ CREATE TABLE `receipt` (
 --
 
 INSERT INTO `receipt` (`id`, `receipt_id`, `price`, `discount`, `img_receipt`, `date`, `company_id`, `user_id`) VALUES
-(1, 'receipt1000', 500, 250, 'empty.jpg', '2023-10-12 23:48:30', 1, 1),
-(2, 'receipt1001', 50, 10, 'receipt_1001.jpg', '2023-10-12 23:50:16', 2, 2),
-(3, 'receipt1002', 75, 15, 'receipt_1002.jpg', '2023-10-12 23:50:16', 3, 3),
-(4, 'receipt1003', 100, 20, 'receipt_1003.jpg', '2023-10-12 23:50:16', 4, 4),
-(5, 'receipt1004', 60, 12, 'receipt_1004.jpg', '2023-10-12 23:50:16', 5, 5),
-(6, 'receipt1005', 80, 16, 'receipt_1005.jpg', '2023-10-12 23:50:16', 6, 6),
-(7, 'receipt1006', 45, 9, 'receipt_1006.jpg', '2023-10-12 23:50:16', 7, 7),
-(8, 'receipt1007', 55, 11, 'receipt_1007.jpg', '2023-10-12 23:50:16', 8, 8),
-(9, 'receipt1008', 70, 14, 'receipt_1008.jpg', '2023-10-12 23:50:16', 9, 9),
-(10, 'receipt1009', 90, 18, 'receipt_1009.jpg', '2023-10-12 23:50:16', 10, 10);
+(1, '652a8d8a211b0', 1200, 20, 'receipt_h6zgel8bc1i.png', '2023-10-14 12:46:02', 'nd3bq5p45r', 'h6zgel8bc1i');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_history`
+--
+
+CREATE TABLE `user_history` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(45) DEFAULT NULL,
+  `admin_id` varchar(45) DEFAULT NULL,
+  `action` varchar(10) NOT NULL DEFAULT 'Created',
+  `time_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_history`
+--
+
+INSERT INTO `user_history` (`id`, `user_id`, `admin_id`, `action`, `time_edited`) VALUES
+(1, '4lb8i4du698', '4lb8i4du700', 'Edited', '2023-10-14 08:52:19'),
+(4, 'h6zgel8bc1i', '4lb8i4du700', 'Created', '2023-10-14 11:16:47');
 
 -- --------------------------------------------------------
 
@@ -215,16 +213,8 @@ CREATE TABLE `verified` (
 --
 
 INSERT INTO `verified` (`id`, `fname`, `mi`, `lname`, `email`, `bdate`, `status_rs`, `gender`, `address`, `number`, `valid_id`, `app_id`, `photo`, `conditions`, `nationality`, `family_name`, `family_contact`, `brgy`) VALUES
-(1, 'gillbert', 'm', 'padon', 'gillbertmpadon@gmail.com', '04-19-2001', 'single', 'Male', 'Tiniguiban', '09707281718', '10000001', '10000001', 'empty.jpg', 'Disabled', 'Pilipino', 'Padon', '09066110267', 'Tiniguiban'),
-(2, 'John', 'A', 'Doe', 'johndoe@gmail.com', '1985-03-15', 'Married', 'Male', '123 Main St', '555-123-4567', '123456', '7890', 'john.jpg', 'None', 'American', 'Doe', '555-987-6543', 'Exampleville'),
-(3, 'Jane', 'B', 'Smith', 'janedoe@gmail.com', '1990-07-22', 'Single', 'Female', '456 Elm St', '555-789-0123', '789012', '1234', 'jane.jpg', 'Asthma', 'Canadian', 'Smith', '555-210-9876', 'Sampletown'),
-(4, 'Michael', 'C', 'Johnson', 'michaelsmith@gmail.com', '1982-11-30', 'Married', 'Male', '789 Oak St', '555-345-6789', '345678', '5678', 'michael.jpg', 'Diabetes', 'Australian', 'Johnson', '555-123-4567', 'Testville'),
-(5, 'Emily', 'D', 'Brown', 'emilybrown@gmail.com', '1987-05-18', 'Single', 'Female', '987 Pine St', '555-432-1098', '432109', '9012', 'emily.jpg', 'None', 'British', 'Brown', '555-234-5678', 'Trytown'),
-(6, 'Daniel', 'E', 'Wilson', 'danielwilson@gmail.com', '1975-09-25', 'Married', 'Male', '234 Cedar St', '555-567-8901', '567890', '3456', 'daniel.jpg', 'Hypertension', 'Irish', 'Wilson', '555-345-6789', 'Testville'),
-(7, 'Ella', 'F', 'Davis', 'elladavis@gmail.com', '1989-01-10', 'Single', 'Female', '345 Maple St', '555-432-1098', '432109', '8901', 'ella.jpg', 'Asthma', 'Scottish', 'Davis', '555-987-6543', 'Sampletown'),
-(8, 'Christopher', 'G', 'Lee', 'christopherlee@gmail.com', '1978-04-05', 'Married', 'Male', '789 Oak St', '555-567-8901', '567890', '3456', 'christopher.jpg', 'Hypertension', 'Irish', 'Lee', '555-345-6789', 'Testville'),
-(9, 'Sarah', 'H', 'Jones', 'sarahjones@gmail.com', '1984-10-15', 'Married', 'Female', '543 Birch St', '555-890-1234', '890123', '6789', 'sarah.jpg', 'None', 'Canadian', 'Jones', '555-987-6543', 'Exampleville'),
-(10, 'Matthew', 'I', 'Clark', 'matthewclark@gmail.com', '1980-06-20', 'Single', 'Male', '678 Pine St', '555-456-7890', '456789', '8901', 'matthew.jpg', 'Diabetes', 'American', 'Clark', '555-234-5678', 'Trytown');
+(1, 'Kyoya', 'm', 'padon', 'gillbertmpadon@gmail.com', '01-20-2001', 'single', 'male', 'Uha', '09707281718', '123', '4lb8i4du698', 'gin_dp.png', 'disabled', 'Pilipino', 'padon', '09066110267', 'ALIWEKWEK'),
+(4, 'test', 'test', 'test', 'test@gmail.com', '2010-01-01', 'single', 'male', 'Uha', '123', '123', 'h6zgel8bc1i', 'test_dp.png', 'senior citizen', 'Pilipino', 'padon', '123', 'ALIWEKWEK');
 
 --
 -- Indexes for dumped tables
@@ -234,6 +224,12 @@ INSERT INTO `verified` (`id`, `fname`, `mi`, `lname`, `email`, `bdate`, `status_
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -261,6 +257,12 @@ ALTER TABLE `receipt`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_history`
+--
+ALTER TABLE `user_history`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `verified`
 --
 ALTER TABLE `verified`
@@ -274,32 +276,42 @@ ALTER TABLE `verified`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `doc`
 --
 ALTER TABLE `doc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `receipt`
 --
 ALTER TABLE `receipt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `user_history`
+--
+ALTER TABLE `user_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `verified`
 --
 ALTER TABLE `verified`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
