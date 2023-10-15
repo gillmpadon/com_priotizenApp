@@ -1,7 +1,7 @@
 <?php
 require('./backend/connection.php');
 $id = $_GET['profile'];
-$query = "SELECT * FROM doc where user_id = $id limit 1";
+$query = "SELECT * FROM doc where user_id = '$id' limit 1";
 $result = mysqli_query($conn, $query);
 $imgPsa; 
 $imgMed ;
@@ -20,7 +20,7 @@ if($result){
 }
 
 $user_id = $_GET['profile'];
-$comQuery = "SELECT concat(fname, ' ',lname) as name , email , photo from verified where id = '$user_id'";
+$comQuery = "SELECT concat(fname, ' ',lname) as name , email , photo from verified where app_id = '$user_id'";
 $comResult = mysqli_query($conn, $comQuery);
 $name = "empty";
 $email = "empty";

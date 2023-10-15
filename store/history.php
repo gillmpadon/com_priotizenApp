@@ -47,7 +47,9 @@ if (!$result) {
                             <p>date:</p>
                         </div>
                         <div class="amounts">
-                            <p>P<?php echo $discount; ?></p>
+                        <p>PHP<?php 
+                            $discount = ((float)$row['discount'])/100 * ((float) $row['price']) ;
+                            echo $discount; ?></p>
                             <p>P<?php echo $price; ?></p>
                             <p><?php
                             $time = date('g:i A', strtotime($date)); 

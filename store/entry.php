@@ -4,7 +4,7 @@ if(isset($_GET['company_id'])){
     $_SESSION['company_id'] = $_GET['company_id'];
 }
 $company_id = $_SESSION['company_id'];
-$query = "SELECT r.price, r.discount, r.img_receipt as receipt, v.lname, n.status, DATE(r.date) as date  from receipt r inner join verified v on r.user_id = v.app_id inner join notification n on r.receipt_id = n.reciept_id where  n.status !='Completed'";
+$query = "SELECT r.price, r.discount, r.img_receipt as receipt, v.lname, n.status, r.date as date  from receipt r inner join verified v on r.user_id = v.app_id inner join notification n on r.receipt_id = n.reciept_id where  n.status !='Completed'";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo  mysqli_error($conn);
@@ -46,7 +46,9 @@ if (!$result) {
                             <p>time:</p>
                         </div>
                         <div class="amounts">
-                            <p>P<?php echo $discount; ?></p>
+                            <p>PHP<?php 
+                            $discount = ((float)$row['discount'])/100 * ((float) $row['price']) ;
+                            echo $discount; ?></p>
                             <p>P<?php echo $price; ?></p>
                             <p><?php
                             $time = date('g:i A', strtotime($date)); 

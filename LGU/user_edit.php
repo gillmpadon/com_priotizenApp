@@ -299,7 +299,7 @@ extract($assoc);
                 <div class="col-md-6" id="docPsa" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">PSA</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/<?php echo $psa ?>" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/documents/<?php echo $psa ?>" alt="">
                           <div class="flex" style="padding: 1em;">
                             <button onclick="hideDoc('Psa')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>
@@ -309,7 +309,7 @@ extract($assoc);
                     <div class="col-md-6" id="docMed" style="display: none;">
                         <div class="card">
                         <p class="text-center" style="padding-top: 1em;">MED</p>
-                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/user_img/<?php echo $med ?>" alt="">
+                          <img style="height: 30em; width:100%; object-fit:cover;" src="../priotizen_app/documents/<?php echo $med ?>" alt="">
                           <div class="flex" style="padding: 1em;">
                             <button onclick="hideDoc('Med')" class="btn btn-info btn-fill" style="float: right;">Hide</button>
                             <br><br>

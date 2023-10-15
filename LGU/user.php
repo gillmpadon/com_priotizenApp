@@ -215,9 +215,7 @@ if($result && $result1 ){
                                 
                                 <div style="display:flex;gap: 1em;">
                                         <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $user_id ?>'">Edit Profile</button>
-                                        <?php
-                                        echo ($isDeleteBtn)? '<button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('.$user_id.')">Delete Profile</button>' :' ';
-                                        ?>
+                                        <button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('<?php  echo $user_id ?>')">Delete Profile</button>
 
                                         
                                 </div>

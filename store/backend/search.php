@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $name = $_REQUEST['name'];
     $status = $_REQUEST['status'];
     $filter = " and account_status like '$status'";
-    $query = "SELECT v.*, a.account_status, v.id as user_id from verified v INNER JOIN account a on v.app_id = a.account_id ";
+    $query = "SELECT v.*, a.account_status, v.app_id as user_id from verified v INNER JOIN account a on v.app_id = a.account_id ";
     if(empty($name)){
         $query =$query."where account_status like '$status'";
     }else{

@@ -57,10 +57,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
 if($_SERVER['REQUEST_METHOD'] == 'DELETE'){
     $user_id = $_REQUEST['id'];
-    $query = "DELETE FROM verified WHERE id = '$user_id'";
+    $query = "DELETE FROM verified WHERE app_id = '$user_id'";
     $result = mysqli_query($conn, $query);
     if($result){
-        $query = "DELETE FROM account WHERE id = '$user_id'";
+        $query = "DELETE FROM account WHERE account_id = '$user_id'";
         $result = mysqli_query($conn, $query);
         if($result){
             echo json_encode("Success");
