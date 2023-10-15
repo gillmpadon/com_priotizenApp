@@ -106,7 +106,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $query1 = "INSERT INTO verified (fname, mi, lname, email, bdate, status_rs, conditions, gender, number, address, photo, valid_id, app_id, family_name, family_contact, brgy) VALUES ('$fname', '$mi', '$lname', '$email', '$bdate', '$status', '$condition', '$gender', '$number', '$address', '$newFilename', '$valid_id', '$app_id', '$family_name', '$family_contact', '$brgy')";
         $query2 = "INSERT INTO account (account_id, email, passcode, account_type, account_status) VALUES ('$app_id', '$email', '$lname', 'user', 'Pending')";
         $query3 = "INSERT INTO user_history (user_id, admin_id) VALUES ('$app_id', '$admin_id')";
-        $query5 = "INSERT INTO doc (user_id) VALUES ('$app_id')";
+        $query4 = "INSERT INTO doc (user_id) VALUES ('$app_id')";
 
         $result1 = mysqli_query($conn, $query1);
         $result2 = mysqli_query($conn, $query2);

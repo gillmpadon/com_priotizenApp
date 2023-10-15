@@ -1,5 +1,5 @@
 <?php
-$notifQuery = "SELECT concat(v.lname,' ',v.fname) as name, a.id from account a inner join verified v on a.email = v.email where a.account_status like 'Pending' order by a.id desc limit 5";
+$notifQuery = "SELECT concat(v.lname,' ',v.fname) as name, a.id, a.account_id from account a inner join verified v on a.account_id = v.app_id where a.account_status like 'Pending' order by a.id desc limit 5";
 $notifResult = mysqli_query($conn,$notifQuery);
 
 ?>
@@ -37,7 +37,7 @@ $notifResult = mysqli_query($conn,$notifQuery);
                                     if($notifResult){
                                         if(mysqli_num_rows($notifResult)>0){
                                             while($row = mysqli_fetch_assoc($notifResult)){
-                                                $id = $row['id'];
+                                                $id = $row['account_id'];
                                                 $name = $row['name'];
                                                 echo "<li><a href='user.php?user_id=$id'>$name</a></li>";
                                             }

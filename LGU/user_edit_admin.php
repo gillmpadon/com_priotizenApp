@@ -40,7 +40,7 @@
             $account_type = strtolower($_GET['account_type'])=='store'? 'company' : 'admin';
             $filter = strtolower($_GET['account_type'])=='store'? 'store' : 'admin';
             $id = $_GET['user_id'];
-            $query = "select n.email, n.name, a.passcode, n.number, n.image from $account_type n inner join account a on n.email = a.email where a.account_type like '$filter' and n.id = '$id' limit 1";
+            $query = "SELECT n.email, n.name, a.passcode, n.number, n.image from $account_type n inner join account a on n.admin_id = a.account_id  where a.account_type like '$filter' and n.admin_id = '$id' limit 1";
             $class="";
             include('includes/sidebar.php'); ?>
     </div>
