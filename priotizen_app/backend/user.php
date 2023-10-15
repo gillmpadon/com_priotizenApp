@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $query = "SELECT * FROM account where email = '$email' and passcode = '$password'";
                 $result = mysqli_query($conn,$query);
                 $assoc = mysqli_fetch_assoc($result);
-                $arr["id"] = $assoc['id'];
+                $arr["id"] = $assoc['account_id'];
                 echo json_encode($arr);
             }
         }else{

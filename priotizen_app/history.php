@@ -53,7 +53,9 @@ $queryResults = mysqli_query($conn,$query);
                             <p id="title"><?php echo $row['company'] ?></p>
                            <div class="info">
                             <p>Discount:</p>
-                            <p><?php echo $row['discount'] ?>%</p>
+                            <p><?php
+                            $amount = ((float)$row['discount'])/100 * ((float) $row['price']) ;
+                            echo $amount ?></p>
                            </div>
                            <div class="info">
                             <p>Cash:</p>
