@@ -24,12 +24,14 @@
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="assets/css/confirmation.css" rel="stylesheet" />
 
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    
 </head>
 <body>
 
@@ -57,19 +59,19 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>First Name</label>
+                                                <label>First Name </label><span class="asterisk">*</span>
                                                 <input id="fname" type="text" class="form-control"  placeholder="Enter first name" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Middle Initial</label>
+                                                <label>Middle Initial</label><span class="asterisk">*</span>
                                                 <input id="mi" type="text" class="form-control" placeholder="Enter M.I" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Last Name</label>
+                                                <label for="exampleInputEmail1">Last Name</label><span class="asterisk">*</span>
                                                 <input id="lname" type="text" class="form-control" placeholder="Enter last name" >
                                             </div>
                                         </div>
@@ -78,7 +80,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Gender</label>
+                                                <label>Gender</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="gender">
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
@@ -87,7 +89,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Status</label>
+                                                <label>Status</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="status">
                                                     <option value="single">Single</option>
                                                     <option value="married">Married</option>
@@ -97,7 +99,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Birth Date</label>
+                                                <label>Birth Date</label><span class="asterisk">*</span>
                                                 <input type="date" class="form-control" id="bdate" >
                                                 </select>
                                             </div>
@@ -105,29 +107,113 @@
                                     </div>
 
                                     <div class="row otherInfoOff">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Home Address" id="address" >
+                                                <label>Municipality</label><span class="asterisk">*</span>
+                                                <select name="  " class="form-control" id="municipality">
+                                                    <option value="lingayin" selected>Lingayin</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" class="form-control" placeholder="Email Address" id="email" >
+                                                <label>Barangay</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="brgy" >
+                                                <?php
+                                                $barangays = [
+                                                    'Aliwekwek',
+                                                    'Baay',
+                                                    'Balangobong',
+                                                    'Balococ',
+                                                    'Bantayan',
+                                                    'Basing',
+                                                    'Capandanan',
+                                                    'Domalandan Center',
+                                                    'Domalandan East',
+                                                    'Domalandan West',
+                                                    'Dorongan',
+                                                    'Dulag',
+                                                    'Estanza',
+                                                    'Lasip',
+                                                    'Libsong East',
+                                                    'Libsong West',
+                                                    'Malawa',
+                                                    'Malimpuec',
+                                                    'Maniboc',
+                                                    'Matalava',
+                                                    'Naguelguel',
+                                                    'Namolan',
+                                                    'Pangapisan North',
+                                                    'Pangapisan Sur',
+                                                    'Poblacion',
+                                                    'Quibaol',
+                                                    'Rosario',
+                                                    'Sabangan',
+                                                    'Talogtog',
+                                                    'Tumbar',
+                                                    'Tonton',
+                                                    'Wawa'
+                                                ];
+                                                foreach ($barangays as $barangay) {
+                                                    echo "<option value=\"$barangay\">$barangay</option>";
+                                                }
+                                                ?>
+                                             </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Address</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="brgy" >
+                                                <?php
+                                                $barangays = [
+                                                    "Avenida",
+                                                    "Alvear E",
+                                                    "Alvear II",
+                                                    "Artacho",
+                                                    "Bonifacio",
+                                                    "Dike",
+                                                    "Dona Asunsion Garcia",
+                                                    "Guilig",
+                                                    "Heroes",
+                                                    "Jacoba",
+                                                    "Mendoza",
+                                                    "New St",
+                                                    "P. Moran",
+                                                    "Padilla",
+                                                    "Panfilo Lopez",
+                                                    "Primicias St",
+                                                    "Ramos",
+                                                    "Sollis",
+                                                    "Sto. Nino",
+                                                    "Gov. Antonio U. Sison"
+                                                ];
+                                                foreach ($barangays as $barangay) {
+                                                    echo "<option value=\"$barangay\">$barangay St.</option>";
+                                                }
+                                                ?>
+                                             </select>                                               
+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>House No</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="House No/Block" id="email" >
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row otherInfoOn" style="display: none;">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Valid ID</label>
+                                                <label>Valid ID</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter Valid ID Number" id="valid_id" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>APP ID</label>
+                                                <label>APP ID</label><span class="asterisk">*</span>
                                                 <input readonly type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" >
                                             </div>
                                         </div>
@@ -137,19 +223,19 @@
                                     <div class="row otherInfoOff">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Nationality</label>
+                                                <label>Nationality</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter nationality" id="nationality">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Number</label>
+                                                <label>Number</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter number" id="number">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Condition</label>
+                                                <label>Condition</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="condition">
                                                     <option value="senior citizen">Senior Citizen</option>
                                                     <option value="disabled">Disabled</option>
@@ -161,60 +247,20 @@
                                     <div class="row otherInfoOn" style="display: none;">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Name</label>
+                                                <label>Family Name</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter Family Name" id="family_name">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Contact</label>
+                                                <label>Family Contact</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter Family Number" id="family_contact">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Barangay</label>
-                                                <select name="" class="form-control" id="brgy" >
-                                                <?php
-                                                $barangays = [
-                                                    'ALIWEKWEK',
-                                                    'BAAY',
-                                                    'BALANGOBONG',
-                                                    'BALOCOC',
-                                                    'BANTAYAN',
-                                                    'BASING',
-                                                    'CAPANDANAN',
-                                                    'DOMALANDAN CENTER',
-                                                    'DOMALANDAN EAST',
-                                                    'DOMALANDAN WEST',
-                                                    'DORONGAN',
-                                                    'DULAG',
-                                                    'ESTANZA',
-                                                    'LASIP',
-                                                    'LIBSONG EAST',
-                                                    'LIBSONG WEST',
-                                                    'MALAWA',
-                                                    'MALIMPUEC',
-                                                    'MANIBOC',
-                                                    'MATALAVA',
-                                                    'NAGUELGUEL',
-                                                    'NAMOLAN',
-                                                    'PANGAPISAN NORTH',
-                                                    'PANGAPISAN SUR',
-                                                    'POBLACION',
-                                                    'QUIBAOL',
-                                                    'ROSARIO',
-                                                    'SABANGAN',
-                                                    'TALOGTOG',
-                                                    'TUMBAR',
-                                                    'TONTON',
-                                                    'WAWA'
-                                                ];
-                                                foreach ($barangays as $barangay) {
-                                                    echo "<option value=\"$barangay\">$barangay</option>";
-                                                }
-                                                ?>
-                                             </select>
+                                                <label>Email</label><span class="asterisk">*</span>
+                                                <input type="email" class="form-control" placeholder="Email Address" id="email" >
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +294,6 @@
                                 <button onclick="showDoc('Psa')" href="#" class="btn btn-simple"><i class="pe-7s-note2"></i> PSA</button>
                                 <button onclick="showDoc('Med')" href="#" class="btn btn-simple"><i class="pe-7s-file"></i> MED</button>
                                 <button onclick="toggleOtherInfo()" href="#" class="btn btn-simple"><i class="pe-7s-id"></i> OTHER</button>
-
                             </div>
                         </div>
                     </div>
@@ -440,9 +485,13 @@
     .then( result =>{
         if(result=="Successful"){
             goSuccess()
-            setTimeout(()=>[
+            setTimeout(()=>{
+                if(condition == "disabled"){
                     window.location.href="table.php"
-            ],2000)
+                }else{
+                    window.location.href="table.php"
+                }
+            },2000)
         }else{
             goError()
         }

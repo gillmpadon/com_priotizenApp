@@ -1,0 +1,192 @@
+.maincontent{
+    box-sizing: border-box;
+    
+}
+table{
+    width: 100%;
+    table-layout: fixed;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: .5em;
+    box-sizing: border-box;
+}
+td{
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.black{
+    background-color: black;
+}
+.text-white{
+    color: white;
+}
+.inputs{
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+.inputs input{
+    width: 100%;
+    
+}
+.input-text{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.bg-gray{
+    color: black;
+    background-color: rgb(86, 83, 83);
+}
+.notop{
+    border-top: 0;
+}
+.nobottom{
+    border-bottom: 0;
+}
+.noleft{
+    border-left: 0;
+}
+.noright{
+    border-right: 0;
+}
+.top, .bot{
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+}
+.top input, .bot input{
+    width: 100%;
+}
+.bot input{
+    border: none;
+    border-right: 1px solid black;
+}
+.bot ::placeholder{
+    text-align: center;
+}
+.flex{
+    display:flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.checkbox-input{
+    display: flex;
+    gap: .5em;
+    align-items: baseline;
+    justify-content: center;
+}
+.card .header{
+    padding: 0;
+}
+.header,.entry{
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+.entry input{
+    width:100%;
+    text-align: center;
+}
+.checks{
+    display: flex;
+    width: 100%;
+}
+.checks-entry{
+    width: 100%;
+}
+.entries{
+    display: flex;
+    align-items: baseline;
+    gap: .5em;
+    width: 100%;
+    padding-inline: .5em;
+    height: 3em;
+    border-right: 1px solid black;
+
+}
+.entries input[type="text"]{
+    width: 50%;
+    border: none;
+}
+.entries p,.last p{
+    font-size: .9em;
+}
+.onlybottom{
+    border-bottom: 1px solid black;
+}
+.onlyright{
+    border-right: 1px solid black;
+}
+
+.lastentry{
+    display: flex;
+    width: 100%;
+}
+.last{
+    width: 100%;
+    display: flex;
+    gap: .5em;
+    align-items: baseline;
+    padding-inline: .5em;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+.last input[type="text"]{
+    width: 100%;
+    border: none;
+}
+#norights{
+    border-right: 0;
+}
+#nobottom{
+    border-bottom: 0;
+}
+
+.middle{
+    width: 100%;
+    height: 100%;
+}
+.midentry{
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+    gap: .5em;
+    border-bottom: 1px solid black;
+    padding-inline: 1em;
+}
+.midentry input[type="text"]{
+    width: 100%;
+    border: none;
+}
+
+.narrow div{
+    height: 2em;
+}
+
+.sign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2em;
+}
+.signature, .attach{
+    height: 15em;
+    width: 20em;
+    padding: 1em;
+    text-align: center;
+}
+.signature input{
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin-top: 5em;
+}
+.attach{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

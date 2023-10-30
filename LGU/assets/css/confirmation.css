@@ -1,0 +1,30 @@
+
+.confirmation{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    color: white;
+    border: none;
+    background: wheat;
+    z-index: 1000;
+    border-radius: 1em;
+    width: 20em;
+
+}
+.cons-buttons{
+    display: flex;
+    justify-content: space-between;
+}
+.cons-buttons button{
+    width: 45%;
+    height: 3em;
+    color: white;
+    border-radius: .5em;
+    border: none;
+}
+
+.asterisk{
+    color: red;
+}

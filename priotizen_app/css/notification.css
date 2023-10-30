@@ -1,10 +1,11 @@
-body{
+html,body{
     background-color: var(--bg);
     margin: 0;
     padding: 0;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    position: relative;
 }
 
 .container{
@@ -23,7 +24,6 @@ body{
 
 /* notifications */
 .notifications{
-    height: 80%;
     overflow: auto;
 }
 .notifications::-webkit-scrollbar{
@@ -120,6 +120,19 @@ body{
 .notActive{
     background-color: var(--inputDiv);
 }
+
+
+.bodyconfirmation{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #1e1e1fb1;
+    z-index: 2;
+}
+.confirmation{
+    border-radius: 1em;
+}
+
 
 /* responsiveness */
 @media screen and (min-width: 600px) {

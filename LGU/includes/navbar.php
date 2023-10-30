@@ -3,6 +3,18 @@ $notifQuery = "SELECT concat(v.lname,' ',v.fname) as name, a.id, a.account_id fr
 $notifResult = mysqli_query($conn,$notifQuery);
 
 ?>
+<div class="bodyconfirmation" style="display: none;">
+            <div class="confirmation" >
+                <div class="cons-text">
+                    <h3>Confirmation</h3>
+                    <p>Are you sure you want to proceed to pay?</p>
+                </div>
+                <div class="cons-buttons">
+                    <button class="btnTrig" style="background: red;" onclick="proceedToPay('no')">No</button>
+                    <button class="btnTrig" style="background: green;" onclick="proceedToPay('yes')">Yes</button>
+            </div>
+    </div>
+</div>
 <nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -115,17 +127,43 @@ $notifResult = mysqli_query($conn,$notifQuery);
             function dontDelete(str){
                 demo.goNotif('Error',` ${str.toUpperCase()}`,'success','pe-7s-delete-user')
             }
-            function truncate(str,account){
-                fetch(`./backend/settings.php?action=${str}`,{
-                    method: 'DELETE'
-                })
-                .then( response => response.json())
-                .then( result =>{
-                    if(result == "Success"){
-                        goDelete(str)
-                    }else{
-                        dontDelete(str)
+
+            const confirmation = document.querySelector('.bodyconfirmation')
+            function proceed(str,action){
+                if(action=="yes"){
+                    fetch(`./backend/settings.php?action=${str}`,{
+                        method: 'DELETE'
+                    })
+                    .then( response => response.json())
+                    .then( result =>{
+                        if(result == "Success"){
+                            goDelete(str)
+                        }else{
+                            dontDelete(str)
+                        }
+                        setTimeout(()=>{
+                            confirmation.style.display = "none"
+                        },1000)
+                    })
+                }else{
+                    confirmation.style.display ='none';
+                }
+                console.log(str,action)
+            }
+            function clearBtn(){
+                const parent = document.querySelector('.cons-buttons')
+                const btnTrig = document.querySelectorAll('.btnTrig')
+                    while(parent.hasChildNodes()){
+                        parent.removeChild(parent.childNodes[0]);
                     }
-                })
+            }
+            function truncate(str){
+                clearBtn()
+                const red = `<button class="btnTrig" style="background: red;" onclick="proceed('${str}','no')">No</button>`
+                const green = `<button class="btnTrig" style="background: green;" onclick="proceed('${str}','yes')">Yes</button>`
+                const parent = document.querySelector('.cons-buttons')
+                parent.innerHTML += red
+                parent.innerHTML += green
+                confirmation.style.display ='block';
             }
         </script>

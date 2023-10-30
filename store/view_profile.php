@@ -34,6 +34,19 @@ if($comResult){
     }
 }
 
+$oldCustomer ;
+$company_id = $_SESSION['company_id'];
+$checkCustomer = "SELECT * FROM receipt where company_id = '$company_id' and user_id = '$user_id'";
+$checkResult = mysqli_query($conn, $checkCustomer);
+if($checkResult){
+    if(mysqli_num_rows($checkResult)>0){
+        $oldCustomer = "Old Customer";
+    }else{
+        $oldCustomer = "Not a Customer";
+    }
+}else{
+    $oldCustomer = "Not a Customer";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,6 +123,7 @@ if($comResult){
             <img src="../priotizen_app/user_img/<?php echo $img ?>" alt="image" style="border-radius: .5em;">
             <p><?php echo $name ?></p>
             <p><?php echo $email ?></p>
+            <p><?php echo $oldCustomer?></p>
         </div>
         <br>
         <div class="dashboard">

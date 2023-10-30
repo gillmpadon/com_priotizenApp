@@ -31,6 +31,7 @@ form{
     width: 100%;
     margin: auto;
     position: relative;
+    border: 1px solid white;
 }
 .entryInput{
     height: 3em;
@@ -138,7 +139,4 @@ form{
         height: 50%;
     }
 
-}
-.form{
-    margin: auto;
 }

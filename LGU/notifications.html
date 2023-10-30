@@ -23,6 +23,8 @@
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="assets/css/confirmation.css" rel="stylesheet" />
+    <link href="assets/css/confirmation.css" rel="stylesheet" />
 
 
     <!--     Fonts and icons     -->
@@ -32,14 +34,16 @@
 
 </head>
 <body>
-
+  
 <div class="wrapper">
+    
     <div class="sidebar" data-color="purple" >
 
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
 
 
     	<div class="sidebar-wrapper">
+            
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
                     Creative Tim
@@ -88,8 +92,20 @@
             </ul>
     	</div>
     </div>
-
+    
     <div class="main-panel">
+        <div class="bodyconfirmation" >
+            <div class="confirmation" >
+                <div class="cons-text">
+                    <h3>Confirmation</h3>
+                    <p>Are you sure you want to proceed to pay?</p>
+                </div>
+                <div class="cons-buttons">
+                    <button style="background: red;" onclick="proceedToPay('no')">No</button>
+                    <button style="background: green;" onclick="proceedToPay('yes')">Yes</button>
+                </div>
+            </div>
+        </div>
 		<nav class="navbar navbar-default navbar-fixed">
             <div class="container-fluid">
                 <div class="navbar-header">

@@ -66,6 +66,7 @@ if($result){
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/animate.min.css" rel="stylesheet"/>
     <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <link href="assets/css/confirmation.css" rel="stylesheet" />
     <link href="assets/css/demo.css" rel="stylesheet" />
 
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -73,7 +74,11 @@ if($result){
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <!--  Charts Plugin -->
     <script src="./assets/js/chartist.min.js"></script>
-
+    <style>
+        .sidebar{
+            background-color: #608943;
+        }
+    </style>
 </head>
 <body>
 
@@ -109,8 +114,50 @@ if($result){
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Top Company Discount</h4>
+                                <p class="category">Percentage</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences2" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
+                                <div class="footer">
+                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
+                                        <i class="fa fa-circle text-info" ></i> Disabled
+                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
+                                    </div>
+                                    <hr>
+                                    <div class="stats" >
+                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Top User to Use Discount</h4>
+                                <p class="category">Percentage</p>
+                            </div>
+                            <div class="content">
+                                <div id="chartPreferences3" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
+                                <div class="footer">
+                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
+                                        <i class="fa fa-circle text-info" ></i> Disabled
+                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
+                                    </div>
+                                    <hr>
+                                    <div class="stats" >
+                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="col-md-8">
+                    <!-- <div class="col-md-8">
                         <div class="card ">
                             <div class="header">
                                 <h4 class="title">USERS REPORT</h4>
@@ -131,7 +178,7 @@ if($result){
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -281,7 +328,7 @@ if($result){
 	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<!-- <script src="assets/js/demo.js"></script> -->
+	<script src="assets/js/demo.js"></script>
 
 	
 

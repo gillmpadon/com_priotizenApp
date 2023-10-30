@@ -6,8 +6,8 @@ if(isset($_GET['user_id'])){
 }
 $id = $_GET['user_id'];
 $date = date('F j D');
-$query = "SELECT n.reciept_id as receipt_id, n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.receipt_id INNER JOIN company c on n.company_id=c.store_id where n.user_id ='$id' and DATE(r.date) = CURDATE()";
-$queryResults = mysqli_query($conn,$query);
+$query = "SELECT n.reciept_id as receipt_id, n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.receipt_id INNER JOIN company c on n.company_id=c.store_id where DATE(r.date) = CURDATE() and n.user_id = '$id'";
+$queryResults = mysqli_query($conn, $query);
 $rid;
 ?>
 <!DOCTYPE html>
@@ -18,10 +18,24 @@ $rid;
     <title>Notification</title>
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/notification.css">
+    <link rel="stylesheet" href="css/confirmation.css" >
     <script src="script/script.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="bodyconfirmation" style="display: none;">
+        <div class="confirmation" >
+            <div class="cons-text">
+                <h1>Confirmation</h1>
+                <p>Are you sure you want to proceed to pay?</p>
+            </div>
+            <div class="cons-buttons">
+                <button style="background: red;" onclick="proceedToPay('no')">No</button>
+                <button style="background: green;" onclick="proceedToPay('yes')">Yes</button>
+            </div>
+        </div>
+    </div>
+    <ul class="notifications" ></ul>
+    <div class="container" >
         <div class="head">
             <p>Notification</p>
             <p><?php echo $date ?> Transactions</p>
@@ -75,7 +89,11 @@ $rid;
         
     </div>
     <script>
-        function payNow(uid){
+        let showConfirmation = false
+        function proceedToPay(str){
+        const confirmation = document.querySelector('.bodyconfirmation');
+           if(str == "yes"){
+            const uid = localStorage.getItem('item');
             const paynowBtn = document.querySelector(`.btn${uid}`)
             const formData = new FormData();
             formData.append('uid',uid);
@@ -86,10 +104,29 @@ $rid;
             .then( response => response.json() )
             .then( result => {
                 if(result == "Successful"){
+                    confirmation.style.display = 'none';
                     paynowBtn.style.background="green";
                     paynowBtn.innerHTML = "COMPLETED"
                 }
             });
+           }else{
+            showConfirmation = false
+            confirmation.style.display = 'none';
+           }
+        }
+        function payNow(uid){
+            const confirmation = document.querySelector('.bodyconfirmation');
+            console.log('status', showConfirmation)
+            if(showConfirmation) {
+                showConfirmation = false;
+                confirmation.style.display = 'none';
+                localStorage.removeItem('item');
+            }else{
+                showConfirmation = true;
+                confirmation.style.display = 'block';
+                localStorage.setItem('item',uid)
+                console.log(localStorage.getItem('item'));
+            }
         }
     </script>
 </body>
