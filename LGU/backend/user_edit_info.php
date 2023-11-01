@@ -40,7 +40,7 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
         family_name = '$family_name', family_contact = '$family_contact'  $photo where app_id = '$app_id'";
         $result = mysqli_query($conn, $query);
         
-        $query2 = "UPDATE user_history set action = 'Edited' , time_edited = NOW(),  admin_id = '$admin_id' where user_id = '$app_id'"; 
+        $query2= "INSERT INTO user_history(user_id, admin_id, action, time_edited) VALUES ('$app_id','$admin_id','Edited',NOW())";
         $result2 = mysqli_query($conn, $query2);
         if($result && $result2){
             $arr = "Successful";

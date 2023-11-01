@@ -163,8 +163,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Address</label><span class="asterisk">*</span>
-                                                <select name="" class="form-control" id="brgy" >
+                                                <label>Street</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="street" >
                                                 <?php
                                                 $barangays = [
                                                     "Avenida",
@@ -200,7 +200,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>House No</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="House No/Block" id="email" >
+                                                <input type="text" class="form-control" placeholder="House No/Block" id="house" >
                                             </div>
                                         </div>
                                     </div>
@@ -448,10 +448,12 @@
     const gender = document.getElementById('gender').value
     const status = document.getElementById('status').value
     const bdate = document.getElementById('bdate').value
-    const address = document.getElementById('address').value
     const number = document.getElementById('number').value
     const condition = document.getElementById('condition').value
     const brgy = document.getElementById('brgy').value
+    const street = document.getElementById('street').value
+    const house = document.getElementById('house').value
+    const municipality = document.getElementById('municipality').value
     const family_contact = document.getElementById('family_contact').value
     const family_name = document.getElementById('family_name').value
     const valid_id = document.getElementById('valid_id').value
@@ -466,10 +468,12 @@
     formData.append('gender', gender)
     formData.append('status', status)
     formData.append('bdate', bdate)
-    formData.append('address', address)
     formData.append('number', number)
     formData.append('condition', condition)
     formData.append('brgy', brgy)
+    formData.append('street', street)
+    formData.append('house', house)
+    formData.append('municipality', municipality)
     formData.append('family_contact', family_contact)
     formData.append('family_name', family_name)
     formData.append('app_id', user_id)
@@ -487,9 +491,9 @@
             goSuccess()
             setTimeout(()=>{
                 if(condition == "disabled"){
-                    window.location.href="table.php"
+                    window.location.href="user_add_senior.php"
                 }else{
-                    window.location.href="table.php"
+                    window.location.href="user_add_pwd.php"
                 }
             },2000)
         }else{

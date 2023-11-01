@@ -81,7 +81,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $gender = $_POST['gender'];    
         $status = $_POST['status'];
         $bdate = $_POST['bdate'];
-        $address = $_POST['address'];
+        $address = $_POST['brgy'];
+        $street = $_POST['street'];
+        $house = $_POST['house'];
         $number = $_POST['number'];
         $condition = $_POST['condition'];
         $email = $_POST['email'];
@@ -107,13 +109,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $query2 = "INSERT INTO account (account_id, email, passcode, account_type, account_status) VALUES ('$app_id', '$email', '$lname', 'user', 'Pending')";
         $query3 = "INSERT INTO user_history (user_id, admin_id) VALUES ('$app_id', '$admin_id')";
         $query4 = "INSERT INTO doc (user_id) VALUES ('$app_id')";
-
+        $query5 = "INSERT INTO address(user_id, brgy, street, house) values ('$app_id', '$brgy', '$street', '$house')";
         $result1 = mysqli_query($conn, $query1);
         $result2 = mysqli_query($conn, $query2);
         $result3 = mysqli_query($conn, $query3);
         $result4 = mysqli_query($conn, $query4);
+        $result5 = mysqli_query($conn, $query5);
 
-        if ($result1 && $result2 && $result3 && $result4) {
+        if ($result1 && $result2 && $result3 && $result4 && $result5)  {
                 if(isset($_FILES["image"])){
                     if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
                         $arr = "Successful";

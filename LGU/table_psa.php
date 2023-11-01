@@ -111,8 +111,11 @@
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
-    	  
-        include('includes/sidebar.php'); ?>
+    <?php
+            include('./backend/connection.php');
+            $admin_id = json_encode($_SESSION['user_id']);
+            $class="user_add";
+            include('includes/sidebar.php'); ?>
     </div>
 
     <div class="main-panel">
@@ -138,11 +141,11 @@
                                                 <div class="superflex">
                                                 <p>1.</p> 
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="applicant" id="">
                                                         <p>NEW APPLICANT</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="applicant" id="">
                                                         <p>RENEWAL</p>
                                                     </div>
                                                 </div>
@@ -157,17 +160,17 @@
                                                     <p>2.</p> 
                                                     <p>PERSONS WITH DISABILITY NUMBER <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="" id="valid_id">
                                             </td>
                                             <td colspan="1">
                                                 <div class="rowitem superflex">
                                                     <p>3.</p> 
                                                     <p>DATE APPLIED (mm/dd/yyyy)<span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="date">
                                             </td>
                                             <td colspan="1" rowspan="2">
-                                                <p>photo</p>
+                                                <img src="../priotizen_app/user_img/123.jpg" alt="" style="height: 100%; width:100%;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -431,7 +434,7 @@
                                         <tr>
                                             <td colspan="2">
                                                 <div class="rowitem superflex">
-                                                    <p>Landline No. <span class="asterisk">*</span></p>
+                                                    <p>Landline No. </p>
                                                 </div>
                                                 <input class="input" type="text" >
 
@@ -782,28 +785,6 @@
                                             <td >
                                                 <div class="rowitem superflex">
                                                      <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <div class="rowitem superflex">
-                                                    <p>FATHER'S NAME:</p>
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
                                                 </div>
                                             </td>
                                         </tr>

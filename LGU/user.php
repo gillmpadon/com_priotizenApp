@@ -10,7 +10,7 @@ if(isset($_GET['user_id'])){
 $query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.account_id = v.app_id inner join doc d on v.app_id = d.user_id where a.account_id = '$user_id'";
 $result = mysqli_query($conn, $query);
 
-$query1 = "SELECT u.action, u.time_edited, a.name as admin_name from user_history u inner join admin a on u.admin_id = a.admin_id where u.user_id = '$user_id' ";
+$query1 = "SELECT u.action, u.time_edited , a.name as admin_name from user_history u inner join admin a on u.admin_id = a.admin_id where u.user_id = '$user_id' order by u.id desc limit 1 ";
 $result1 = mysqli_query($conn,$query1);
 if($result && $result1 ){
     $assoc = mysqli_fetch_assoc($result);
@@ -21,6 +21,8 @@ if($result && $result1 ){
     echo $query;
 }
 
+$query3 = "SELECT u.action, u.time_edited, a.name as admin_name, concat(v.lname,' ',v.fname) as user_name  from user_history u inner join admin a on u.admin_id = a.admin_id inner join verified v on u.user_id = v.app_id where u.user_id = '$user_id' order by u.id desc ";
+$query3_result = mysqli_query($conn,$query3);
 
 ?>
 <!doctype html>
@@ -55,6 +57,22 @@ if($result && $result1 ){
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <style>
+        #history_content, #history_content tr, #history_content td{
+            border: 1px solid black;
+        }
+        #history_content table{
+            border: 1px solid black;
+            width: 100%;
+        }
+        .table_head{
+            text-align: center;
+        }
+        #table_body td{
+            padding-inline: .5em;
+        }
+       
+    </style>
 </head>
 <body>
 
@@ -75,7 +93,7 @@ if($result && $result1 ){
                                 <h4 class="title">Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form id="info_content" >
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -213,9 +231,40 @@ if($result && $result1 ){
                                     </div>
 
                                 </form>
-                                
+                                <form id="history_content" style="display: none;">
+                                    <table id="table_body">
+                                        <tr>
+                                            <td class="table_head">ID</td>
+                                            <td class="table_head">USER</td>
+                                            <td class="table_head">ADMIN</td>
+                                            <td class="table_head">ACTION</td>
+                                            <td class="table_head">DATE</td>
+                                        </tr>
+                                        <?php
+                                        $counter=1;
+                                        while ($row = mysqli_fetch_assoc($query3_result)) {
+                                            $user_name = $row['user_name'];
+                                            $admin_name = $row['admin_name'];
+                                            $action = $row['action'];
+                                            $time_done = $row['time_edited'];
+                                            $dateTime = new DateTime($time_done);
+                                            $newDate = $dateTime -> format('F j g:i A');
+                                            echo "<tr>
+                                            <td>$counter</td>
+                                            <td>$user_name</td>
+                                            <td>$admin_name</td>
+                                            <td>$action</td>
+                                            <td>$newDate</td>
+                                            </tr>";
+                                            $counter++;
+                                        }
+                                        ?>
+                                    </table>
+                                </form>
+                                <br>
                                 <div style="display:flex;gap: 1em;">
                                         <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $user_id ?>'">Edit Profile</button>
+                                        <button type="submit" class="btn btn-success btn-fill " onclick="userHistory()">User History</button>
                                         <button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('<?php  echo $user_id ?>')">Delete Profile</button>
 
                                         
@@ -287,7 +336,6 @@ if($result && $result1 ){
                 </div>
             </div>
             <div class="container-fluid">
-            <div class="container-fluid">
                 <div class="row">
                 <div class="col-md-6" id="docPsa" style="display: none;">
                         <div class="card">
@@ -310,7 +358,6 @@ if($result && $result1 ){
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
 
@@ -351,7 +398,20 @@ if($result && $result1 ){
 </div>
 
 <script>
-
+    let seeUserHistory = false;
+    function userHistory(){
+        const history_content = document.getElementById('history_content');
+        const info_content = document.getElementById('info_content');
+        if(!seeUserHistory){
+            history_content.style.display = 'block';
+            info_content.style.display = 'none';
+            seeUserHistory = true
+        }else{
+            history_content.style.display = 'none';
+            info_content.style.display = 'block';
+            seeUserHistory = false
+        }
+    }
 
   let showOtherInfo = false;
 
