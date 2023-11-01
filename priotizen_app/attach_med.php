@@ -28,16 +28,16 @@ if($med!=null){
     <style>
         #fileinput{
             height: 3em;
-            border: 1px solid #43689d;
+            border: 1px solid var(--inactiveBtn);
             width: 100%;
-            background-color: #43689d;
+            background-color: var(--inactiveBtn);
             display: flex;
             align-items: center;
             justify-content: center;
         }
         #fileinput p{
             text-align: center;
-            color: white;
+            color: var(--text);
         }
     </style>
     

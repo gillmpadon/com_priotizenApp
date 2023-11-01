@@ -4,13 +4,12 @@
     margin:auto;
 }
 .entrydash{
-
     background: var(--inputDiv);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1em;
-    color: white;
+    color: var(--text);
     height: 3em;
     padding: .3em;
 }
@@ -33,7 +32,7 @@
 }
 
 .search{
-    border: 1px solid var(--inputColor);
+    border: 1px solid var(--text);
     width: 95%;
     margin:auto;
     padding: .3em;
@@ -46,12 +45,16 @@
 .search input{
     width: 100%;
     border: none;
-    color: aliceblue;
+    color: var(--text);
     background: transparent;
 }
 .search input:focus{
     outline: none;
 }
 .search svg{
-    color: var(--svgColor);
+    color: var(--text);
+}
+
+input::placeholder{
+    color: var(--text);
 }

@@ -38,7 +38,18 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/form.css">
     <script src="script/script.js"></script>
-
+    <style>
+        .container{
+            width: 90%;
+            height: 100%;
+            margin: auto;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        form{
+            border:none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

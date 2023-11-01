@@ -13,7 +13,7 @@ body{
 }
 .head{
     width: 90%;
-    color:white;
+    color:var(--text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -49,7 +49,7 @@ body{
     background-color: var(--inputDiv);
     width: 85%;
     margin: auto;
-    color: white;
+    color:var(--text);
     padding: 1em;
     text-align: justify;
     margin-bottom: 1em;

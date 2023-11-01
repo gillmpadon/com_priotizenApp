@@ -14,7 +14,7 @@ body{
 }
 .head{
     width: 90%;
-    color:white;
+    color:var(--text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -50,7 +50,7 @@ body{
 .logo{
     display: flex;
     align-items: center;
-    color: white;
+    color:var(--text);
     width: 50%;
     text-transform: uppercase;
 }
@@ -136,7 +136,7 @@ body{
 .buttonNav button{
     width: 49.5%;
     border: none;
-    color: white;
+    color:var(--text);
 }
 .buttonNav button:first-child{
     border-top-left-radius: .5em;

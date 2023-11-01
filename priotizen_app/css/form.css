@@ -1,20 +1,20 @@
-body{
+html,body{
     background-color: var(--bg);
     margin: 0;
     padding: 0;
     height: 100vh;
     width: 100vw;
-    overflow: hidden;
+    overflow:hidden;
+    color: var(--text);
 }
 .container{
     width: 90%;
     height: 90%;
-    margin: auto;
-    margin-top: 10%;
+    margin: 0;
 }
 .logo{
     line-height: 1;
-    color: white;
+    color: var(--text);
     margin: auto;
     text-align: center;
     height: 25%;
@@ -43,17 +43,18 @@ form{
     width: 100%;
     padding-left: .5em;
     position: relative;
+    box-sizing: border-box;
 }
 .entryInput svg {
     height: 1.5em;
     width: 2em;
 }
 .entryInput svg path{
-    fill: var(--svgColor);
+    fill: var(--text);
 }
 .passwordInput svg path:first-child{
     fill: none;
-    stroke: var(--svgColor);
+    stroke: var(--text);
 }
 .passwordInput svg path:last-child{
     fill: none;
@@ -65,6 +66,9 @@ form{
     color: var(--inputColor);
     width: 60%;
 }
+::placeholder{
+    color: var(--text);
+}
 .entryInput input:focus{
     outline: none;
 }
@@ -74,7 +78,7 @@ form{
 }
 
 #forget{
-    color: var(--svgColor);
+    color: var(--text);
     text-decoration: none;
 }
 
@@ -92,11 +96,11 @@ form{
 }
 .buttonSubmit button:first-child{
     background-color: var(--buttonActive);
-    color: white;
+    color: var(--text);
 }
 .buttonSubmit button:last-child{
-    background-color: var(--buttonInactive);
-    color: white;
+    background-color: var(--buttonActive);
+    color: var(--text);
 }
 .orline{
     display: flex;
@@ -111,32 +115,3 @@ form{
     background-color: var(--svgColor);
 }
 
-/* responsiveness */
-@media screen and (min-width: 600px){
-    .container{
-        width: 40em;
-        margin-top: 2%;
-    }
-    form{
-        width: 90%;
-    }
-    .entryInput{
-        height: 4em;
-    }
-    .entryInput input{
-        font-size: 1.3em;
-    }
-    .entryInput svg{
-        height: 2em;
-    }
-    #eyePass{
-        right: 1em;
-    }
-    .buttonSubmit{
-        height: 7em;
-    }
-    .buttonSubmit button{
-        height: 50%;
-    }
-
-}

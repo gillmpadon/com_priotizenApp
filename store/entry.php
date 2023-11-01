@@ -61,7 +61,7 @@ if (!$result) {
             <?php
                 }}
                 else{
-                    echo "  <p style='text-align:center; color:white;'>NO RECORDS FOR TODAY</p>";
+                    echo "  <p style='text-align:center; '>NO RECORDS FOR TODAY</p>";
                 }
             ?>
       

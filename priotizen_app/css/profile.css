@@ -15,7 +15,7 @@ body{
     position: relative;
 }
 .head{
-    color: white;
+    color: var(--text);
     text-align: center;
     text-transform: uppercase;
 
@@ -24,7 +24,7 @@ body{
 .avatar{
     height: 13em;
     width: 11em;
-    color: white;
+    color: var(--text);
     line-height: 0;
     margin: auto;
     text-align: center;
@@ -55,7 +55,7 @@ body{
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--svgColor);
-    color: white;
+    color: var(--text);
     margin-bottom: .4em;
 
 }
@@ -80,7 +80,7 @@ body{
 .buttonNav button{
     width: 49.5%;
     border: none;
-    color: white;
+    color: var(--text);
 }
 .buttonNav button:first-child{
     border-top-left-radius: .5em;
@@ -94,7 +94,7 @@ body{
     background-color: var(--buttonActive);
 }
 .notActive{
-    background-color: var(--inputDiv);
+    background-color: var(--buttonInactive);
 }
 
 .notFill svg path:first-of-type{

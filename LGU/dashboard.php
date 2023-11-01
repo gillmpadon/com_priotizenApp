@@ -30,7 +30,7 @@ if($result){
  $origArr = json_encode($origArr);
 
 
- $brgyQuery ="select count(*) as count, brgy, conditions from verified GROUP by conditions,brgy";
+ $brgyQuery ="SELECT count(*) as count, brgy, conditions from verified GROUP by conditions,brgy";
  $brgyResult = mysqli_query($conn, $brgyQuery);
  $brgyArr = array();
  if($brgyResult){
@@ -51,28 +51,53 @@ if($result){
 
  $brgyArr = json_encode($brgyArr);
 
- $topDiscount ="SELECT sum(r.price) as price , r.company_id, c.name as company_name, r.user_id, concat(v.lname,' ',v.fname) as user_name from receipt r INNER join company c on r.company_id = c.store_id inner join verified v on r.user_id = v.app_id order by r.price desc";
+ $topDiscount ="SELECT c.name , count(r.id) as count, sum(r.discount) as discount from receipt r inner join company c on c.store_id = r.company_id group by company_id order by discount desc limit 10";
  $resDiscount = mysqli_query($conn, $topDiscount);
- $discountArr = array();
+ $arrCompany = array();
  $dis_count= 1;
  if($resDiscount){
     if(mysqli_num_rows($resDiscount) > 0){
         while($row = mysqli_fetch_assoc($resDiscount)){
             $arr = array();
-            $arr['price'] = $row['price'];
-            $arr['company_name'] = $row['company_name'];
-            $arr['user_name'] = $row['user_name'];
-            $discountArr[] = $arr;
+            $arr['discount'] = $row['discount'];
+            $arr['count'] = $row['count'];
+            $arr['name'] = $row['name'];
+            $arrCompany[] = $arr;
             $dis_count++;
         }
     }else{
-        $discountArr[] = "Error";
+        $arrCompany[] = "Error";
     }
  }else{
-    $discountArr[] = "Error";
+    $arrCompany[] = "Error";
  }
 
- $discountArr = json_encode($discountArr);
+ $arrCompany = json_encode($arrCompany);
+
+ $topCustomer ="SELECT  r.user_id, concat(v.lname, ' ', v.fname) as name , sum(r.price) as price, sum(r.discount) as discount, count(r.id) as count from receipt r inner join verified v on r.user_id = v.app_id group by r.user_id order by price desc limit 10  ";
+ $resCustomer = mysqli_query($conn, $topCustomer);
+ $arrCustomer = array();
+ $dis_count= 1;
+ if($resCustomer){
+    if(mysqli_num_rows($resCustomer) > 0){
+        while($row = mysqli_fetch_assoc($resCustomer)){
+            $arr = array();
+            $arr['name'] = $row['name'];
+            $arr['price'] = $row['price'];
+            $arr['discount'] = $row['discount'];
+            $arr['count'] = $row['count'];
+            $arrCustomer[] = $arr;
+            $dis_count++;
+        }
+    }else{
+        $arrCustomer[] = "Error";
+    }
+ }else{
+    $arrCustomer[] = "Error";
+ }
+
+ $arrCustomer = json_encode($arrCustomer);
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -97,6 +122,7 @@ if($result){
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <!--  Charts Plugin -->
     <script src="./assets/js/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .sidebar{
             background-color: #608943;
@@ -116,92 +142,44 @@ if($result){
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4" >
+                    <div class="col-md-6" >
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Total Number Of User</h4>
-                                <p class="category">Percentage</p>
+                                <h4 class="title">Top Company</h4>
+                                <p class="category">Representation</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
+                                <canvas id="chart_company" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></canvas>
                                 <div class="footer">
-                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
-                                        <i class="fa fa-circle text-info" ></i> Disabled
-                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
-                                    </div>
                                     <hr>
                                     <div class="stats" >
-                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Top Company Discount</h4>
-                                <p class="category">Percentage</p>
+                                <h4 class="title">Top User </h4>
+                                <p class="category">Representation</p>
                             </div>
                             <div class="content">
-                                <div id="chartPreferences2" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
+                                <canvas id="chart_customer" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></canvas>
                                 <div class="footer">
-                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
-                                        <i class="fa fa-circle text-info" ></i> Disabled
-                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
-                                    </div>
                                     <hr>
                                     <div class="stats" >
-                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Top User to Use Discount</h4>
-                                <p class="category">Percentage</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartPreferences3" class="ct-chart ct-perfect-fourth" style="font-size: 2em;"></div>
-                                <div class="footer">
-                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
-                                        <i class="fa fa-circle text-info" ></i> Disabled
-                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
-                                    </div>
-                                    <hr>
-                                    <div class="stats" >
-                                        <i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;"> </span> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- <div class="col-md-8">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">USERS REPORT</h4>
-                                <p class="category">Categorized via condition each brgy</p>
-                            </div>
-                            <div class="content">
-                                <div id="chartActivity" class="ct-chart ct-perfect-fourth"></div>
-
-                                <div class="footer">
-                                    <div class="legend " style=" display: flex;  justify-content: center; align-items: center; gap:1em">
-                                        <i class="fa fa-circle text-info" ></i> Disabled
-                                        <i class="fa fa-circle text-danger"></i> Senior Citizen
-                                    </div>
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-check"></i> Data information certified
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -242,139 +220,73 @@ if($result){
 </div>
 
 <script>
-    const totalCount = document.getElementById("totalCount")
-    const arr = <?php echo $origArr  ?>;
-    console.log(arr);
-    const label = []
-    const percent = []
-    let count = 0;
-    arr.map(item=>{
-        const str = `${item.count}%`;
-        label.push(str)
-        percent.push(item.count)
-        count += Number.parseInt(item.count)
-    })
-    totalCount.textContent = ` Total Number is ${count}`;
+    const arrCompany = <?php echo $arrCompany ?>;
+    const arrCustomer = <?php echo $arrCustomer ?>;
     
-    var dataPreferences = {
-            series: [
-                [25, 30, 20, 25]
-            ]
-        };
 
-        var optionsPreferences = {
-            donut: true,
-            donutWidth: 40,
-            startAngle: 0,
-            total: 100,
-            showLabel: false,
-            axisX: {
-                showGrid: false
-            },
-        
-        };
-
-        Chartist.Pie('#chartPreferences', dataPreferences, optionsPreferences);
-
-        Chartist.Pie('#chartPreferences', {
-          labels: label,
-          series: percent
-        });
-
-    const dis_arr = <?php echo $discountArr  ?>;
-    console.log(dis_arr);
-    const dis_label = []
-    const dis_percent = []
-    const dis_user = []
-    let dis_count = 0;
-    dis_arr.map(item=>{
-        const str = `${item.company_name}`;
-        dis_label.push(str)
-        dis_percent.push(item.price)
-        dis_count += Number.parseInt(item.price)
-        dis_user.push(item.user_name)
+    const company = [];  
+    const companyLabel = [];   
+    const customer = [];
+    const customerLabel = []; 
+    arrCompany.forEach( item=>{
+        company.push(item.discount)
+        companyLabel.push(item.name)
     })
-    
-    var dataPreferences_2 = {
-            series: [
-                [25, 30, 20, 25]
-            ]
-        };
+    arrCustomer.forEach( item=>{
+        customer.push(item.discount)
+        customerLabel.push(item.name)
+    })
+    console.log(arrCustomer)
+    console.log(arrCompany)
+   
+//Chart Top 10 Company Discounts
+    const chart_company = document.getElementById('chart_company');
+    new Chart(chart_company, {
+    type: 'bar',
+    data: {
+        labels: ['1', '2', '3'],
+        datasets: [{
+        label: 'Top Company to give Discounts',
+        data: [1,2,3,],
+        borderWidth: 1,
+        backgroundColor: [ 'green ']
+        }]
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+});
 
-        var optionsPreferences_2 = {
-            donut: true,
-            donutWidth: 40,
-            startAngle: 0,
-            total: 100,
-            showLabel: false,
-            axisX: {
-                showGrid: false
-            },
-        
-        };
 
 
-        Chartist.Pie('#chartPreferences2', dataPreferences_2, optionsPreferences_2);
+//Top Customre to use Discounts
+const chart_customer = document.getElementById('chart_customer');
+    new Chart(chart_customer, {
+    type: 'bar',
+    data: {
+        labels: customerLabel,
+        datasets: [{
+        label: 'Top Customer to use Discounts',
+        data: customer,
+        borderWidth: 1,
+        backgroundColor: [ 'green ']
 
-        Chartist.Pie('#chartPreferences2', {
-          labels: dis_label,
-          series: dis_percent
-        });
-        Chartist.Pie('#chartPreferences3', dataPreferences_2, optionsPreferences_2);
+        }]
+    },
+    options: {
+        scales: {
+        y: {
+            beginAtZero: true
+        }
+        }
+    }
+});
 
-        Chartist.Pie('#chartPreferences3', {
-          labels: dis_user,
-          series: dis_percent
-        });
 
-    // // Sample SQL result data
-    // const sqlResult = <?php // echo $brgyArr ?>;
-    // // Create a new object to store the formatted data
-    // const formattedData = {};
-
-    // // Iterate through the SQL result data
-    // sqlResult.map((row) => {
-    // if (!formattedData[row.brgy]) {
-    //     formattedData[row.brgy] = {
-    //     brgy: row.brgy,
-    //     disabled: '0',
-    //     senior: '0',
-    //     };
-    // }
-
-    // if (row.conditions === 'Disabled') {
-    //     formattedData[row.brgy].disabled = row.count;
-    // } else if (row.conditions === 'Senior Citizen') {
-    //     formattedData[row.brgy].senior = row.count;
-    // }
-    // });
-
-    // // Convert the formatted data into an array
-    //     const resultArray = Object.values(formattedData);
-    //     const brgyData = resultArray
-
-    //     // Extract disabled and senior population data
-    //     const disabledData = brgyData.map((item) => parseInt(item.disabled, 10));
-    //     const seniorData = brgyData.map((item) => parseInt(item.senior, 10));
-    //     const brgyLabels = brgyData.map((item) => item.brgy);
-
-    //     // Create data for the bar graph
-    //     const data = {
-    //     labels: brgyLabels,
-    //     series: [disabledData, seniorData],
-    //     };
-
-    //     // Set the options for the bar graph
-    //     const options = {
-    //     stackBars: false,
-    //     axisX: {
-    //         labelInterpolationFnc: (value) => value, // Display brgy name as labels
-    //     },
-    //     };
-
-    //     // Create the bar graph
-    //     new Chartist.Bar('#chartActivity', data, options);
-    //     console.log({"resultArray":resultArray})
 </script>
 
 </body>

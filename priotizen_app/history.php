@@ -75,7 +75,7 @@ $queryResults = mysqli_query($conn,$query);
             <?php }?>
 
            <?php }}else{?> 
-            <p style='text-align:center; color:white;'>NO RECORDS FOR TODAY</p>
+            <p style='text-align:center; '>NO RECORDS FOR TODAY</p>
         <?php }?>
 
 

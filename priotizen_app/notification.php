@@ -4,7 +4,7 @@ session_start();
 if(isset($_GET['user_id'])){
     $_SESSION['account_id'] = $_GET['user_id'];
 }
-$id = $_GET['user_id'];
+$id = $_SESSION['account_id'];
 $date = date('F j D');
 $query = "SELECT n.reciept_id as receipt_id, n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.receipt_id INNER JOIN company c on n.company_id=c.store_id where DATE(r.date) = CURDATE() and n.user_id = '$id'";
 $queryResults = mysqli_query($conn, $query);
@@ -74,7 +74,7 @@ $rid;
             </div>
         <?php }
         }else{
-            echo "<p style='text-align:center; color:white;'>NO RECORDS FOR TODAY</p>";
+            echo "<p style='text-align:center;'>NO RECORDS FOR TODAY</p>";
         }
         ?>
             

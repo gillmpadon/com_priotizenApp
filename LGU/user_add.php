@@ -491,9 +491,9 @@
             goSuccess()
             setTimeout(()=>{
                 if(condition == "disabled"){
-                    window.location.href="user_add_senior.php"
+                    window.location.href="table_senior.php"
                 }else{
-                    window.location.href="user_add_pwd.php"
+                    window.location.href="table_pwd.php"
                 }
             },2000)
         }else{

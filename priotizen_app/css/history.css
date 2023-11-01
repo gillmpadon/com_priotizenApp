@@ -13,7 +13,7 @@ body{
 }
 .head{
     width: 90%;
-    color:white;
+    color:var(--text);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -48,7 +48,7 @@ body{
     margin-bottom: 1em;
 }
 .date{
-    color: white;
+    color:var(--text);
     font-size: 1.5em;
 }
 .date p{
@@ -80,7 +80,7 @@ body{
 }
 .entry_info{
     height: 30%;
-    color: white;
+    color:var(--text);
     text-transform: uppercase;
     margin-top: 1em;
     font-size: .8em;

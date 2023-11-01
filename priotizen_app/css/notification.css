@@ -1,5 +1,4 @@
 html,body{
-    background-color: var(--bg);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -17,7 +16,7 @@ html,body{
 }
 .head{
     line-height: 0;
-    color: white;
+    color: var(--text);
     text-transform: uppercase;
     text-align: center;
 }
@@ -58,12 +57,14 @@ html,body{
     height: 2.5em;
     border: none;
     border-radius: .3em;
-    color: white;
+    color: var(--text);
+
 }
 .info p{
     text-transform: uppercase;
     font-size: .7em;
-    color: white;
+    color: var(--text);
+
     line-height: 0;
 }
 .details{
@@ -98,13 +99,14 @@ html,body{
     width: 80%;
     display: flex;
     position: absolute;
-    bottom: 2em;
+    bottom: 3em;
     left: 10%;
 }
 .buttonNav button{
     width: 49.5%;
     border: none;
-    color: white;
+    color: var(--text);
+
 }
 .buttonNav button:first-child{
     border-top-left-radius: .5em;
@@ -118,7 +120,7 @@ html,body{
     background-color: var(--buttonActive);
 }
 .notActive{
-    background-color: var(--inputDiv);
+    background-color: var(--buttonInactive);
 }
 
 
