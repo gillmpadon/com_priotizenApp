@@ -23,7 +23,6 @@ if($result && $result1 ){
 
 $query3 = "SELECT u.action, u.time_edited, a.name as admin_name, concat(v.lname,' ',v.fname) as user_name  from user_history u inner join admin a on u.admin_id = a.admin_id inner join verified v on u.user_id = v.app_id where u.user_id = '$user_id' order by u.id desc ";
 $query3_result = mysqli_query($conn,$query3);
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -264,6 +263,7 @@ $query3_result = mysqli_query($conn,$query3);
                                 <br>
                                 <div style="display:flex;gap: 1em;">
                                         <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $user_id ?>'">Edit Profile</button>
+                                        <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='<?php echo ($conditions=='disabled')? 'table_pwd':'table_senior' ?>.php?id=<?php  echo $user_id ?>'">Complete Form</button>
                                         <button type="submit" class="btn btn-success btn-fill " onclick="userHistory()">User History</button>
                                         <button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('<?php  echo $user_id ?>')">Delete Profile</button>
 

@@ -6,7 +6,7 @@
 -- Generation Time: Nov 01, 2023 at 04:09 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
-drop da tabase priotizen;
+drop database priotizen;
 create database priotizen;
 use priotizen;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";

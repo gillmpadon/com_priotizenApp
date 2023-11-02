@@ -490,10 +490,11 @@
         if(result=="Successful"){
             goSuccess()
             setTimeout(()=>{
+                const id = `id=${user_id}`
                 if(condition == "disabled"){
-                    window.location.href="table_senior.php"
+                    window.location.href=`table_senior.php?${id}`
                 }else{
-                    window.location.href="table_pwd.php"
+                    window.location.href=`table_pwd.php?${id}`
                 }
             },2000)
         }else{

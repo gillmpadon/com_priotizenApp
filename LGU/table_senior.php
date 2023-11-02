@@ -1,4 +1,19 @@
-
+<?php
+include('./backend/connection.php');
+$id = $_GET['id'];
+$query = "SELECT v.*, a.street, a.house from verified v Inner join address a on v.app_id = a.user_id where v.app_id = '$id' limit 1";
+$result = mysqli_query($conn,$query);
+if($result){
+    if(mysqli_num_rows($result)>0){
+        $assoc = mysqli_fetch_assoc($result);
+        extract($assoc);
+    }else{
+        echo mysqli_error($conn);
+    }
+}else{
+    echo mysqli_error($conn);
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -39,10 +54,12 @@
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
     <?php
-            include('./backend/connection.php');
             $admin_id = json_encode($_SESSION['user_id']);
             $class="user_add";
-            include('includes/sidebar.php'); ?>
+            include('includes/sidebar.php'); 
+            
+    ?>
+            
     </div>
 
     <div class="main-panel">
@@ -70,9 +87,9 @@
                                         </td>
                                         <td colspan="4">
                                             <div class="inputs">
-                                                <input type="text" class="noleft notop nobottom" id="lname">
-                                                <input type="text" class="noleft notop nobottom" id="fname">
-                                                <input type="text" class="noleft notop nobottom" id="mname">
+                                                <input type="text" class="noleft notop nobottom" id="lname" value="<?php echo $lname; ?>" >
+                                                <input type="text" class="noleft notop nobottom" id="fname" value="<?php echo $fname; ?>">
+                                                <input type="text" class="noleft notop nobottom" id="mname" value="<?php echo $mi; ?>">
                                                 <input type="text" class="noleft notop nobottom noright" id="ext">
                                             </div>
                                             <div class="input-text">
@@ -83,7 +100,14 @@
                                             </div>
                                         </td>
                                         <td rowspan="3" class="bg-gray">
-                                            <img src="../priotizen_app/user_img/123.jpg" alt="" style="height: 100%; width:100%;">
+                                        <?php
+                                            $imagePath = "./user_img/$photo";
+                                            if(file_exists($imagePath)) {
+                                                echo '<img  src="./user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
+                                            }else{
+                                                echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
+                                            }
+                                        ?>
                                         </td>
                                     </tr>
                                     <tr>
@@ -97,10 +121,10 @@
                                         </td>
                                         <td colspan="4">
                                             <div class="inputs">
-                                                <input type="text" class="noleft notop nobottom" id="region">
-                                                <input type="text" class="noleft notop nobottom" id="province">
-                                                <input type="text" class="noleft notop nobottom" id="municipality">
-                                                <input type="text" class="noleft notop nobottom noright" id="brgy">
+                                                <input type="text" class="noleft notop nobottom" id="region" value="<?php echo "Region I"; ?>">
+                                                <input type="text" class="noleft notop nobottom" id="province" value="<?php echo "Pangasinan"; ?>">
+                                                <input type="text" class="noleft notop nobottom" id="municipality" value="<?php echo "Lingayen"; ?>">
+                                                <input type="text" class="noleft notop nobottom noright" id="brgy" value="<?php echo $brgy; ?>">
                                             </div>
                                             <div class="input-text bg-gray">
                                                 <p>Region</p>
@@ -109,8 +133,8 @@
                                                 <p>Barangay</p>
                                             </div>
                                             <div class="inputs">
-                                                <input type="text" class="noleft notop nobottom" style="width: 180%;" id="house">
-                                                <input type="text" class="noleft notop nobottom noright" id="street">
+                                                <input type="text" class="noleft notop nobottom" style="width: 180%;" id="house" value="<?php echo $house; ?>">
+                                                <input type="text" class="noleft notop nobottom noright" id="street" value="<?php echo $street; ?>">
                                             </div>
                                             <div class="input-text bg-gray">
                                                 <p>House No./Zone/Purok/Sition</p>
@@ -126,13 +150,23 @@
                                     <tr>
                                         <td>3. Date of Birth</td>
                                         <td>
+                                            <?php
+                                            $bdateStr = explode("-",$bdate);
+                                            $birth00 = substr($bdateStr[1],0);
+                                            $birth01 = substr($bdateStr[1],1);
+                                            $birth10 = substr($bdateStr[2],0);
+                                            $birth11 = substr($bdateStr[2],1);
+                                            $birth20 = substr($bdateStr[0],-2);
+                                            $birth22 = substr($bdateStr[0],-1);
+
+                                            ?>
                                             <div class="top">
-                                                <input type="text" id="birth00">
-                                                <input type="text" id="birth01">
-                                                <input type="text" id="birth10">
-                                                <input type="text" id="birth11">
-                                                <input type="text" id="birth20">
-                                                <input type="text" id="birth02">
+                                                <input type="text" id="birth00" value="<?php echo $birth00; ?>" >
+                                                <input type="text" id="birth01" value="<?php echo $birth01; ?>">
+                                                <input type="text" id="birth10" value="<?php echo $birth10; ?>">
+                                                <input type="text" id="birth11" value="<?php echo $birth11; ?>">
+                                                <input type="text" id="birth20" value="<?php echo $birth20; ?>">
+                                                <input type="text" id="birth22" value="<?php echo $birth22; ?>" >
                                             </div>
                                             <div class="bot">
                                                 <input type="text" placeholder="m" readonly>
@@ -153,7 +187,7 @@
                                             5. Marital Status
                                         </td>
                                         <td>
-                                            <input type="text" class="inputs nobottom noleft noright notop" id="status">
+                                            <input type="text" class="inputs nobottom noleft noright notop" id="status" value="<?php echo $status_rs; ?>">
                                         </td>
                                     </tr>
                                     <tr>
@@ -167,19 +201,19 @@
                                             6. Gender/Sex
                                         </td>
                                         <td>
-                                            <input type="text" class="inputs nobottom noleft noright notop" id="sex">
+                                            <input type="text" class="inputs nobottom noleft noright notop" id="sex" value="<?php echo $gender; ?>">
                                         </td>
                                         <td class="bg-gray">
                                             7. Contact Number
                                         </td>
                                         <td>
-                                            <input type="text" class="inputs nobottom noleft noright notop" id="contact">
+                                            <input type="text" class="inputs nobottom noleft noright notop" id="contact" value="<?php echo $number; ?>">
                                         </td>
                                         <td class="bg-gray">
                                             8. Email Address
                                         </td>
                                         <td>
-                                            <input type="text" class="inputs nobottom noleft noright notop" id="email">
+                                            <input type="text" class="inputs nobottom noleft noright notop" id="email" value="<?php echo $email; ?>">
                                         </td>
                                     </tr>
 
@@ -418,27 +452,10 @@
                                                     <input type="text" class="child_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_age">
+                                                    <input type="text" class="child_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_isworking">
-                                                </div>
-                                            </div>
-                                            <div class="header">
-                                                <div class="entry">
-                                                    <input type="text" class="child_name">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_occupation">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_income">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="children_age">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="children_isworking">
+                                                    <input type="text" class="child_isworking">
                                                 </div>
                                             </div>
                                             <div class="header">
@@ -452,10 +469,10 @@
                                                     <input type="text" class="child_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_age">
+                                                    <input type="text" class="child_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_isworking">
+                                                    <input type="text" class="child_isworking">
                                                 </div>
                                             </div>
                                             <div class="header">
@@ -469,10 +486,27 @@
                                                     <input type="text" class="child_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_age">
+                                                    <input type="text" class="child_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="children_isworking">
+                                                    <input type="text" class="child_isworking">
+                                                </div>
+                                            </div>
+                                            <div class="header">
+                                                <div class="entry">
+                                                    <input type="text" class="child_name">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="child_occupation">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="child_income">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="child_age">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="child_isworking">
                                                 </div>
                                             </div>
                                         </td>
@@ -575,43 +609,43 @@
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e1" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e1" >
                                                         <p>Elementary Level</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e2" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e2" >
                                                         <p>High School Level</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e3" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e3" >
                                                         <p>Post Graduate</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e4" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e4" >
                                                         <p>Elementary Graduate</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e5" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e5" >
                                                         <p>College Level</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e6" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e6" >
                                                         <p>Vocational</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e7" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e7" >
                                                         <p>High School Graduate</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e8" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e8" >
                                                         <p>College Graduate</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" name="" id="e9">
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e9">
                                                         <p>No Attended School</p>
                                                     </div>
                                                 </div>
@@ -1460,8 +1494,12 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    <tr style="border:none">
+                                        <td colspan="6" style=" width:100%; border:none; margin:auto;text-align:center;">
+                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill">SUBMIT FORM</button>
+                                        </td>
+                                    </tr>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -1534,7 +1572,14 @@
 </div>
 
 <script>
-
+    const inputs_id = ['lname','fname','mname','ext','region','province','country',
+    'municipality','brgy','birth00','birth01','birth10','birth11','birth20','birth22',
+    'birth_place','status','sex','contact','email','religion','ethnic','language','osca_id','gsis_id',
+    'tin_id','philhealth_id','org_id','gov_id','travel_yes','travel_no','business','pension','spouse_lname',
+    'spouse_fname','spouse_mname','spouse_ext','fathers_fname','fathers_lname','fathers_mname','fathers_ext',
+    'mothers_lname','mothers_fname','mothers_mname','mothers_ext',]
+    const inputs_class_child = ['child_name','child_occupation','child_income','child_age','child_isworking']
+    const inputs_class_others = ['others_name','others_occupation','others_income','others_age','others_isworking']
     function goSuccess(){
         demo.goNotif('Successfully',' Created','success','pe-7s-add-user')
     }
@@ -1542,6 +1587,55 @@
         demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
     }
 
+
+    function submitForm(){
+        const main_child = []
+        inputs_class_child.forEach(item=>{
+            const element = document.querySelectorAll(`.${item}`)
+            const children = []
+            element.forEach((i,index )=>{
+                if(i.value !="" || i.value.length !=0){
+                    console.log(i.value, index)
+                    children.push(i.value)
+                }else{
+                    children.push(" ")
+                }
+            })
+            main_child.push(children)
+        })
+        // console.log(main_child)
+
+        const main_others = []
+        inputs_class_others.forEach(item=>{
+            const element = document.querySelectorAll(`.${item}`)
+            const children = []
+            element.forEach((i,index )=>{
+                if(i.value !="" || i.value.length !=0){
+                    console.log(i.value, index)
+                    children.push(i.value)
+                }else{
+                    children.push(" ")
+                }
+            })
+            main_others.push(children)
+        })
+        // console.log(main_others)
+
+        
+      
+    }
+
+    function updateEduc(e){
+        const id = e.id
+        const element = document.querySelectorAll(`.${e.className}`)
+        element.forEach( item =>{
+            if(item.id != id){
+                const unselect = document.querySelector(`#${item.id}`)
+                unselect.checked= false;
+            }
+        })
+    }
+   
 </script>
 
 </body>
