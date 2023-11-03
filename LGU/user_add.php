@@ -492,9 +492,9 @@
             setTimeout(()=>{
                 const id = `id=${user_id}`
                 if(condition == "disabled"){
-                    window.location.href=`table_senior.php?${id}`
+                    window.location.href=`table_senior.php?${id}&action=create`
                 }else{
-                    window.location.href=`table_pwd.php?${id}`
+                    window.location.href=`table_pwd.php?${id}&action=create`
                 }
             },2000)
         }else{

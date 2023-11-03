@@ -1,0 +1,72 @@
+.maincontent{
+    box-sizing: border-box;
+}
+table {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid black ;
+    box-sizing: border-box;
+    table-layout: fixed;
+}
+
+tr, td{
+    border: 1px solid black ;
+}
+td{
+    padding-inline: .5em;
+}
+.noborder{
+    border: none;
+}
+
+.superflex {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+}
+.flexitem {
+    display: flex;
+    gap: 1em;
+    align-items: baseline;
+    margin-right: 2em;
+}
+
+.asterisk{
+    color: red;
+}
+
+.input{
+    border: none;
+    line-height: 0;
+    margin-left: 1em;
+    box-sizing: border-box;
+    width: 90%;
+}
+table p{
+    font-size: .8em;
+}
+
+.checkboxDiv{
+    line-height: 0;
+    margin: 0;
+}
+.checkboxDiv div{
+    height: 1em;
+}
+
+.twocolumns{
+    display: flex;
+}
+
+.certcontent{
+    padding: 1em;
+}
+
+/* certificate */
+.certificate, .certificate tr, .certificate td{
+    border: none;
+}
+.certificate input{
+    border: none;
+    border-bottom: 1px solid black;
+}

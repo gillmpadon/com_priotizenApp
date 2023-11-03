@@ -1,4 +1,19 @@
-
+<?php
+include('./backend/connection.php');
+$id = $_GET['id'];
+$query = "SELECT v.*, a.street, a.house from verified v Inner join address a on v.app_id = a.user_id where v.app_id = '$id' limit 1";
+$result = mysqli_query($conn,$query);
+if($result){
+    if(mysqli_num_rows($result)>0){
+        $assoc = mysqli_fetch_assoc($result);
+        extract($assoc);
+    }else{
+        echo mysqli_error($conn);
+    }
+}else{
+    echo mysqli_error($conn);
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -141,11 +156,11 @@
                                                 <div class="superflex">
                                                 <p>1.</p> 
                                                     <div class="flexitem">
-                                                        <input type="radio" name="applicant" id="">
+                                                        <input type="radio" name="applicant" id="new">
                                                         <p>NEW APPLICANT</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="applicant" id="">
+                                                        <input type="radio" name="applicant"  id="old">
                                                         <p>RENEWAL</p>
                                                     </div>
                                                 </div>
@@ -170,7 +185,14 @@
                                                 <input class="input" type="text" id="date">
                                             </td>
                                             <td colspan="1" rowspan="2">
-                                                <img src="../priotizen_app/user_img/123.jpg" alt="" style="height: 100%; width:100%;">
+                                            <?php
+                                            $imagePath = "./user_img/$photo";
+                                                if(file_exists($imagePath)) {
+                                                    echo '<img  src="./user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
+                                                }else{
+                                                    echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
+                                                }
+                                            ?>
                                             </td>
                                         </tr>
                                         <tr>
@@ -183,28 +205,28 @@
                                                 <div class="rowitem superflex">
                                                     <p>LAST NAME <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text"  value="<?php echo $lname; ?>" id="lname">
 
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>FIRST NAME <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text"  value="<?php echo $fname; ?>" id="fname">
 
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>MIDDLE NAME <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text"  value="<?php echo $mi; ?>" id="mi">
 
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>SUFFIX NAME <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text"  id="suffix">
                                             </td>
                                         </tr>
 
@@ -214,7 +236,10 @@
                                                 <div class="rowitem superflex">
                                                     <P>5.DATE OF BIRTH <span class="asterisk">*</span> (mm/dd/yy)</P>
                                                 </div>
-                                                <input type="date" class="noborder">
+                                                <?php
+                                                    $convertedDate = date("Y-m-d", strtotime($bdate));
+                                                ?>
+                                                <input type="date" class="noborder" value="<?php echo $convertedDate; ?>" id="bdate">
                                             </td>
                                             <td colspan="2">
                                                 <div class="rowitem superflex">
@@ -222,11 +247,11 @@
                                                 </div>
                                                 <div class="superflex">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new" id="male" class="gender">
                                                             <p>MALE</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new" id="female" class="gender">
                                                             <p>FEMALE</p>
                                                         </div>
                                                 </div>
@@ -239,23 +264,23 @@
                                                 </div>
                                                 <div class="superflex">
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="new" id="single"  class="status_rs">
                                                         <p>Single</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="new" id="separated" class="status_rs">
                                                         <p>Separated</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="new" id="cohabitation" class="status_rs">
                                                         <p>Cohabitation (live-in)</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="new" id="married" class="status_rs">
                                                         <p>Married</p>
                                                     </div>
                                                     <div class="flexitem">
-                                                        <input type="radio" name="new" id="">
+                                                        <input type="radio" name="new" id="widow">
                                                         <p>Widow/er</p>
                                                     </div>
                                                 </div>
@@ -270,23 +295,23 @@
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="deaf">
                                                             <p>Deaf or Hard of Hearing</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="intellectual">
                                                             <p>Intellectual Disability</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="learning">
                                                             <p>Learning Disability</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="mental">
                                                             <p>Mental Disability</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="physical">
                                                             <p>Physical Disability</p>
                                                         </div>
                                                         
@@ -294,24 +319,24 @@
     
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
-                                                            <p>Deaf or Hard of Hearing</p>
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="pyschosocial">
+                                                            <p>Pyschosocial Disability</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
-                                                            <p>Intellectual Disability</p>
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="speech">
+                                                            <p>Speech and Language Impairement</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
-                                                            <p>Learning Disability</p>
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="visual">
+                                                            <p>Visual Disability</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
-                                                            <p>Mental Disability</p>
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="cancer">
+                                                            <p>Cancer (RA11215)</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
-                                                            <p>Physical Disability</p>
+                                                            <input type="checkbox" class="checkboxes_a" onclick="updateCheckBox(this)" name="new_type" id="rare">
+                                                            <p>Rare Disease(RA10747)</p>
                                                         </div>
                                                         
                                                     </div>
@@ -329,52 +354,54 @@
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="congenital">
                                                             <p>Congenital/Inborn</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="adhd">
                                                             <p>ADHD</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="cerebral">
                                                             <p>Cerebral</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="palsy">
                                                             <p>Central Palsy</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="down">
                                                             <p>Down Syndrome</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="cause_others_1">
                                                             <p>Others</p>
+                                                            <input type="text" id="cause_others_1_input" style="width: 100%; border:none;" >
                                                         </div>
                                                         
                                                     </div>
     
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="acquired">
                                                             <p>Acquired</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="chronic">
                                                             <p>Chronic Illness</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="cerebral">
                                                             <p>Cerebral Palsy</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="injury">
                                                             <p>Injury</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="checkbox" name="new" id="">
+                                                            <input type="checkbox" class="checkboxes" onclick="updateCheckBox(this)" name="cause_new" id="cause_others_2">
                                                             <p>Others</p>
+                                                            <input type="text" id="cause_others_2_input" style="width: 100%; border:none;" >
                                                         </div>
                                                         
                                                     </div>
@@ -394,34 +421,33 @@
                                                 <div class="rowitem superflex">
                                                     <p>House No. and Street <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
-
+                                                <input class="input" type="text" value="<?php echo $house ?>" id="house">
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>Barangay<span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo $brgy ?> " id="brgy">
 
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>Municipality <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo "Lingayen" ?>" id="municipality">
 
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>Province <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo "Pangasinan" ?>" id="province">
                                             </td>
                                             <td>
                                                 <div class="rowitem superflex">
                                                     <p>Region <span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo "Region 1" ?>" id="region">
                                             </td>
                                         </tr>
                                         
@@ -436,21 +462,21 @@
                                                 <div class="rowitem superflex">
                                                     <p>Landline No. </p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="landline">
 
                                             </td>
                                             <td colspan="2">
                                                 <div class="rowitem superflex">
                                                     <p>Mobile No.<span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo $number ?>" id="number">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>Email Address </p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" value="<?php echo $email ?>" id="email">
 
                                             </td>
                                         </tr>
@@ -464,38 +490,38 @@
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="none">
                                                             <p>None</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="kindergarten">
                                                             <p>Kindergarten</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="elementary">
                                                             <p>Elementary</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="junior">
                                                             <p>Junior High School</p>
                                                         </div>
                                                     </div>
     
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="senior">
                                                             <p>Senior High School</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="college">
                                                             <p>College</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="vocational">
                                                             <p>Vocational</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_educ" id="graduate">
                                                             <p>Post Graduate</p>
                                                         </div>
                                                         
@@ -513,48 +539,48 @@
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="managers">
                                                             <p>Managers</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="professional">
                                                             <p>Professional</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="technicians">
                                                             <p>Technicians and Associate Professionals</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="clerical">
                                                             <p>Clerical Support Workers</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="service">
                                                             <p>Service and Sales Workers</p>
                                                         </div>
 
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="agricultural">
                                                             <p>Skilled Agricultrual, Forestry and Fishery Workers</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="trade">
                                                             <p>Craft and Related Trade Workers</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="machine">
                                                             <p>Plant and Machine Operations and Assembers</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="occupation">
                                                             <p>Elementary Occupation</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="forces">
                                                             <p>Armed Forces Occupation</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_job" id="job_others">
                                                             <p>Others</p>
                                                         </div>
                                                         
@@ -576,15 +602,15 @@
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="newStatus" id="employed">
                                                             <p>Employed</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="newStatus" id="unemployed">
                                                             <p>Unemployed</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="newStatus" id="selfemployed">
                                                             <p>Self-employed</p>
                                                         </div>
                                                     </div>
@@ -598,16 +624,20 @@
                                                 <div class="twocolumns" >
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
-                                                            <p>Employed</p>
+                                                            <input type="radio" name="new" id="regular">
+                                                            <p>Permanent / Regular</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
-                                                            <p>Unemployed</p>
+                                                            <input type="radio" name="new" id="seasonal">
+                                                            <p>Seasonal</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
-                                                            <p>Self-employed</p>
+                                                            <input type="radio" name="new" id="casual">
+                                                            <p>Casual</p>
+                                                        </div>
+                                                        <div class="flexitem">
+                                                            <input type="radio" name="new" id="emergency">
+                                                            <p>Emergency</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -620,17 +650,17 @@
                                         <tr>
                                             <td colspan="2">
                                                 <div class="rowitem superflex">
-                                                    <P>13. STATUS OF EMPLOYMENT <span class="asterisk">*</span></P>
+                                                    <P>13. CATEGORY OF EMPLOYMENT <span class="asterisk">*</span></P>
                                                 </div>
                                                 <div class="twocolumns" >
 
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_category" id="government">
                                                             <p>Goverment</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="">
+                                                            <input type="radio" name="new_category" id="private">
                                                             <p>Private</p>
                                                         </div>
                                                     </div>
@@ -652,28 +682,28 @@
                                                 <div class="rowitem superflex">
                                                     <p>Organization Affiliated: </p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="organization">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>Contact Person</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="contact">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>Office Address</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="office">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>Tel No.:</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="tel">
 
                                             </td>
                                         </tr>
@@ -691,34 +721,34 @@
                                                 <div class="rowitem superflex">
                                                     <p>SSS NO.: </p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="sss">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>GSIS NO.:</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="gsis">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>PAG-IBIG NO.:</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="pagibig">
 
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>PSN NO.:</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="psn">
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
                                                     <p>PhilHealth NO.:</p>
                                                 </div>
-                                                <input class="input" type="text" >
+                                                <input class="input" type="text" id="philhealth">
 
                                             </td>
                                         </tr>
@@ -752,17 +782,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="fathers_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="fathers_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="fathers_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -774,17 +804,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="mothers_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="mothers_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="mothers_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -796,17 +826,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                    <input class="input" type="text" name="" id="guardian_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                    <input class="input" type="text" name="" id="guardian_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                    <input class="input" type="text" name="" id="guardian_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -836,67 +866,65 @@
                                         <tr>
                                             <td colspan="2" rowspan="3">
                                                 <div class="rowitem superflex">
-                                                    <input type="radio" name="" id="">
+                                                    <input type="radio" name="guard" id="radio_applicant">
                                                     <p>APPLICANT</p>
                                                 </div>
                                                 <div class="rowitem superflex">
-                                                    <input type="radio" name="" id="">
-                                                    <p>GUERDIAN</p>
+                                                    <input type="radio" name="guard" id="radio_guardian">
+                                                    <p>GUARDIAN</p>
                                                 </div>
                                                 <div class="rowitem superflex">
-                                                    <input type="radio" name="" id="">
+                                                    <input type="radio" name="guard" id="radio_representative">
                                                     <p>REPRESENTATIVE</p>
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="aoplicant_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="aoplicant_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="aoplicant_mname">
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
-                                            
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="guardian_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="guardian_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="guardian_mname">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="representative_lname">
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="representative_fname">
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="representative_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -909,9 +937,21 @@
                                                 <p>LICENSE NO.</p>
                                                 <input type="text" class="input">
                                             </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="license_lname">
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="license_fname">
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div class="rowitem superflex">
+                                                     <input class="input" type="text" name="" id="license_mname">
+                                                </div>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -922,17 +962,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="officer_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="officer_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="officer_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -945,17 +985,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="approving_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="approving_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="approving_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -968,17 +1008,17 @@
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="encoder_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="encoder_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                     <input class="input" type="text" name="" id="">
+                                                     <input class="input" type="text" name="" id="encoder_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -986,7 +1026,7 @@
                                             <td colspan="5">
                                                 <div class="rowitem superflex">
                                                     <p>NAME OF REPORTING UNIT(OFFICE/SECTION): <span class="asterisk">*</span></p>
-                                                    <input class="input" type="text" name="" id="">
+                                                    <input class="input" type="text" name="" id="reporting_unit">
                                                 </div>
                                             </td>
                                            
@@ -996,7 +1036,7 @@
                                             <td colspan="5">
                                                 <div class="rowitem superflex">
                                                     <p>CONTROL NO: <span class="asterisk">*</span></p>
-                                                    <input class="input" type="text" name="" id="">
+                                                    <input class="input" type="text" name="" id="control_number">
                                                 </div>
                                             </td>
                                            
@@ -1029,7 +1069,7 @@
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
                                     <tr>
                                         <td style="text-indent: 10%;">
-                                            This is to certify that <input type="text" style="width: 22%;">, residents of <input type="text" style="width: 30%;">  </td>
+                                            This is to certify that <input type="text" style="width: 22%;" id="fullname">, residents of <input type="text" style="width: 30%;" id="full_address">  </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -1044,7 +1084,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td >of the province of <input type="text" style="width: 30%;">, in <input type="text" style="width: 25%;">, had voluntarily submitted</td>
+                                        <td >of the province of <input type="text" style="width: 30%;" id="full_province">, in <input type="text" style="width: 25%;" id="full_region">, had voluntarily submitted</td>
                                     </tr>
                                     <tr>
                                         <td>herself/himself to this facility/clinic/office with regard to the nature of disability due to the currently functional</td>
@@ -1055,18 +1095,18 @@
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
                                     <tr>
                                         <td style="text-indent: 10%;">
-                                            Based on the personal interview and medical assessment conducted by herein physician <input type="text"> the patient has Accompanied by <input type="text" name="" id="">, which results to Difficulty 
+                                            Based on the personal interview and medical assessment conducted by here in physician the patient has <input type="text" value="" id="full_disease"> Accompanied by <input type="text" name="" id="another_disease"  style="width: 40%;">, which results to Difficulty 
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="flexitem">
                                             <p style="padding-left: 8%;">Diagnosis</p> 
-                                            <p style="padding-left: 38%;"> Describe the health condition </p>
+                                            <p style="padding-left: 35%;"> Describe the health condition </p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                             in (e.g. walking, seeing) and therefore considered as person with <input type="text" name="" id="" style="width: 40%;"> 
+                                             in (e.g. walking, seeing) and therefore considered as person with <input type="text" name="" id="type_disability" style="width: 40%;" > 
                                         </td>
                                     </tr>
                                     <tr>
@@ -1080,7 +1120,7 @@
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
                                     <tr>
                                         <td style="text-indent: 10%;">
-                                            This certification is issued on <input type="text"> at <input type="text"> in compliance with the requirement in issuance of ID for the twenty percent(20%) discounts for Persons with disabilities mandated by Republic Act No. 9442 or Magna Carta for Persons with Disabilities.
+                                            This certification is issued on <input type="text" id="issue_date"> at <input type="text" id="requirement"> in compliance with the requirement in issuance of ID for the twenty percent(20%) discounts for Persons with disabilities mandated by Republic Act No. 9442 or Magna Carta for Persons with Disabilities.
                                         </td>
                                     </tr>
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
@@ -1090,10 +1130,15 @@
                                     </tr>
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
                                     <tr><td><input type="text"></td></tr>
-                                    <tr><td>Name of Physician</td></tr>
-                                    <tr><td>License Number:</td></tr>
-
+                                    <tr><td >Name of Physician: <span id="physicia_name"></span> </td></tr>
+                                    <tr><td>License Number: <span id="physicia_number"></span></td></tr>
+                                    <tr style="border:none">
+                                        <td  style=" width:100%; border:none; margin:auto;text-align:center;">
+                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill">SUBMIT FORM</button>
+                                        </td>
+                                    </tr>
                                 </table>
+                               
                             </div>
                         </div>
                     </div>
@@ -1145,9 +1190,87 @@
     function goError(){
         demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
     }
+    
+    function updateCheckBox(e){
+        const id = e.id
+        const element = document.querySelectorAll(`.${e.className}`)
+        element.forEach( item =>{
+            if(item.id != id){
+                const unselect = document.querySelector(`#${item.id}`)
+                unselect.checked= false;
+            }
+        })
+    }
+    
+    function submitForm() {
+        const mainObj = {}
+        const inputs = document.querySelectorAll('table input');
+        inputs.forEach(input => {
+        if (input.type === 'checkbox') {
+            mainObj[input.id] = input.checked;
+        } else if (input.type === 'text') {
+            mainObj[input.id] = input.value
+        }else{
+            mainObj[input.id] = input.checked
+        }
+        });
+        
+        const url = new URLSearchParams(window.location.search);
+        const id = url.get('id');
+        const action = url.get('action');
+        
+        const objStr = JSON.stringify(mainObj);
+        const formData = new FormData();
+        formData.append('data', objStr);
+        formData.append('action', action);
+        formData.append('user_id', id);
+        formData.append('noimage', true);
+        fetch('./backend/forms_submit.php',{
+            method: 'POST',
+            body: formData
+        })
+        .then(response=> response.json())
+        .then(result =>{
+            console.log(result)
+        })
+
+    }
+
+    function readData(){
+        const url = new URLSearchParams(window.location.search);
+        const id = url.get('id');
+        fetch(`./backend/forms_submit.php?user_id=${id}`,{
+            method: 'GET'
+        })
+        .then( response => response.json())
+        .then( result => {
+            const data = result['data'];
+            let objectData = JSON.parse(data);
+            for (const key in objectData) {
+                if (objectData.hasOwnProperty(key)) {
+                    const value = objectData[key];
+                    const item = document.getElementById(key);
+
+                    if (item && item.tagName === "INPUT") {
+                        if (item.type === "checkbox") {
+                            // It's a checkbox input
+                            item.checked = value === "on"; // Set the checkbox value based on your data
+                        } else if (item.type === "text") {
+                            // It's a text input
+                            item.value = value==""? "":value; // Set the text input value
+                        }else{
+                            item.checked = value === true;
+                        }
+                    }
+                  
+                }
+            }
+        })
+    }
+    readData()
+
 
 </script>
-
 </body>
 
     <!--   Core JS Files   -->

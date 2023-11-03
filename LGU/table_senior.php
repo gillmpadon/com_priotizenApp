@@ -108,6 +108,7 @@ if($result){
                                                 echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
                                             }
                                         ?>
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -313,11 +314,11 @@ if($result){
                                         <td>
                                            <div class="flex">
                                             <div class="checkbox-input">
-                                                <input type="checkbox" name="" id="tavel_yes">
+                                                <input type="checkbox" name="" class="travel" onclick="updateCheckBox(this)" id="travel_yes">
                                                 <p>YES</p>
                                            </div>
                                            <div class="checkbox-input">
-                                                <input type="checkbox" name="" id="travel_no">
+                                                <input type="checkbox" name="" class="travel" onclick="updateCheckBox(this)" id="travel_no">
                                                 <p>NO</p>
                                             </div>
                                            </div>
@@ -609,43 +610,43 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e1" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e1" >
                                                         <p>Elementary Level</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e2" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e2" >
                                                         <p>High School Level</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e3" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e3" >
                                                         <p>Post Graduate</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e4" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e4" >
                                                         <p>Elementary Graduate</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e5" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e5" >
                                                         <p>College Level</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e6" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e6" >
                                                         <p>Vocational</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e7" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e7" >
                                                         <p>High School Graduate</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e8" >
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e8" >
                                                         <p>College Graduate</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="educ_checkbox" onclick="updateEduc(this)" " name="" id="e9">
+                                                        <input type="checkbox" class="educ_checkbox" onclick="updateCheckBox(this)" " name="" id="e9">
                                                         <p>No Attended School</p>
                                                     </div>
                                                 </div>
@@ -655,17 +656,17 @@ if($result){
                                                     28. Share Skill (Community Service)
                                                 </div>
                                                 <div class="midentry">
-                                                    <input type="checkbox" name="" id="skill1">
+                                                    <input type="checkbox" class="skills" onclick="updateCheckBox(this)" name="" id="skill1">
                                                     <p>1</p>
                                                     <input type="text" name="" id="skill1_input">
                                                 </div>
                                                 <div class="midentry">
-                                                <input type="checkbox" name="" id="skill2">
+                                                <input type="checkbox" class="skills" onclick="updateCheckBox(this)" name="" id="skill2">
                                                     <p>2</p>
-                                                    <input type="text" name="" id="skill2_input">
+                                                    <input type="text"  name="" id="skill2_input">
                                                 </div>
                                                 <div class="midentry" id="nobottom">
-                                                <input type="checkbox" name="" id="skill3">
+                                                <input type="checkbox" class="skills" onclick="updateCheckBox(this)" name="" id="skill3">
                                                     <p>3</p>
                                                     <input type="text" name="" id="skill3_input">
                                                 </div>
@@ -675,79 +676,79 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t1" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t1" >
                                                         <p>Medical</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t2" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t2" >
                                                         <p>Dental</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t3" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t3" >
                                                         <p>Fishing</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t4" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t4" >
                                                         <p>Engineering</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t5" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t5" >
                                                         <p>Barber</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t6" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t6" >
                                                         <p>Evangelization</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t7" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t7" >
                                                         <p>Teaching</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t8" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t8" >
                                                         <p>Counselling</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t9" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t9" >
                                                         <p>Cooking</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t10" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t10" >
                                                         <p>Carpenter</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t11" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t11" >
                                                         <p>Masson</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t12" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t12" >
                                                         <p>Tailor</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t13" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t13" >
                                                         <p>Legal Services</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t14" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t14" >
                                                         <p>Farming</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t15" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t15" >
                                                         <p>Arts</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t16" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t16" >
                                                         <p>Plumber</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t17" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t17" >
                                                         <p>Sapatero</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t18" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t18" >
                                                         <p>Chef/Cook</p>
                                                     </div>
                                                 </div>
@@ -758,15 +759,15 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry lastentry">
                                                     <div class="last ">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t19" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t19" >
                                                         <p>Millwright</p>
                                                     </div>
                                                     <div class="last " id="norights">
-                                                        <input type="checkbox" class="technical_checkbox" name="" id="t20" >
+                                                        <input type="checkbox" class="technical_checkbox" onclick="updateCheckBox(this)"  name="" id="t20" >
                                                         <p>Others, specify</p>
                                                     </div>
                                                     <div class="last">
-                                                        <input type="text" name="" id="t20_input" >
+                                                        <input type="text" name="" id="technical_checkbox_others" >
                                                     </div>
                                                 </div>
                                                 
@@ -784,57 +785,57 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c1" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c1" >
                                                         <p>Medical</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c2" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c2" >
                                                         <p>Community / Organization Leader</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c3" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c3" >
                                                         <p>Neighborhood Support Services</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c4" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c4" >
                                                         <p>Counseling Referral</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c5" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c5" >
                                                         <p>Rosource Volunter</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c6" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c6" >
                                                         <p>Dental</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c7" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c7" >
                                                         <p>Legal Services</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c8" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c8" >
                                                         <p>Sponsorship</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c9" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c9" >
                                                         <p>Community Beautification</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c10" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c10" >
                                                         <p>Friendly Visits</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c11" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c11" >
                                                         <p>Religious</p>
                                                     </div>
                                                     <div class="entries">
-                                                        <input type="checkbox" class="community_checkbox" name="" id="c12" >
+                                                        <input type="checkbox" class="community_checkbox" onclick="updateCheckBox(this)"  name="" id="c12" >
                                                         <p>Others, specify</p>
-                                                        <input type="text" name="" id="c12_input">
+                                                        <input type="text" name="" id="community_checkbox_others">
                                                     </div>
                                                 </div>
                                             </div>
@@ -853,45 +854,45 @@ if($result){
                                         <div class="checks">
                                             <div class="checks-entry narrow">
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i1" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i1" >
                                                     <p>Alone</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i2" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i2" >
                                                     <p>Spouse</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i3" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i3" >
                                                     <p>Child(ren)</p>
                                                 </div>
                                                 
                                             </div>
                                             <div class="checks-entry narrow">
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i4" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i4" >
                                                     <p>Grand Child(ren)</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i5" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i5" >
                                                     <p>In-law(s)</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i6" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i6" >
                                                     <p>Relative(s)</p>
                                                 </div>
                                                
                                             </div>
                                             <div class="checks-entry narrow">
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i7" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i7" >
                                                     <p>Common Law Spouse</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i8" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i8" >
                                                     <p>Care Institution</p>
                                                 </div>
                                                 <div class="entries onlybottom">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i9" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i9" >
                                                     <p>Friends(s)</p>
                                                 </div>
                                             </div>
@@ -938,9 +939,9 @@ if($result){
                                         <td colspan="4">
                                             <div class="checks-entry narrow">
                                                 <div class="entries ">
-                                                    <input type="checkbox" class="income_checkbox" name="" id="i10" >
+                                                    <input type="checkbox" class="income_checkbox" onclick="updateCheckBox(this)" name="" id="i10" >
                                                     <p>Others, pls specify</p>
-                                                    <input type="text" name="" id="i10_input">
+                                                    <input type="text" name="" id="income_checkbox_others">
                                                 </div>
                                             </div>
                                         </td>
@@ -950,7 +951,7 @@ if($result){
                                                 <div class="entries">
                                                     <input type="checkbox" class="personal_checkbox" name="" id="p7" >
                                                     <p>Others, pls specify</p>
-                                                    <input type="text" name="" id="p7_input">
+                                                    <input type="text" name="" id="personal_checkbox_input">
                                                 </div>
                                             </div>
                                         </td>
@@ -968,57 +969,57 @@ if($result){
                                             <div class="checks ">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s1" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s1" >
                                                         <p>Own earnigns, salary/ wages</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s2" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s2" >
                                                         <p>Depended on children/ relatives</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s3" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s3" >
                                                         <p>Spouse's Pension</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s4" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s4" >
                                                         <p>Livestock / orchard / farm</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s5" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s5" >
                                                         <p>Own Pension</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s6" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s6" >
                                                         <p>Spouse's salary</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s7" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s7" >
                                                         <p>Rentals / sharecrops</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s8" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s8" >
                                                         <p>Fishing</p>
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s9" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s9" >
                                                         <p>Stocs / Dividends</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s10" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s10" >
                                                         <p>Insurance</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s11" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s11" >
                                                         <p>Savings</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" class="source_checkout" name="" id="s12" >
+                                                        <input type="checkbox" class="source_checkout" onclick="updateCheckBox(this)"  name="" id="s12" >
                                                         <p>Others, specify</p>
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" name="" id="source_checkout_input">
                                                     </div>
                                                 </div>
                                             </div>
@@ -1035,21 +1036,21 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow" >
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a1" >
                                                         <p>House</p>
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a2" >
                                                         <p>Lot / Farmland</p>
                                                     </div>
                                                 
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a3" >
                                                         <p>House & Lot</p>
                                                     </div>
                                                 </div>
@@ -1057,7 +1058,7 @@ if($result){
                                             <div class="checks"> 
                                                 <div class="checks-entry narrow" style="width: 100%;">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a4" >
                                                         <p>Commercial Building</p>
                                                         <input type="text">
                                                     </div>
@@ -1066,7 +1067,7 @@ if($result){
                                                
                                                 <div class="checks-entry narrow" style="width: 50%;">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a5" >
                                                         <p>Fishpond / resort</p>
                                                     </div>
                                                 </div>
@@ -1074,9 +1075,9 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="a6" >
                                                         <p>Others, specify</p>
-                                                        <input type="text">
+                                                        <input type="text" id="assets_others">
                                                     </div>
                                                     
                                                 </div>
@@ -1088,48 +1089,48 @@ if($result){
                                             <div class="checks ">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per1" >
                                                         <p>Automobile</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per2" >
                                                         <p>Personal Computer</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per3" >
                                                         <p>Boarts</p>
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per4" >
                                                         <p>Heavy Equipment</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per5" >
                                                         <p>Laptops</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per6" >
                                                         <p>Drones</p>
                                                     </div>
                                                 
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per7" >
                                                         <p>Motorcycle</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per8" >
                                                         <p>Mobile Phones</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="personal" onclick="updateCheckBox(this)" id="per9" >
                                                         <p>Specify</p>
-                                                    </div>
-                                                </div>
+                                                        <input type="text" id="personsal_others">
+                                                    </div></div>
                                             </div>
                                         </td>
                                     </tr>
@@ -1147,45 +1148,45 @@ if($result){
                                             <div class="checks ">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon1" >
                                                         <p>60,000 and above</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon2" >
                                                         <p>50,000 to 60,000</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon3" >
                                                         <p>40,000 to 50,000</p>
                                                     </div>
                                                     
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon4" >
                                                         <p>30,000 to 40,000</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon5" >
                                                         <p>20,000 to 30,000</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon6" >
                                                         <p>10,000 to 20,000</p>
                                                     </div>
                                                 
                                                 </div>
                                                 <div class="checks-entry narrow ">
                                                     <div class="entries onlybottom ">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon7" >
                                                         <p>5,000 to 10,000</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon8" >
                                                         <p>1,000 to 5000</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="month_income" onclick="updateCheckBox(this)" id="mon9" >
                                                         <p>Below 1,000</p>
                                                     </div>
                                                 </div>
@@ -1193,9 +1194,9 @@ if($result){
                                             </div>
                                             
                                             <div class="entries ">
-                                                <input type="checkbox" name="" id="" >
+                                                <input type="checkbox" class="month_income" onclick="updateCheckBox(this)" id="mon10" >
                                                 <p>Others, specify</p>
-                                                <input type="text" name="" id="">
+                                                <input type="text" name="" id="month_income_others">
                                             </div>
                                             <br>
                                         </td>
@@ -1203,25 +1204,25 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="resources" onclick="updateCheckBox(this)" id="res1" >
                                                         <p>Lack of income / resources</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="resources" onclick="updateCheckBox(this)" id="res2" >
                                                         <p>Loss of income / resources</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="resources" onclick="updateCheckBox(this)" id="res3" >
                                                         <p>Skills / capability training</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="resources" onclick="updateCheckBox(this)" id="res4" >
                                                         <p>Livelihood opportunities</p>
                                                     </div>
                                                     <div class="entries ">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" name="" class="resources" onclick="updateCheckBox(this)" id="res5" >
                                                         <p>Others, specify</p>
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" name="" id="resources_others">
                                                     </div>
                                                 </div>
                                                 
@@ -1248,78 +1249,81 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow" >
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)"  name="" id="med1" >
                                                         <p>Blood Type</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub1">
                                                         <p>O</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub2">
                                                         <p>A</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub3">
                                                         <p>B</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub4">
                                                         <p>AB</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub5">
                                                         <p>Don't know</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med2" >
                                                         <p>Physical Disability</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med3" >
                                                         <p>Health problems / ailments</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med4" >
                                                         <p>Hypertension</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub6">
                                                         <p>Arthritis / Goul</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub7">
                                                         <p>Coronary Heart Disease</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med5" >
                                                         <p>Diabetes</p>
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" class="medical_sub" onclick="updateCheckBox(this)" name="" id="medsub8">
                                                         <p>Chronic Kidney Disease</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med6" >
                                                         <p>Alzheimer's / Dementia</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med7" >
                                                         <p>Chronic Obstructive Pulmonary Disease</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="medical" onclick="updateCheckBox(this)" name="" id="med8" >
                                                         <p>Others, pls specify</p>
+                                                        <input type="text" id="medical_others">
                                                     </div>
                                                     <div class="entries bg-gray">
                                                         <p>38. Dental Concern</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="dental" onclick="updateCheckBox(this)" name="" id="den1" >
                                                         <p>Needs Dental Care</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="dental" onclick="updateCheckBox(this)" name="" id="den2" >
                                                         <p>Others</p>
+                                                        <input type="text" id="dental_others">
                                                     </div>
                                                     <div class="entries bg-gray">
                                                         <p>39. Optical</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="optical" onclick="updateCheckBox(this)" name="" id="opt1" >
                                                         <p>Eye impairment</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="optical" onclick="updateCheckBox(this)" name="" id="opt2" >
                                                         <p>Needs eye care</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="optical" onclick="updateCheckBox(this)" name="" id="opt3" >
                                                         <p>Others</p>
+                                                        <input type="text" id="optical_others">
                                                     </div>
                                                    
                                                 </div>
@@ -1331,59 +1335,61 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow" >
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="hearing" onclick="updateCheckBox(this)"  name="" id="hear1" >
                                                         <p>Aural impairment / Hearing impairement</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"  class="hearing" onclick="updateCheckBox(this)" name="" id="hear2" >
                                                         <p>Others</p>
+                                                        <input type="text" id="hearing_others">
                                                     </div>
                                                     <div class="entries onlybottom bg-gray">
                                                         <p>41. Social/Emotional</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc1" >
                                                         <p>Feeling neglect / rejection</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc2" >
                                                         <p>Feeling helplessness / worthlessness</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc3" >
                                                         <p>Feeling loneliness / isolate</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc4" >
                                                         <p>Lack of leisure / recreational activities</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc5" >
                                                         <p>Lack SC friendly environment</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox"class="social" onclick="updateCheckBox(this)" name="" id="soc6" >
                                                         <p>Others, specify</p>
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" name="" id="social_others">
                                                     </div>
                                                     <div class="entries onlybottom bg-gray">
                                                         <p>42. Area / Difficulty</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="cost" onclick="updateCheckBox(this)" name="" id="cost1" >
                                                         <p>High cost of medicines</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="cost" onclick="updateCheckBox(this)" name="" id="cost2" >
                                                         <p>Lack of medicines</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="cost" onclick="updateCheckBox(this)" name="" id="cost3" >
                                                         <p>Lack of medical attention</p>
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" id="" >
+                                                        <input type="checkbox" class="cost" onclick="updateCheckBox(this)" name="" id="cost4" >
                                                         <p>Others</p>
+                                                        <input type="text" id="cost_others">
                                                     </div>
                                                     <div class="entries onlybottom" style="visibility:hidden">
                                                         <input type="checkbox" >
@@ -1403,35 +1409,35 @@ if($result){
                                             <div class="checks">
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_1">
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_2">
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
-                                                    </div>
-                                                </div>
-                                                <div class="checks-entry narrow">
-                                                    <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
-                                                    </div>
-                                                    <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
-                                                    </div>
-                                                    <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_3">
                                                     </div>
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_4">
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_5">
                                                     </div>
                                                     <div class="entries onlybottom">
-                                                        <input type="text" name="" id="">
+                                                        <input type="text" class="listMed" name="" id="listMed_6">
+                                                    </div>
+                                                </div>
+                                                <div class="checks-entry narrow">
+                                                    <div class="entries onlybottom">
+                                                        <input type="text" class="listMed" name="" id="listMed_7">
+                                                    </div>
+                                                    <div class="entries onlybottom">
+                                                        <input type="text" class="listMed" name="" id="listMed_8">
+                                                    </div>
+                                                    <div class="entries onlybottom">
+                                                        <input type="text" class="listMed" name="" id="listMed_9">
                                                     </div>
                                                 </div>
                                                 
@@ -1446,9 +1452,9 @@ if($result){
                                            <div class="checks">
                                             <div class="checks-entry " >
                                                 <div class="entries ">
-                                                    <input type="checkbox" name="" id="" >
+                                                    <input type="checkbox" class="isMed" onclick="updateCheckBox(this)" name="" id="isMedyes" >
                                                     <p>Yes</p>
-                                                    <input type="checkbox" name="" id="" >
+                                                    <input type="checkbox" class="isMed" onclick="updateCheckBox(this)" name="" id="isMedno" >
                                                     <p>No</p>
                                                 </div>
                                             </div>
@@ -1463,12 +1469,13 @@ if($result){
                                            <div class="checks">
                                             <div class="checks-entry" >
                                                 <div class="entries">
-                                                    <input type="checkbox" name="" id="" >
-                                                    <p>Elementary Level</p>
-                                                    <input type="checkbox" name="" id="" >
-                                                    <p>Elementary Level</p>
-                                                    <input type="checkbox" name="" id="" >
-                                                    <p>Elementary Level</p>
+                                                    <input type="checkbox" class="frequent" onclick="updateCheckBox(this)" name="" id="fre1" >
+                                                    <p>Yearly</p>
+                                                    <input type="checkbox" class="frequent" onclick="updateCheckBox(this)" name="" id="fre2" >
+                                                    <p>Every 6 months</p>
+                                                    <input type="checkbox" class="frequent" onclick="updateCheckBox(this)" name="" id="fre3" >
+                                                    <p>Others</p>
+                                                    
                                                 </div>
                                             </div>
                                            </div>
@@ -1485,11 +1492,12 @@ if($result){
                                         <td colspan="6" style="padding: 1em;">
                                             <div class="sign">
                                                 <div class="signature">
-                                                    <input type="text">
+                                                    <input type="text" id="signature">
                                                     <p>Name and Signaure of Senior Citizen</p>
                                                 </div>
                                                 <div class="attach">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><circle cx="16" cy="8" r="2" opacity=".5"/><path stroke-linecap="round" d="m2 12.5l1.752-1.533a2.3 2.3 0 0 1 3.14.105l4.29 4.29a2 2 0 0 0 2.564.222l.299-.21a3 3 0 0 1 3.731.225L21 18.5" opacity=".5"/></g></svg>
+                                                    <img id="attach_signature" src="../priotizen_app/documents/signature.png" style="height:100%; width:100%; "  alt="..."/>
+                                                    <input type="file" name="" style="display: none;" id="attach_file">
                                                 </div>
                                             </div>
                                         </td>
@@ -1572,60 +1580,76 @@ if($result){
 </div>
 
 <script>
-    const inputs_id = ['lname','fname','mname','ext','region','province','country',
-    'municipality','brgy','birth00','birth01','birth10','birth11','birth20','birth22',
-    'birth_place','status','sex','contact','email','religion','ethnic','language','osca_id','gsis_id',
-    'tin_id','philhealth_id','org_id','gov_id','travel_yes','travel_no','business','pension','spouse_lname',
-    'spouse_fname','spouse_mname','spouse_ext','fathers_fname','fathers_lname','fathers_mname','fathers_ext',
-    'mothers_lname','mothers_fname','mothers_mname','mothers_ext',]
-    const inputs_class_child = ['child_name','child_occupation','child_income','child_age','child_isworking']
-    const inputs_class_others = ['others_name','others_occupation','others_income','others_age','others_isworking']
-    function goSuccess(){
+
+
+     function goSuccess(){
         demo.goNotif('Successfully',' Created','success','pe-7s-add-user')
     }
     function goError(){
         demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
     }
 
-
+    const inputs_id = ['lname','fname','mname','ext','region','province','country',
+    'municipality','brgy','birth00','birth01','birth10','birth11','birth20','birth22',
+    'birth_place','status','sex','contact','email','religion','ethnic','language','osca_id','gsis_id',
+    'tin_id','philhealth_id','org_id','gov_id','business','pension','spouse_lname',
+    'spouse_fname','spouse_mname','spouse_ext','fathers_fname','fathers_lname','fathers_mname','fathers_ext',
+    'mothers_lname','mothers_fname','mothers_mname','mothers_ext','signature','optical_others','hearing_others','social_others','cost_others','dental_others','month_income_others','resources_others','assets_others','personal_others','income_checkbox_others','personal_checkbox_others','community_checkbox_others','technical_checkbox_others']
+    const checkboxes_and_inputs = [,'others_name','others_occupation','others_income','others_age','others_isworking','child_name','child_occupation','child_income','child_age','child_isworking','travel','educ_checkbox','skills','technical_checkbox','community_checkbox','income_checkbox','personal_checkbox','source_checkout','assets','personal','month_income','resources','medical','medical_sub','medical','dental','optical','hearing','social','cost','listMed','frequent','isMed']
+   
     function submitForm(){
-        const main_child = []
-        inputs_class_child.forEach(item=>{
-            const element = document.querySelectorAll(`.${item}`)
-            const children = []
+        const id_inputs = {}
+        let counts = 0;
+
+
+        inputs_id.forEach(item=>{
+            const element = document.querySelectorAll(`#${item}`)
             element.forEach((i,index )=>{
-                if(i.value !="" || i.value.length !=0){
-                    console.log(i.value, index)
-                    children.push(i.value)
+                const myId = i.id
+                if(i.value !="" || i.value.length >0){
+                    id_inputs[myId] = i.value
+                    counts++
                 }else{
-                    children.push(" ")
+                    id_inputs[myId] = "off"
                 }
             })
-            main_child.push(children)
-        })
-        // console.log(main_child)
-
-        const main_others = []
-        inputs_class_others.forEach(item=>{
-            const element = document.querySelectorAll(`.${item}`)
-            const children = []
-            element.forEach((i,index )=>{
-                if(i.value !="" || i.value.length !=0){
-                    console.log(i.value, index)
-                    children.push(i.value)
-                }else{
-                    children.push(" ")
-                }
-            })
-            main_others.push(children)
-        })
-        // console.log(main_others)
-
         
-      
-    }
+        })
+        checkboxes_and_inputs.forEach(item=>{
+            const element = document.querySelectorAll(`.${item}`)
+            for( ele of element){
+                const myId = ele.id
+                if (ele.type === 'checkbox' && ele.checked) {
+                    id_inputs[myId] = ele.value
+                }else{
+                    id_inputs[myId] = "off"
+                }
+                counts++
+            }
+        })
 
-    function updateEduc(e){
+        const attach_file = document.querySelector('#attach_file')
+        const url = new URLSearchParams(window.location.search)
+        const id = url.get('id')
+        const action = url.get('action')
+
+        const formData = new FormData();
+        const jsonString = JSON.stringify(id_inputs);
+        formData.append('data', jsonString);
+        formData.append('image', attach_file.files[0])
+        formData.append('user_id', id)
+        formData.append('action', action)
+        fetch('./backend/forms_submit.php',{
+            method: 'POST',
+            body: formData
+        })
+        .then(response=> response.json())
+        .then(result =>{
+            console.log(result)
+        })
+
+    }
+    function updateCheckBox(e){
         const id = e.id
         const element = document.querySelectorAll(`.${e.className}`)
         element.forEach( item =>{
@@ -1635,7 +1659,55 @@ if($result){
             }
         })
     }
-   
+    const attach_signature = document.querySelector('#attach_signature')
+    const attach_file = document.querySelector('#attach_file'  )
+    attach_file.addEventListener('change',()=>{
+        const file = attach_file.files[0]
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = ()=>{
+            attach_signature.src = reader.result
+        }
+    })
+    attach_signature.addEventListener('click', ()=>{
+        attach_file.click()
+    })
+
+    function readData(){
+        fetch(`./backend/forms_submit.php`,{
+            method: 'GET'
+        })
+        .then( response => response.json())
+        .then( result => {
+            let signature = result['signature']; // Trim the string
+            let img_signature = document.querySelector('#attach_signature');
+            img_signature.src = '../priotizen_app/documents/'+signature;
+            console.log(signature, signature.length)
+            const data = result['data'];
+            let objectData = JSON.parse(data);
+            for (const key in objectData) {
+                if (objectData.hasOwnProperty(key)) {
+                    const value = objectData[key];
+                    const item = document.getElementById(key);
+
+                    // Check if the element is an input element and its type
+                    if (item && item.tagName === "INPUT") {
+                        if (item.type === "checkbox") {
+                            // It's a checkbox input
+                            item.checked = value === "on"; // Set the checkbox value based on your data
+                            console.log(value === "on")
+                        } else if (item.type === "text") {
+                            // It's a text input
+                            item.value = value=="off"? "":value; // Set the text input value
+                        }
+                        
+                    }
+                  
+                }
+            }
+        })
+    }
+    readData()
 </script>
 
 </body>
