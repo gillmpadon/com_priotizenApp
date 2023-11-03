@@ -148,8 +148,8 @@ extract($assoc);
                                     <div class="row otherInfoOn" style="display: none;">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Valid ID</label>
-                                                <input type="text" class="form-control" placeholder="Enter Valid ID Number" id="valid_id" value="<?php echo $valid_id ?>">
+                                                <label>National ID</label>
+                                                <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id" value="<?php echo $valid_id ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">

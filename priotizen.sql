@@ -3,12 +3,10 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2023 at 04:09 PM
+-- Generation Time: Nov 03, 2023 at 04:51 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
-drop database priotizen;
-create database priotizen;
-use priotizen;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -45,15 +43,16 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `account_id`, `email`, `passcode`, `account_type`, `account_status`, `isfirstlogin`) VALUES
-(1, '4lb8i4du698', 'gillbertmpadon@gmail.com', '123', 'user', 'Completed', 1),
+(1, '4lb8i4du69s', 'gillbertmpadon@gmail.com', '123', 'user', 'Completed', 1),
 (2, '4lb8i4du700', 'admin@gmail.com', 'admin', 'admin', 'Completed', 0),
-(5, 'h6zgel8bc1i', 'test@gmail.com', 'test', 'user', 'Pending', 0),
+(5, '4lb8i4du698', 'test@gmail.com', 'test', 'user', 'Pending', 0),
 (15, 'nd3bq5p45r', 'sm@gmail.com', '123123', 'company', 'Pending', 1),
 (16, '49oo8unqfq7', '123', '123', 'user', 'Pending', 0),
 (17, 'h35eq8qs1tq', '', '', 'user', 'Pending', 0),
 (18, 'm0r8oowgqzc', '123', '123', 'user', 'Pending', 0),
 (19, 'ob0x5c9fo8o', 'test', 'test', 'user', 'Pending', 0),
-(20, 'hkvhms0sq85', 'tset', 'padon', 'user', 'Pending', 0);
+(20, 'hkvhms0sq85', 'tset', 'padon', 'user', 'Pending', 0),
+(21, 'ptushpr1n2', 'test2', 'test2', 'user', 'Pending', 0);
 
 -- --------------------------------------------------------
 
@@ -62,6 +61,7 @@ INSERT INTO `account` (`id`, `account_id`, `email`, `passcode`, `account_type`, 
 --
 
 CREATE TABLE `address` (
+  `id` int(11) NOT NULL,
   `user_id` varchar(45) DEFAULT NULL,
   `brgy` varchar(45) DEFAULT NULL,
   `street` varchar(45) DEFAULT NULL,
@@ -72,10 +72,14 @@ CREATE TABLE `address` (
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`user_id`, `brgy`, `street`, `house`) VALUES
-('m0r8oowgqzc', 'Aliwekwek', 'Avenida', ''),
-('ob0x5c9fo8o', 'Aliwekwek', 'Avenida', '123'),
-('hkvhms0sq85', 'Quibaol', 'Panfilo Lopez', 'test');
+INSERT INTO `address` (`id`, `user_id`, `brgy`, `street`, `house`) VALUES
+(1, 'm0r8oowgqzc', 'Aliwekwek', 'Avenida', ''),
+(2, 'ob0x5c9fo8o', 'Aliwekwek', 'Avenida', '123'),
+(3, 'hkvhms0sq85', 'Quibaol', 'Panfilo Lopez', 'test'),
+(4, 'm0r8oowgqzc', 'Aliwekwek', 'Avenida', ''),
+(5, 'ob0x5c9fo8o', 'Aliwekwek', 'Avenida', '123'),
+(6, '4lb8i4du698', 'Quibaol', 'Panfilo Lopez', 'test'),
+(7, 'ptushpr1n2', 'Aliwekwek', 'Avenida', '12');
 
 -- --------------------------------------------------------
 
@@ -99,119 +103,6 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`id`, `name`, `email`, `image`, `number`, `admin_id`) VALUES
 (1, 'gin', 'admin@gmail.com', 'image.png', '1234567910', '4lb8i4du700'),
 (2, '123', '123', '123.jpg', '123', '49oo8unqfq7');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `applicant_med`
---
-
-CREATE TABLE `applicant_med` (
-  `user_id` varchar(45) DEFAULT NULL,
-  `religion` varchar(45) DEFAULT NULL,
-  `ethnic` varchar(45) DEFAULT NULL,
-  `language_spoken` varchar(45) DEFAULT NULL,
-  `osca_id` varchar(45) DEFAULT NULL,
-  `gsis` varchar(45) DEFAULT NULL,
-  `tin` varchar(45) DEFAULT NULL,
-  `philhealth` varchar(45) DEFAULT NULL,
-  `org_id` varchar(45) DEFAULT NULL,
-  `gov_id` varchar(45) DEFAULT NULL,
-  `travel` varchar(45) DEFAULT NULL,
-  `business` varchar(45) DEFAULT NULL,
-  `pension` varchar(45) DEFAULT NULL,
-  `spouse_lname` varchar(45) DEFAULT NULL,
-  `spouse_fname` varchar(45) DEFAULT NULL,
-  `spouse_mname` varchar(45) DEFAULT NULL,
-  `spouse_ext` varchar(45) DEFAULT NULL,
-  `fathers_fname` varchar(45) DEFAULT NULL,
-  `fathers_lname` varchar(45) DEFAULT NULL,
-  `fathers_mname` varchar(45) DEFAULT NULL,
-  `fathers_ext` varchar(45) DEFAULT NULL,
-  `mothers_fname` varchar(45) DEFAULT NULL,
-  `mothers_lname` varchar(45) DEFAULT NULL,
-  `mothers_mname` varchar(45) DEFAULT NULL,
-  `mothers_ext` varchar(45) DEFAULT NULL,
-  `children_name` varchar(255) DEFAULT NULL,
-  `children_job` varchar(255) DEFAULT NULL,
-  `children_income` varchar(255) DEFAULT NULL,
-  `children_age` varchar(255) DEFAULT NULL,
-  `children_isworking` varchar(55) DEFAULT NULL,
-  `others_name` varchar(45) DEFAULT NULL,
-  `others_job` varchar(45) DEFAULT NULL,
-  `others_income` varchar(45) DEFAULT NULL,
-  `others_age` varchar(45) DEFAULT NULL,
-  `others_isworking` varchar(45) DEFAULT NULL,
-  `education_level` varchar(45) DEFAULT NULL,
-  `share_skill` varchar(255) DEFAULT NULL,
-  `technical_skill` varchar(45) DEFAULT NULL,
-  `community` varchar(255) DEFAULT NULL,
-  `living` varchar(255) DEFAULT NULL,
-  `source_income` varchar(255) DEFAULT NULL,
-  `assests` varchar(100) DEFAULT NULL,
-  `personal` varchar(100) DEFAULT NULL,
-  `monthly_income` varchar(100) DEFAULT NULL,
-  `problem` varchar(100) DEFAULT NULL,
-  `health` varchar(100) DEFAULT NULL,
-  `hearing` varchar(100) DEFAULT NULL,
-  `emotional` varchar(100) DEFAULT NULL,
-  `dental` varchar(100) DEFAULT NULL,
-  `optical` varchar(100) DEFAULT NULL,
-  `difficulty` varchar(100) DEFAULT NULL,
-  `list_of_medicine` varchar(255) DEFAULT NULL,
-  `ismaintenance` varchar(40) DEFAULT NULL,
-  `ifyes_maintenance` varchar(10) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `applicant_psa`
---
-
-CREATE TABLE `applicant_psa` (
-  `user_id` varchar(45) DEFAULT NULL,
-  `applicant` varchar(45) DEFAULT NULL,
-  `date_applied` datetime DEFAULT NULL,
-  `disability` varchar(45) DEFAULT NULL,
-  `educational` varchar(45) DEFAULT NULL,
-  `occupation` varchar(45) DEFAULT NULL,
-  `employment` varchar(45) DEFAULT NULL,
-  `types_emp` varchar(45) DEFAULT NULL,
-  `status_emp` varchar(45) DEFAULT NULL,
-  `org_affiliated` varchar(45) DEFAULT NULL,
-  `org_contact` varchar(45) DEFAULT NULL,
-  `org_address` varchar(45) DEFAULT NULL,
-  `org_no` varchar(45) DEFAULT NULL,
-  `id_sss` varchar(45) DEFAULT NULL,
-  `id_gsis` varchar(45) DEFAULT NULL,
-  `id_pagibig` varchar(45) DEFAULT NULL,
-  `id_psn` varchar(45) DEFAULT NULL,
-  `id_philhealth` varchar(45) DEFAULT NULL,
-  `fathers_fname` varchar(45) DEFAULT NULL,
-  `fathers_lname` varchar(45) DEFAULT NULL,
-  `fathers_mname` varchar(45) DEFAULT NULL,
-  `mothers_fname` varchar(45) DEFAULT NULL,
-  `mothers_lname` varchar(45) DEFAULT NULL,
-  `mothers_mname` varchar(45) DEFAULT NULL,
-  `guardian_fname` varchar(45) DEFAULT NULL,
-  `guardian_lname` varchar(45) DEFAULT NULL,
-  `guardian_mname` varchar(45) DEFAULT NULL,
-  `physician_fname` varchar(45) DEFAULT NULL,
-  `physician_lname` varchar(45) DEFAULT NULL,
-  `physician_mname` varchar(45) DEFAULT NULL,
-  `pro_fname` varchar(45) DEFAULT NULL,
-  `pro_lname` varchar(45) DEFAULT NULL,
-  `pro_mname` varchar(45) DEFAULT NULL,
-  `app_fname` varchar(45) DEFAULT NULL,
-  `app_lname` varchar(45) DEFAULT NULL,
-  `app_mname` varchar(45) DEFAULT NULL,
-  `encoder_fname` varchar(45) DEFAULT NULL,
-  `encoder_lname` varchar(45) DEFAULT NULL,
-  `encoder_mname` varchar(45) DEFAULT NULL,
-  `unit_name` varchar(45) DEFAULT NULL,
-  `control_no` varchar(45) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -258,7 +149,8 @@ INSERT INTO `doc` (`id`, `psa`, `med`, `user_id`) VALUES
 (3, 'empty.jpg', 'empty.jpg', 'h35eq8qs1tq'),
 (4, 'empty.jpg', 'empty.jpg', 'm0r8oowgqzc'),
 (5, 'empty.jpg', 'empty.jpg', 'ob0x5c9fo8o'),
-(6, 'empty.jpg', 'empty.jpg', 'hkvhms0sq85');
+(6, 'empty.jpg', 'empty.jpg', 'hkvhms0sq85'),
+(7, 'empty.jpg', 'empty.jpg', 'ptushpr1n2');
 
 -- --------------------------------------------------------
 
@@ -308,6 +200,27 @@ INSERT INTO `receipt` (`id`, `receipt_id`, `price`, `discount`, `img_receipt`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `test`
+--
+
+CREATE TABLE `test` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(45) NOT NULL,
+  `all_data` text,
+  `signature` varchar(200) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`id`, `user_id`, `all_data`, `signature`) VALUES
+(8, '4lb8i4du698', '{\"lname\":\"test\",\"fname\":\"hehe\",\"mname\":\"test\",\"ext\":\"off\",\"region\":\"Region I\",\"province\":\"Pangasinan\",\"municipality\":\"Lingayen\",\"brgy\":\"Aliwekwek\",\"birth00\":\"10\",\"birth01\":\"0\",\"birth10\":\"31\",\"birth11\":\"1\",\"birth20\":\"23\",\"birth22\":\"3\",\"birth_place\":\"off\",\"status\":\"single\",\"sex\":\"male\",\"contact\":\"test\",\"email\":\"test@gmail.com\",\"religion\":\"off\",\"ethnic\":\"off\",\"language\":\"off\",\"osca_id\":\"off\",\"gsis_id\":\"off\",\"tin_id\":\"off\",\"philhealth_id\":\"off\",\"org_id\":\"off\",\"gov_id\":\"off\",\"business\":\"off\",\"pension\":\"off\",\"spouse_lname\":\"off\",\"spouse_fname\":\"off\",\"spouse_mname\":\"off\",\"spouse_ext\":\"off\",\"fathers_fname\":\"off\",\"fathers_lname\":\"off\",\"fathers_mname\":\"off\",\"fathers_ext\":\"off\",\"mothers_lname\":\"off\",\"mothers_fname\":\"off\",\"mothers_mname\":\"off\",\"mothers_ext\":\"off\",\"signature\":\"gin\",\"optical_others\":\"off\",\"hearing_others\":\"off\",\"social_others\":\"off\",\"cost_others\":\"off\",\"dental_others\":\"off\",\"month_income_others\":\"off\",\"resources_others\":\"off\",\"assets_others\":\"off\",\"income_checkbox_others\":\"off\",\"community_checkbox_others\":\"off\",\"technical_checkbox_others\":\"off\",\"\":\"off\",\"travel_yes\":\"off\",\"travel_no\":\"off\",\"e1\":\"off\",\"e2\":\"off\",\"e3\":\"off\",\"e4\":\"off\",\"e5\":\"off\",\"e6\":\"off\",\"e7\":\"on\",\"e8\":\"off\",\"e9\":\"off\",\"skill1\":\"off\",\"skill2\":\"off\",\"skill3\":\"off\",\"t1\":\"off\",\"t2\":\"off\",\"t3\":\"off\",\"t4\":\"off\",\"t5\":\"off\",\"t6\":\"off\",\"t7\":\"off\",\"t8\":\"off\",\"t9\":\"off\",\"t10\":\"off\",\"t11\":\"off\",\"t12\":\"off\",\"t13\":\"off\",\"t14\":\"off\",\"t15\":\"off\",\"t16\":\"off\",\"t17\":\"off\",\"t18\":\"off\",\"t19\":\"off\",\"t20\":\"off\",\"c1\":\"off\",\"c2\":\"off\",\"c3\":\"off\",\"c4\":\"off\",\"c5\":\"off\",\"c6\":\"off\",\"c7\":\"off\",\"c8\":\"off\",\"c9\":\"off\",\"c10\":\"on\",\"c11\":\"off\",\"c12\":\"off\",\"i1\":\"off\",\"i2\":\"off\",\"i3\":\"off\",\"i4\":\"off\",\"i5\":\"on\",\"i6\":\"off\",\"i7\":\"off\",\"i8\":\"off\",\"i9\":\"off\",\"i10\":\"off\",\"p1\":\"off\",\"p2\":\"off\",\"p3\":\"off\",\"p4\":\"off\",\"p5\":\"off\",\"p6\":\"off\",\"p7\":\"off\",\"s1\":\"off\",\"s2\":\"off\",\"s3\":\"off\",\"s4\":\"off\",\"s5\":\"off\",\"s6\":\"off\",\"s7\":\"off\",\"s8\":\"off\",\"s9\":\"off\",\"s10\":\"off\",\"s11\":\"off\",\"s12\":\"on\",\"a1\":\"off\",\"a2\":\"off\",\"a3\":\"off\",\"a4\":\"off\",\"a5\":\"off\",\"a6\":\"off\",\"per1\":\"off\",\"per2\":\"off\",\"per3\":\"off\",\"per4\":\"off\",\"per5\":\"off\",\"per6\":\"off\",\"per7\":\"off\",\"per8\":\"off\",\"per9\":\"off\",\"mon1\":\"off\",\"mon2\":\"off\",\"mon3\":\"off\",\"mon4\":\"off\",\"mon5\":\"off\",\"mon6\":\"off\",\"mon7\":\"off\",\"mon8\":\"off\",\"mon9\":\"off\",\"mon10\":\"off\",\"res1\":\"off\",\"res2\":\"off\",\"res3\":\"off\",\"res4\":\"off\",\"res5\":\"off\",\"med1\":\"off\",\"med2\":\"off\",\"med3\":\"off\",\"med4\":\"off\",\"med5\":\"off\",\"med6\":\"off\",\"med7\":\"off\",\"med8\":\"off\",\"medsub1\":\"off\",\"medsub2\":\"off\",\"medsub3\":\"off\",\"medsub4\":\"off\",\"medsub5\":\"off\",\"medsub6\":\"off\",\"medsub7\":\"off\",\"medsub8\":\"off\",\"den1\":\"off\",\"den2\":\"off\",\"opt1\":\"off\",\"opt2\":\"off\",\"opt3\":\"off\",\"hear1\":\"off\",\"hear2\":\"off\",\"soc1\":\"off\",\"soc2\":\"off\",\"soc3\":\"off\",\"soc4\":\"off\",\"soc5\":\"off\",\"soc6\":\"off\",\"cost1\":\"off\",\"cost2\":\"off\",\"cost3\":\"off\",\"cost4\":\"off\",\"listMed_1\":\"off\",\"listMed_2\":\"off\",\"listMed_3\":\"off\",\"listMed_4\":\"off\",\"listMed_5\":\"off\",\"listMed_6\":\"off\",\"listMed_7\":\"off\",\"listMed_8\":\"off\",\"listMed_9\":\"off\",\"fre1\":\"on\",\"fre2\":\"off\",\"fre3\":\"off\",\"isMedyes\":\"on\",\"isMedno\":\"off\"}', '4lb8i4du698_sign.png'),
+(18, 'ptushpr1n2', '{\"new\":false,\"old\":false,\"valid_id\":\"\",\"date\":\"\",\"lname\":\"test2\",\"fname\":\"test2\",\"mi\":\"test2\",\"suffix\":\"\",\"bdate\":false,\"male\":false,\"female\":false,\"single\":false,\"separated\":false,\"cohabitation\":false,\"married\":false,\"widow\":false,\"deaf\":false,\"intellectual\":false,\"learning\":false,\"mental\":false,\"physical\":false,\"pyschosocial\":false,\"speech\":false,\"visual\":false,\"cancer\":false,\"rare\":false,\"congenital\":false,\"adhd\":false,\"cerebral\":false,\"palsy\":false,\"down\":false,\"cause_others_1\":false,\"cause_others_1_input\":\"\",\"acquired\":false,\"chronic\":false,\"injury\":false,\"cause_others_2\":false,\"cause_others_2_input\":\"\",\"house\":\"12\",\"brgy\":\"Aliwekwek \",\"municipality\":\"Lingayen\",\"province\":\"Pangasinan\",\"region\":\"Region 1\",\"landline\":\"\",\"number\":\"test2\",\"email\":\"test2\",\"none\":false,\"kindergarten\":false,\"elementary\":false,\"junior\":false,\"senior\":false,\"college\":false,\"vocational\":false,\"graduate\":true,\"managers\":false,\"professional\":false,\"technicians\":false,\"clerical\":false,\"service\":false,\"agricultural\":false,\"trade\":false,\"machine\":false,\"occupation\":false,\"forces\":false,\"job_others\":false,\"employed\":false,\"unemployed\":false,\"selfemployed\":true,\"regular\":true,\"seasonal\":false,\"casual\":false,\"emergency\":false,\"government\":false,\"private\":true,\"organization\":\"\",\"contact\":\"\",\"office\":\"\",\"tel\":\"\",\"sss\":\"\",\"gsis\":\"\",\"pagibig\":\"\",\"psn\":\"\",\"philhealth\":\"\",\"fathers_lname\":\"\",\"fathers_fname\":\"\",\"fathers_mname\":\"\",\"mothers_lname\":\"\",\"mothers_fname\":\"\",\"mothers_mname\":\"\",\"guardian_lname\":\"sdf\",\"guardian_fname\":\"\",\"guardian_mname\":\"\",\"radio_applicant\":false,\"radio_guardian\":true,\"radio_representative\":false,\"aoplicant_lname\":\"\",\"aoplicant_fname\":\"\",\"aoplicant_mname\":\"\",\"representative_lname\":\"\",\"representative_fname\":\"\",\"representative_mname\":\"\",\"\":\"\",\"license_lname\":\"\",\"license_fname\":\"\",\"license_mname\":\"\",\"officer_lname\":\"\",\"officer_fname\":\"\",\"officer_mname\":\"\",\"approving_lname\":\"\",\"approving_fname\":\"\",\"approving_mname\":\"\",\"encoder_lname\":\"\",\"encoder_fname\":\"\",\"encoder_mname\":\"\",\"reporting_unit\":\"\",\"control_number\":\"\",\"fullname\":\"sdfsd\",\"full_address\":\"fsdfdsf\",\"full_province\":\"\",\"full_region\":\"\",\"full_disease\":\"\",\"another_disease\":\"\",\"type_disability\":\"\",\"issue_date\":\"\",\"requirement\":\"\"}', NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_history`
 --
 
@@ -331,7 +244,8 @@ INSERT INTO `user_history` (`id`, `user_id`, `admin_id`, `action`, `time_edited`
 (7, 'ob0x5c9fo8o', '4lb8i4du700', 'Created', '2023-10-31 18:15:20'),
 (8, '4lb8i4du698', '4lb8i4du700', 'Edited', '2023-11-01 02:17:50'),
 (9, '4lb8i4du698', '4lb8i4du700', 'Edited', '2023-11-01 02:19:23'),
-(10, 'hkvhms0sq85', '4lb8i4du700', 'Created', '2023-11-01 15:02:12');
+(10, 'hkvhms0sq85', '4lb8i4du700', 'Created', '2023-11-01 15:02:12'),
+(11, 'ptushpr1n2', '4lb8i4du700', 'Created', '2023-11-03 10:52:18');
 
 -- --------------------------------------------------------
 
@@ -376,7 +290,8 @@ INSERT INTO `verified` (`id`, `fname`, `mi`, `lname`, `email`, `bdate`, `status_
 (15, 'Olivia', 'E', 'Lee', 'olivia@example.com', '1982-06-15', 'married', 'female', '678 Maple St', '333-111-9999', 'ID678', 'APP008', 'olivia.jpg', 'senior citizen', 'Pilipino', 'Lee', '333-111-9999', 'Tiniguiban'),
 (16, 'James', 'W', 'Garcia', 'james@example.com', '1987-08-10', 'single', 'male', '456 Redwood St', '666-999-7777', 'ID456', 'APP009', 'james.jpg', 'none', 'Pilipino', 'Garcia', '666-999-7777', 'Tiniguiban'),
 (17, 'Sophia', 'L', 'Anderson', 'sophia@example.com', '1995-04-02', 'single', 'female', '890 Oakwood St', '555-777-8888', 'ID890', 'APP010', 'sophia.jpg', 'senior citizen', 'Pilipino', 'Anderson', '555-777-8888', 'Tiniguiban'),
-(18, 'gillbert', 'test', 'padon', 'tset', '', 'single', 'male', 'Quibaol', 'test', 'test', 'hkvhms0sq85', 'unkown.jpg', 'senior citizen', 'Pilipino', 'test', 'test', 'Quibaol');
+(18, 'gillbert', 'test', 'padon', 'tset', '', 'single', 'male', 'Quibaol', 'test', 'test', 'hkvhms0sq85', 'unkown.jpg', 'senior citizen', 'Pilipino', 'test', 'test', 'Quibaol'),
+(19, 'test2', 'test2', 'test2', 'test2', '', 'single', 'male', 'Aliwekwek', 'test2', 'test2', 'ptushpr1n2', 'test2_dp.png', 'senior citizen', 'Pilipino', 'test2', 'test2', 'Aliwekwek');
 
 --
 -- Indexes for dumped tables
@@ -386,6 +301,12 @@ INSERT INTO `verified` (`id`, `fname`, `mi`, `lname`, `email`, `bdate`, `status_
 -- Indexes for table `account`
 --
 ALTER TABLE `account`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `address`
+--
+ALTER TABLE `address`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -419,6 +340,12 @@ ALTER TABLE `receipt`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `test`
+--
+ALTER TABLE `test`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_history`
 --
 ALTER TABLE `user_history`
@@ -438,7 +365,12 @@ ALTER TABLE `verified`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `address`
+--
+ALTER TABLE `address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `admin`
 --
@@ -453,7 +385,7 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT for table `doc`
 --
 ALTER TABLE `doc`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `notification`
 --
@@ -465,15 +397,20 @@ ALTER TABLE `notification`
 ALTER TABLE `receipt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `test`
+--
+ALTER TABLE `test`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `verified`
 --
 ALTER TABLE `verified`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

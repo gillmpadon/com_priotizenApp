@@ -168,8 +168,8 @@ $query3_result = mysqli_query($conn,$query3);
                                     <div class="row otherInfoOn" style="display: none;">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Valid ID</label>
-                                                <input type="text" class="form-control" value="<?php echo $valid_id?>" placeholder="Enter Valid ID Number" id="valid_id" readonly>
+                                                <label>National ID</label>
+                                                <input type="text" class="form-control" value="<?php echo $valid_id?>" placeholder="Enter National ID Number" id="valid_id" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

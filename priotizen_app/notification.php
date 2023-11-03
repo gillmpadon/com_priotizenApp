@@ -38,7 +38,7 @@ $rid;
     <div class="container" >
         <div class="head">
             <p>Notification</p>
-            <p><?php echo $date ?> Transactions</p>
+            <p><span style="font-style: italic; color:white;"><?php echo $date ?></span>  Transactions</p>
         </div>
         <div class="notifications">
 

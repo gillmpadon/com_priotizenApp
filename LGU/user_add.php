@@ -60,12 +60,12 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>First Name </label><span class="asterisk">*</span>
-                                                <input id="fname" type="text" class="form-control"  placeholder="Enter first name" >
+                                                <input id="fname" type="text" class="form-control"  placeholder="Enter first name" required >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Middle Initial</label><span class="asterisk">*</span>
+                                                <label>Middle Initial</label>
                                                 <input id="mi" type="text" class="form-control" placeholder="Enter M.I" >
                                             </div>
                                         </div>
@@ -192,6 +192,7 @@
                                                     echo "<option value=\"$barangay\">$barangay St.</option>";
                                                 }
                                                 ?>
+                                                <option value="None">None</option>
                                              </select>                                               
 
                                             </div>
@@ -207,8 +208,8 @@
                                     <div class="row otherInfoOn" style="display: none;">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Valid ID</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Valid ID Number" id="valid_id" >
+                                                <label>National ID</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id" >
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -492,9 +493,9 @@
             setTimeout(()=>{
                 const id = `id=${user_id}`
                 if(condition == "disabled"){
-                    window.location.href=`table_senior.php?${id}&action=create`
-                }else{
                     window.location.href=`table_pwd.php?${id}&action=create`
+                }else{
+                    window.location.href=`table_senior.php?${id}&action=create`
                 }
             },2000)
         }else{

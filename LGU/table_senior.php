@@ -1600,8 +1600,6 @@ if($result){
     function submitForm(){
         const id_inputs = {}
         let counts = 0;
-
-
         inputs_id.forEach(item=>{
             const element = document.querySelectorAll(`#${item}`)
             element.forEach((i,index )=>{
@@ -1674,7 +1672,9 @@ if($result){
     })
 
     function readData(){
-        fetch(`./backend/forms_submit.php`,{
+        const url = new URLSearchParams(window.location.search)
+        const id = url.get('id')
+        fetch(`./backend/forms_submit.php?user_id=${id}`,{
             method: 'GET'
         })
         .then( response => response.json())

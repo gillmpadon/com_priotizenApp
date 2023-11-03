@@ -40,87 +40,14 @@ if($result){
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
     <link href="assets/css/confirmation.css" rel="stylesheet" />
+    <link href="assets/css/pwd.css" rel="stylesheet" />
 
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-    <style>
-    .maincontent{
-        box-sizing: border-box;
-    }
-    table {
-        width: 100%;
-        max-width: 100%;
-        border: 1px solid black ;
-        box-sizing: border-box;
-        table-layout: fixed;
-    }
-
-    tr, td{
-        border: 1px solid black ;
-    }
-    td{
-        padding-inline: .5em;
-    }
-    .noborder{
-        border: none;
-    }
-
-    .superflex {
-        display: flex;
-        align-items: baseline;
-        gap: 1em;
-    }
-    .flexitem {
-        display: flex;
-        gap: 1em;
-        align-items: baseline;
-        margin-right: 2em;
-    }
-
-    .asterisk{
-        color: red;
-    }
-
-    .input{
-        border: none;
-        line-height: 0;
-        margin-left: 1em;
-        box-sizing: border-box;
-        width: 90%;
-    }
-    table p{
-        font-size: .8em;
-    }
-
-    .checkboxDiv{
-        line-height: 0;
-        margin: 0;
-    }
-    .checkboxDiv div{
-        height: 1em;
-    }
-
-    .twocolumns{
-        display: flex;
-    }
-
-    .certcontent{
-        padding: 1em;
-    }
-
-    /* certificate */
-    .certificate, .certificate tr, .certificate td{
-        border: none;
-    }
-    .certificate input{
-        border: none;
-        border-bottom: 1px solid black;
-    }
-
-    </style>
+    
 </head>
 <body>
 
@@ -186,9 +113,9 @@ if($result){
                                             </td>
                                             <td colspan="1" rowspan="2">
                                             <?php
-                                            $imagePath = "./user_img/$photo";
+                                            $imagePath = "../priotizen_app/user_img/$photo";
                                                 if(file_exists($imagePath)) {
-                                                    echo '<img  src="./user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
+                                                    echo '<img  src="../priotizen_app/user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
                                                 }else{
                                                     echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
                                                 }

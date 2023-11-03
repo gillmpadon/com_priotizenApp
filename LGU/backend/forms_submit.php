@@ -36,6 +36,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $extension = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
             $newFilename = "sign_".$id . ".". $extension;
             $targetFile = $targetDir . $newFilename;
+            if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
+                echo json_encode("Successful");
+            }else{
+                echo json_encode("Error");
+            }
         }else{
             $newFilename = "unknown.jpg";
         }
@@ -46,11 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         $result = mysqli_query($conn,$query);
         if($result){
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-                echo json_encode("Successful");
-            }else{
-                echo json_encode("Successful");
-            }
+            echo json_encode("Successful");
         }else{
             echo json_encode(mysqli_error($conn));
     

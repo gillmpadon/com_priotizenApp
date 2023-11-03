@@ -151,8 +151,8 @@ $result = mysqli_query($conn,$query);
 
 <script>
 
-    function goToPage(id){
-        window.location.href = "user.php?user_id="+id;
+    function goToPage(id,accountType){
+        window.location.href = `user_view_admin.php?user_id=${id}&account_type=${accountType}`;
     }
     function createElementTag(e,count){
         const tbody = document.querySelector('#tbody')
@@ -166,7 +166,7 @@ $result = mysqli_query($conn,$query);
 
         tr.classList.add("row_data")
         tr.onclick= function() {
-            goToPage(id)
+            goToPage(id,account_type)
         }
         td1.textContent = count
         td2.textContent = `${name}`
