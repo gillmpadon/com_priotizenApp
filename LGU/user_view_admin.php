@@ -38,10 +38,12 @@
     <div class="sidebar" data-color="purple" >
     	    <?php
             include('./backend/connection.php');
-            $account_type = strtolower($_GET['account_type'])=='store'? 'company' : 'admin';
-            $filter = strtolower($_GET['account_type'])=='store'? 'store' : 'admin';
+            $account_type = strtolower($_GET['account_type'])=='company'? 'company' : 'admin';
+            $filter = strtolower($_GET['account_type'])=='company'? 'company' : 'admin';
+            $adminOrStore = strtolower($_GET['account_type'])=='company'? 'n.store_id' : 'n.admin_id';
             $id = $_GET['user_id'];
-            $query = "SELECT n.email, n.name, a.passcode, n.number, n.image from $account_type n inner join account a on n.admin_id = a.account_id  where a.account_type like '$filter' and n.admin_id = '$id' limit 1";
+            $query = "SELECT n.email, n.name, a.passcode, n.number, n.image from $account_type n inner join account a on $adminOrStore = a.account_id  where a.account_type like '$filter' and $adminOrStore = '$id' limit 1";
+            
             $class="";
             include('includes/sidebar.php'); ?>
     </div>
@@ -59,7 +61,6 @@
                                     <?php 
                                 
                                     echo "ADMIN PROFILE";
-
                                     $error = false;
                                     $result = mysqli_query($conn, $query);
                                     if($result && mysqli_num_rows($result)>0){
@@ -98,7 +99,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Password</label>
-                                                <input id="password" type="text" class="form-control" value="<?php echo $passcode; ?>" placeholder="Enter Password" readonly>
+                                                <input id="password" type="password" class="form-control" value="<?php echo $passcode; ?>" placeholder="Enter Password" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,10 +186,10 @@
                 reader.readAsDataURL(imageInput.files[0]);
             }
     })
-    setImage.addEventListener('click', ()=>{
-            imageInput.click()
-            console.log("Image is clicked")
-        })
+    // setImage.addEventListener('click', ()=>{
+    //         imageInput.click()
+    //         console.log("Image is clicked")
+    //     })
 
         
 

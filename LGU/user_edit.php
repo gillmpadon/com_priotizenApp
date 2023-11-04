@@ -5,7 +5,7 @@ if(isset($_GET['user_id'])){
 }else{
     $user_id = $_SESSION['user_id'];
 }
-$query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN  account a on a.account_id = v.app_id inner join doc d on v.app_id = d.user_id  where v.app_id= '$user_id'";
+$query = "SELECT v.*, a.account_status ,ad.* , d.psa , d.med FROM verified v INNER JOIN  account a on a.account_id = v.app_id inner join doc d on v.app_id = d.user_id inner join address ad on ad.user_id = v.app_id where v.app_id= '$user_id'";
 $result = mysqli_query($conn, $query);
 $assoc = mysqli_fetch_assoc($result);
 extract($assoc);
@@ -75,20 +75,20 @@ extract($assoc);
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control"  placeholder="Enter first name" value="<?php echo $fname; ?>" id="fname">
+                                                <label>First Name </label><span class="asterisk">*</span>
+                                                <input id="fname" type="text" class="form-control"  placeholder="Enter first name"  value="<?php echo $fname; ?>" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Middle Initial</label>
-                                                <input type="text" class="form-control" placeholder="Enter M.I" value="<?php echo $mi?>" id="mi">
+                                                <input id="mi" type="text" class="form-control" placeholder="Enter M.I" value="<?php echo $mi; ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Last Name</label>
-                                                <input type="text" class="form-control" placeholder="Enter last name" value="<?php echo $lname?>" id="lname">
+                                                <label for="exampleInputEmail1">Last Name</label><span class="asterisk">*</span>
+                                                <input id="lname" type="text" class="form-control" placeholder="Enter last name" value="<?php echo $lname; ?>" >
                                             </div>
                                         </div>
                                     </div>
@@ -96,66 +96,149 @@ extract($assoc);
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Gender</label>
-                                                <select name="  " class="form-control" id="gender">
-                                                    <option value="<?php echo $gender ?>"><?php echo $gender ?></option>
-                                                    <option value="<?php echo ($gender=="Female")? "Male":"Female" ?>"><?php echo ($gender=="Female")? "Male":"Female" ?></option>
+                                                <label>Gender</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="gender">
+                                                    <option value="<?php echo $gender; ?>" selected><?php echo $gender; ?></option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Status</label>
-                                                <select name="  " class="form-control" id="status_rs">
-                                                    <option value="<?php echo $status_rs ?>"><?php echo $status_rs ?></option>
-                                                    <?php 
-                                                    $arr = ['single', 'widowed', 'married'];
-                                                    for($i = 0; $i<count($arr);$i++){
-                                                        if($arr[$i]!=$status_rs){
-                                                            echo '<option value="'.$arr[$i].'">'.$arr[$i].'</option>';
-                                                            echo $status_rs==$arr[$i];
-                                                        }
-                                                    }
-                                                    ?>
+                                                <label>Status</label><span class="asterisk">*</span>
+                                                <select name="  " class="form-control" id="status">
+                                                    <option value="<?php echo $status_rs; ?>" selected><?php echo $status_rs; ?></option>
+                                                    <option value="single">Single</option>
+                                                    <option value="married">Married</option>
+                                                    <option value="widowed">Widowed</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Birth Date</label>
-                                                <input type="date" class="form-control"  value="<?php echo date('Y-m-d', strtotime($bdate)); ?>" id="bdate">
+                                                <label>Birth Date</label><span class="asterisk">*</span>
+                                                <?php
+                                                $formattedDate = date("Y-m-d", strtotime($bdate));
+                                                ?>
+                                                <input type="date" class="form-control" id="bdate" value="<?php echo $formattedDate ?>">
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row otherInfoOff">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Home Address" value="<?php echo $address ?>" id="address">
+                                                <label>Municipality</label><span class="asterisk">*</span>
+                                                <select name="  " class="form-control" id="municipality">
+                                                    <option value="lingayen" selected>Lingayen</option>
+                                                </select>
                                             </div>
                                         </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" class="form-control" placeholder="Email Address" value="<?php echo $email ?>" id="email">
+                                                <label>Barangay</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="brgy" >
+                                                    <option value="<?php echo $brgy ?>"><?php echo $brgy ?></option>
+                                                <?php
+                                                $barangays = [
+                                                    'Aliwekwek',
+                                                    'Baay',
+                                                    'Balangobong',
+                                                    'Balococ',
+                                                    'Bantayan',
+                                                    'Basing',
+                                                    'Capandanan',
+                                                    'Domalandan Center',
+                                                    'Domalandan East',
+                                                    'Domalandan West',
+                                                    'Dorongan',
+                                                    'Dulag',
+                                                    'Estanza',
+                                                    'Lasip',
+                                                    'Libsong East',
+                                                    'Libsong West',
+                                                    'Malawa',
+                                                    'Malimpuec',
+                                                    'Maniboc',
+                                                    'Matalava',
+                                                    'Naguelguel',
+                                                    'Namolan',
+                                                    'Pangapisan North',
+                                                    'Pangapisan Sur',
+                                                    'Poblacion',
+                                                    'Quibaol',
+                                                    'Rosario',
+                                                    'Sabangan',
+                                                    'Talogtog',
+                                                    'Tumbar',
+                                                    'Tonton',
+                                                    'Wawa'
+                                                ];
+                                                foreach ($barangays as $barangay) {
+                                                    echo "<option value=\"$barangay\">$barangay</option>";
+                                                }
+                                                ?>
+                                             </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Street</label><span class="asterisk">*</span>
+                                                <select name="" class="form-control" id="street" >
+                                                <option value="<?php echo $street ?>"><?php echo $street ?></option>
+                                                <?php
+                                                $barangays = [
+                                                    "Avenida",
+                                                    "Alvear E",
+                                                    "Alvear II",
+                                                    "Artacho",
+                                                    "Bonifacio",
+                                                    "Dike",
+                                                    "Dona Asunsion Garcia",
+                                                    "Guilig",
+                                                    "Heroes",
+                                                    "Jacoba",
+                                                    "Mendoza",
+                                                    "New St",
+                                                    "P. Moran",
+                                                    "Padilla",
+                                                    "Panfilo Lopez",
+                                                    "Primicias St",
+                                                    "Ramos",
+                                                    "Sollis",
+                                                    "Sto. Nino",
+                                                    "Gov. Antonio U. Sison"
+                                                ];
+                                                foreach ($barangays as $barangay) {
+                                                    echo "<option value=\"$barangay\">$barangay St.</option>";
+                                                }
+                                                ?>
+                                                <option value="None">None</option>
+                                             </select>                                               
+
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>House No</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="House No/Block" id="house" value="<?php echo $house ?>">
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>National ID</label>
-                                                <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id" value="<?php echo $valid_id ?>">
+                                                <label>National ID</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id"  value="<?php echo $valid_id ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                        <div class="form-group">
-                                                <label>APP ID</label>
-                                                <input type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" value="<?php echo $app_id ?>"  readonly>
+                                            <div class="form-group">
+                                                <label>APP ID</label><span class="asterisk">*</span>
+                                                <input readonly type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" value="<?php echo $app_id ?>" >
                                             </div>
                                         </div>
                                         
@@ -164,88 +247,45 @@ extract($assoc);
                                     <div class="row otherInfoOff">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Nationality</label>
-                                                <input type="text" class="form-control" placeholder="Enter nationality" value="<?php echo $nationality ?>" id="nationality">
+                                                <label>Nationality</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter nationality" id="nationality" value="<?php echo $nationality ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Number</label>
-                                                <input type="text" class="form-control" placeholder="Enter number" value="<?php echo $number ?>" id="number">
+                                                <label>Number</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter number" id="number" value="<?php echo $number ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Condition</label>
-                                                <select name="  " class="form-control" id="conditions">
+                                                <label>Condition</label><span class="asterisk">*</span>
+                                                <select name="  " class="form-control" id="condition">
                                                     <option value="<?php echo $conditions ?>"><?php echo $conditions ?></option>
-                                                    <option value="<?php echo ($conditions=="disabled")? "senior citizen":"disabled" ?>"><?php echo ($conditions=="disabled")? "Senior Citizen":"disabled" ?></option>
+                                                    <option value="senior citizen">Senior Citizen</option>
+                                                    <option value="pwd">PWD</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Name</label>
-                                                <input type="text" class="form-control" placeholder="Enter Family Name" id="family_name" value="<?php echo $family_name ?>">
+                                                <label>Family Name</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Family Name" id="family_name" value="<?php echo $family_name ?>" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Contact</label>
-                                                <input type="text" class="form-control" placeholder="Enter Family Number" value="<?php echo $family_contact ?>" id="family_contact">
+                                                <label>Family Contact</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Family Number" id="family_contact" value="<?php echo $family_contact ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Barangay</label>
-                                                <select name="" class="form-control" id="brgy" >
-                                                <?php
-                                                $barangays = [
-                                                    'ALIWEKWEK',
-                                                    'BAAY',
-                                                    'BALANGOBONG',
-                                                    'BALOCOC',
-                                                    'BANTAYAN',
-                                                    'BASING',
-                                                    'CAPANDANAN',
-                                                    'DOMALANDAN CENTER',
-                                                    'DOMALANDAN EAST',
-                                                    'DOMALANDAN WEST',
-                                                    'DORONGAN',
-                                                    'DULAG',
-                                                    'ESTANZA',
-                                                    'LASIP',
-                                                    'LIBSONG EAST',
-                                                    'LIBSONG WEST',
-                                                    'MALAWA',
-                                                    'MALIMPUEC',
-                                                    'MANIBOC',
-                                                    'MATALAVA',
-                                                    'NAGUELGUEL',
-                                                    'NAMOLAN',
-                                                    'PANGAPISAN NORTH',
-                                                    'PANGAPISAN SUR',
-                                                    'POBLACION',
-                                                    'QUIBAOL',
-                                                    'ROSARIO',
-                                                    'SABANGAN',
-                                                    'TALOGTOG',
-                                                    'TUMBAR',
-                                                    'TONTON',
-                                                    'WAWA'
-                                                ];
-                                                foreach ($barangays as $barangay) {
-                                                    if($barangay == strtoupper($brgy)){
-                                                        echo "<option selected value=\"$barangay\">$barangay</option>";
-                                                    }else{
-                                                        echo "<option value=\"$barangay\">$barangay</option>";
-                                                    }
-                                                }
-                                                ?>
-                                             </select>
+                                                <label>Email</label><span class="asterisk">*</span>
+                                                <input type="email" class="form-control" placeholder="Email Address" id="email" value=" <?php echo $email ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -253,7 +293,8 @@ extract($assoc);
                                         <button type="submit" class="btn btn-info btn-fill pull-right " onclick="editUser()">Edit Profile</button>
                                         <button type="submit" class="btn btn-success btn-fill pull-right " onclick="verifyUser()" >Verify Profile</button>
                                     </div>
-                                    <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+
                             </div>
                         </div>
                     </div>
@@ -262,6 +303,7 @@ extract($assoc);
                             <div class="image">
                                 <img style="visibility:hidden"  src="../priotizen_app/user_img/<?php echo $photo ?>" alt="..."/>
                             </div>
+
                             <div class="content">
                                 <div class="author">
                                     <input type="file" id="imageInput" style="display: none;">
@@ -285,7 +327,7 @@ extract($assoc);
                             <div class="text-center">
                                 <button onclick="showDoc('Psa')" href="#" class="btn btn-simple"><i class="pe-7s-note2"></i> PSA</button>
                                 <button onclick="showDoc('Med')" href="#" class="btn btn-simple"><i class="pe-7s-file"></i> MED</button>
-                                <button onclick="toggleOtherInfo()" href="#" class="btn btn-simple"><i class="pe-7s-id"></i> OTHER</button>
+                                
                             </div>
                         </div>
                     </div>
@@ -399,8 +441,8 @@ extract($assoc);
             if(result == "Success"){
                 goSuccess()
                 setTimeout(()=>{
-                    window.location.reload()
-            },2000)
+                    window.location.href = `user.php?user_id=${id}`
+                },2000)
             }else{
                 goError()
             }

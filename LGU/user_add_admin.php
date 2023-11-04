@@ -218,6 +218,9 @@
         .then( result => {
             if(result=="Successful"){
             goSuccess()
+            setTimeout(()=>{
+                window.location.href = "table_user.php"
+            },2000)
         }else{
             goError()
         }

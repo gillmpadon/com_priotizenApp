@@ -110,6 +110,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $query3 = "INSERT INTO user_history (user_id, admin_id) VALUES ('$app_id', '$admin_id')";
         $query4 = "INSERT INTO doc (user_id) VALUES ('$app_id')";
         $query5 = "INSERT INTO address(user_id, brgy, street, house) values ('$app_id', '$brgy', '$street', '$house')";
+        $query6 = "INSERT INTO test(user_id,all_data,signature)";
         $result1 = mysqli_query($conn, $query1);
         $result2 = mysqli_query($conn, $query2);
         $result3 = mysqli_query($conn, $query3);

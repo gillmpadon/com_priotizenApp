@@ -165,7 +165,7 @@ $query3_result = mysqli_query($conn,$query3);
                                         </div>
                                     </div>
 
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>National ID</label>
@@ -200,13 +200,13 @@ $query3_result = mysqli_query($conn,$query3);
                                                 <label>Condition</label>
                                                 <select name="  " class="form-control" id="" readonly>
                                                     <option value=""><?php echo $conditions ?></option>
-                                                    <option value="<?php echo ($conditions=="disabled")? "senior citizen":"disabled" ?>"><?php echo ($conditions=="disabled")? "Senior Citizen":"disabled" ?></option>
+                                                    <option value="<?php echo ($conditions=="pwd")? "senior citizen":"disabled" ?>"><?php echo ($conditions=="pwd")? "Senior Citizen":"disabled" ?></option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Family Name</label>
@@ -307,15 +307,14 @@ $query3_result = mysqli_query($conn,$query3);
                                     </a>
                                     <?php
                                     $bdateFormat = $bdate;
-                                    $date = DateTime::createFromFormat('m-d-Y', $bdateFormat);
-                                    if ($date) {
-                                        $currentDate = new DateTime();
-                                        $age = $currentDate->diff($date)->y;
-                                    } else {
-                                        $age = $bdate;
-                                    }
+                                    $date =  date("l F d, Y");
+                                    $date = explode(',',$date);
+                                    $date = $date[1];
+                                    $bdate = explode('-', $bdateFormat);
+                                    $bdate = $bdate[0];
+                                    $birthday = $date - $bdate ;
                                     ?>
-                                    <h5><?php echo $age ?> Yrs Old</h5>
+                                    <h5><?php echo $birthday ?> Yrs Old</h5>
                                     <h5><?php echo $account_status ?></h5>
                                 </div>
                                
@@ -324,7 +323,7 @@ $query3_result = mysqli_query($conn,$query3);
                             <div class="text-center">
                                 <button onclick="showDoc('Psa')" href="#" class="btn btn-simple"><i class="pe-7s-note2"></i> PSA</button>
                                 <button onclick="showDoc('Med')" href="#" class="btn btn-simple"><i class="pe-7s-file"></i> MED</button>
-                                <button onclick="toggleOtherInfo()" href="#" class="btn btn-simple"><i class="pe-7s-id"></i> OTHER</button>
+                                
 
                             </div>
                         </div>

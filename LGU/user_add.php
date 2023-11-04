@@ -111,7 +111,7 @@
                                             <div class="form-group">
                                                 <label>Municipality</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="municipality">
-                                                    <option value="lingayin" selected>Lingayin</option>
+                                                    <option value="lingayen" selected>Lingayen</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -205,7 +205,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>National ID</label><span class="asterisk">*</span>
@@ -239,13 +239,13 @@
                                                 <label>Condition</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="condition">
                                                     <option value="senior citizen">Senior Citizen</option>
-                                                    <option value="disabled">Disabled</option>
+                                                    <option value="pwd">PWD</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="row otherInfoOn" style="display: none;">
+                                    <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Family Name</label><span class="asterisk">*</span>
@@ -294,7 +294,7 @@
                             <div class="text-center">
                                 <button onclick="showDoc('Psa')" href="#" class="btn btn-simple"><i class="pe-7s-note2"></i> PSA</button>
                                 <button onclick="showDoc('Med')" href="#" class="btn btn-simple"><i class="pe-7s-file"></i> MED</button>
-                                <button onclick="toggleOtherInfo()" href="#" class="btn btn-simple"><i class="pe-7s-id"></i> OTHER</button>
+                                
                             </div>
                         </div>
                     </div>

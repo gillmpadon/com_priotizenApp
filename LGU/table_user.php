@@ -1,8 +1,8 @@
 <?php
 require('connection.php');
-$query = "select a.id, a.name, a.email, a.number, ac.account_type from admin a inner join account ac on a.email=ac.email where 1=1 
+$query = "select a.id, a.admin_id as uid, a.name, a.email, a.number, ac.account_type from admin a inner join account ac on a.admin_id=ac.account_id 
 UNION
-select a.id, a.name, a.email, a.number , ac.account_type from company a  inner join account ac on a.email=ac.email where 1=1";
+select a.id, a.store_id as uid, a.name, a.email, a.number, ac.account_type from company a inner join account ac on a.store_id=ac.account_id ";
 $result = mysqli_query($conn,$query);
 ?>
 <!doctype html>
@@ -83,14 +83,17 @@ $result = mysqli_query($conn,$query);
                                         $count=1;
                                         while($row = mysqli_fetch_assoc($result)){
                                             extract($row);
-                                            echo  "<tr class='row_data' onclick='goToPage($id)'>
-                                            <td>$count</td>
-                                            <td>$name</td>
-                                            <td>$email</td>
-                                            <td>$number</td>
-                                            <td>$account_type</td>
-                                            </tr>";
-                                            $count++;
+                                            if ($account_type != "user") {
+                                                echo  '<tr class="row_data" onclick="goToPage(\''.$uid.'\',\''.$account_type.'\')">
+                                                        <td>'.$count.'</td>
+                                                        <td>'.$name.'</td>
+                                                        <td>'.$email.'</td>
+                                                        <td>'.$number.'</td>
+                                                        <td>'.$account_type.'</td>
+                                                      </tr>';
+                                                $count++;
+                                            }
+                                            
                                         }
                                        }else{
                                             echo '<tr class="row_data">
@@ -210,8 +213,12 @@ function sendRequest(searchValue, typeValue,) {
         refreshTags();
         let count = 1;
         result.map(item => {
-          createElementTag(item, count);
-          count++;
+            console.log(item);
+         if(item.account_type != "user"){
+            createElementTag(item, count);
+            count++;
+         }
+          
         });
       }
     });

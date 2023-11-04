@@ -61,6 +61,22 @@ $company_id = json_encode($_SESSION['company_id']);
             console.log('okay')
         })
 
+        function updatePayment(){
+            const discount = document.getElementById("discount").value;
+            const money = document.getElementById("money").value;
+            const payment = document.getElementById("payment");
+            const calcu = money-(money * (discount/100))
+            payment.value = calcu;
+        }
+        const discount = document.getElementById("discount");
+        discount.addEventListener('keyup',()=>{
+            updatePayment();
+        })
+        const money = document.getElementById("money");
+        money.addEventListener('keyup',()=>{
+            updatePayment();
+        })
+
         function proceedTransact(){
             const user_id = document.getElementById("user_id").value;
             const discount = document.getElementById("discount").value;
@@ -72,7 +88,6 @@ $company_id = json_encode($_SESSION['company_id']);
             formData.append('discount',discount);
             formData.append('money',money);
             const calcu = money-(money * (discount/100))
-            payment.value = calcu;
             formData.append('payment',calcu);
             formData.append('image',file.files[0])
             fetch('./backend/transact.php',{

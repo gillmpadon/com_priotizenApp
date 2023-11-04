@@ -8,6 +8,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $number = $_POST['number'];
     $password = $_POST['password'];
     $account_type = $_POST['account_type'];
+    $account_type = strtolower($account_type);
     if(isset($_FILES["image"])){
         $images = $_FILES["image"];
         $targetDir = '../../priotizen_app/user_img/';

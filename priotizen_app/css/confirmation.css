@@ -6,7 +6,7 @@
     padding: 1em;
     color: white;
     border: none;
-    background: var(--bg);
+    background: var(--svgColor);
 }
 .cons-buttons{
     display: flex;

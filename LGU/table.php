@@ -114,7 +114,7 @@ $result = mysqli_query($conn,$query);
                                     <select name="" id="condition" class="form-control" style="width: 10em;">
                                         <option value="">Condition</option>
                                         <option value="senior citizen">Senior Citizen</option>
-                                        <option value="disabled">Disabled</option>
+                                        <option value="pwd">Pwd</option>
                                     </select>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@ $result = mysqli_query($conn,$query);
                                         while($row = mysqli_fetch_assoc($result)){
                                             extract($row);
                                             $color = $account_status!="Pending"? "#943bea ": "#9d65d2";
-                                            echo "<tr class='row_data' onclick=\"goToPage('$account_id')\">;
+                                            echo "<tr class='row_data' onclick=\"goToPage('$account_id')\">
                                             <td>$count</td>
                                             <td>$fname $mi $lname</td>
                                             <td>$conditions</td>

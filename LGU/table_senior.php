@@ -101,9 +101,9 @@ if($result){
                                         </td>
                                         <td rowspan="3" class="bg-gray">
                                         <?php
-                                            $imagePath = "./user_img/$photo";
+                                            $imagePath = "../priotizen_app/user_img/$photo";
                                             if(file_exists($imagePath)) {
-                                                echo '<img  src="./user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
+                                                echo '<img  src="../priotizen_app/user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
                                             }else{
                                                 echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
                                             }
@@ -1643,7 +1643,9 @@ if($result){
         })
         .then(response=> response.json())
         .then(result =>{
-            console.log(result)
+            if(result=="Successful"){
+                window.location.reload()
+            }
         })
 
     }

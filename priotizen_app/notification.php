@@ -22,7 +22,7 @@ $rid;
     <script src="script/script.js"></script>
 </head>
 <body>
-    <div class="bodyconfirmation" style="display: none;">
+    <div class="bodyconfirmation" style="display:none;">
         <div class="confirmation" >
             <div class="cons-text">
                 <h1>Confirmation</h1>
