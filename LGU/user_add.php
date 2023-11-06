@@ -378,7 +378,7 @@
 
 
     let showOtherInfo = false;
-
+ 
     function toggleOtherInfo() {
         const otherInfoOnElements = document.querySelectorAll('.otherInfoOn');
         const otherInfoOffElements = document.querySelectorAll('.otherInfoOff');
@@ -482,26 +482,32 @@
     formData.append('valid_id', valid_id)
     formData.append('image', image.files[0]);
 
-    fetch('./backend/user.php',{
+    if(result){
+        fetch('./backend/user.php',{
         method: 'POST',
         body: formData
-    })
-    .then( response => response.json())
-    .then( result =>{
-        if(result=="Successful"){
-            goSuccess()
-            setTimeout(()=>{
-                const id = `id=${user_id}`
-                if(condition == "pwd"){
-                    window.location.href=`table_pwd.php?${id}&action=create`
-                }else{
-                    window.location.href=`table_senior.php?${id}&action=create`
-                }
-            },2000)
-        }else{
-            goError()
-        }
-    })
+        })
+        .then( response => response.json())
+        .then( result =>{
+            if(result=="Successful"){
+                goSuccess()
+                setTimeout(()=>{
+                    const id = `id=${user_id}`
+                    if(condition == "pwd"){
+                        window.location.href=`table_pwd.php?${id}&action=create`
+                    }else{
+                        window.location.href=`table_senior.php?${id}&action=create`
+                    }
+                },2000)
+            }else{
+                goError()
+            }
+        })
+    }else{
+        setTimeout(()=>{
+            demo.goNotif('Fill All ','Required Fields','success','pe-7s-delete-user')
+        },2000)
+    }
         
     }
     function showDoc(str){

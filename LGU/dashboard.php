@@ -71,7 +71,7 @@ if($result){
  }else{
     $arrCompany[] = "Error";
  }
-
+$arrCom = $arrCompany;
  $arrCompany = json_encode($arrCompany);
 
  $topCustomer ="SELECT  r.user_id, concat(v.lname, ' ', v.fname) as name , sum(r.price) as price, sum(r.discount) as discount, count(r.id) as count from receipt r inner join verified v on r.user_id = v.app_id group by r.user_id order by price desc limit 10  ";
@@ -95,7 +95,7 @@ if($result){
  }else{
     $arrCustomer[] = "Error";
  }
-
+ $arrCus = $arrCustomer;
  $arrCustomer = json_encode($arrCustomer);
 
 ?>
@@ -123,9 +123,22 @@ if($result){
     <!--  Charts Plugin -->
     <script src="./assets/js/chartist.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
         .sidebar{
             background-color: #608943;
+        }
+        #downloadBtn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            height: 2em;
+            width: 10em;
+            padding: 1.5em;
+            background: green;
+            border: none;
+            color: white;
         }
     </style>
 </head>
@@ -139,7 +152,7 @@ if($result){
     </div>
     <div class="main-panel">
         <?php include('includes/navbar.php'); ?>
-        <div class="content">
+        <div class="content" id="downloadComponent">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6" >
@@ -153,9 +166,14 @@ if($result){
                                 <div class="footer">
                                     <hr>
                                     <div class="stats" >
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                        <?php 
+                                        $counterCom = 1;
+                                            foreach  ( $arrCom  as $i){
+                                                echo ' <p>Top '.$counterCom.'<span style="font-size: 1em;">'.$i['name'].'</span> </p>';
+                                                $counterCom++;
+                                            }
+                                        ?>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -172,14 +190,20 @@ if($result){
                                 <div class="footer">
                                     <hr>
                                     <div class="stats" >
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
-                                        <p><i class="fa fa-clock-o"></i><span id="totalCount" style="font-size: 1em;">h</span> </p>
+                                    <?php 
+                                        $counterCus = 1;
+                                            foreach  ( $arrCus as $i){
+                                                echo ' <p>Top '.$counterCus.'<span style="font-size: 1em;">'.$i['name'].'</span> </p>';
+                                                $counterCus++;
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <button id="downloadBtn">DOWNLOAD</button>
                 </div>
             </div>
         </div>
@@ -244,10 +268,10 @@ if($result){
     new Chart(chart_company, {
     type: 'bar',
     data: {
-        labels: ['1', '2', '3'],
+        labels: companyLabel,
         datasets: [{
         label: 'Top Company to give Discounts',
-        data: [1,2,3,],
+        data: company,
         borderWidth: 1,
         backgroundColor: [ 'green ']
         }]
@@ -286,7 +310,15 @@ const chart_customer = document.getElementById('chart_customer');
     }
 });
 
+const downloadButton = document.getElementById('downloadBtn');
+const cardContainer = document.getElementById('downloadComponent');
 
+downloadButton.addEventListener('click', function () {
+  const element = cardContainer; // element to be converted to PDF
+  html2pdf(element)
+    .from(element)
+    .save('dashboard_report.pdf');
+});
 </script>
 
 </body>
