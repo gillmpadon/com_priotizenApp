@@ -28,12 +28,7 @@
                         <p>Admin & Store</p>
                     </a>
                 </li>
-                <li <?php echo $class=="user_add"? "class='active'" :""?>>
-                    <a href="user_add.php">
-                        <i class="pe-7s-add-user"></i>
-                        <p>Create User</p>
-                    </a>
-                </li>
+                
                 <?php }else{
                 ?>
                  <li>

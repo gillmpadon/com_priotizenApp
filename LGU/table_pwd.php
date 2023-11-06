@@ -117,7 +117,7 @@ if($result){
                                                 if(file_exists($imagePath)) {
                                                     echo '<img  src="../priotizen_app/user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
                                                 }else{
-                                                    echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
+                                                    echo '<img  src="../priotizen_app/user_img/default.png" style="height:100%; width:100%; "  alt="..."/>';
                                                 }
                                             ?>
                                             </td>
@@ -1056,12 +1056,15 @@ if($result){
                                         <td>Signed</td>
                                     </tr>
                                     <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr><td><input type="text"></td></tr>
-                                    <tr><td >Name of Physician: <span id="physicia_name"></span> </td></tr>
-                                    <tr><td>License Number: <span id="physicia_number"></span></td></tr>
+                                    <tr><td><input type="text" class="myinput" id="mynameInput"></td></tr>
+                                    <tr><td >Name of Physician: <span class="myinput" id="physician_name"></span> </td></tr>
+                                    <tr><td>License Number: <span class="myinput" id="physician_number"></span></td></tr>
                                     <tr style="border:none">
                                         <td  style=" width:100%; border:none; margin:auto;text-align:center;">
-                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill">SUBMIT FORM</button>
+                                        <?php
+                                        $action_get = $_GET['action'];
+                                        ?>
+                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -1112,10 +1115,10 @@ if($result){
 <script>
 
     function goSuccess(){
-        demo.goNotif('Successfully',' Created','success','pe-7s-add-user')
+        demo.goNotif('Successfully',' Update','success','pe-7s-add-user')
     }
     function goError(){
-        demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
+        demo.goNotif('Error',' Update','success','pe-7s-delete-user')
     }
     
     function updateCheckBox(e){
@@ -1137,8 +1140,10 @@ if($result){
             mainObj[input.id] = input.checked;
         } else if (input.type === 'text') {
             mainObj[input.id] = input.value
-        }else{
+        }else if((input.type === 'radio'))
             mainObj[input.id] = input.checked
+        else{
+            mainObj[input.id] = input.value
         }
         });
         
@@ -1158,7 +1163,14 @@ if($result){
         })
         .then(response=> response.json())
         .then(result =>{
-            console.log(result)
+            if(result=="Successful"){
+                goSuccess()
+                setTimeout(()=>{
+                    window.location.href = "user.php?user_id="+id
+                },2000);
+            }else{
+                goError()
+            }
         })
 
     }

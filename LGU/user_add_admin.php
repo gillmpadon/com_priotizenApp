@@ -62,8 +62,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Full Name</label>
-                                                <input id="name" type="text" class="form-control"  placeholder="Enter FullName" >
+                                                <label><?php echo $_GET['account_type']=="store"? "Store Name":"Full Name"; ?></label>
+                                                <input id="name" type="text" class="form-control"  placeholder="Enter <?php echo $_GET['account_type']=="store"? "Store Name":"Fullname"; ?>" >
                                             </div>
                                         </div>
                                     </div>

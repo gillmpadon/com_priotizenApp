@@ -58,19 +58,20 @@
               localStorage.setItem('qrcode_app_id', app_id);
               setTimeout(()=>{
                 window.location.href = `${(isfirstlogin =="0")? "changepass" :"notification"}.php?user_id=${app_id}&user_type=user`;
-              },2000)
+              },2000) 
+              
             }else if(account_type=="company"){
               const {company_id , ...rest} = result
               setTimeout(()=>{
               window.location.href = `../store/${(isfirstlogin =="0")? "changepass" :"entry"}.php?company_id=${company_id}&user_type=store`;
             },2000)
-            }else{
-              const { id , ...rest} = result
-              setTimeout(()=>{
-              window.location.href = `../LGU/dashboard.php?user_id=${id}`;
-            },2000)
-
             }
+            // else{
+            //   const { id , ...rest} = result
+            //   setTimeout(()=>{
+            //   window.location.href = `../LGU/dashboard.php?user_id=${id}`;
+            // },2000)
+            // }
           }else{
             createToast("error","No User Found")
           }

@@ -492,7 +492,7 @@
             goSuccess()
             setTimeout(()=>{
                 const id = `id=${user_id}`
-                if(condition == "disabled"){
+                if(condition == "pwd"){
                     window.location.href=`table_pwd.php?${id}&action=create`
                 }else{
                     window.location.href=`table_senior.php?${id}&action=create`

@@ -119,7 +119,15 @@
                                 <div class="author">
                                     <a href="#">
                                     <input type="file" name="" id="imageInput" style="display: none;">
-                                    <img  id="setImage" class="avatar border-gray" style="height: 17em; width: 17em" src="../priotizen_app/user_img/<?php echo $image; ?>"  alt="..."/>
+                                    <?php
+                                            $imagePath = "../priotizen_app/user_img/$image";
+                                                if(file_exists($imagePath)) { ?>
+                                                    <img  id="setImage" class="avatar border-gray" style="height: 17em; width: 17em" src="../priotizen_app/user_img/<?php echo $image; ?>"  alt="..."/>
+                                                <?php    
+                                                }else{
+                                                    echo '<img  id="setImage" class="avatar border-gray" style="height: 17em; width: 17em" src="../priotizen_app/user_img/default.png ?>"  alt="..."/>';
+                                                }
+                                    ?>
                                       <h4 class="title" ><span id="setFullname"><?php echo $name; ?></span> <br />
                                          <small id="setEmail"><?php echo $email; ?></small>
                                       </h4>

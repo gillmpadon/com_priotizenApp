@@ -1,7 +1,7 @@
 <?php
 include('./backend/connection.php');
 $id = $_GET['id'];
-$query = "SELECT v.*, a.street, a.house from verified v Inner join address a on v.app_id = a.user_id where v.app_id = '$id' limit 1";
+$query = "SELECT v.*, a.street, a.house, s.signature from verified v Inner join address a on v.app_id = a.user_id inner join test s on s.user_id = v.app_id where v.app_id = '$id' limit 1";
 $result = mysqli_query($conn,$query);
 if($result){
     if(mysqli_num_rows($result)>0){
@@ -105,7 +105,7 @@ if($result){
                                             if(file_exists($imagePath)) {
                                                 echo '<img  src="../priotizen_app/user_img/'.$photo.'" style="height:100%; width:100%;" alt="..."/>';
                                             }else{
-                                                echo '<img  src="../priotizen_app/user_img/123.jpg" style="height:100%; width:100%; "  alt="..."/>';
+                                                echo '<img  src="../priotizen_app/user_img/default.png" style="height:100%; width:100%; "  alt="..."/>';
                                             }
                                         ?>
 
@@ -1496,7 +1496,15 @@ if($result){
                                                     <p>Name and Signaure of Senior Citizen</p>
                                                 </div>
                                                 <div class="attach">
-                                                    <img id="attach_signature" src="../priotizen_app/documents/signature.png" style="height:100%; width:100%; "  alt="..."/>
+                                                <?php
+                                                    $imagePath = "../priotizen_app/documents/$signature";
+                                                        if(file_exists($imagePath)) { ?>
+                                                            <img id="attach_signature" src="../priotizen_app/documents/signature.png" style="height:100%; width:100%; "  alt="..."/>
+                                                    <?php  }else{
+                                                        echo "<img id='attach_signature' src='../priotizen_app/documents/no_signature.png' style='height:100%; width:100%;'alt='...'/>";
+                                                    }
+                                                    ?>
+
                                                     <input type="file" name="" style="display: none;" id="attach_file">
                                                 </div>
                                             </div>
@@ -1504,7 +1512,10 @@ if($result){
                                     </tr>
                                     <tr style="border:none">
                                         <td colspan="6" style=" width:100%; border:none; margin:auto;text-align:center;">
-                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill">SUBMIT FORM</button>
+                                        <?php
+                                        $action_get = $_GET['action'];
+                                        ?>
+                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
                                         </td>
                                     </tr>
                                 </table>
@@ -1583,10 +1594,10 @@ if($result){
 
 
      function goSuccess(){
-        demo.goNotif('Successfully',' Created','success','pe-7s-add-user')
+        demo.goNotif('Successfully',' Update','success','pe-7s-add-user')
     }
     function goError(){
-        demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
+        demo.goNotif('Error',' Update','success','pe-7s-delete-user')
     }
 
     const inputs_id = ['lname','fname','mname','ext','region','province','country',
@@ -1644,7 +1655,12 @@ if($result){
         .then(response=> response.json())
         .then(result =>{
             if(result=="Successful"){
-                window.location.reload()
+                goSuccess()
+                setTimeout(()=>{
+                    window.location.href = "user.php?user_id="+id
+                },2000);
+            }else{
+                goError()
             }
         })
 

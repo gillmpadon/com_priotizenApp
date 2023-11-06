@@ -18,10 +18,8 @@ html,body{
     line-height: 0;
     color: #ffffff;
     text-transform: uppercase;
+    font-weight: bold;
     text-align: center;
-    height: 3em;
-    background: black;
-    padding: 0.5em;
     margin-bottom: 1em;
 }
 
