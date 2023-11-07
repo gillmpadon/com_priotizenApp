@@ -260,7 +260,7 @@ extract($assoc);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Condition</label><span class="asterisk">*</span>
-                                                <select name="  " class="form-control" id="condition">
+                                                <select name="  " class="form-control" id="conditions">
                                                     <option value="<?php echo $conditions ?>"><?php echo $conditions ?></option>
                                                     <option value="senior citizen">Senior Citizen</option>
                                                     <option value="pwd">PWD</option>
@@ -449,13 +449,13 @@ extract($assoc);
 
     
     function editUser(){
+        const img = document.getElementById('imageInput')
         const fname = document.getElementById('fname').value
         const mi = document.getElementById('mi').value
         const lname = document.getElementById('lname').value
         const gender = document.getElementById('gender').value
-        const status_rs = document.getElementById('status_rs').value
+        const status_rs = document.getElementById('status').value
         const bdate = document.getElementById('bdate').value
-        const address = document.getElementById('address').value
         const email = document.getElementById('email').value
         const valid_id =  document.getElementById('valid_id').value
         const app_id = document.getElementById('app_id').value
@@ -464,6 +464,10 @@ extract($assoc);
         const conditions = document.getElementById('conditions').value
         const family_name = document.getElementById('family_name').value
         const family_contact = document.getElementById('family_contact').value
+        const municipality = document.getElementById('municipality')
+        const brgy = document.getElementById('brgy')
+        const street = document.getElementById('street')
+        const house = document.getElementById('house')
 
         const formData = new FormData();
         formData.append('admin_id', admin_id);
@@ -473,7 +477,6 @@ extract($assoc);
         formData.append('gender', gender);
         formData.append('status_rs', status_rs);
         formData.append('bdate', bdate);
-        formData.append('address', address);
         formData.append('email', email);
         formData.append('valid_id', valid_id);
         formData.append('app_id', app_id);
@@ -482,7 +485,11 @@ extract($assoc);
         formData.append('conditions', conditions);
         formData.append('family_name', family_name);
         formData.append('family_contact', family_contact);
-        formData.append('image', imageInput.files[0]);
+        formData.append('brgy',brgy)
+        formData.append('municipality',municipality)
+        formData.append('street',street)
+        formData.append('house',house)
+        formData.append('image', img.files[0]);
         fetch('./backend/user_edit_info.php',{
             method: 'POST',
             body: formData,

@@ -35,7 +35,7 @@ $assoc = mysqli_fetch_assoc($result);
                 }
             ?>
             <p><?php echo $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'] ?></p>
-            <p>0<?php echo $assoc['number'] ?></p>
+            <p><?php echo $assoc['number'] ?></p>
             <p style="padding-top: .5em;"><?php echo $assoc['account_status'];?></p>
         </div>
         <br>

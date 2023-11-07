@@ -8,7 +8,7 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
     $gender = $_POST["gender"];
     $status_rs = $_POST["status_rs"];
     $bdate = $_POST["bdate"];
-    $address = $_POST["address"];
+    $address = $_POST["brgy"];
     $email = $_POST["email"];
     $valid_id = $_POST["valid_id"];
     $app_id = $_POST["app_id"];
@@ -17,7 +17,10 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
     $conditions = $_POST["conditions"];
     $family_name = $_POST["family_name"];
     $family_contact = $_POST["family_contact"];
-    
+    $brgy =  $_POST["brgy"];
+    $street = $_POST["street"];
+    $municipality = $_POST["municipality"];
+    $house = $_POST["house"];
     if(isset($_FILES["image"])){
         $images = $_FILES["image"];
         $targetDir = '../../priotizen_app/user_img/';
@@ -41,8 +44,10 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
         $result = mysqli_query($conn, $query);
         
         $query2= "INSERT INTO user_history(user_id, admin_id, action, time_edited) VALUES ('$app_id','$admin_id','Edited',NOW())";
+        $query3 = "INSERT INTO address(user_id,brgy,street,house) values('$app_id','$brgy','$street','$house')";
         $result2 = mysqli_query($conn, $query2);
-        if($result && $result2){
+        $result3 = mysqli_query($conn, $query3);
+        if($result && $result2 && $result3){
             $arr = "Successful";
         }else{
             $arr = "Error";

@@ -54,7 +54,6 @@ if($result){
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
     <?php
-            include('./backend/connection.php');
             $admin_id = json_encode($_SESSION['user_id']);
             $class="user_add";
             include('includes/sidebar.php'); ?>

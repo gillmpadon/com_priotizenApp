@@ -66,12 +66,12 @@
               window.location.href = `../store/${(isfirstlogin =="0")? "changepass" :"entry"}.php?company_id=${company_id}&user_type=store`;
             },2000)
             }
-            // else{
-            //   const { id , ...rest} = result
-            //   setTimeout(()=>{
-            //   window.location.href = `../LGU/dashboard.php?user_id=${id}`;
-            // },2000)
-            // }
+            else{
+              const { id , ...rest} = result
+              setTimeout(()=>{
+              window.location.href = `../LGU/dashboard.php?user_id=${id}`;
+            },2000)
+            }
           }else{
             createToast("error","No User Found")
           }

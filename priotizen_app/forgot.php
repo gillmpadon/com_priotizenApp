@@ -46,7 +46,7 @@
                     <p>or</p>
                     <hr>
                 </div>
-                <button>Cancel</button>
+                <button onclick="window.location.href='signin.php'">Cancel</button>
             </div>
     </div>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script> 
