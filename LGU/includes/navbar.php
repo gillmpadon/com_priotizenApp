@@ -82,7 +82,6 @@ $notifResult = mysqli_query($conn,$notifQuery);
 										Operation
 										<b class="caret"></b>
 									</p>
-
                               </a>
                               <ul class="dropdown-menu">
                                 <li><a href="user_add_admin.php?account_type=admin">Create Admin</a></li>
