@@ -66,7 +66,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Password</label>
-                                                <input type="text" class="form-control" id="password" placeholder="Enter Password" >
+                                                <input type="password" class="form-control" id="password" placeholder="Enter Password" >
                                                 </select>
                                             </div>
                                         </div>
@@ -113,30 +113,28 @@
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="dashboard.php">
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Company
+                            <a href="table.php">
+                                User List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Portfolio
+                            <a href="table_user.php">
+                                Admin List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                               Blog
+                          <a href="../priotizen_app/index.html">
+                                Priotizen App
                             </a>
                         </li>
                     </ul>
                 </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
+                
             </div>
         </footer>
 

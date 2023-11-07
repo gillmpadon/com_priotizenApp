@@ -366,30 +366,28 @@ $query3_result = mysqli_query($conn,$query3);
                 <nav class="pull-left">
                     <ul>
                         <li>
-                            <a href="#">
+                            <a href="dashboard.php">
                                 Home
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Company
+                            <a href="table.php">
+                                User List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                                Portfolio
+                            <a href="table_user.php">
+                                Admin List
                             </a>
                         </li>
                         <li>
-                            <a href="#">
-                               Blog
+                          <a href="../priotizen_app/index.html">
+                                Priotizen App
                             </a>
                         </li>
                     </ul>
                 </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
+                
             </div>
         </footer>
 
