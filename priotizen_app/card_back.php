@@ -84,7 +84,7 @@ $assoc = mysqli_fetch_assoc($result);
         var qrContainer = document.getElementById('qrcode');
             const valid_id = localStorage.getItem('qrcode_valid_id');
             const app_id = localStorage.getItem('qrcode_app_id');
-            var text = `http://127.0.0.1/edsa-Priotizen/priomanage_web/index.php?app_id=${encodeURIComponent(app_id)}&valid_id=${encodeURIComponent(valid_id)}`;
+            var text = `https://3e37-103-3-83-159.ngrok-free.app/edsa-priotizen/priomanage_web/index.php?app_id=${encodeURIComponent(app_id)}&valid_id=${encodeURIComponent(valid_id)}`;
             console.log(text);
             qrContainer.innerHTML = "";
             var qrcode = new QRCode(qrContainer, {
