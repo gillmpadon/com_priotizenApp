@@ -158,6 +158,12 @@ $arrCom = $arrCompany;
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
+        #anotherList{
+            list-style-type: none;
+        }
+        #anotherList li a{
+            padding:.5em;
+        }
         .sidebar{
             background-color: #608943;
         }
@@ -317,9 +323,6 @@ $arrCom = $arrCompany;
                 </div>
                 <div class="flex" style="display:flex; gap:1em;">
                         <button id="downloadBtn">DOWNLOAD</button>
-                        <button id="showgraph" onclick="window.location.href='dashboard.php'">Show Graph</button>
-                        <button id="showcompany" onclick="window.location.href='dashboard.php?filter=user'">Show User</button>
-                        <button id="showtable" onclick="window.location.href='dashboard.php?filter=company'">Show Company</button>
                    </div>
             </div>
         </div>

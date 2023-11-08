@@ -2,7 +2,7 @@
 require('connection.php');
 $app_id = $_GET['app_id'];
 $valid_id = $_GET['valid_id'];
-$query = "SELECT * FROM verified where app_id = '$app_id' and valid_id = '$valid_id'";
+$query = "SELECT v.* FROM verified inner join account a on v.app_id = a.account_id where v.app_id = '$app_id' and v.valid_id = '$valid_id'";
 $results = mysqli_query($conn, $query);
 $verified = false;
 if(mysqli_num_rows($results)>0){
@@ -16,7 +16,6 @@ if(mysqli_num_rows($results)>0){
     $app_id_res = $app_id;
     $photo_res = "unknown.png";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

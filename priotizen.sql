@@ -3,10 +3,12 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2023 at 07:20 PM
+-- Generation Time: Nov 09, 2023 at 12:20 AM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
-
+drop database priotizen;
+create database priotizen;
+use priotizen;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
@@ -46,7 +48,7 @@ INSERT INTO `account` (`id`, `account_id`, `email`, `passcode`, `account_type`, 
 (1, '5er4wfw9ok', 'Admin_lgu1@gmail.com', 'admin', 'Admin', 'Pending', 0),
 (2, '73ad5qri84q', 'juandelacruz@gmail.com', 'delacruz', 'user', 'Verified', 1),
 (3, '5j64080mdqg', 'christian@gmail.com', 'reyes', 'user', 'Pending', 1),
-(4, 'i2tejdgjy4d', 'streetwear@gmail.com', 'streetwear', 'company', 'Pending', 1),
+(4, 'i2tejdgjy4d', 'streetwear@gmail.com', 'padon', 'company', 'Pending', 1),
 (5, 'xbw8cw0n9qi', 'alma@gmail.com', 'Ramos', 'user', 'Verified', 1),
 (6, '3ekhuyjowhh', 'organic@gmail.com', 'organic', 'company', 'Pending', 1),
 (7, '2gl1hip5cvn', 'juan@gmail.com', 'Santos', 'user', 'Pending', 1),
@@ -79,7 +81,8 @@ INSERT INTO `address` (`id`, `user_id`, `brgy`, `street`, `house`) VALUES
 (3, 'xbw8cw0n9qi', 'Baay', 'None', '21'),
 (4, '2gl1hip5cvn', 'Capandanan', 'None', '89'),
 (5, 'g8xl7x8ymzg', 'Estanza', 'None', '34'),
-(6, 'nxqf64vfnek', 'Dorongan', 'None', '65');
+(6, 'nxqf64vfnek', 'Dorongan', 'None', '65'),
+(7, '73ad5qri84q', '[object HTMLSelectElement]', '[object HTMLSelectElement]', '[object HTMLInputElement]');
 
 -- --------------------------------------------------------
 
@@ -101,8 +104,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `email`, `image`, `number`, `admin_id`) VALUES
-(1, 'Jordan F. Estrada', 'Admin_lgu1@gmail.com', 'admin1.jpg', '09123456788', '5er4wfw9ok'),
-(2, 'Erika A. Vergara', 'Admin_lgu2@gmail.com', 'Erika A. Vergara.jpg', '0988776655', 'pymfeew8vy');
+(1, 'Jordan F. Estrada', 'Admin_lgu1@gmail.com', 'default.png', '09123456788', '5er4wfw9ok'),
+(2, 'Erika A. Vergara', 'Admin_lgu2@gmail.com', 'default.png', '0988776655', 'pymfeew8vy');
 
 -- --------------------------------------------------------
 
@@ -116,17 +119,18 @@ CREATE TABLE `company` (
   `email` varchar(30) DEFAULT NULL,
   `image` varchar(200) DEFAULT 'image.png',
   `number` varchar(20) DEFAULT '1234567910',
-  `store_id` varchar(45) DEFAULT NULL
+  `store_id` varchar(45) DEFAULT NULL,
+  `address` varchar(20) NOT NULL DEFAULT 'Lingayen'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `company`
 --
 
-INSERT INTO `company` (`id`, `name`, `email`, `image`, `number`, `store_id`) VALUES
-(1, 'Street Wear Urban', 'streetwear@gmail.com', 'Street Wear Urban.jpg', '09876543210', 'i2tejdgjy4d'),
-(2, 'Organic Shop', 'organic@gmail.com', 'Organic Shop.jpg', '09998887766', '3ekhuyjowhh'),
-(3, 'Stop & Shop', 'ss@gmail.com', 'Stop & Shop.png', '09113355778', 'ax49l5yjxag');
+INSERT INTO `company` (`id`, `name`, `email`, `image`, `number`, `store_id`, `address`) VALUES
+(1, 'Street Wear Urban', 'streetwear@gmail.com', 'default.png', '09876543210', 'i2tejdgjy4d', 'Lingayen'),
+(2, 'Organic Shop', 'organic@gmail.com', 'default.png', '09998887766', '3ekhuyjowhh', 'Lingayen'),
+(3, 'Stop & Shop', 'ss@gmail.com', 'default.png', '09113355778', 'ax49l5yjxag', 'Lingayen');
 
 -- --------------------------------------------------------
 
@@ -172,16 +176,16 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`id`, `user_id`, `company_id`, `reciept_id`, `status`) VALUES
-(1, '5j64080mdqg', 'i2tejdgjy4d', '6548fa5d3ab23', 'Completed'),
-(2, '5j64080mdqg', '3ekhuyjowhh', '6548fb33134d0', 'Completed'),
-(4, '73ad5qri84q', '3ekhuyjowhh', '65491b92eade3', 'Completed'),
-(7, '2gl1hip5cvn', '3ekhuyjowhh', '65491cff399eb', 'Completed'),
-(8, 'xbw8cw0n9qi', 'ax49l5yjxag', '65491ff875f5e', 'Completed'),
-(9, 'xbw8cw0n9qi', 'ax49l5yjxag', '6549234da09c8', 'Completed'),
-(10, 'g8xl7x8ymzg', 'i2tejdgjy4d', '6549262700cd1', 'Completed'),
-(11, 'g8xl7x8ymzg', '3ekhuyjowhh', '654928ba8b8c2', 'Completed'),
-(12, '2gl1hip5cvn', 'ax49l5yjxag', '6549294d9282c', 'Completed'),
-(13, 'xbw8cw0n9qi', 'ax49l5yjxag', '654929e358bbc', 'Pending');
+(1, 'xbw8cw0n9qi', '3ekhuyjowhh', '6548fa5d3ab23', 'Completed'),
+(2, 'xbw8cw0n9qi', '3ekhuyjowhh', '6548fa5d3ab23', 'Completed'),
+(4, 'xbw8cw0n9qi', '3ekhuyjowhh', '65491b92eade3', 'Completed'),
+(7, 'xbw8cw0n9qi', '3ekhuyjowhh', '65491cff399eb', 'Completed'),
+(8, 'xbw8cw0n9qi', '3ekhuyjowhh', '65491ff875f5e', 'Completed'),
+(9, 'xbw8cw0n9qi', '3ekhuyjowhh', '6548fa5d3ab23', 'Completed'),
+(10, 'xbw8cw0n9qi', '3ekhuyjowhh', '6549262700cd1', 'Completed'),
+(11, 'xbw8cw0n9qi', '3ekhuyjowhh', '654928ba8b8c2', 'Completed'),
+(12, 'xbw8cw0n9qi', '3ekhuyjowhh', '6549294d9282c', 'Completed'),
+(13, 'xbw8cw0n9qi', '3ekhuyjowhh', '654929e358bbc', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -205,14 +209,14 @@ CREATE TABLE `receipt` (
 --
 
 INSERT INTO `receipt` (`id`, `receipt_id`, `price`, `discount`, `img_receipt`, `date`, `company_id`, `user_id`) VALUES
-(1, '6548fa5d3ab23', 200, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 14:38:21', 'i2tejdgjy4d', '5j64080mdqg'),
-(2, '6548fb33134d0', 500, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 14:41:55', '3ekhuyjowhh', '5j64080mdqg'),
-(3, '654900ecac3df', 600, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 15:06:20', 'ax49l5yjxag', '5j64080mdqg'),
-(4, '65491b92eade3', 1000, 12, 'receipt_73ad5qri84q.jpg', '2023-11-06 17:00:02', '3ekhuyjowhh', '73ad5qri84q'),
-(5, '65491bff6ccba', 600, 12, 'receipt_xbw8cw0n9qi.jpg', '2023-11-06 17:01:51', 'null', 'xbw8cw0n9qi'),
-(6, '65491ca484ec0', 400, 12, 'receipt_2gl1hip5cvn.jpg', '2023-11-06 17:04:36', 'null', '2gl1hip5cvn'),
-(7, '65491cff399eb', 1200, 12, 'receipt_2gl1hip5cvn.jpg', '2023-11-06 17:06:07', '3ekhuyjowhh', '2gl1hip5cvn'),
-(8, '65491ff875f5e', 560, 12, 'receipt_xbw8cw0n9qi.jpg', '2023-11-06 17:18:48', 'ax49l5yjxag', 'xbw8cw0n9qi'),
+(1, '6548fa5d3ab23', 200, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 14:38:21', 'i2tejdgjy4d', '3ekhuyjowhh'),
+(2, '6548fb33134d0', 500, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 14:41:55', '3ekhuyjowhh', '3ekhuyjowhh'),
+(3, '654900ecac3df', 600, 12, 'receipt_5j64080mdqg.jpg', '2023-11-06 15:06:20', 'ax49l5yjxag', '3ekhuyjowhh'),
+(4, '65491b92eade3', 1000, 12, 'receipt_73ad5qri84q.jpg', '2023-11-06 17:00:02', '3ekhuyjowhh', '3ekhuyjowhh'),
+(5, '65491bff6ccba', 600, 12, 'receipt_xbw8cw0n9qi.jpg', '2023-11-06 17:01:51', 'null', '3ekhuyjowhh'),
+(6, '65491ca484ec0', 400, 12, 'receipt_2gl1hip5cvn.jpg', '2023-11-06 17:04:36', 'null', '3ekhuyjowhh'),
+(7, '65491cff399eb', 1200, 12, 'receipt_2gl1hip5cvn.jpg', '2023-11-06 17:06:07', '3ekhuyjowhh', '3ekhuyjowhh'),
+(8, '65491ff875f5e', 560, 12, 'receipt_xbw8cw0n9qi.jpg', '2023-11-06 17:18:48', 'ax49l5yjxag', '3ekhuyjowhh'),
 (9, '6549234da09c8', 800, 12, 'receipt_xbw8cw0n9qi.jpg', '2023-11-06 17:33:01', 'ax49l5yjxag', 'xbw8cw0n9qi'),
 (10, '6549262700cd1', 800, 12, 'receipt_g8xl7x8ymzg.jpg', '2023-11-06 17:45:11', 'i2tejdgjy4d', 'g8xl7x8ymzg'),
 (11, '654928ba8b8c2', 900, 12, 'receipt_g8xl7x8ymzg.jpg', '2023-11-06 17:56:10', '3ekhuyjowhh', 'g8xl7x8ymzg'),
@@ -268,7 +272,9 @@ INSERT INTO `user_history` (`id`, `user_id`, `admin_id`, `action`, `time_edited`
 (5, 'g8xl7x8ymzg', '5er4wfw9ok', 'Created', '2023-11-06 14:04:21'),
 (6, 'nxqf64vfnek', '5er4wfw9ok', 'Created', '2023-11-06 14:07:07'),
 (7, 'xbw8cw0n9qi', '5er4wfw9ok', 'Edited', '2023-11-06 17:18:01'),
-(8, '73ad5qri84q', '5er4wfw9ok', 'Edited', '2023-11-06 18:04:56');
+(8, '73ad5qri84q', '5er4wfw9ok', 'Edited', '2023-11-06 18:04:56'),
+(9, '73ad5qri84q', '5er4wfw9ok', 'Edited', '2023-11-07 17:29:01'),
+(10, '73ad5qri84q', '5er4wfw9ok', 'Edited', '2023-11-07 17:32:57');
 
 -- --------------------------------------------------------
 
@@ -302,12 +308,12 @@ CREATE TABLE `verified` (
 --
 
 INSERT INTO `verified` (`id`, `fname`, `mi`, `lname`, `email`, `bdate`, `status_rs`, `gender`, `address`, `number`, `valid_id`, `app_id`, `photo`, `conditions`, `nationality`, `family_name`, `family_contact`, `brgy`) VALUES
-(1, 'Juan ', 'A', 'Dela Cruz', 'juandelacruz@gmail.com', '1955-01-15', 'single', 'male', 'Aliwekwek', '09012345678', '18315', '73ad5qri84q', 'unkown.jpg', 'senior citizen', 'Filipino', 'Dela Cruz', '09012345670', 'Aliwekwek'),
-(2, 'Christian', 'B', 'Reyes', 'christian@gmail.com', '1951-03-10', 'married', 'male', 'Aliwekwek', '09513314673', '67481', '5j64080mdqg', 'Christian_dp.jpg', 'senior citizen', 'Filipino', 'Reyes', '09513314670', 'Aliwekwek'),
-(3, 'Alma', 'J.', 'Ramos', 'alma@gmail.com', '', 'single', 'female', 'Baay', '09998765432', 'PWD001', 'xbw8cw0n9qi', 'Alma_dp.jpg', 'pwd', 'Filipino', 'Ramos', '09998765430', 'Baay'),
-(4, 'Juan', 'C.', 'Santos', 'juan@gmail.com', '1965-11-05', 'married', 'male', 'Capandanan', '09112233445', 'PWD002', '2gl1hip5cvn', 'Juan_dp.jpg', 'pwd', 'Filipino', 'Santos', '09112233440', 'Capandanan'),
-(5, 'Mario', 'G. ', 'Lim', 'mario@gmail.com', '1990-06-12', 'single', 'male', 'Estanza', '09556633778', 'Pwd003', 'g8xl7x8ymzg', 'Mario_dp.jpg', 'pwd', 'Filipino', 'Lim', '09556633770', 'Estanza'),
-(6, 'Christian', 'F.', 'Abarquez', 'christian@gmail.com', '1945-02-17', 'married', 'male', 'Dorongan', '09224466881', '73522', 'nxqf64vfnek', 'Christian_dp.jpg', 'senior citizen', 'Filipino', 'Abarquez', '09224466880', 'Dorongan');
+(1, 'Juan', 'A', 'Dela Cruz', 'juandelacruz@gmail.com', '1955-01-15', 'single', 'male', '[object HTMLSelectElement]', '09012345678', '18315', '73ad5qri84q', 'default.png', 'senior citizen', 'Filipino', 'Dela Cruz', '09012345670', 'Aliwekwek'),
+(2, 'Christian', 'B', 'Reyes', 'christian@gmail.com', '1951-03-10', 'married', 'male', 'Aliwekwek', '09513314673', '67481', '5j64080mdqg', 'default.png', 'senior citizen', 'Filipino', 'Reyes', '09513314670', 'Aliwekwek'),
+(3, 'Alma', 'J.', 'Ramos', 'alma@gmail.com', '', 'single', 'female', 'Baay', '09998765432', 'PWD001', 'xbw8cw0n9qi', 'default.png', 'pwd', 'Filipino', 'Ramos', '09998765430', 'Baay'),
+(4, 'Juan', 'C.', 'Santos', 'juan@gmail.com', '1965-11-05', 'married', 'male', 'Capandanan', '09112233445', 'PWD002', '2gl1hip5cvn', 'default.png', 'pwd', 'Filipino', 'Santos', '09112233440', 'Capandanan'),
+(5, 'Mario', 'G. ', 'Lim', 'mario@gmail.com', '1990-06-12', 'single', 'male', 'Estanza', '09556633778', 'Pwd003', 'g8xl7x8ymzg', 'default.png', 'pwd', 'Filipino', 'Lim', '09556633770', 'Estanza'),
+(6, 'Christian', 'F.', 'Abarquez', 'christian@gmail.com', '1945-02-17', 'married', 'male', 'Dorongan', '09224466881', '73522', 'nxqf64vfnek', 'default.png', 'senior citizen', 'Filipino', 'Abarquez', '09224466880', 'Dorongan');
 
 --
 -- Indexes for dumped tables
@@ -386,7 +392,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `admin`
 --
@@ -421,7 +427,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `user_history`
 --
 ALTER TABLE `user_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `verified`
 --
