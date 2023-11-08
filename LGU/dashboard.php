@@ -97,7 +97,40 @@ $arrCom = $arrCompany;
  }
  $arrCus = $arrCustomer;
  $arrCustomer = json_encode($arrCustomer);
+ $showTable = false;
+ if(isset($_GET['filter']) && $_GET['filter'] == 'company'){
+    $showTable = true;
+    // $start_date = $_GET['start_date'];
+    // $end_date = $_GET['end_date'];
+    $highest ="";
+    $query_company = "SELECT c.name , c.address, c.number, r.company_id, r.discount, r.price from company c inner join receipt r on r.company_id = c.store_id";
+    $query_company_max = "SELECT concat(c.name,' ' , max(r.price) ) as max_price from company c inner join receipt r on r.company_id = c.store_id";
+    $query_result = mysqli_query($conn,$query_company);
+    $query_result_max = mysqli_query($conn,$query_company_max);
+    if($query_result_max){
+        $assoc_one= mysqli_fetch_assoc($query_result_max);
+        $highest = $assoc_one['max_price'];
+    }else{
+        $highest = "None 0";
+    }
+ }
 
+ if(isset($_GET['filter']) && $_GET['filter'] == 'user'){
+    $showTable = true;
+    // $start_date = $_GET['start_date'];
+    // $end_date = $_GET['end_date'];
+    $highest_user ="";
+    $query_user = "SELECT c.name , c.address, c.number, r.company_id, r.discount, r.price from company c inner join receipt r on r.company_id = c.store_id";
+    $query_user_max = "SELECT concat(c.name,' ' , max(r.price) ) as max_price from company c inner join receipt r on r.company_id = c.store_id";
+    $query_result = mysqli_query($conn,$query_user);
+    $query_result_max_user = mysqli_query($conn,$query_user_max);
+    if($query_result_max_user){
+        $assoc_one= mysqli_fetch_assoc($query_result_max_user);
+        $highest_user = $assoc_one['max_price'];
+    }else{
+        $highest_user = "None 0";
+    }
+ }
 ?>
 <!doctype html>
 <html lang="en">
@@ -128,7 +161,7 @@ $arrCom = $arrCompany;
         .sidebar{
             background-color: #608943;
         }
-        #downloadBtn, #showtable{
+        #downloadBtn, #showtable,#showgraph,#showcompany{
             display: flex;
             justify-content: center;
             align-items: center;
@@ -140,9 +173,35 @@ $arrCom = $arrCompany;
             border: none;
             color: white;
         }
-        .date_details{
+        .details{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            gap: 2em;
+        }
+        .date_details, .detailsBtn{
             display:flex;
             gap: 1em;
+        }
+
+        .detailsBtn button{
+            background-color: green;
+            border: none;
+            color: white;
+        }
+        
+
+        #tableStore table, #tableStore td{
+            border: 1px solid black;
+        }
+        table{
+            width: 100%;
+        }
+        table td{
+            padding: .5em;
+        }
+        .tablehead td{
+            text-align: center;
         }
     </style>
 </head>
@@ -159,7 +218,7 @@ $arrCom = $arrCompany;
         <div class="content" id="downloadComponent">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 ">
+                    <div class="col-md-12 " <?php echo $showTable==true? "":'style="display:none;"' ?>>
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Reports</h4>
@@ -172,14 +231,41 @@ $arrCom = $arrCompany;
                                         <p>To</p>
                                         <input type="date" name="" id="">
                                     </div>
+                                    <div class="detailsBtn">
+                                        <input type="text" name="" id="" readonly value="<?php echo $highest?>">
+                                        <button>Show Data</button>
+                                    </div>
                                 </div>
-                               <table>
-
+                                <br>
+                               <table id="tableStore">
+                                    <tr class="tablehead">
+                                        <td>Name</td>
+                                        <td>Address</td>
+                                        <td>Contact</td>
+                                        <td>Account ID</td>
+                                        <td>Discounts</td>
+                                        <td>Payments</td>
+                                    </tr>
+                                    <?php
+                                        while($row = mysqli_fetch_assoc($query_result)){
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $row['name']?></td>
+                                                <td><?php echo $row['address']?></td>
+                                                <td><?php echo $row['number']?></td>
+                                                <td><?php echo $row['company_id']?></td>
+                                                <td><?php echo $row['discount']?></td>
+                                                <td><?php echo $row['price']?></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                    
+                                    ?>
                                </table>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 graph" style="display: none;">
+                    <div class="col-md-6 graph" <?php echo  $showTable?  'style="display:none;"':'' ?>>
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Top Company</h4>
@@ -203,7 +289,7 @@ $arrCom = $arrCompany;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 graph" style="display: none;">
+                    <div class="col-md-6 graph" <?php echo $showTable? 'style="display:none;"':'' ?>>
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Top User </h4>
@@ -231,7 +317,9 @@ $arrCom = $arrCompany;
                 </div>
                 <div class="flex" style="display:flex; gap:1em;">
                         <button id="downloadBtn">DOWNLOAD</button>
-                        <button id="showtable">Show Table</button>
+                        <button id="showgraph" onclick="window.location.href='dashboard.php'">Show Graph</button>
+                        <button id="showcompany" onclick="window.location.href='dashboard.php?filter=user'">Show User</button>
+                        <button id="showtable" onclick="window.location.href='dashboard.php?filter=company'">Show Company</button>
                    </div>
             </div>
         </div>
