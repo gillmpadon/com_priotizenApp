@@ -128,7 +128,7 @@ $arrCom = $arrCompany;
         .sidebar{
             background-color: #608943;
         }
-        #downloadBtn{
+        #downloadBtn, #showtable{
             display: flex;
             justify-content: center;
             align-items: center;
@@ -139,6 +139,10 @@ $arrCom = $arrCompany;
             background: green;
             border: none;
             color: white;
+        }
+        .date_details{
+            display:flex;
+            gap: 1em;
         }
     </style>
 </head>
@@ -155,7 +159,27 @@ $arrCom = $arrCompany;
         <div class="content" id="downloadComponent">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6" >
+                    <div class="col-md-12 ">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Reports</h4>
+                                <p class="category">STORES</p>
+                            </div>
+                            <div class="content">
+                                <div class="details">
+                                    <div class="date_details">
+                                        <input type="date" name="" id="">
+                                        <p>To</p>
+                                        <input type="date" name="" id="">
+                                    </div>
+                                </div>
+                               <table>
+
+                               </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 graph" style="display: none;">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Top Company</h4>
@@ -179,7 +203,7 @@ $arrCom = $arrCompany;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 graph" style="display: none;">
                         <div class="card">
                             <div class="header">
                                 <h4 class="title">Top User </h4>
@@ -203,8 +227,12 @@ $arrCom = $arrCompany;
                         </div>
                     </div>
 
-                    <button id="downloadBtn">DOWNLOAD</button>
+                   
                 </div>
+                <div class="flex" style="display:flex; gap:1em;">
+                        <button id="downloadBtn">DOWNLOAD</button>
+                        <button id="showtable">Show Table</button>
+                   </div>
             </div>
         </div>
 

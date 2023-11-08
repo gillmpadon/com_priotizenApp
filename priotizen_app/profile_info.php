@@ -14,7 +14,24 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/profile_info.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <script src="script/script.js"></script>
+    <script src="script/script.js" ></script>
+    <style>
+        input{
+            width: 100%;
+            background: transparent;
+            border: none;
+        }
+        input:focus{
+            outline: none;
+        }
+        #editBtn{
+            width: 100%;
+            height: 3em;
+            background: green;
+            border: none;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -34,25 +51,26 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
                    <div class="info">
                         <p>First Name</p>
                         <div class="input">
-                            <p><?php echo $results['fname'] ?></p>
+                            <input type="text" name="" id="fname" value="<?php echo $results['fname'] ?>">
                         </div>
                    </div>
                    <div class="info">
                     <p>M.I</p>
                     <div class="input">
-                        <p><?php echo $results['mi'] ?></p>
+                        <input type="text" name="" id="mi" value="<?php echo $results['mi'] ?>">
                     </div>
                     <div class="info">
                         <p>Last Name</p>
                         <div class="input">
-                            <p><?php echo $results['lname'] ?></p>
+                            <input type="text" name="" id="lname" value="<?php echo $results['lname'] ?>">
                         </div>
                     </div>
                 </div>
                
                 </div>
                 <div class="images">
-                    <img src="user_img/<?php echo $results['photo'] ?>" alt="">
+                    <input style="display: none;" type="file" name="" id="inputImg">
+                    <img id="userImg" src="user_img/<?php echo $results['photo'] ?>" alt="">
                 </div>
             </div>
         
@@ -61,37 +79,83 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
             <div class="entryInfo">
                 <p>Email</p>
                 <div class="entryInfo_entry">
-                    <p><?php echo $results['email'] ?></p>
+                <input type="text" name="" id="email" value="<?php echo $results['email'] ?>">
                 </div>
             </div>
             <div class="twoEntry">
                 <div class="entryInfo">
                     <p>Birthday</p>
                     <div class="entryInfo_entry">
-                        <p><?php echo $date = date('F d, Y', strtotime($results['bdate']) ); ?></p>
+                        <?php  
+                        $date = date('Y-m-d', strtotime($results['bdate']) ); ?>
+                        <input type="date" name="" id="bdate" value="<?php echo $date  ?>">
                     </div>
                 </div>
                 <div class="entryInfo">
                     <p>Status</p>
                     <div class="entryInfo_entry">
-                        <p><?php echo $results['status_rs'] ?></p>
+                        <input type="text" name="" id="status_rs" value="<?php echo $results['status_rs'] ?>">
                     </div>
                 </div>
             </div>
-            <div class="entryInfo">
+            <div class="entryInfo" style="display: none;">
                 <p>Compelete Address</p>
                 <div class="entryInfo_entry">
-                    <p><?php echo $results['address'] ?></p>
+                    <input type="text" name="" id="brgy" value="<?php echo $results['brgy'] ?>">
                 </div>
             </div>
             <div class="entryInfo">
                 <p>Mobile Number</p>
                 <div class="entryInfo_entry">
-                    <p>0<?php echo $results['number'] ?></p>
+                    <input type="text" name="" id="number" value="<?php echo $results['number'] ?>">
+                </div>
+            </div>
+            <div class="entryInfo">
+                <p>Operation</p>
+                <div class="entryInfo_entry">
+                    <button id="editBtn">Edit Profile</button>
                 </div>
             </div>
         </div>
     </div>
     </div>
+    <script>
+        const editBtn = document.getElementById('editBtn')
+        editBtn.addEventListener('click', ()=>{
+            const fname = document.getElementById('fname').value
+            const mi = document.getElementById('mi').value
+            const lname = document.getElementById('lname').value
+            const bdate = document.getElementById('bdate').value
+            const email = document.getElementById('email').value
+            const status_rs = document.getElementById('status_rs').value
+            const number = document.getElementById('number').value
+            const app_id = localStorage.getItem('app_id')
+            const formData = new FormData();
+            formData.append('app_id',app_id)
+            formData.append('fname',fname)
+            formData.append('mi',mi)
+            formData.append('lname',lname)
+            formData.append('bdate',bdate)
+            formData.append('email',email)
+            formData.append('status_rs',status_rs)
+            formData.append('number',number)
+            fetch('./backend/editBasicInfo.php',{
+                method:'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(result =>{
+            if(result == "Successful"){
+              setTimeout(()=>{
+                window.location.href = `profile_info.php`;
+            },2000)
+            }
+          })
+
+
+
+
+        })
+    </script>
 </body>
 </html>

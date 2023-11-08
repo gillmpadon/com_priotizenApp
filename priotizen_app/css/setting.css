@@ -59,6 +59,12 @@ body{
     text-transform: uppercase;
     margin-top: 0;
 }
+.entry button{
+    width: 100%;
+    border: none;
+    height: 3em;
+    font-size: 1em;
+}
 
 
 /* responsiveness */

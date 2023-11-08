@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/setting.css">
     <script src="script/script.js"></script>
+    
 </head>
 <body>
     <div class="container">
