@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/form.css">
     <script src="script/script.js" defer></script>
+    <style>
+      .container{
+        position: relative;
+        width: 19em;
+      }
+      .buttonSubmit button{
+        position: relative;
+        width: 100%;
+      }
+    </style>
 </head>
 <body>
     <ul class="notifications"></ul>

@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/setting.css">
     <script src="script/script.js"></script>
-    
+    <style>
+        .container{
+            width:20em;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

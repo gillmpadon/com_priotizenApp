@@ -40,7 +40,7 @@ body{
     margin: auto;
 }
 .allnames{
-    height: 15em;
+    height: 14em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,36 +116,10 @@ body{
     align-items: center;
 }
 
-/* responsiveness */
-@media screen and (min-width: 600px) {
-    /* notification */
-    .container{
-        width: 40em;
-        margin-top: 2%;
-    }
-    .input,.entryInfo,.entryInfo_entry{
-        height: 3em;
-    }
-    p{
-        font-size: 1.3em;
-    }
-    .allnames{
-        margin-bottom: 2em;
-        height: 18em;
-        width: 95%;
-    }
-    .images{
-        height: 100%;
-    }
 
-    .details{
-        margin-top: -2em;
+    .input,.entryInfo_entry{
+        height: 2em;
     }
-    .details div{
-        margin-bottom: 3em;
+    .entryInfo{
+        height: 5em;
     }
-    .details div:nth-child(3){
-        margin-top: -2em;
-    }
-    
-}

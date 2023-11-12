@@ -1,6 +1,6 @@
 <?php
-$notifQuery = "SELECT concat(v.lname,' ',v.fname) as name, a.id, a.account_id from account a inner join verified v on a.account_id = v.app_id where a.account_status like 'Pending' order by a.id desc limit 5";
-$notifResult = mysqli_query($conn,$notifQuery);
+// $notifQuery = "SELECT concat(v.lname,' ',v.fname) as name, a.id, a.account_id from account a inner join verified v on a.account_id = v.app_id where a.account_status like 'Pending' order by a.id desc limit 5";
+// $notifResult = mysqli_query($conn,$notifQuery);
 
 ?>
 <div class="bodyconfirmation" style="display: none;">
@@ -27,7 +27,7 @@ $notifResult = mysqli_query($conn,$notifQuery);
                     <a class="navbar-brand" href="#">Profile List</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-left">
+                    <!-- <ul class="nav navbar-nav navbar-left">
                         
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -35,8 +35,8 @@ $notifResult = mysqli_query($conn,$notifQuery);
                                     <b class="caret hidden-sm hidden-xs"></b>
                                     <span class="notification hidden-sm hidden-xs">
                                     <?php
-                                        $num = mysqli_num_rows($notifResult);
-                                        echo $num; 
+                                        // $num = mysqli_num_rows($notifResult);
+                                        // echo $num; 
                                     ?> 
                                     </span>
 									<p class="hidden-lg hidden-md">
@@ -46,26 +46,26 @@ $notifResult = mysqli_query($conn,$notifQuery);
                               </a>
                               <ul class="dropdown-menu">
                                     <?php
-                                    if($notifResult){
-                                        if(mysqli_num_rows($notifResult)>0){
-                                            while($row = mysqli_fetch_assoc($notifResult)){
-                                                $id = $row['account_id'];
-                                                $name = $row['name'];
-                                                echo "<li><a href='user.php?user_id=$id'>$name</a></li>";
-                                            }
-                                        }else{
-                                            echo "<li><a href='#'>No Notification</a></li>";
-                                        }
-                                    }else{
-                                        echo "<li><a href='#'>No Notification</a></li>";
-                                    }
+                                    // if($notifResult){
+                                    //     if(mysqli_num_rows($notifResult)>0){
+                                    //         while($row = mysqli_fetch_assoc($notifResult)){
+                                    //             $id = $row['account_id'];
+                                    //             $name = $row['name'];
+                                    //             echo "<li><a href='user.php?user_id=$id'>$name</a></li>";
+                                    //         }
+                                    //     }else{
+                                    //         echo "<li><a href='#'>No Notification</a></li>";
+                                    //     }
+                                    // }else{
+                                    //     echo "<li><a href='#'>No Notification</a></li>";
+                                    // }
 
                                     ?>
                               </ul>
                         </li>
                       
                       
-                    </ul>
+                    </ul> -->
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>

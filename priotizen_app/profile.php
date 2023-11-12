@@ -18,6 +18,11 @@ $assoc = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="css/root.css">
     <link rel="stylesheet" href="css/profile.css">
     <script src="script/script.js"></script>
+    <style>
+        .container{
+            width: 19em;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

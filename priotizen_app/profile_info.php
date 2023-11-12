@@ -31,6 +31,9 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
             border: none;
             color: white;
         }
+        .container{
+            width:20em;
+        }
     </style>
 </head>
 <body>

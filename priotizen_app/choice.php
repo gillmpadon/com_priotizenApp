@@ -11,6 +11,9 @@
         .dashboard{
             padding-top: 3em;
         }
+        .container{
+            width: 19em;
+        }
     </style>
 </head>
 <body>

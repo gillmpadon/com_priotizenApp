@@ -15,6 +15,12 @@ extract($assoc);
     <link rel="stylesheet" href="../priotizen_app/css/root.css">
     <link rel="stylesheet" href="../priotizen_app/css/profile.css">
     <script src="./script/script.js"></script>
+    <style>
+      .container{
+        position: relative;
+        width: 19em;
+      }
+    </style>
 </head>
 <body>
     <div class="container">

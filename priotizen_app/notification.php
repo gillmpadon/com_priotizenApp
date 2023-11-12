@@ -20,6 +20,15 @@ $rid;
     <link rel="stylesheet" href="css/notification.css">
     <link rel="stylesheet" href="css/confirmation.css" >
     <script src="script/script.js"></script>
+    <style>
+        .notifications{
+            height: 0;
+
+        }
+        .container{
+            margin-top: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="bodyconfirmation" style="display:none;">

@@ -224,53 +224,6 @@ $arrCom = $arrCompany;
         <div class="content" id="downloadComponent">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12 " <?php echo $showTable==true? "":'style="display:none;"' ?>>
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Reports</h4>
-                                <p class="category">STORES</p>
-                            </div>
-                            <div class="content">
-                                <div class="details">
-                                    <div class="date_details">
-                                        <input type="date" name="" id="">
-                                        <p>To</p>
-                                        <input type="date" name="" id="">
-                                    </div>
-                                    <div class="detailsBtn">
-                                        <input type="text" name="" id="" readonly value="<?php echo $highest?>">
-                                        <button>Show Data</button>
-                                    </div>
-                                </div>
-                                <br>
-                               <table id="tableStore">
-                                    <tr class="tablehead">
-                                        <td>Name</td>
-                                        <td>Address</td>
-                                        <td>Contact</td>
-                                        <td>Account ID</td>
-                                        <td>Discounts</td>
-                                        <td>Payments</td>
-                                    </tr>
-                                    <?php
-                                        while($row = mysqli_fetch_assoc($query_result)){
-                                        ?>
-                                            <tr>
-                                                <td><?php echo $row['name']?></td>
-                                                <td><?php echo $row['address']?></td>
-                                                <td><?php echo $row['number']?></td>
-                                                <td><?php echo $row['company_id']?></td>
-                                                <td><?php echo $row['discount']?></td>
-                                                <td><?php echo $row['price']?></td>
-                                            </tr>
-                                        <?php
-                                        }
-                                    
-                                    ?>
-                               </table>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-6 graph" <?php echo  $showTable?  'style="display:none;"':'' ?>>
                         <div class="card">
                             <div class="header">
@@ -432,9 +385,11 @@ const cardContainer = document.getElementById('downloadComponent');
 
 downloadButton.addEventListener('click', function () {
   const element = cardContainer; // element to be converted to PDF
-  html2pdf(element)
-    .from(element)
-    .save('dashboard_report.pdf');
+  html2pdf(element, {
+    margin: 10, // optional, set the margins
+    filename: 'dashboard_report.pdf', // optional, set the filename
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } // set the orientation to landscape
+  }).from(element).save();
 });
 </script>
 

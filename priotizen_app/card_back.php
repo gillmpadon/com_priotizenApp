@@ -17,6 +17,11 @@ $assoc = mysqli_fetch_assoc($result);
     <script src="script/script.js"></script>
     <script src="qrcode/qrcode.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        .container{
+            width: 19em;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

@@ -39,6 +39,15 @@ if($med!=null){
             text-align: center;
             color: var(--text);
         }
+        .container{
+            width:19em;
+            margin-top:1em;
+
+        }
+        .buttonNav{
+            width: 100%;
+            left:0;
+        }
     </style>
     
 </head>

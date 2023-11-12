@@ -99,13 +99,16 @@ if($checkResult){
         .head p{
             color: aliceblue;
         }
+        .container{
+            width: 19em;
+        }
     </style>
 </head>
 <body>
     <div class="modal" style="display: none;">
         <div class="head" style="display: flex; align-items: center; justify-content: space-between;">
-            <svg onclick="closeModal()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="currentColor" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="currentColor" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>
-            <p id="modalName">Profile</p>
+            <svg onclick="closeModal()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="white" d="M16 2C8.2 2 2 8.2 2 16s6.2 14 14 14s14-6.2 14-14S23.8 2 16 2zm0 26C9.4 28 4 22.6 4 16S9.4 4 16 4s12 5.4 12 12s-5.4 12-12 12z"/><path fill="currentColor" d="M21.4 23L16 17.6L10.6 23L9 21.4l5.4-5.4L9 10.6L10.6 9l5.4 5.4L21.4 9l1.6 1.6l-5.4 5.4l5.4 5.4z"/></svg>
+            <p id="modalName" >Profile</p>
             <p></p>
         </div>
 
@@ -116,7 +119,7 @@ if($checkResult){
        
         <div class="head" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2em;">
             <svg onclick="window.location.href='profile.php'" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="currentColor" d="m4 10l9 9l1.4-1.5L7 10l7.4-7.5L13 1z"/></svg> 
-            <p>Profile</p>
+            <p style="color:black">Profile</p>
             <p></p>
         </div>
         <div class="avatar">

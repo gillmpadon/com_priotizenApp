@@ -39,6 +39,15 @@ if($psa!=null ){
             text-align: center;
             color: white;
         }
+
+        .container{
+            width:19em;
+            margin-top:1em;
+        }
+        .buttonNav{
+            width: 100%;
+            left:0;
+        }
     </style>
     
 </head>

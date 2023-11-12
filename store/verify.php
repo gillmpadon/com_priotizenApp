@@ -22,6 +22,10 @@
         .dash::-webkit-scrollbar{
             width: 0;
         }
+        .container{
+            width: 19em;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -38,11 +42,12 @@
         <div class="dash">
         
         </div>
-        </div>
         <div class="buttonNav">
             <button class="active"onclick="goPage('verify')">VERIFIED</button>
             <button class="notActive" onclick="goPage('unverify')">PENDING</button>
         </div>
+        </div>
+       
         
     </div>
     <script>

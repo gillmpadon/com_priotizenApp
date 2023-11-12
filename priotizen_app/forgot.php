@@ -11,16 +11,21 @@
     <script src="script/script.js" defer></script>
 
     <style>
-        .container{
-            width: 90%;
-            height: 100%;
-            margin: auto;
-            text-align: center;
-            box-sizing: border-box;
-        }
-        .buttonSubmit{
-            width: 90%;
-        }
+      .container{
+        position: relative;
+        width: 19em;
+      }
+      .notifications{
+        width: 19em;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .buttonSubmit button{
+        position: relative;
+        width: 100%;
+      }
+    </style>
     </style>
 </head>
 <body>
