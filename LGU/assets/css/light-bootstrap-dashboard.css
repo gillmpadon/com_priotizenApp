@@ -14,6 +14,11 @@
 
  */
 /*      light colors         */
+:root{
+    --primary: #fba423;
+}
+
+
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -498,13 +503,13 @@ input:focus {
 }
 
 .sidebar[data-color="purple"]:after {
-    background: #608943;
-    background: -moz-linear-gradient(top, #608943 0%, #b1ce9c 100%);
+    background: #01132d;
+    /* background: -moz-linear-gradient(top, #608943 0%, #b1ce9c 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #608943), color-stop(100%, #b1ce9c));
     background: -webkit-linear-gradient(top, #608943 0%, #b1ce9c 100%);
     background: -o-linear-gradient(top, #608943 0%, #b1ce9c 100%);
     background: -ms-linear-gradient(top, #608943 0%, #b1ce9c 100%);
-    background: linear-gradient(to bottom, #608943 0%, #b1ce9c 100%);
+    background: linear-gradient(to bottom, #608943 0%, #b1ce9c 100%); */
     background-size: 150% 150%;
 }
 
@@ -572,7 +577,7 @@ fieldset[disabled] .btn.active {
 
 .btn.btn-fill {
     color: #FFFFFF;
-    background-color: #888888;
+    background-color: var(--primary);
     opacity: 1;
     filter: alpha(opacity=100);
 }

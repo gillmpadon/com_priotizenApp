@@ -175,7 +175,7 @@ $arrCom = $arrCompany;
             height: 2em;
             width: 10em;
             padding: 1.5em;
-            background: green;
+            background: var(--primary);
             border: none;
             color: white;
         }
@@ -343,7 +343,7 @@ $arrCom = $arrCompany;
         label: 'Top Company to give Discounts',
         data: company,
         borderWidth: 1,
-        backgroundColor: [ 'green ']
+        backgroundColor: [ 'red ']
         }]
     },
     options: {
@@ -367,7 +367,7 @@ const chart_customer = document.getElementById('chart_customer');
         label: 'Top Customer to use Discounts',
         data: customer,
         borderWidth: 1,
-        backgroundColor: [ 'green ']
+        backgroundColor: [ 'skyblue ']
 
         }]
     },

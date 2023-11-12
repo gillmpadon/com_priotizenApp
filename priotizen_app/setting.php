@@ -11,6 +11,11 @@
         .container{
             width: 19em;
         }
+        .entry{
+            background: var(--secondary);
+            color: var(--textInput);
+
+        }
     </style>
 </head>
 <body>
