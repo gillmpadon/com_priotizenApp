@@ -40,6 +40,7 @@ body{
     width: 95%;
     margin: auto;
     overflow: auto;
+    color: var(--text);
 }
 .dashboard::-webkit-scrollbar{
     width: 0;

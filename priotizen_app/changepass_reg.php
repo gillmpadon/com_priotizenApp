@@ -9,6 +9,18 @@
     <link rel="stylesheet" href="../priotizen_app/css/root.css">
     <link rel="stylesheet" href="../priotizen_app/css/form.css">
     <script src="../priotizen_app/script/script.js" defer></script>
+    <style>
+      .container{
+        width:19em;
+      }
+      .buttonSubmit{
+        position:relative;
+        width:100%;
+      }
+      .buttonSubmit button {
+        width:100%;
+      }
+    </style>
 </head>
 <body>
     <ul class="notifications"></ul>
@@ -38,18 +50,14 @@
       function changePassword (){
         const passInput1 = document.getElementById('passInput1');	
         const passInput = document.getElementById('passInput');
-    
+        const app_id = localStorage.getItem('app_id');
         if(passInput.value == passInput1.value){
-          const formData = new FormData()
-          formData.append('id',id)
-          formData.append('pass',passInput.value)
-          fetch(`../priotizen_app/backend/user.php?`,{
-            method: 'POST',
-            body: formData
+          fetch(`../priotizen_app/backend/forgot.php?app_id=${app_id}&pass=${passInput.value}`,{
+            method: 'GET',
           })
           .then(res => res.json())
           .then(result =>{
-            if(result == "Successful"){
+            if(result == "Success"){
               createToast("success","Update Successful")
               setTimeout(()=>{
                 window.location.href = `profile.php`;

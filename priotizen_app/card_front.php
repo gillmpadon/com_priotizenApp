@@ -86,17 +86,17 @@ $assoc = mysqli_fetch_assoc($result);
                     <p>Signature</p>
                 </div>
             </div>
-            <svg id="bgSvg" width="261" height="435" viewBox="0 0 291 490" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg id="bgSvg" width="261" height="435" viewBox="0 0 291 490" fill="red" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_7049_2)">
-                <rect width="291" height="490" fill="white"/>
-                <path d="M291 485.667H0V460.75C154.059 454.25 245.353 485.667 291 373V485.667Z" fill="#2E9DA6"/>
-                <path d="M291 490H0V465.084C154.059 458.584 245.353 490 291 377.333V490Z" fill="#000F30"/>
-                <path d="M291 5.823H0V101.32C159.051 193.905 238.221 89.6738 291 101.32V5.823Z" fill="#2E9DA6"/>
-                <path d="M291 0H0V95.4967C159.051 188.082 238.221 83.8508 291 95.4967V0Z" fill="#000F30"/>
+                <rect width="291" height="490" fill="white"></rect>
+                <path d="M291 485.667H0V460.75C154.059 454.25 245.353 485.667 291 373V485.667Z" fill="#2E9DA6"></path>
+                <path d="M291 490H0V465.084C154.059 458.584 245.353 490 291 377.333V490Z" fill="black"></path>
+                <path d="M291 5.823H0V101.32C159.051 193.905 238.221 89.6738 291 101.32V5.823Z" fill="#2E9DA6"></path>
+                <path d="M291 0H0V95.4967C159.051 188.082 238.221 83.8508 291 95.4967V0Z" fill="black"></path>
                 </g>
                 <defs>
                 <clipPath id="clip0_7049_2">
-                <rect width="291" height="490" fill="white"/>
+                <rect width="291" height="490" fill="white"></rect>
                 </clipPath>
                 </defs>
             </svg>

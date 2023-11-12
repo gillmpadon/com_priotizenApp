@@ -27,7 +27,7 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
         #editBtn{
             width: 100%;
             height: 3em;
-            background: green;
+            background: var(--accent);
             border: none;
             color: white;
         }
@@ -150,7 +150,7 @@ $results = mysqli_fetch_assoc(mysqli_query($conn,$query));
             .then(result =>{
             if(result == "Successful"){
               setTimeout(()=>{
-                window.location.href = `profile_info.php`;
+                window.location.href = `profile.php`;
             },2000)
             }
           })

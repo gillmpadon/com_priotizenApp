@@ -33,7 +33,7 @@
                 <button onclick="goPage('setting')">Manual</button>
             </div>
             <div class="entry">
-                <button onclick="goPage('changepass')">Change Password</button>
+                <button onclick="goPage('changepass_reg')">Change Password</button>
             </div>
         </div>
         

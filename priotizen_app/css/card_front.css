@@ -150,7 +150,7 @@ body{
     background-color: var(--buttonActive);
 }
 .notActive{
-    background-color: var(--inputDiv);
+    background-color: var(--accent);
 }
 
 /* qrcode */

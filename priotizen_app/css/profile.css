@@ -24,7 +24,7 @@ body{
 .avatar{
     height: 13em;
     width: 11em;
-    color: var(--inputText);
+    color: var(--text);
     line-height: 0;
     margin: auto;
     text-align: center;
@@ -94,7 +94,7 @@ body{
     background-color: var(--buttonActive);
 }
 .notActive{
-    background-color: var(--buttonInactive);
+    background-color: var(--accent);
 }
 
 .notFill svg path:first-of-type{

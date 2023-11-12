@@ -121,7 +121,7 @@ html,body{
     background-color: var(--buttonActive);
 }
 .notActive{
-    background-color: var(--buttonInactive);
+    background-color: var(--accent);
 }
 
 

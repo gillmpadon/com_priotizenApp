@@ -46,7 +46,7 @@ body{
     width: 0;
 }
 .entry{
-    background-color: var(--inputDiv);
+    background-color: var(--accent);
     width: 85%;
     margin: auto;
     color:var(--text);
