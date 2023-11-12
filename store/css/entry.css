@@ -1,16 +1,17 @@
 :root{
-    --bg : #16181F;
-    --inputDiv : #b1ce9c;
+    --bg : #01132d;
+    --inputDiv : #f8fec3;
     --svgColor : #070a05; 
-    --inputColor : #7D848D; 
-    --buttonActive: #608943;
+    --inputColor : #f8fec3; 
+    --buttonActive: #fba423;
     --buttonInactive: #b1ce9c;
     --inactiveBtn: #2E9DA6;
-    --text: #070a05;
+    --text: #ffffff;
+    --inputText : #01132d;
     --background: #ffffff;
     --primary: #b1ce9c;
-    --secondary: #c9ddbb;
-    --accent: #608943;
+    --secondary: #fba423;
+    --accent: #f01c05;
     --activeBtn :  #008000;
 }
 a{
@@ -18,8 +19,7 @@ a{
     color: white;
 }
 body{
-    background: rgb(177,206,156);
-      background: linear-gradient(0deg, rgba(177,206,156,1) 0%, rgba(96,137,67,1) 76%); 
+    background-color: var(--bg);
 }
 
 body{

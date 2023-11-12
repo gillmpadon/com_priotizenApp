@@ -9,7 +9,7 @@
     justify-content: center;
     align-items: center;
     gap: 1em;
-    color: var(--text);
+    color: var(--textInput);
     height: 3em;
     padding: .3em;
 }
@@ -29,6 +29,7 @@
     align-items: center;
     justify-content: center;
     font-size: .7em;
+    color: var(--text);
 }
 
 .search{

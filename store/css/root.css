@@ -1,16 +1,17 @@
 :root{
     --bg : #01132d;
-    --inputDiv : #b1ce9c;
+    --inputDiv : #f8fec3;
     --svgColor : #070a05; 
-    --inputColor : #7D848D; 
-    --buttonActive: #608943;
+    --inputColor : #f8fec3; 
+    --buttonActive: #fba423;
     --buttonInactive: #b1ce9c;
-    --inactiveBtn: #2E9DA6;
-    --text: #070a05;
+    --inactiveBtn: #f01c05;
+    --text: #ffffff;
+    --inputText : #01132d;
     --background: #ffffff;
     --primary: #b1ce9c;
-    --secondary: #c9ddbb;
-    --accent: #608943;
+    --secondary: #fba423;
+    --accent: #f01c05;
     --activeBtn :  #008000;
 }
 a{
