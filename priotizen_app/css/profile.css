@@ -24,7 +24,7 @@ body{
 .avatar{
     height: 13em;
     width: 11em;
-    color: var(--text);
+    color: var(--inputText);
     line-height: 0;
     margin: auto;
     text-align: center;
@@ -39,7 +39,7 @@ body{
     font-size: 1.5em;
 }
 .avatar p:last-of-type{
-    color: var(--svgColor);
+    color: var(--text);
 }
 
 /* dashboard */
@@ -54,7 +54,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid var(--svgColor);
+    border-bottom: 1px solid var(--text);
     color: var(--text);
     margin-bottom: .4em;
 
@@ -63,7 +63,7 @@ body{
     height: 2em;
 }
 .entry svg path{
-    fill: var(--svgColor);
+    fill: var(--text);
 }
 .entry svg:last-of-type:not(:first-child) path {
     fill: none;

@@ -44,30 +44,32 @@ form{
     padding-left: .5em;
     position: relative;
     box-sizing: border-box;
+
 }
 .entryInput svg {
     height: 1.5em;
     width: 2em;
 }
 .entryInput svg path{
-    fill: var(--text);
+    fill: var(--inputText);
 }
 .passwordInput svg path:first-child{
     fill: none;
-    stroke: var(--text);
+    stroke: var(--inputText);
 }
 .passwordInput svg path:last-child{
     fill: none;
+    stroke:var(--inputText);
 }
 .entryInput input{
     height: 50%;
     background-color: transparent;
     border: none;
-    color: var(--inputColor);
+    color: var(--inputText);
     width: 60%;
 }
 ::placeholder{
-    color: var(--text);
+    color: var(--inputText);
 }
 .entryInput input:focus{
     outline: none;

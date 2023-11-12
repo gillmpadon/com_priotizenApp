@@ -1,12 +1,13 @@
 :root{
-    --bg : #16181F;
-    --inputDiv : #b1ce9c;
+    --bg : #01132d;
+    --inputDiv : #f8fec3;
     --svgColor : #070a05; 
-    --inputColor : #7D848D; 
-    --buttonActive: #608943;
+    --inputColor : #f8fec3; 
+    --buttonActive: #fba423;
     --buttonInactive: #b1ce9c;
     --inactiveBtn: #2E9DA6;
-    --text: #070a05;
+    --text: #ffffff;
+    --inputText : #01132d;
     --background: #ffffff;
     --primary: #b1ce9c;
     --secondary: #c9ddbb;
@@ -18,8 +19,7 @@ a{
     color: white;
 }
 body{
-    background: rgb(156, 165, 206);
-      background: linear-gradient(0deg, rgb(45, 76, 22) 0%, rgb(109, 67, 137) 76%); 
+    background: var(--bg);
 }
 svg{
     fill: var(--text);

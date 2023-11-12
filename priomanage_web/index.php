@@ -2,8 +2,7 @@
 require('connection.php');
 $app_id = $_GET['app_id'];
 $valid_id = $_GET['valid_id'];
-$query = "SELECT v.* FROM verified v inner join account a on v.app_id = a.account_id where v.app_id = '$app_id' and v.valid_id = '$valid_id'";
-echo $query;
+$query = "SELECT v.*, a.acccount_status  FROM verified v inner join account a on v.app_id = a.account_id where v.app_id = '$app_id' and v.valid_id = '$valid_id'";
 $results = mysqli_query($conn, $query);
 $verified = false;
 if($results){
@@ -12,7 +11,9 @@ if($results){
         $fullname_res = $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'];
         $app_id_res =  $assoc['app_id'];
         $photo_res = $assoc['photo'];
-        $verified = true;
+        if($asso['acccount_status']=="Verified"){
+            $verified = true;
+        }
     }else{
         $fullname_res = "Unknown User";
         $app_id_res = $app_id;
