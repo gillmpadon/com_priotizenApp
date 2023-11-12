@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../priotizen_app/css/root.css">
     <link rel="stylesheet" href="../priotizen_app/css/form.css">
     <script src="../priotizen_app/script/script.js" defer></script>
+    <link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
+
     <style>
       .container{
         width:19em;

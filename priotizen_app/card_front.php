@@ -13,6 +13,7 @@ $assoc = mysqli_fetch_assoc($result);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CARD FRONT</title>
     <link rel="stylesheet" href="css/root.css">
+    <link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
     <link rel="stylesheet" href="css/card_front.css">
     <script src="script/script.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>

@@ -12,7 +12,7 @@ $queryResults = mysqli_query($conn,$query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Information</title>
-    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/root.css"><link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
     <link rel="stylesheet" href="css/history.css">
     <script src="script/script.js"></script>
 </head>

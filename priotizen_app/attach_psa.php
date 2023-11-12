@@ -22,9 +22,10 @@ if($psa!=null ){
     <title>Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="css/toast.css">
-    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/root.css"><link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
     <link rel="stylesheet" href="css/profile.css">
     <script src="script/script.js" defer></script>
+
     <style>
         #fileinput{
             height: 3em;

@@ -102,7 +102,6 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
 
         .detailsBtn button{
             background: var(--primary);
-
             border: none;
             color: white;
             padding: .8em;

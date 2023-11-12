@@ -130,7 +130,7 @@ body {
   outline: none;
   cursor: pointer;
   margin: 0 5px;
-  color: var(--light);
+  color: var(--dark);
   font-size: 1.2rem;
   padding: 10px 20px;
   border-radius: 4px;
