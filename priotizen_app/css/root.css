@@ -18,8 +18,8 @@ a{
     color: white;
 }
 body{
-    background: rgb(177,206,156);
-      background: linear-gradient(0deg, rgba(177,206,156,1) 0%, rgba(96,137,67,1) 76%); 
+    background: rgb(156, 165, 206);
+      background: linear-gradient(0deg, rgb(45, 76, 22) 0%, rgb(109, 67, 137) 76%); 
 }
 svg{
     fill: var(--text);

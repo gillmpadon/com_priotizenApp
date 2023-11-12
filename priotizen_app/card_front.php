@@ -79,7 +79,7 @@ $assoc = mysqli_fetch_assoc($result);
                         <p>Phone</p>
                         <p>:</p>
                     </div>
-                    <p>0<?php echo $assoc['number']?></p>
+                    <p><?php echo $assoc['number']?></p>
                 </div>
              
                 <div class="signature">

@@ -2,15 +2,22 @@
 require('connection.php');
 $app_id = $_GET['app_id'];
 $valid_id = $_GET['valid_id'];
-$query = "SELECT v.* FROM verified inner join account a on v.app_id = a.account_id where v.app_id = '$app_id' and v.valid_id = '$valid_id'";
+$query = "SELECT v.* FROM verified v inner join account a on v.app_id = a.account_id where v.app_id = '$app_id' and v.valid_id = '$valid_id'";
+echo $query;
 $results = mysqli_query($conn, $query);
 $verified = false;
-if(mysqli_num_rows($results)>0){
-    $assoc = mysqli_fetch_assoc($results);
-    $fullname_res = $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'];
-    $app_id_res =  $assoc['app_id'];
-    $photo_res = $assoc['photo'];
-    $verified = true;
+if($results){
+    if(mysqli_num_rows($results)>0){
+        $assoc = mysqli_fetch_assoc($results);
+        $fullname_res = $assoc['fname']." ".$assoc['mi']." ".$assoc['lname'];
+        $app_id_res =  $assoc['app_id'];
+        $photo_res = $assoc['photo'];
+        $verified = true;
+    }else{
+        $fullname_res = "Unknown User";
+        $app_id_res = $app_id;
+        $photo_res = "unknown.png";
+    }
 }else{
     $fullname_res = "Unknown User";
     $app_id_res = $app_id;
