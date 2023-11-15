@@ -13,6 +13,10 @@
         .container{
             width:20em;
         }
+        .entry{
+            background: #f8fec3;
+            color: var(--bg)
+        }
     </style>
 </head>
 <body>

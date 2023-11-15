@@ -13,6 +13,12 @@
         .dashboard{
             padding-top: 3em;
         }
+        .entry{
+            background: var(--accent)
+        }
+        .entry button{
+            background: white;
+        }
     </style>
 </head>
 <body>
