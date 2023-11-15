@@ -224,7 +224,7 @@ $result = mysqli_query($conn,$query);
         td2.textContent = `${fname} ${mi} ${lname}`
         td3.textContent = conditions
         td4.textContent = account_status
-        td4.style.background = account_status!="Pending"? "#943bea ": "#9d65d2";
+        td4.style.background = account_status!="Pending"? "#fba423" : "#f01c05";
         td4.style.textAlign = "center"
         td4.style.color = "white"
         td5.textContent = gender

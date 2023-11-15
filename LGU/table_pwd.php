@@ -1131,7 +1131,7 @@ if($result){
     
     function submitForm() {
         const mainObj = {}
-        const inputs = document.querySelectorAll('table input');
+    const inputs = document.querySelectorAll('table input');
         inputs.forEach(input => {
         if (input.type === 'checkbox') {
             mainObj[input.id] = input.checked;
@@ -1142,6 +1142,7 @@ if($result){
         else{
             mainObj[input.id] = input.value
         }
+        const disability = document.querySelectorAll('')
         });
         
         const url = new URLSearchParams(window.location.search);
@@ -1162,9 +1163,9 @@ if($result){
         .then(result =>{
             if(result=="Successful"){
                 goSuccess()
-                setTimeout(()=>{
-                    window.location.href = "user.php?user_id="+id
-                },2000);
+                //setTimeout(()=>{
+                //    window.location.href = "user.php?user_id="+id
+                //},2000);
             }else{
                 goError()
             }
@@ -1190,7 +1191,7 @@ if($result){
                     if (item && item.tagName === "INPUT") {
                         if (item.type === "checkbox") {
                             // It's a checkbox input
-                            item.checked = value === "on"; // Set the checkbox value based on your data
+                            item.checked = value === true; // Set the checkbox value based on your data
                         } else if (item.type === "text") {
                             // It's a text input
                             item.value = value==""? "":value; // Set the text input value
