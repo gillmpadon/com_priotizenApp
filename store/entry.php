@@ -5,7 +5,7 @@ if(isset($_GET['company_id'])){
 }
 $company_id = $_SESSION['company_id'];
 echo "<script>localStorage.setItem('user_uid','$company_id')</script>";
-$query = "SELECT r.price, r.discount, r.img_receipt as receipt, v.lname, n.status, r.date as date  from receipt r inner join verified v on r.user_id = v.app_id inner join notification n on r.receipt_id = n.reciept_id where  n.status !='Completed'";
+$query = "SELECT r.price, r.discount, r.img_receipt as receipt, v.lname, v.app_id, n.status, r.date as date  from receipt r inner join verified v on r.user_id = v.app_id inner join notification n on r.receipt_id = n.reciept_id where  n.status !='Completed'";
 $result = mysqli_query($conn, $query);
 if (!$result) {
     echo  mysqli_error($conn);
@@ -48,6 +48,7 @@ if (!$result) {
                 </div>
                 <div class="info">
                     <p><?php echo $lname; ?></p>
+                    <p><?php echo $app_id; ?></p>
                     <div class="details">
                         <div class="names">
                             <p>discount:</p>
@@ -70,7 +71,7 @@ if (!$result) {
             <?php
                 }}
                 else{
-                    echo "  <p style='text-align:center; '>NO RECORDS FOR TODAY</p>";
+                    echo "  <p style='text-align:center; color:white; '>NO RECORDS FOR TODAY</p>";
                 }
             ?>
       

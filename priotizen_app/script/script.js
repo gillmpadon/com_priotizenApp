@@ -34,7 +34,7 @@ const createToast = (id,message) => {
     // Setting the inner HTML for the toast
     toast.innerHTML = `<div class="column">
                          <i class="fa-solid ${icon}"></i>
-                         <span>${message}</span>
+                         <span style="color:black">${message}</span>
                       </div>
                       <i class="fa-solid fa-xmark" onclick="removeToast(this.parentElement)"></i>`;
     notifications.appendChild(toast); // Append the toast to the notification ul

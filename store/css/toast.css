@@ -25,6 +25,9 @@ body {
   position: fixed;
   top: 30px;
   right: 20px;
+  color:black;
+  z-index: 100;
+
 }
 .notifications :where(.toast, .column) {
   display: flex;
@@ -102,6 +105,7 @@ body {
 }
 .toast.info::before, .btn#info {
   background: var(--info);
+  
 }
 .toast .column i {
   font-size: 1.75rem;
