@@ -21,7 +21,7 @@ $rid;
     <link rel="stylesheet" href="css/confirmation.css" >
     <script src="script/script.js"></script>
     <style>
-        .notifications{
+        .notificationsss{
             height: 0;
 
         }
@@ -43,7 +43,7 @@ $rid;
             </div>
         </div>
     </div>
-    <ul class="notifications" ></ul>
+    <ul class="notificationsss" ></ul>
     <div class="container" >
         <div class="head">
             <p>Notification</p>
@@ -60,7 +60,7 @@ $rid;
                     <img src="receipt_img/<?php echo $row['receipt'] ?>" alt="An Image">
                 </div>
                 <div class="info">
-                    <p><?php echo $row['company'] ?></p>
+                    <p style="line-height:1"><?php echo $row['company'] ?></p>
                     <div class="details">
                         <div class="names">
                             <p>discount:</p>

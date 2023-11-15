@@ -39,7 +39,7 @@ html,body{
     border-radius: .3em;
     padding: .2em;
     margin-bottom: 1em;
-    height: 7.5em;
+    height: 8.5em;
 }
 .entryImages{
     width: 55%;
@@ -92,7 +92,7 @@ html,body{
     background-color: var(--accent);
 }
 .completed{
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 
 /* button Nav */
