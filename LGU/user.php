@@ -436,7 +436,7 @@ function toggleOtherInfo() {
     console.log(showOtherInfo);
 }
     function goSuccess(){
-        demo.goNotif('Successfully',' Deleted','danger','pe-7s-delete-user')
+        demo.goNotif('Successfully',' Deleted','success','pe-7s-delete-user')
     }
     function goError(){
         demo.goNotif('Error',' Deleted','danger','pe-7s-junk')

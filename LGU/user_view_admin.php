@@ -59,8 +59,8 @@
                             <div class="header">
                                 <h4 class="title">
                                     <?php 
-                                
-                                    echo "ADMIN PROFILE";
+                                    $nameProfile = strtolower($_GET['account_type'])=='company'? 'STORE':'ADMIN';
+                                    echo $nameProfile." PROFILE";
                                     $error = false;
                                     $result = mysqli_query($conn, $query);
                                     if($result && mysqli_num_rows($result)>0){
