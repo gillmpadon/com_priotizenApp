@@ -118,27 +118,13 @@ $query3_result = mysqli_query($conn,$query3);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Gender</label>
-                                                <select name="  " class="form-control" id="" readonly>
-                                                    <option value=""><?php echo $gender ?></option>
-                                                    <option value="<?php echo ($gender=="Female")? "Male":"Female" ?>"><?php echo ($gender=="Female")? "Male":"Female" ?></option>
-                                                </select>
+                                                <input type="text" class="form-control" name="" id="" readonly value="<?php echo $gender?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Status</label>
-                                                <select name="  " class="form-control" id="" readonly>
-                                                    <option value="<?php echo $status_rs ?>"><?php echo $status_rs ?></option>
-                                                    <?php 
-                                                    $arr = ['single', 'widowed', 'married'];
-                                                    for($i = 0; $i<count($arr);$i++){
-                                                        if($arr[$i]!=$status_rs){
-                                                            echo '<option value="'.$arr[$i].'">'.$arr[$i].'</option>';
-                                                            echo $status_rs==$arr[$i];
-                                                        }
-                                                    }
-                                                    ?>
-                                                </select>
+                                                <input type="text" name="" class="form-control" id="" readonly value="<?php echo $status_rs?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -198,10 +184,7 @@ $query3_result = mysqli_query($conn,$query3);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Condition</label>
-                                                <select name="  " class="form-control" id="" readonly>
-                                                    <option value=""><?php echo $conditions ?></option>
-                                                    <option value="<?php echo ($conditions=="pwd")? "senior citizen":"disabled" ?>"><?php echo ($conditions=="pwd")? "Senior Citizen":"disabled" ?></option>
-                                                </select>
+                                                <input type="text" name="" id="" class="form-control" readonly value="<?php echo ($conditions=="pwd")? "senior citizen":"disabled" ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -222,9 +205,7 @@ $query3_result = mysqli_query($conn,$query3);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Barangay</label>
-                                                <select name="" class="form-control" id="brgy" readonly>
-                                                    <option selected value="<?php echo $brgy?>"><?php echo $brgy?></option>
-                                                </select>
+                                                <input type="text" name="" id="" class="form-control" readonly value="<?php echo $brgy?>">
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +246,7 @@ $query3_result = mysqli_query($conn,$query3);
                                         <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='user_edit.php?user_id=<?php  echo $user_id ?>'">Edit Profile</button>
                                         <button type="submit" class="btn btn-info btn-fill " onclick="window.location.href='<?php echo ($conditions=='pwd')? 'table_pwd':'table_senior' ?>.php?id=<?php  echo $user_id.'&action=edit' ?>'">Complete Form</button>
                                         <button type="submit" class="btn btn-success btn-fill " onclick="userHistory()">User History</button>
-                                        <button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('<?php  echo $user_id ?>')">Delete Profile</button>
+                                        <!-- <button type="submit" class="btn btn-danger btn-fill " onclick="deleteUser('<?php  echo $user_id ?>')">Delete Profile</button> -->
 
                                         
                                 </div>

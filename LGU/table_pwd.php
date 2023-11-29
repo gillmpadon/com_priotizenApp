@@ -68,7 +68,7 @@ if($result){
                     justify-content: center;
                     align-items: center;
                     ">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <div class="card">
                             <div class="header" style="text-align: center;">
                                 <h4 class="title">DEPARTMENT OF HEALTH</h4>
@@ -980,100 +980,26 @@ if($result){
                 </div>
         </div>
 
-            <div class="content ">
-                <div class="container-fluid">
-                    <div class="row" style="display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    ">
-                        <div class="col-md-8">
-                            <div class="card certcontent" >
-                                <div class="header" style="text-align: center;">
-                                    <h4 class="title">CERTIFICATION OF DISABILITY</h4>
-                                </div>
-                                <table class="certificate">
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr>
-                                        <td style="text-indent: 10%;">
-                                            This is to certify that <input type="text" style="width: 22%;" id="fullname">, residents of <input type="text" style="width: 30%;" id="full_address">  </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="flexitem">
-                                                <p style="padding-left: 38%;">
-                                                    name
-                                                </p>
-                                                <p  style="padding-left: 22%;">
-                                                    House No., Barangay, Town, Municipality
-                                                </p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td >of the province of <input type="text" style="width: 30%;" id="full_province">, in <input type="text" style="width: 25%;" id="full_region">, had voluntarily submitted</td>
-                                    </tr>
-                                    <tr>
-                                        <td>herself/himself to this facility/clinic/office with regard to the nature of disability due to the currently functional</td>
-                                    </tr>
-                                    <tr>
-                                        <td> limitation currently experienced by the here in patient.</td>
-                                    </tr>
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr>
-                                        <td style="text-indent: 10%;">
-                                            Based on the personal interview and medical assessment conducted by here in physician the patient has <input type="text" value="" id="full_disease"> Accompanied by <input type="text" name="" id="another_disease"  style="width: 40%;">, which results to Difficulty 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="flexitem">
-                                            <p style="padding-left: 8%;">Diagnosis</p> 
-                                            <p style="padding-left: 35%;"> Describe the health condition </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                             in (e.g. walking, seeing) and therefore considered as person with <input type="text" name="" id="type_disability" style="width: 40%;" > 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <p style="padding-left: 70%;">Type of Disability</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>as classifed by the Department of health Adminstrative Order No. 2009-011.</td>
-                                    </tr>
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr>
-                                        <td style="text-indent: 10%;">
-                                            This certification is issued on <input type="text" id="issue_date"> at <input type="text" id="requirement"> in compliance with the requirement in issuance of ID for the twenty percent(20%) discounts for Persons with disabilities mandated by Republic Act No. 9442 or Magna Carta for Persons with Disabilities.
-                                        </td>
-                                    </tr>
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr>
-                                        <td>Signed</td>
-                                    </tr>
-                                    <tr><td><p style="visibility: hidden;">hi</p></td></tr>
-                                    <tr><td><input type="text" class="myinput" id="mynameInput"></td></tr>
-                                    <tr><td >Name of Physician: <span class="myinput" id="physician_name"></span> </td></tr>
-                                    <tr><td>License Number: <span class="myinput" id="physician_number"></span></td></tr>
-                                    <tr style="border:none">
-                                        <td  style=" width:100%; border:none; margin:auto;text-align:center;">
-                                        <?php
-                                        $action_get = $_GET['action'];
-                                        ?>
-                                            <button onclick="submitForm()" style="width:50%; margin:auto; text-align:center;" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                               
-                            </div>
-                        </div>
+        <?php 
+        $action_get = $_GET['action'];
+         ?>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row" >
+                    <div class="col-md-10">
+                        <img src="" alt="" id="userCertificate">
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <div style="display:flex; justify-content:space-between; align-items:center; width:80%; margin:auto;">
+            <button onclick="submitForm()" style="width:50%" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
+            <button onclick="submitForm()" style="width:50%" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
+        </div>
+    </div>
 
 
         <footer class="footer">

@@ -95,7 +95,7 @@
                                     <p>Log out</p>
                                 </a>
                             </li>
-
+<!-- 
                             <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-cog"></i>
@@ -109,7 +109,7 @@
                                    <li><a onclick="truncate('disabled')">Delete All Disabled</a></li>
                                    <li><a onclick="truncate('senior')">Delete All Senior</a></li>
                               </ul>
-                            </li>
+                            </li> -->
 
                         <?php } ?>
                         
