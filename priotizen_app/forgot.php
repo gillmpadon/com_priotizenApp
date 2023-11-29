@@ -88,7 +88,7 @@
                     createToast("success","Email Sent")
                     const message =`
                     We have received that you forgot your password and want to reset it. Here is the link to reset it. 
-                    http://127.0.0.1/edsa-priotizen/priotizen_app/reset.php?app_id=${result[1]}
+                    https://pig-tidy-gradually.ngrok-free.app/edsa-priotizen/priotizen_app/reset.php?app_id=${result[1]}
                     Please do not share this link with anyone.
                     Greetings from Quezone.`
                     sendEmail(email, "Forgot Password", message)

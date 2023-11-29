@@ -33,7 +33,7 @@
                     <p>or</p>
                     <hr>
                 </div>
-                <button>Quit</button>
+                <button onclick="window.location.href='signin.php'">Quit</button>
             </div>
     </div>
  <script>
