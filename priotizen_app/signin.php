@@ -45,6 +45,12 @@
            </div>
     </div>
     <script>
+      function setCookie(cname, cvalue) {
+      const d = new Date();
+      d.setTime(d.getTime() + ( 24* 60  * 60 * 1000));
+      let expires = "expires="+d.toUTCString();
+      document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
       function loginAccount(){
         const email = document.getElementById('email');
         const passInput = document.getElementById('passInput');
@@ -73,6 +79,7 @@
               
             }else if(account_type=="company"){
               const {company_id , ...rest} = result
+              setCookie('company', company_id)
               setTimeout(()=>{
               window.location.href = `../store/${(isfirstlogin =="0")? "changepass" :"entry"}.php?company_id=${company_id}&user_type=store`;
             },2000)
