@@ -63,9 +63,9 @@
 
             const entry = document.createElement('div');
             entry.classList.add('entrydash');
-            entry.onclick = function() {
-                window.location.href = `view_profile.php?profile=${encodeURIComponent(id)}`;
-            };
+            // entry.onclick = function() {
+            //     window.location.href = `view_profile.php?profile=${encodeURIComponent(id)}`;
+            // };
             const text = document.createElement('div');
             text.classList.add('text');
             const p1 = document.createElement('p');
@@ -116,7 +116,7 @@
         }
 
         function goSearch(value){
-            const status = 'Completed';
+            const status = 'Verified';
             fetch(`./backend/search.php?name=${value}&status=${status}`,{
                 method: "GET",
             })

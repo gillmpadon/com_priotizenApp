@@ -67,10 +67,10 @@
                       
                     </ul> -->
 
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="display:flex; align-items:center;">
                         <li>
                            <a href="user_edit_admin.php?account_type=admin&user_id=<?php echo $_SESSION['user_id']; ?>">
-                               <p>Account</p>
+                               <img src="../priotizen_app/user_img/<?php echo $_SESSION['admin_image']; ?>" alt="" style="height:2em; width:2em; border-radius:150%;">
                             </a>
                         </li>
                         <?php

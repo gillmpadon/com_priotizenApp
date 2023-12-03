@@ -47,9 +47,50 @@ if($result){
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-39365077-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <style>
+    .signModal{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(5px);
+        z-index: 100;
+        top:0;
+    }
+    .signBox{
+        width: 30%;
+        height:30%;
+        position: absolute;
+        top: 50%;
+        left:50%;
+        transform: translate(-50%, -50%)
+    }
+    .btnSign{
+        height:3em;
+        width:100%
+    }
     
+    .signExit{
+        position:absolute;
+        top:0;
+        right:0;
+        z-index: 100;
+    }
+  </style>
 </head>
-<body>
+<body onselectstart="return false" style="position:relative">
 
 <div class="wrapper">
     <div class="sidebar" data-color="purple" >
@@ -982,23 +1023,33 @@ if($result){
 
         <?php 
         $action_get = $_GET['action'];
+        // $imagePath = "../priotizen_app/user_img/$image";
+        // $imagePath = file_exists($imagePath);
          ?>
 
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row" >
-                    <div class="col-md-10">
-                        <img src="" alt="" id="userCertificate">
+            <div class="content ">
+                <div class="container-fluid">
+                    <div class="row" style="display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    ">
+                        <div class="col-md-10">
+                            <img src="" id="imgCertificate" alt="this is image" style="display: none; width:100%; height:auto;">
+                            <h3 style="text-align:center; display:none" id="imgLabel" >Certificate of Disability</h3>
+                            <img src="" id="imgSignature" alt="this is image" style="display: none; width:100%; height:auto;">
+                            <h3 style="text-align:center; display:none" id="signLabel" >Signature</h3>
+                            <input type="file" name="" style="display:none;" id="certificate">
+                           <div class="" style="display:flex; gap:1em;" >
+                                <button class="btn btn-info btn-fill" style="width: 100%; margin-top:1em;" id="buttonFileInput">Certificate of Disability</button>
+                                <button class="btn btn-info btn-fill" onclick="showSignature()" style=" width: 100%; margin-top:1em; <?php echo $_GET['action']=="edit"? "display:none":"" ?>">Upload Signature</button>
+                                <button onclick="submitForm()"  class="btn btn-info btn-fill" style="width: 100%; margin-top:1em;"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <div style="display:flex; justify-content:space-between; align-items:center; width:80%; margin:auto;">
-            <button onclick="submitForm()" style="width:50%" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
-            <button onclick="submitForm()" style="width:50%" class="btn btn-info btn-fill"><?php echo $action_get=="edit"? "EDIT":"SUBMIT" ?> FORM</button>
-        </div>
     </div>
 
 
@@ -1035,13 +1086,62 @@ if($result){
     </div>
 </div>
 
-<script>
+<div id="signature-pad" class="signature-pad signModal"  style="visibility:hidden">
+    <div class="signBox">
+        <div class="signature-pad--body signPanel" style="border: 1px solid black;">
+            <canvas style="width: 100%;"></canvas>
+        </div>
+        <div class="signature-pad--actions signControl">
+            <div style="display:flex; gap:1em; margin-top:1em">
+            <button type="button" class="button clear btnSign" data-action="clear">Clear</button>
+            <button type="button" class="button btnSign" data-action="undo" >Undo</button>
+            <button type="button" class="button save btnSign" data-action="save-png">Save</button>
+            </div>
+        </div>
+        <svg  class="signExit" xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 256 256"><path fill="currentColor" d="M208 32H48a16 16 0 0 0-16 16v160a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16Zm-26.34 138.34a8 8 0 0 1-11.32 11.32L128 139.31l-42.34 42.35a8 8 0 0 1-11.32-11.32L116.69 128L74.34 85.66a8 8 0 0 1 11.32-11.32L128 116.69l42.34-42.35a8 8 0 0 1 11.32 11.32L139.31 128Z"/></svg>
+    </div>
+</div>
 
+<script src="assets/sign_js/signature_pad.js"></script>
+<script src="assets/sign_js/app.js"></script>
+<script>
+     const signExit = document.querySelector('.signExit')
+     signExit.addEventListener('click', () =>{
+    const signModal = document.querySelector('.signModal');
+    signModal.style.visibility = 'hidden';
+ })
+</script>
+<script>
+    const previewImage = document.getElementById('imgCertificate');
+    const imgLabel = document.getElementById('imgLabel');
+        const fileinput = document.getElementById('buttonFileInput');
+        const file = document.getElementById('certificate');
+        fileinput.addEventListener('click', () => {
+            file.click();
+        })
+        file.addEventListener('change',()=>{
+            if (file.files && file.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgCertificate.style.display= "block"
+                    imgLabel.style.display= "block"
+                    previewImage.src = e.target.result;
+                };
+                reader.readAsDataURL(file.files[0]);
+            }
+        })
+
+                                                
     function goSuccess(){
         demo.goNotif('Successfully',' Update','success','pe-7s-add-user')
     }
     function goError(){
         demo.goNotif('Error',' Update','success','pe-7s-delete-user')
+    }
+
+    const signModal = document.querySelector('.signModal');
+    function showSignature(){
+        signModal.style.visibility = 'visible';
     }
     
     function updateCheckBox(e){
@@ -1057,20 +1157,23 @@ if($result){
     
     function submitForm() {
         const mainObj = {}
-    const inputs = document.querySelectorAll('table input');
+        const inputs = document.querySelectorAll('table input');
         inputs.forEach(input => {
         if (input.type === 'checkbox') {
             mainObj[input.id] = input.checked;
         } else if (input.type === 'text') {
             mainObj[input.id] = input.value
-        }else if((input.type === 'radio'))
+        }else if((input.type === 'radio')){
             mainObj[input.id] = input.checked
+        }
         else{
             mainObj[input.id] = input.value
         }
-        const disability = document.querySelectorAll('')
         });
         
+        const certificate = document.getElementById('certificate');
+        const haveFile = certificate.files.length > 0;
+
         const url = new URLSearchParams(window.location.search);
         const id = url.get('id');
         const action = url.get('action');
@@ -1080,7 +1183,14 @@ if($result){
         formData.append('data', objStr);
         formData.append('action', action);
         formData.append('user_id', id);
-        formData.append('noimage', true);
+
+        if(action=='edit' && haveFile){
+            formData.append('noimage', false);
+            formData.append('certificate', certificate.files[0])
+        }else if(action=='create' && haveFile){
+            formData.append('noimage', false);
+            formData.append('certificate', certificate.files[0])
+        }
         fetch('./backend/forms_submit.php',{
             method: 'POST',
             body: formData
@@ -1089,9 +1199,9 @@ if($result){
         .then(result =>{
             if(result=="Successful"){
                 goSuccess()
-                //setTimeout(()=>{
-                //    window.location.href = "user.php?user_id="+id
-                //},2000);
+                setTimeout(()=>{
+                   window.location.href = "user.php?user_id="+id
+                },2000);
             }else{
                 goError()
             }
@@ -1102,12 +1212,36 @@ if($result){
     function readData(){
         const url = new URLSearchParams(window.location.search);
         const id = url.get('id');
+        const action = url.get('action');
         fetch(`./backend/forms_submit.php?user_id=${id}`,{
             method: 'GET'
         })
         .then( response => response.json())
         .then( result => {
             const data = result['data'];
+            const signature = result['signature'];
+            const certificate = result['certificate'];
+            console.log({signature,certificate})
+            if(certificate!="unknown" || !certificate){
+                const imgCertificate = document.getElementById('imgCertificate');
+                const imgLabels = document.getElementById('imgLabel');
+                imgCertificate.src = `../priotizen_app/documents/${certificate}`
+                imgCertificate.style.display= "block"
+                imgLabels.style.display= "block"
+
+            }
+            if(signature!="unknown" || !signature || action!='edit'){
+                const imgSignature = document.getElementById('imgSignature');
+                const signLabel = document.getElementById('signLabel');
+                imgSignature.src = `../priotizen_app/documents/${signature}`
+                imgSignature.style.display= "block"
+                signLabel.style.display= "block"
+                
+            }
+
+
+
+
             let objectData = JSON.parse(data);
             for (const key in objectData) {
                 if (objectData.hasOwnProperty(key)) {

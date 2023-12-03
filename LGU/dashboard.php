@@ -2,6 +2,11 @@
 require('connection.php');
 if(isset($_GET['user_id'])){
     $_SESSION['user_id'] = $_GET['user_id'];
+    $admin_id = $_GET['user_id'];
+    $photo = "SELECT image from admin where admin_id = '$admin_id'";
+    $resphoto = mysqli_query($conn, $photo);
+    $assocphoto = mysqli_fetch_assoc($resphoto);
+    $_SESSION['admin_image'] = $assocphoto['image'];
     $_SESSION['isLogged'] =true;
 }
 if(!isset($_SESSION['isLogged'])){

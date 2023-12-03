@@ -69,6 +69,9 @@
             .then(result=>{
                 if(result=="Success"){
                 createToast("success","Updated Successfully")
+                setTimeout(() => {
+                    window.location.href='signin.php'
+                }, 2000);
                 }else{
                     createToast("error","Updated Failed")
                 }

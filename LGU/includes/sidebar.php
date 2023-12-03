@@ -28,6 +28,18 @@
                                 <p>Company Reports</p>
                             </a>
                         </li>
+                        <li>
+                            <a href="dash_reports_senior.php?select=technical">
+                                <i class="pe-7s-user"></i>
+                                <p>Senior List</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="dash_reports_pwd.php?select=occupation">
+                                <i class="pe-7s-user"></i>
+                                <p>PWD List</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li <?php echo $class=="table"? "class='active'" :""?>>

@@ -47,7 +47,7 @@
             </div>
             
             <div class="buttonSubmit">
-                <button type="submit" name="submit" onclick="submit()">Update Password</button>
+                <button type="submit" name="submit" onclick="submit()">Forgot Password</button>
                 <div class="orline">
                     <hr>
                     <p>or</p>

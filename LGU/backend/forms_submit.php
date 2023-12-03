@@ -8,55 +8,54 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $arr = array();
     $arr['data'] = $assoc['all_data'];
     $arr['signature'] = $assoc['signature'];
+    $arr['certificate'] = $assoc['certificate'];
     echo json_encode($arr);
 }
 
+function insertImage($name, $id){
+    if(isset($_FILES[$name])){
+        $images = $_FILES[$name];
+        $targetDir = '../../priotizen_app/documents/';
+        $originalFilename = basename($_FILES[$name]["name"]);
+        $extension = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
+        $newFilename = $name."_$originalFilename".".". $extension;
+        $targetFile = $targetDir . $newFilename;
+        if(move_uploaded_file($_FILES[$name]["tmp_name"], $targetFile)){
+            return $newFilename;
+        }else{
+            return "unknown.jpg";
+        }
+    }else{
+        return "unknown.jpg";
+    }
+}
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $data = $_POST['data'];
     $id = $_POST['user_id'];
     $action = $_POST['action'];
-    if(isset($_POST['noimage'])){
-        if($action == "create"){
-            $query = "INSERT INTO test(user_id, all_data) values('$id','$data')";
-        }else{
-            $query = "UPDATE test SET all_data = '$data' WHERE user_id = '$id'";
-        }
-        $result = mysqli_query($conn,$query);
-        if($result){
-            echo json_encode("Successful");
-        }else{
-            echo json_encode(mysqli_error($conn));
-    
-        }
+    if(isset($_POST['senior'])){
+        $query = "UPDATE test SET all_data = '$data' WHERE user_id = '$id'";
     }else{
-        if(isset($_FILES["image"])){
-            $images = $_FILES["image"];
-            $targetDir = '../../priotizen_app/documents/';
-            $originalFilename = basename($_FILES["image"]["name"]);
-            $extension = strtolower(pathinfo($originalFilename, PATHINFO_EXTENSION));
-            $newFilename = "sign_".$id . ".". $extension;
-            $targetFile = $targetDir . $newFilename;
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)){
-                echo json_encode("Successful");
+        if($action=='edit'){
+            if(!isset($_POST['noimage'])){
+                $query = "UPDATE test SET all_data = '$data' WHERE user_id = '$id'";
             }else{
-                echo json_encode("Error");
+                $certificate = insertImage('certificate', $id);
+                $query = "UPDATE test SET all_data = '$data', certificate = '$certificate' WHERE user_id = '$id'";
             }
         }else{
-            $newFilename = "unknown.jpg";
-        }
-        if($action == "create"){
-            $query = "INSERT INTO test(user_id, all_data, signature) values('$id','$data','$newFilename')";
-        }else{
-            $query = "UPDATE test SET all_data = '$data', signature = '$newFilename' WHERE user_id = '$id'";
-        }
-        $result = mysqli_query($conn,$query);
-        if($result){
-            echo json_encode("Successful");
-        }else{
-            echo json_encode(mysqli_error($conn));
-    
+            $certificate = insertImage('certificate', $id);
+            $query = "UPDATE test SET all_data = '$data', certificate = '$certificate' WHERE user_id = '$id'";
         }
     }
+    $result = mysqli_query($conn,$query);
+    if($result){
+        echo json_encode("Successful");
+    }else{
+        echo json_encode(mysqli_error($conn));
+
     }
+
+}
 
 ?>

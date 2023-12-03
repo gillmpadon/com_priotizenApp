@@ -71,7 +71,7 @@ $result = mysqli_query($conn,$query);
                                     <select name="" id="type" class="form-control" style="width: 10em;">
                                         <option value="">Account</option>
                                         <option value="admin">Admin</option>
-                                        <option value="store">Store</option>
+                                        <option value="company">Store</option>
                                     </select>
                                 </div>
                             </div>

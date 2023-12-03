@@ -59,7 +59,7 @@ form{
 }
 .passwordInput svg path:last-child{
     fill: none;
-    stroke:var(--inputText);
+    /* stroke:var(--inputText); */
 }
 .entryInput input{
     height: 50%;
