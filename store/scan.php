@@ -30,6 +30,9 @@ $all_id = json_encode($app_idArr);
         position: relative;
         height:80%;
       }
+      .notifications{
+        margin-top: 1em;
+      }
       
     </style>
 </head>

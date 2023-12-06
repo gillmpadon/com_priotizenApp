@@ -6,14 +6,8 @@
 -- Generation Time: Nov 09, 2023 at 12:20 AM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
-drop database priotizen;
 create database priotizen;
 use priotizen;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
