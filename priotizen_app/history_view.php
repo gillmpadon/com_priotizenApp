@@ -3,7 +3,7 @@ require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
 $reciept_id = $_GET['view'];
-$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.receipt_id as receipt_number, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = $id and n.id = $reciept_id";
+$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price, r.receipt_id as receipt_number, r.discount as discount, r.img_receipt as receipt, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.receipt_id INNER JOIN company c on n.company_id=c.store_id where n.user_id = '$id' and r.id ='$reciept_id'";
 $queryResults = mysqli_query($conn,$query);
 if(!$queryResults){
     echo mysqli_error($conn);
@@ -19,6 +19,11 @@ $assocQuery = mysqli_fetch_assoc($queryResults);
     <link rel="stylesheet" href="css/root.css"><link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
     <link rel="stylesheet" href="css/history_view.css">
     <script src="script/script.js"></script>
+    <style>
+        .info p{
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

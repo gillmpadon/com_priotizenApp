@@ -3,7 +3,7 @@ require('connection.php');
 session_start();
 $id = $_SESSION['account_id'];
 
-$query = "SELECT n.id as receipt_id , n.user_id as user_id, c.name as company, n.status as status, r.price as price,r.img_receipt as receipt, r.discount as discount, r.date as time_date from notification n INNER JOIN receipt r on n.reciept_id = r.id INNER JOIN company c on n.company_id=c.id where n.user_id = '$id' ";
+$query = "SELECT n.id as receipt_id , n.user_id as user_id,  n.status as status, r.price as price,r.img_receipt as receipt, r.discount as discount, r.date as time_date, c.name as company from notification n INNER JOIN receipt r on n.reciept_id = r.receipt_id inner join company c on r.company_id = c.store_id  where n.user_id = '$id' ";
 $queryResults = mysqli_query($conn,$query);
 ?>
 <!DOCTYPE html>
@@ -15,6 +15,11 @@ $queryResults = mysqli_query($conn,$query);
     <link rel="stylesheet" href="css/root.css"><link rel="icon" type="image/png" href="../LGU/assets/img/favicon.ico">
     <link rel="stylesheet" href="css/history.css">
     <script src="script/script.js"></script>
+    <style>
+        .entry_info{
+            color: black;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

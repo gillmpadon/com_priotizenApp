@@ -1,10 +1,10 @@
 <?php
 require('./backend/connection.php');
-$query = "SELECT app_id, valid_id from verified";
+$query = "SELECT v.app_id, v.valid_id, a.account_status from verified v inner join account a on v.app_id= a.account_id where a.account_status='Verified'";
 $result = mysqli_query($conn, $query);
 $app_idArr = array();
 while ($row = mysqli_fetch_array($result)){
-    $app_idArr[] = $row['app_id']." ".$row['valid_id'];
+    $app_idArr[] = $row['app_id']." ".$row['valid_id']." ".$row['account_status'];
 }
 $all_id = json_encode($app_idArr);
 ?>
@@ -52,7 +52,7 @@ $all_id = json_encode($app_idArr);
     </div> 
     
 </div>
-<p id="resultss" style="color:white"> output</p>
+<!-- <p id="resultss" style="color:white"> output</p> -->
     <script
         src="https://unpkg.com/html5-qrcode"> 
     </script> 
@@ -127,24 +127,31 @@ $all_id = json_encode($app_idArr);
         function onScanSuccess(decodedText, decodedResult) {
             let all_id = <?php echo $all_id ?>;
             if(decodedText.length>10){
-                const resultss = document.getElementById('resultss')
-                resultss.textContent =decodedText
+                // const resultss = document.getElementById('resultss')
+                // resultss.textContent =decodedText
                 const newa = (decodedText.substring(decodedText.indexOf('?')+1)).split('&')
                 const codeapp_id = newa[0].split("=")[1]
                 const codevalid_id = newa[1].split("=")[1]
-                if(all_id.includes(`${codeapp_id} ${codevalid_id}`)){
-                    if(countergreen!=0){
-                        countergreen--
-                        createToast('success', 'Success')
-                        setTimeout(() => {
-                            const ifStore = localStorage.getItem('user_uid')
-                            window.location.href= `add_entry.php?byPass=${ifStore}&user_id=${codeapp_id}`
-                        }, 2000);
+                if(all_id.includes(`${codeapp_id} ${codevalid_id} Verified`) || all_id.includes(`${codeapp_id} ${codevalid_id} Pending`)){
+                    if(all_id.includes(`${codeapp_id} ${codevalid_id} Verified`)){
+                        if(countergreen!=0){
+                            countergreen--
+                            createToast('success', 'Success')
+                            setTimeout(() => {
+                                const ifStore = localStorage.getItem('user_uid')
+                                window.location.href= `add_entry.php?byPass=${ifStore}&user_id=${codeapp_id}`
+                            }, 2000);
+                        }
+                    }else{
+                        if(counterRed!=0){
+                        counterRed--
+                        createToast('error', 'Not Verified')
+                    }
                     }
                 }else{
                     if(counterRed!=0){
                         counterRed--
-                        createToast('error', 'Error')
+                        createToast('error', 'Not Exists')
                     }
                 }
                 
