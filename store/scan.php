@@ -24,7 +24,6 @@ $all_id = json_encode($app_idArr);
     <style>
       .container{
         position: relative;
-        /* width: 19em; */
       }
       .section{
         position: relative;
@@ -32,6 +31,9 @@ $all_id = json_encode($app_idArr);
       }
       .notifications{
         margin-top: 1em;
+      }
+      #resultss{
+        position: absolute;
       }
       
     </style>
@@ -48,9 +50,9 @@ $all_id = json_encode($app_idArr);
             <div id="reader"> </div> 
         </div> 
     </div> 
-        
-        
-    </div>
+    
+</div>
+<p id="resultss" style="color:white"> output</p>
     <script
         src="https://unpkg.com/html5-qrcode"> 
     </script> 
@@ -125,6 +127,8 @@ $all_id = json_encode($app_idArr);
         function onScanSuccess(decodedText, decodedResult) {
             let all_id = <?php echo $all_id ?>;
             if(decodedText.length>10){
+                const resultss = document.getElementById('resultss')
+                resultss.textContent =decodedText
                 const newa = (decodedText.substring(decodedText.indexOf('?')+1)).split('&')
                 const codeapp_id = newa[0].split("=")[1]
                 const codevalid_id = newa[1].split("=")[1]
