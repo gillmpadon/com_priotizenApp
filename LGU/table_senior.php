@@ -469,87 +469,87 @@ if($result){
                                         <td colspan="5">
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" value="Fullname" readonly>
+                                                    <input type="text" value="Fullname" readonly id="child1_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" value="Occupation" readonly>
+                                                    <input type="text" value="Occupation" readonly id="child1_occupation">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" value="Income" readonly>
+                                                    <input type="text" value="Income" readonly id="child1_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" value="Age" readonly>
+                                                    <input type="text" value="Age" readonly id="child1_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" value="Working/not working" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="header">
-                                                <div class="entry">
-                                                    <input type="text" class="child_name">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_occupation">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_income">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_age">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_isworking">
+                                                    <input type="text" value="Working/not working" readonly id="child1_work">
                                                 </div>
                                             </div>
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" class="child_name">
+                                                    <input type="text"   id="child2_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_occupation">
+                                                    <input type="text"   id="child2_occupation">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_income">
+                                                    <input type="text"   id="child2_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_age">
+                                                    <input type="text"   id="child2_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_isworking">
-                                                </div>
-                                            </div>
-                                            <div class="header">
-                                                <div class="entry">
-                                                    <input type="text" class="child_name">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_occupation">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_income">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_age">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="child_isworking">
+                                                    <input type="text"   id="child2_work">
                                                 </div>
                                             </div>
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" class="child_name">
+                                                    <input type="text"   id="child3_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_occupation">
+                                                    <input type="text"   id="child3_occupation">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_income">
+                                                    <input type="text"   id="child3_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_age">
+                                                    <input type="text"   id="child3_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="child_isworking">
+                                                    <input type="text"   id="child3_work">
+                                                </div>
+                                            </div>
+                                            <div class="header">
+                                                <div class="entry">
+                                                    <input type="text"   id="child4_name">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child4_occupation">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child4_income">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child4_age">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child4_work">
+                                                </div>
+                                            </div>
+                                            <div class="header">
+                                                <div class="entry">
+                                                    <input type="text"   id="child5_name">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child5_occupation">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child5_income">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child5_age">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text"   id="child5_work">
                                                 </div>
                                             </div>
                                         </td>
@@ -560,70 +560,70 @@ if($result){
                                             
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" class="others_name">
+                                                    <input type="text" class="others_name" id="others2_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_job">
+                                                    <input type="text" class="others_job" id="others2_job">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_income">
+                                                    <input type="text" class="others_income" id="others2_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_age">
+                                                    <input type="text" class="others_age" id="others2_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_isworking">
-                                                </div>
-                                            </div>
-                                            <div class="header">
-                                                <div class="entry">
-                                                    <input type="text" class="others_name">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="others_job">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="others_income">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="others_age">
-                                                </div>
-                                                <div class="entry">
-                                                    <input type="text" class="others_isworking">
+                                                    <input type="text" class="others_isworking" id="others2_work">
                                                 </div>
                                             </div>
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" class="others_name">
+                                                    <input type="text" class="others_name" id="others3_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_job">
+                                                    <input type="text" class="others_job" id="others3_job">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_income">
+                                                    <input type="text" class="others_income" id="others3_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_age">
+                                                    <input type="text" class="others_age" id="others3_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_isworking">
+                                                    <input type="text" class="others_isworking" id="others3_work">
                                                 </div>
                                             </div>
                                             <div class="header">
                                                 <div class="entry">
-                                                    <input type="text" class="others_name">
+                                                    <input type="text" class="others_name" id="others4_name">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_job">
+                                                    <input type="text" class="others_job" id="others4_job">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_income">
+                                                    <input type="text" class="others_income" id="others4_income">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_age">
+                                                    <input type="text" class="others_age" id="others4_age">
                                                 </div>
                                                 <div class="entry">
-                                                    <input type="text" class="others_isworking">
+                                                    <input type="text" class="others_isworking" id="others4_work">
+                                                </div>
+                                            </div>
+                                            <div class="header">
+                                                <div class="entry">
+                                                    <input type="text" class="others_name" id="others5_name">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="others_job" id="others5_job">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="others_income" id="others5_income">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="others_age" id="others5_age">
+                                                </div>
+                                                <div class="entry">
+                                                    <input type="text" class="others_isworking" id="others5_work">
                                                 </div>
                                             </div>
                                         </td>
@@ -1092,7 +1092,7 @@ if($result){
                                                 </div>
                                                 <div class="checks-entry narrow">
                                                     <div class="entries onlybottom">
-                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="house_assets" >
+                                                        <input type="checkbox" name="" class="assets" onclick="updateCheckBox(this)" id="house_asset" >
                                                         <p>House & Lot</p>
                                                     </div>
                                                 </div>
@@ -1677,6 +1677,7 @@ if($result){
 
         const url = new URLSearchParams(window.location.search)
         const id = url.get('id')
+        const admin_id= localStorage.getItem('admin_id');
         const action = url.get('action')
 
         const formData = new FormData();
@@ -1684,6 +1685,7 @@ if($result){
         console.log(jsonString)
         formData.append('data', jsonString);
         formData.append('user_id', id)
+        formData.append('admin_id', admin_id)
         formData.append('action', action)
         formData.append('senior', true)
 
@@ -1695,9 +1697,9 @@ if($result){
         .then(result =>{
             if(result=="Successful"){
                 goSuccess()
-                // setTimeout(()=>{
-                //     window.location.href = "user.php?user_id="+id
-                // },2000);
+                setTimeout(()=>{
+                    window.location.href = "user.php?user_id="+id
+                },2000);
             }else{
                 goError()
             }

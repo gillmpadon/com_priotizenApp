@@ -103,7 +103,6 @@ body{
 .intro{
     display: flex;
     align-items: center;
-    width: 7em;
     justify-content: space-between;
 
 }

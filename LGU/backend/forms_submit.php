@@ -33,6 +33,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $data = $_POST['data'];
     $id = $_POST['user_id'];
     $action = $_POST['action'];
+    $admin_id = $_POST['admin_id'];
+    $query1 = "INSERT INTO user_history(user_id, admin_id,action) values('$id', '$admin_id', 'Edited')";
     if(isset($_POST['senior'])){
         $query = "UPDATE test SET all_data = '$data' WHERE user_id = '$id'";
     }else{
@@ -49,7 +51,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
     $result = mysqli_query($conn,$query);
-    if($result){
+    $result1 = mysqli_query($conn,$query1);
+    if($result && $result1){
         echo json_encode("Successful");
     }else{
         echo json_encode(mysqli_error($conn));

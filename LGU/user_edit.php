@@ -98,9 +98,8 @@ extract($assoc);
                                             <div class="form-group">
                                                 <label>Gender</label><span class="asterisk">*</span>
                                                 <select name="" class="form-control" id="gender">
-                                                    <option value="<?php echo $gender; ?>" selected><?php echo $gender; ?></option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="male" <?php echo $gender=="male"? "selected":""; ?>>Male</option>
+                                                    <option value="female" <?php echo $gender=="female"? "selected":""; ?>>Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -108,10 +107,9 @@ extract($assoc);
                                             <div class="form-group">
                                                 <label>Status</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="status">
-                                                    <option value="<?php echo $status_rs; ?>" selected><?php echo $status_rs; ?></option>
-                                                    <option value="single">Single</option>
-                                                    <option value="married">Married</option>
-                                                    <option value="widowed">Widowed</option>
+                                                    <option value="single" <?php echo $status_rs=="single"? "selected":""; ?>>Single</option>
+                                                    <option value="married" <?php echo $status_rs=="married"? "selected":""; ?>>Married</option>
+                                                    <option value="widowed" <?php echo $status_rs=="widowed"? "selected":""; ?>>Widowed</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -261,9 +259,8 @@ extract($assoc);
                                             <div class="form-group">
                                                 <label>Condition</label><span class="asterisk">*</span>
                                                 <select name="  " class="form-control" id="conditions">
-                                                    <option value="<?php echo $conditions ?>"><?php echo $conditions ?></option>
-                                                    <option value="senior citizen">Senior Citizen</option>
-                                                    <option value="pwd">PWD</option>
+                                                    <option value="senior citizen" <?php echo $conditions=="senior citizen"? "selected":"" ?>>Senior Citizen</option>
+                                                    <option value="pwd" <?php echo $conditions=="pwd"? "selected":"" ?>>PWD</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -272,14 +269,14 @@ extract($assoc);
                                     <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Name</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Family Name" id="family_name" value="<?php echo $family_name ?>" >
+                                                <label>Emergency Name</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Emergency Name" id="family_name" value="<?php echo $family_name ?>" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Contact</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Family Number" id="family_contact" value="<?php echo $family_contact ?>">
+                                                <label>Emergency Contact</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Emergency Contact" id="family_contact" value="<?php echo $family_contact ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -465,10 +462,9 @@ extract($assoc);
         const family_name = document.getElementById('family_name').value
         const family_contact = document.getElementById('family_contact').value
         const municipality = document.getElementById('municipality')
-        const brgy = document.getElementById('brgy')
-        const street = document.getElementById('street')
-        const house = document.getElementById('house')
-
+        const brgy = document.getElementById('brgy').value
+        const street = document.getElementById('street').value
+        const house = document.getElementById('house').value
         const formData = new FormData();
         formData.append('admin_id', admin_id);
         formData.append('fname', fname);

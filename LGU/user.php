@@ -11,6 +11,9 @@ $query = "SELECT v.*, a.account_status, d.psa , d.med FROM verified v INNER JOIN
 $result = mysqli_query($conn, $query);
 
 $query1 = "SELECT u.action, u.time_edited , a.name as admin_name from user_history u inner join admin a on u.admin_id = a.admin_id where u.user_id = '$user_id' order by u.id desc limit 1 ";
+$lastAction = "SELECT action from user_history where user_id = '$user_id' order by id desc limit 1 ";
+$resLastAction = mysqli_query($conn,$lastAction);
+$restAssoc = mysqli_fetch_assoc($resLastAction);
 $result1 = mysqli_query($conn,$query1);
 if($result && $result1 ){
     $assoc = mysqli_fetch_assoc($result);
@@ -184,7 +187,7 @@ $query3_result = mysqli_query($conn,$query3);
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Condition</label>
-                                                <input type="text" name="" id="" class="form-control" readonly value="<?php echo ($conditions=="pwd")? "senior citizen":"disabled" ?>">
+                                                <input type="text" name="" id="" class="form-control" readonly value="<?php echo ($conditions=="pwd")? "disabled":"senior citizen" ?>">
                                             </div>
                                         </div>
                                     </div>
@@ -192,14 +195,14 @@ $query3_result = mysqli_query($conn,$query3);
                                     <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Name</label>
-                                                <input type="text" class="form-control" value="<?php echo $family_name?>" placeholder="Enter Family Name" id="family_name" readonly>
+                                                <label>Emergency Name</label>
+                                                <input type="text" class="form-control" value="<?php echo $family_name?>" placeholder="Enter Emergency Name" id="family_name" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Contact</label>
-                                                <input type="text" class="form-control" value="<?php echo $family_contact?>" placeholder="Enter Family Number" id="family_contact" readonly>
+                                                <label>Emergency Contact</label>
+                                                <input type="text" class="form-control" value="<?php echo $family_contact?>" placeholder="Enter Emergency Contact" id="family_contact" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -256,7 +259,7 @@ $query3_result = mysqli_query($conn,$query3);
                                 $dateFormat = $time_edited;
                                 $dateTime = new DateTime($dateFormat);
                                 $newDate = $dateTime -> format('F j g:i A');
-                                $text = ($action=="Created"? "Created by ": "Last Edited by "); 
+                                $text = ($restAssoc['action']=="Created"? "Created by ": "Last Edited by "); 
                                 $text =$text.$admin_name. " on ".$newDate;
                                 echo $text;
                                 ?></p>

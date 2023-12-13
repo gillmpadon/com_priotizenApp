@@ -39,14 +39,14 @@ if($_SERVER["REQUEST_METHOD"] =="POST"){
         }
 
         $query = "UPDATE verified set fname = '$fname', mi = '$mi' , lname = '$lname', gender = '$gender',
-        address = '$address' , valid_id = '$valid_id', conditions = '$conditions', email = '$email',
+        address = '$address' , valid_id = '$valid_id', conditions = '$conditions',bdate = '$bdate', nationality= '$nationality', email = '$email',
         family_name = '$family_name', family_contact = '$family_contact'  $photo where app_id = '$app_id'";
         $result = mysqli_query($conn, $query);
         
         $query2= "INSERT INTO user_history(user_id, admin_id, action, time_edited) VALUES ('$app_id','$admin_id','Edited',NOW())";
-        $query3 = "INSERT INTO address(user_id,brgy,street,house) values('$app_id','$brgy','$street','$house')";
-        $result2 = mysqli_query($conn, $query2);
+        $query3 = "UPDATE address set brgy = '$brgy', street = '$street', house = '$house' where user_id = '$app_id'";
         $result3 = mysqli_query($conn, $query3);
+        $result2 = mysqli_query($conn, $query2);
         if($result && $result2 && $result3){
             $arr = "Successful";
         }else{

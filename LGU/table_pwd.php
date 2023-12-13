@@ -1,6 +1,9 @@
 <?php
 include('./backend/connection.php');
 $id = $_GET['id'];
+$date_applied = "SELECT DATE(time_edited) as time_edited from user_history where user_id = '$id' and action = 'Created'";
+$result_da = mysqli_query($conn,$date_applied);
+$assoc_da  = mysqli_fetch_assoc($result_da);
 $query = "SELECT v.*, a.street, a.house from verified v Inner join address a on v.app_id = a.user_id where v.app_id = '$id' limit 1";
 $result = mysqli_query($conn,$query);
 if($result){
@@ -149,7 +152,11 @@ if($result){
                                                     <p>3.</p> 
                                                     <p>DATE APPLIED (mm/dd/yyyy)<span class="asterisk">*</span></p>
                                                 </div>
-                                                <input class="input" type="text" id="date">
+                                                <?php
+                                                $dateda = new DateTime ($assoc_da['time_edited']);
+                                                $new_das = $dateda->format('F j, Y')
+                                                ?>
+                                                <input class="input" type="text" value="<?php echo $new_das ?>" id="date" readonly>
                                             </td>
                                             <td colspan="1" rowspan="2">
                                             <?php
@@ -214,11 +221,11 @@ if($result){
                                                 </div>
                                                 <div class="superflex">
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="male" class="gender">
+                                                            <input type="radio" name="newsex" id="male" class="gender">
                                                             <p>MALE</p>
                                                         </div>
                                                         <div class="flexitem">
-                                                            <input type="radio" name="new" id="female" class="gender">
+                                                            <input type="radio" name="newsex" id="female" class="gender">
                                                             <p>FEMALE</p>
                                                         </div>
                                                 </div>
@@ -592,7 +599,7 @@ if($result){
                                                     <div class="checkboxDiv">
                                                         <div class="flexitem">
                                                             <input type="radio" name="new" id="regular">
-                                                            <p>Permanent / Regular</p>
+                                                            <p>Regular</p>
                                                         </div>
                                                         <div class="flexitem">
                                                             <input type="radio" name="new" id="seasonal">
@@ -793,17 +800,17 @@ if($result){
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="guardian_lname">
+                                                    <input class="input" type="text" name="" id="guardian1_lname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="guardian_fname">
+                                                    <input class="input" type="text" name="" id="guardian1_fname">
                                                 </div>
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
-                                                    <input class="input" type="text" name="" id="guardian_mname">
+                                                    <input class="input" type="text" name="" id="guardian1_mname">
                                                 </div>
                                             </td>
                                         </tr>
@@ -902,7 +909,7 @@ if($result){
                                                     <p>19. NAME OF CERYIFYING PHYSICIAN: </p>
                                                 </div>
                                                 <p>LICENSE NO.</p>
-                                                <input type="text" class="input">
+                                                <input type="text" class="input" id="license">
                                             </td>
                                             <td >
                                                 <div class="rowitem superflex">
@@ -1176,6 +1183,7 @@ if($result){
 
         const url = new URLSearchParams(window.location.search);
         const id = url.get('id');
+        const admin_id= localStorage.getItem('admin_id');
         const action = url.get('action');
         
         const objStr = JSON.stringify(mainObj);
@@ -1183,7 +1191,7 @@ if($result){
         formData.append('data', objStr);
         formData.append('action', action);
         formData.append('user_id', id);
-
+        formData.append('admin_id', admin_id);
         if(action=='edit' && haveFile){
             formData.append('noimage', false);
             formData.append('certificate', certificate.files[0])
@@ -1221,7 +1229,6 @@ if($result){
             const data = result['data'];
             const signature = result['signature'];
             const certificate = result['certificate'];
-            console.log({signature,certificate})
             if(certificate!="unknown" || !certificate){
                 const imgCertificate = document.getElementById('imgCertificate');
                 const imgLabels = document.getElementById('imgLabel');

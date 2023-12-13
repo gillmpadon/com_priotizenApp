@@ -3,6 +3,7 @@ require('connection.php');
 if(isset($_GET['user_id'])){
     $_SESSION['user_id'] = $_GET['user_id'];
     $admin_id = $_GET['user_id'];
+    echo "<script>localStorage.setItem('admin_id','$admin_id')</script>";
     $photo = "SELECT image from admin where admin_id = '$admin_id'";
     $resphoto = mysqli_query($conn, $photo);
     $assocphoto = mysqli_fetch_assoc($resphoto);

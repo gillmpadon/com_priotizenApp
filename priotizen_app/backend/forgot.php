@@ -36,7 +36,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                     }else{
                         $arr[] = $assoc['account_id'];
                         $arr[] = $assoc['name'];
-
                     }
                 }else{
                     $arr[] = "Error";
@@ -50,5 +49,4 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         echo json_encode('Error');
     }
 }
-
 ?>

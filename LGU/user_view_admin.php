@@ -125,7 +125,7 @@
                                          <small id="setEmail"><?php echo $email; ?></small>
                                       </h4>
                                       <br>
-                                      <h6>Admin</h6>
+                                      <h6><?php echo $account_type ?></h6>
                                     </a>
                                 </div>
                                

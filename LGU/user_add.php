@@ -248,14 +248,14 @@
                                     <div class="row otherInfoOn" >
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Name</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Family Name" id="family_name">
+                                                <label>Emergency Name</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Emergency Name" id="family_name">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Family Contact</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Family Number" id="family_contact">
+                                                <label>Emergency Contact</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Enter Emergency Contact" id="family_contact">
                                             </div>
                                         </div>
                                         <div class="col-md-4">

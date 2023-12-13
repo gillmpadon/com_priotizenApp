@@ -47,7 +47,6 @@ $all_id = json_encode($app_idArr);
         <div class="section"> 
             <div id="reader"> </div> 
         </div> 
-      
     </div> 
         
         
