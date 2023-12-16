@@ -53,9 +53,15 @@
         const passInput1 = document.getElementById('passInput1');	
         const passInput = document.getElementById('passInput');
         const app_id = localStorage.getItem('app_id');
+        const formdata = new FormData();
+
+        formdata.append('id', app_id);
+        formdata.append('pass', passInput.value);
+
         if(passInput.value == passInput1.value){
-          fetch(`../priotizen_app/backend/forgot.php?app_id=${app_id}&pass=${passInput.value}`,{
-            method: 'GET',
+          fetch(`../priotizen_app/backend/changepass_reg.php`,{
+            method: 'POST',
+            body: formdata
           })
           .then(res => res.json())
           .then(result =>{
@@ -69,7 +75,7 @@
             }
           })
       }else{
-        console.log("password do not match")
+        createToast("error","Password Do not Matched")
       }
     }
     </script>

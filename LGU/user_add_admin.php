@@ -111,7 +111,7 @@
                                          <small id="setEmail">email@gmail.com</small>
                                       </h4>
                                       <br>
-                                      <h6>Pending</h6>
+                                      <h6><?php echo $_GET['account_type']=="store"? "STORE":"ADMIN" ?></h6>
                                     </a>
                                 </div>
                                
