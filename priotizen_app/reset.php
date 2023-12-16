@@ -57,13 +57,19 @@
     function resetEmail(){
         var pass1 = document.getElementById('passInput1').value;
         var pass2 = document.getElementById('passInput2').value;
+        
         if(pass1 != pass2){
             createToast("error","Passwords do not match")
         }else{
             const url = new URLSearchParams(window.location.search)
             const app_id = url.get('app_id')
-            fetch(`./backend/forgot.php?app_id=${app_id}&pass=${pass2}`,{
-                method:'GET'
+            
+            const formdata = new FormData();
+            formdata.append('pass', pass1);
+            formdata.append('id', app_id);
+            fetch(`./backend/changepass_reg.php`,{
+                method:'POST',
+                body: formdata
             })
             .then(response=>response.json())
             .then(result=>{
