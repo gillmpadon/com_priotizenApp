@@ -1041,7 +1041,8 @@ if($result){
                     align-items: center;
                     ">
                         <div class="col-md-10">
-                            <img src="" id="imgCertificate" alt="this is image" style="display: none; width:100%; height:auto;">
+                            <img src="../priotizen_app/documents/default.jpg" id="imgCertificate"  style="display: none; width:100%; height:auto;">
+                            
                             <h3 style="text-align:center; display:none" id="imgLabel" >Certificate of Disability</h3>
                             <img src="" id="imgSignature" alt="this is image" style="display: none; width:100%; height:auto;">
                             <h3 style="text-align:center; display:none" id="signLabel" >Signature</h3>
