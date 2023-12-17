@@ -70,7 +70,16 @@
                     <ul class="nav navbar-nav navbar-right" style="display:flex; align-items:center;">
                         <li>
                            <a href="user_edit_admin.php?account_type=admin&user_id=<?php echo $_SESSION['user_id']; ?>">
-                               <img src="../priotizen_app/user_img/<?php echo $_SESSION['admin_image']; ?>" alt="" style="height:2em; width:2em; border-radius:150%;">
+                                    <?php
+                                        $imageKO = isset($_SESSION['admin_image'])? $_SESSION['admin_image']:"none";
+                                        $imagePath = "../priotizen_app/user_img/$imageKO";
+                                        if(file_exists($imagePath)) {
+                                            echo "<img src='$imagePath' alt='' style='height:2em; width:2em; border-radius:150%;'>";
+                                        }else{
+                                            echo '<img  style="height:2em; width:2em; border-radius:150%;" src="./assets/img/default-avatar.png"  alt="..."/>';
+                                        }
+                                      ?>
+                               
                             </a>
                         </li>
                         <?php
