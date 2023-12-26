@@ -62,10 +62,10 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-        #anotherList{
+        #anotherList, .listUser{
             list-style-type: none;
         }
-        #anotherList li a{
+        #anotherList li a, , .listUser li a{
             padding:.5em;
         }
         .sidebar{

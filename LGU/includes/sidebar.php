@@ -29,6 +29,20 @@
                             </a>
                         </li>
                         <li>
+                            <a href="dash_reports_user_transaction.php">
+                                <i class="pe-7s-display2"></i>
+                                <p>User Transactions</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li <?php echo $class=="table"? "class='active'" :""?>>
+                    <a href="table.php">
+                        <i class="pe-7s-note2"></i>
+                        <p>Users List</p>
+                    </a>
+                    <ul id="anotherList1" class="listUser" style="list-style-type:none;<?php echo $class=="table"? "" :"'display:none;'"?>">
+                        <li>
                             <a href="dash_reports_senior.php?select=technical">
                                 <i class="pe-7s-user"></i>
                                 <p>Senior List</p>
@@ -41,12 +55,6 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li <?php echo $class=="table"? "class='active'" :""?>>
-                    <a href="table.php">
-                        <i class="pe-7s-note2"></i>
-                        <p>Users List</p>
-                    </a>
                 </li>
                 <li <?php echo $class=="table list"? "class='active'" :""?>>
                     <a href="table_user.php">

@@ -26,9 +26,9 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
     $endDate = $formatDate->format('Y-m-d');
     $filter_date = " where r.date >= '$startDate' and r.date <= '$endDate'";
 }
-    $account_id = $_GET['account_id'] ?? "";
-    $query_user = "SELECT concat(c.lname,' ',c.fname) as name , c.conditions ,co.name as cname, r.date as date, r.discount, r.price from verified c inner join receipt r on r.user_id = c.app_id INNER JOIN company co on co.store_id = r.company_id $filter_date";
-    $query_user_max = "SELECT concat(c.lname,' ' , (r.price)) as max_price from verified c inner join receipt r on r.user_id = c.app_id $filter_date order by r.price desc limit 1 ";
+    $account_id = isset($_GET['account_id'])? $_GET['account_id']:"";
+    $account =  $account_id? "and app_id='$account_id'":"";
+    $query_user = "SELECT concat(c.lname,' ',c.fname) as name , c.conditions ,co.name as cname, r.date as date, r.discount, r.price from verified c inner join receipt r on r.user_id = c.app_id INNER JOIN company co on co.store_id = r.company_id $filter_date $account ";
     $query_result = mysqli_query($conn,$query_user);
 ?>
 <!doctype html>
@@ -57,10 +57,10 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
-        #anotherList{
+        #anotherList, .listUser{
             list-style-type: none;
         }
-        #anotherList li a{
+        #anotherList li a, , .listUser li a{
             padding:.5em;
         }
         .sidebar{
@@ -156,7 +156,7 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                     <tr class="tablehead">
                                         <td>Name</td>
                                         <td>Account Type</td>
-                                        <td>Company Name</td>
+                                        <td>Store Name</td>
                                         <td>Date</td>
                                         <td>Bill</td>
                                         <td>Discounts</td>
@@ -238,7 +238,8 @@ const filterBtn = document.querySelector('#filterBtn');
 filterBtn.addEventListener('click', ()=>{
     const startDate = document.querySelector('#startDate').value;
     const endDate = document.querySelector('#endDate').value;
-    const account_id = document.querySelector('#account_id').value;
+    let account_id = document.querySelector('#account_id').value;
+    account_id = account_id? account_id: new URLSearchParams(window.location.search).get('account_id')
     window.location.href = `dash_reports_user_transaction.php?startDate=${startDate}&endDate=${endDate}&account_id=${account_id}`;
 })
 </script>
