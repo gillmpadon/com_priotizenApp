@@ -56,7 +56,7 @@ $company_id = json_encode($_SESSION['company_id']);
                 <p id="proof">Proof of Transactions</p>
             </div>
 
-            <button onclick="proceedTransact()">
+            <button id="proceedBtn" onclick="proceedTransact()">
                 Proceed
             </button>
         </div>
@@ -96,6 +96,8 @@ $company_id = json_encode($_SESSION['company_id']);
         })
 
         function proceedTransact(){
+            const proceedBtn  = document.getElementById("proceedBtn")
+            proceedBtn.disabled = true;
             const user_id = document.getElementById("user_id").value;
             const discount = document.getElementById("discount").value;
             const money = document.getElementById("money").value;
@@ -120,6 +122,7 @@ $company_id = json_encode($_SESSION['company_id']);
                     createToast("success","Receipt Added")
                     setTimeout(()=> window.location.href="entry.php",2000)
                 }else{
+                    proceedBtn.disabled = false;
                     createToast("error","Receipt Error")
                 }
             // notifications.style.display = 'none';

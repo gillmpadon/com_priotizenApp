@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
         if(mysqli_num_rows($result) > 0){
             $assoc = mysqli_fetch_assoc($result);
             if($assoc['account_type'] == 'user'){
-                $queryVerify = "SELECT v.* , a.account_type, a.isfirstlogin, a.id as id from verified v inner join account a on v.app_id = a.account_id where v.email  = '$email'";
+                $queryVerify = "SELECT v.* , a.account_type, a.account_status, a.isfirstlogin, a.id as id from verified v inner join account a on v.app_id = a.account_id where v.email  = '$email'";
                 $resultVerify = mysqli_query($conn,$queryVerify);
                 $assoc = mysqli_fetch_assoc($resultVerify);
                 extract($assoc);
@@ -25,6 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $_SESSION['photo'] = $photo;
                 $_SESSION['account_id'] = $id;
                 $arr["isfirstlogin"] = $isfirstlogin;
+                $arr["isVerified"] = $account_status;
             }  else if($assoc['account_type'] == 'company'){
                 $arr["account_type"] = $assoc['account_type'];
                 $queryAccount = "SELECT c.*, a.isfirstlogin FROM company c inner join account a on c.store_id= a.account_id where a.email = '$email'";

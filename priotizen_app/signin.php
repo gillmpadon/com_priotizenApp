@@ -45,13 +45,13 @@
            </div>
     </div>
     <script>
-      function setCookie(cname, cvalue) {
+    function setCookie(cname, cvalue) {
       const d = new Date();
       d.setTime(d.getTime() + ( 24* 60  * 60 * 1000));
       let expires = "expires="+d.toUTCString();
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
-      function loginAccount(){
+    function loginAccount(){
         const email = document.getElementById('email');
         const passInput = document.getElementById('passInput');
         fetch(`./backend/user.php?email=${email.value}&password=${passInput.value}`,{
@@ -62,22 +62,27 @@
           if(result.message == "Successful"){
             const account_type = result.account_type
             const isfirstlogin = result.isfirstlogin
-            createToast("success","Login Successful")
             if(account_type=="user"){
-              const {message, app_id , photo, uniqueDownload, account_id, valid_id, account_type, account_name} = result
-              localStorage.setItem('account_id', account_id)
-              localStorage.setItem('account_name', account_name)
-              localStorage.setItem('app_id', app_id);
-              localStorage.setItem('photo', photo);
-              localStorage.setItem('uniqueDownload', uniqueDownload);
-              localStorage.setItem('valid_id', valid_id);
-              localStorage.setItem('qrcode_valid_id', valid_id);
-              localStorage.setItem('qrcode_app_id', app_id);
-              setTimeout(()=>{
-                window.location.href = `${(isfirstlogin =="0")? "changepass" :"notification"}.php?user_id=${app_id}&user_type=user`;
-              },2000) 
+              const {message, app_id, isVerified , photo, uniqueDownload, account_id, valid_id, account_type, account_name} = result
+              if(isVerified=="Pending"){
+                createToast("error","User Exists But Not Verified")
+              }else{
+                createToast("success","Login Successful")
+                localStorage.setItem('account_id', account_id)
+                localStorage.setItem('account_name', account_name)
+                localStorage.setItem('app_id', app_id);
+                localStorage.setItem('photo', photo);
+                localStorage.setItem('uniqueDownload', uniqueDownload);
+                localStorage.setItem('valid_id', valid_id);
+                localStorage.setItem('qrcode_valid_id', valid_id);
+                localStorage.setItem('qrcode_app_id', app_id);
+                setTimeout(()=>{
+                  window.location.href = `${(isfirstlogin =="0")? "changepass" :"notification"}.php?user_id=${app_id}&user_type=user`;
+                },2000) 
+              }
               
             }else if(account_type=="company"){
+              createToast("success","Login Successful")
               const {company_id , ...rest} = result
               setCookie('company', company_id)
               setTimeout(()=>{
@@ -85,6 +90,7 @@
             },2000)
             }
             else{
+              createToast("success","Login Successful")
               const { id , ...rest} = result
               setTimeout(()=>{
               window.location.href = `../LGU/dashboard.php?user_id=${id}`;
@@ -94,6 +100,31 @@
             createToast("error","No User Found")
           }
         })
+      }
+    
+    
+    </script>
+    <script>
+      function verifyUser(verification){
+        const formData = new FormData()
+        formData.append('verify',verification)
+          fetch(`./backend/verified.php`,{
+                method: 'POST',
+                body: formData
+          })
+          .then(response => response.json())
+          .then( result =>{
+                if(result == "Success"){
+                  createToast("success","User Verify Successful")
+                }else{
+                  createToast("error","User Verify Failed")
+                }
+          })
+      }
+      const url = new URLSearchParams(window.location.search);
+      const verification = url.get('verify') ?? '';
+      if(verification){
+        verifyUser(verification)
       }
     </script>
     <script src="script/showpass.js"></script>

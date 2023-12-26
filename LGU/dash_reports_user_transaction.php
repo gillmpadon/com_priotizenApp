@@ -29,17 +29,9 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
  $showTable = false;
     $showTable = true;
     $highest_user ="";
-    $query_user = "SELECT concat(c.lname,' ',c.fname) as name , c.brgy, c.number, r.date as date, r.user_id, r.discount, r.price from verified c inner join receipt r on r.user_id = c.app_id $filter_date";
+    $query_user = "SELECT concat(c.lname,' ',c.fname) as name , c.conditions ,co.name as cname, r.date as date, r.discount, r.price from verified c inner join receipt r on r.user_id = c.app_id INNER JOIN company co on co.store_id = r.company_id $filter_date";
     $query_user_max = "SELECT concat(c.lname,' ' , (r.price)) as max_price from verified c inner join receipt r on r.user_id = c.app_id $filter_date order by r.price desc limit 1 ";
     $query_result = mysqli_query($conn,$query_user);
-    $query_result_max_user = mysqli_query($conn,$query_user_max);
-    if($query_result_max_user){
-        $assoc_one= mysqli_fetch_assoc($query_result_max_user);
-        $highest_user = $assoc_one['max_price'];
-    }else{
-        $highest_user = "None 0";
-    }
-    // echo $query_user;
 ?>
 <!doctype html>
 <html lang="en">
@@ -152,16 +144,12 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                 <div class="details">
                                     <button id="downloadBtn">DOWNLOAD</button>
                                     <div class="date_details">
-                                        <?php
-                                        
-                                        ?>
                                         <input type="date" name="" id="startDate" <?php echo $filter_date == "" ? "" : 'value="' . date('Y-m-d', strtotime($startDate)) . '"'; ?>>
                                         <p>To</p>
                                         <input type="date" name="" id="endDate" <?php echo $filter_date == "" ? "" : 'value="' . date('Y-m-d', strtotime($endDateOld)) . '"'; ?>>
-
                                     </div>
                                     <div class="detailsBtn">
-                                        <input type="text" name="" id="" readonly value="Highest: <?php echo $highest_user?>">
+                                        <input type="text" name="" id="account_id" >
                                         <button id="filterBtn">Show Data</button>
                                     </div>
                                 </div>
@@ -169,23 +157,24 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                <table id="tableStore">
                                     <tr class="tablehead">
                                         <td>Name</td>
-                                        <td>Address</td>
-                                        <td>Contact</td>
-                                        <td>Account ID</td>
+                                        <td>Account Type</td>
+                                        <td>Company Name</td>
                                         <td>Date</td>
+                                        <td>Bill</td>
                                         <td>Discounts</td>
                                         <td>Payments</td>
                                     </tr>
                                     <?php
                                     if(mysqli_num_rows($query_result)>0){
                                         while($row = mysqli_fetch_assoc($query_result)){
+                                        $bill = floor(($row['price'])/(1-($row['discount']/100)));
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['name']?></td>
-                                                <td><?php echo $row['brgy']?></td>
-                                                <td><?php echo $row['number']?></td>
-                                                <td><?php echo $row['user_id']?></td>
+                                                <td><?php echo $row['conditions']?></td>
+                                                <td><?php echo $row['cname']?></td>
                                                 <td><?php echo date('M j, g:i a', strtotime($row['date']))?></td>
+                                                <td><?php echo $bill ?></td>
                                                 <td><?php echo $row['discount']?></td>
                                                 <td><?php echo $row['price']?></td>
                                             </tr>
@@ -251,30 +240,16 @@ const filterBtn = document.querySelector('#filterBtn');
 filterBtn.addEventListener('click', ()=>{
     const startDate = document.querySelector('#startDate').value;
     const endDate = document.querySelector('#endDate').value;
-    window.location.href = `dash_reports_user.php?startDate=${startDate}&endDate=${endDate}`;
+    const account_id = document.querySelector('#account_id').value;
+    window.location.href = `dash_reports_user_transaction.php?startDate=${startDate}&endDate=${endDate}&account_id=${account_id}`;
 })
 </script>
 
 </body>
-
-    <!--   Core JS Files   -->
     <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
-
-	
-
-    <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
-
-    <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
-
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
-
-	
-
 </html>

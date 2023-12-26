@@ -65,8 +65,8 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Middle Initial</label>
-                                                <input id="mi" type="text" class="form-control" placeholder="Enter M.I" >
+                                                <label>Middle Name</label>
+                                                <input id="mi" type="text" class="form-control" placeholder="Enter Middle Name" >
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -206,16 +206,28 @@
                                         </div>
                                     </div>
                                     <div class="row otherInfoOn" >
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>National ID</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id" >
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>APP ID</label><span class="asterisk">*</span>
                                                 <input readonly type="text" class="form-control" placeholder="Enter APP ID Number" id="app_id" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Email</label><span class="asterisk">*</span>
+                                                <input type="email" class="form-control" placeholder="Email Address" id="email" >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Control #</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="Control Number" id="ctrlNo" >
                                             </div>
                                         </div>
                                         
@@ -246,24 +258,22 @@
                                     </div>
 
                                     <div class="row otherInfoOn" >
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Emergency Name</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Emergency Name" id="family_name">
+                                        <div class="header">
+                                            <h5 class="title">Emergency Contact<span class="asterisk">*</span></h5>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" style="display:flex; gap:1em; align-items:baseline; justify-content:center;">
+                                                <p>Name:</p>
+                                                <input type="text" style="border:none; width:90%" class="form-control" placeholder="Enter Name" id="family_name">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Emergency Contact</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter Emergency Contact" id="family_contact">
+                                        <div class="col-md-6">
+                                            <div class="form-group" style="display:flex; gap:1em; align-items:baseline; justify-content:center;">
+                                                <p>Contact<p> Number</p>:</p>
+                                                <input type="text" style="border:none; width:90%" class="form-control" placeholder="Enter Contact" id="family_contact">
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Email</label><span class="asterisk">*</span>
-                                                <input type="email" class="form-control" placeholder="Email Address" id="email" >
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 <div >
                                         <button type="submit" class="btn btn-info btn-fill pull-right" onclick="createProfile()" >Create Profile</button>
@@ -365,14 +375,40 @@
     </div>
 </div>
 
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script> 
 <script>
-
     function goSuccess(){
         demo.goNotif('Successfully',' Created','success','pe-7s-add-user')
     }
     function goError(){
         demo.goNotif('Error',' Creation','success','pe-7s-delete-user')
     }
+
+
+    emailjs.init('wNOaPZ8yBLfSbRF8O'); 
+
+    function sendEmail(to_email, fromname, message) {
+        console.log("email is sent")
+        const serviceID = 'service_ri5dx1k'; 
+        const templateID = 'template_a22qdxk'; 
+
+        const emailParams = {
+            to_email: to_email,
+            from_name: fromname, 
+            message: message,
+        };
+
+        emailjs.send(serviceID, templateID, emailParams)
+            .then(function(response) {
+                console.log('Email sent successfully!', response);
+            })
+            .catch(function(error) {
+                console.error('Error sending email:', error);
+            });
+    }
+
+</script>
+<script>
 
 
     let showOtherInfo = false;
@@ -400,8 +436,12 @@
         }
         console.log(showOtherInfo);
     }
+    function validateEmail(email) {
+        // Regular expression for Gmail addresses ending with '@gmail.com'
+        const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-
+        return regex.test(email);
+    }
     let sfname = document.getElementById('fname')
     let smi = document.getElementById('mi');
     let slname = document.getElementById('lname');
@@ -456,6 +496,7 @@
     const family_contact = document.getElementById('family_contact').value
     const family_name = document.getElementById('family_name').value
     const valid_id = document.getElementById('valid_id').value
+    const ctrlNo = document.getElementById('ctrlNo').value
     const image = document.getElementById('imageInput')
 
     const formData = new FormData();
@@ -478,38 +519,104 @@
     formData.append('app_id', user_id)
     formData.append('admin_id', admin_id)
     formData.append('valid_id', valid_id)
+    formData.append('ctrlNo', ctrlNo)
     formData.append('image', image.files[0]);
-    let result = true
+    let result = true, isAlready65 = false
+
+    const dateSelected = new Date(bdate);
+    const year  = dateSelected.getFullYear()
+    const month = dateSelected.getMonth()+1
+    const day = dateSelected.getDate()
+
+    const currentDate = new Date()
+    const currentYear = currentDate.getFullYear()
+    const currentMonth = currentDate.getMonth()+1
+    const currentDay = currentDate.getDate()
+
+    let isValidEmail = validateEmail(email)
+
+
     if(fname == '' || lname == '' || email == '' || gender == '' || status == '' || bdate == '' || number == '' 
     || condition == '' || brgy == '' || street == '' || house == '' || municipality == '' || family_contact == ''
-    || family_name == '' || valid_id == '' || image.files[0] == ''){
+    || family_name == '' || valid_id == '' || image.files[0] == '' ||image.files.length === 0){
         result = false
     }
-    if(result){
-        fetch('./backend/user.php',{
-        method: 'POST',
-        body: formData
-        })
-        .then( response => response.json())
-        .then( result =>{
-            if(result=="Successful"){
-                goSuccess()
-                setTimeout(()=>{
-                    const id = `id=${user_id}`
-                    if(condition == "pwd"){
-                        window.location.href=`table_pwd.php?${id}&action=create`
-                    }else{
-                        window.location.href=`table_senior.php?${id}&action=create`
-                    }
-                },2000)
+    if(condition == 'pwd'){
+        if(currentYear - year >=65){
+            if(currentMonth > month){
+                result = true
+                isAlready65 =true
+            }else if(currentMonth == month){
+            if(currentDay >= day){
+                result = true
+                isAlready65 = true
             }else{
-                goError()
+                result = false
+            }
+            }
+        }else{
+            result = false
+        }
+    }
+    if(result && isValidEmail){
+        fetch(`../priotizen_app/backend/verified.php?id=${ctrlNo}&type=${condition}`,{
+            method: 'GET'
+        })
+        .then( res => res.json())
+        .then( results=>{
+            if(results=="Success"){
+                console.log(results);
+            fetch('./backend/user.php',{
+            method: 'POST',
+            body: formData
+            })
+            .then( response => response.json())
+            .then( result =>{
+                if(result=="Successful"){
+                    const message =`
+                        Hey there! Congratulations your account is now ready for use in Priotizen! To get started, we need to verify your email address.
+                        Click the link to verify your email address https://pig-tidy-gradually.ngrok-free.app/edsa-priotizen/priotizen_app/signin.php?verify=${user_id} 
+                        Please do not share this link with anyone.
+                        Greetings from Quezone.`
+                    sendEmail(email, "Verify user", message)
+                    goSuccess()
+                    setTimeout(()=>{
+                        const id = `id=${user_id}`
+                        if(condition == "pwd"){
+                            window.location.href=`table_pwd.php?${id}&action=create`
+                        }else{
+                            window.location.href=`table_senior.php?${id}&action=create`
+                        }
+                    },2000)
+                }else{
+                    goError()
+                    console.log(result)
+                    console.log("error here")
+                }
+            })
+            }else{
+                demo.goNotif('Control No or Condition Error ','Number and Condition not exists  in Database','success','pe-7s-delete-user')
             }
         })
+
+
     }else{
-        setTimeout(()=>{
-            demo.goNotif('Fill All ','Required Fields','success','pe-7s-delete-user')
-        },2000)
+        if(!isValidEmail){
+            setTimeout(()=>{
+                    demo.goNotif('Invalid Email ','Email is not Valid and Incorrect','success','pe-7s-delete-user')
+                },1000)
+        }else{
+            if(condition == 'pwd' && !isAlready65){
+                setTimeout(()=>{
+                    demo.goNotif('Fill All ','Age must be at least 65 for PWD','success','pe-7s-delete-user')
+                },1000)
+            }else{
+                setTimeout(()=>{
+                    demo.goNotif('Fill All ','Required Fields','success','pe-7s-delete-user')
+                },1000)
+            }
+        }
+
     }
         
     }

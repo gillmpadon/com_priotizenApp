@@ -288,7 +288,7 @@ extract($assoc);
                                     </div>
                                     <div style="display: flex; gap:1em">
                                         <button type="submit" class="btn btn-info btn-fill pull-right " onclick="editUser()">Edit Profile</button>
-                                        <button type="submit" class="btn btn-success btn-fill pull-right " onclick="verifyUser()" >Verify Profile</button>
+                                        <!-- <button type="submit" class="btn btn-success btn-fill pull-right " onclick="verifyUser()" >Verify Profile</button> -->
                                     </div>
                                 <div class="clearfix"></div>
 

@@ -127,9 +127,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 else{
                     $arr = "Successful";
                 }
-            }else{
+        }else{
                 $arr = mysqli_error($conn);
-            }
+                $arr =  $query1 ;
+        }
         echo json_encode($arr);
 
 }

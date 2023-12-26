@@ -51,14 +51,14 @@ $assoc = mysqli_fetch_assoc($result);
                 </div>
                 <div class="entry emergency">
                     <div class="intro">
-                        <p>Emergency Name</p>
+                        <p>Name</p>
                         <p>:</p>
                     </div>
                     <p><?php echo $assoc['family_name']; ?></p>
                 </div>
                 <div class="entry emergency">
                     <div class="intro">
-                        <p>Family No.</p>
+                        <p>Contact No.</p>
                         <p>:</p>
                     </div>
                     <p><?php echo $assoc['family_contact']; ?></p>
