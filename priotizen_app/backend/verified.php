@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $type = $_REQUEST['type'];
     $fname = $_REQUEST['fname'];
     $lname = $_REQUEST['lname'];
-    $query = "SELECT va.*, v.fname, f.lname from valid_id va where va.user_id = '$id' and va.user_type = '$type' and v.fname = '$fname' and v.lname = '$lname'";
+    $query = "SELECT * from valid_id where user_id = '$id' and user_type = '$type' and fname = '$fname' and lname = '$lname'";
     $result = mysqli_query($conn, $query);
     if(mysqli_num_rows($result)>0){
         echo json_encode("Success");
