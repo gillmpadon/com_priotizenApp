@@ -26,9 +26,7 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
     $endDate = $formatDate->format('Y-m-d');
     $filter_date = " where r.date >= '$startDate' and r.date <= '$endDate'";
 }
- $showTable = false;
-    $showTable = true;
-    $highest_user ="";
+    $account_id = $_GET['account_id'] ?? "";
     $query_user = "SELECT concat(c.lname,' ',c.fname) as name , c.conditions ,co.name as cname, r.date as date, r.discount, r.price from verified c inner join receipt r on r.user_id = c.app_id INNER JOIN company co on co.store_id = r.company_id $filter_date";
     $query_user_max = "SELECT concat(c.lname,' ' , (r.price)) as max_price from verified c inner join receipt r on r.user_id = c.app_id $filter_date order by r.price desc limit 1 ";
     $query_result = mysqli_query($conn,$query_user);

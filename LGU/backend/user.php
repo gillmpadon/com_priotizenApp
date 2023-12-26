@@ -102,7 +102,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $newFilename = $fname . "_dp.". $extension;
             $targetFile = $targetDir . $newFilename;
         }else{
-            $newFilename = "unkown.jpg";
+            $newFilename = "unknown.jpg";
         }
         $arr;
         $query1 = "INSERT INTO verified (fname, mi, lname, email, bdate, status_rs, conditions, gender, number, address, photo, valid_id, app_id, family_name, family_contact, brgy) VALUES ('$fname', '$mi', '$lname', '$email', '$bdate', '$status', '$condition', '$gender', '$number', '$address', '$newFilename', '$valid_id', '$app_id', '$family_name', '$family_contact', '$brgy')";

@@ -226,7 +226,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Control #</label><span class="asterisk">*</span>
+                                                <label>Control Number</label><span class="asterisk">*</span>
                                                 <input type="text" class="form-control" placeholder="Control Number" id="ctrlNo" >
                                             </div>
                                         </div>
@@ -541,7 +541,7 @@
     || family_name == '' || valid_id == '' || image.files[0] == '' ||image.files.length === 0){
         result = false
     }
-    if(condition == 'pwd'){
+    if(condition != 'pwd'){
         if(currentYear - year >=65){
             if(currentMonth > month){
                 result = true
@@ -559,7 +559,7 @@
         }
     }
     if(result && isValidEmail){
-        fetch(`../priotizen_app/backend/verified.php?id=${ctrlNo}&type=${condition}`,{
+        fetch(`../priotizen_app/backend/verified.php?id=${ctrlNo}&type=${condition}&fname=${fname}&lname=${lname}`,{
             method: 'GET'
         })
         .then( res => res.json())
@@ -606,7 +606,7 @@
                     demo.goNotif('Invalid Email ','Email is not Valid and Incorrect','success','pe-7s-delete-user')
                 },1000)
         }else{
-            if(condition == 'pwd' && !isAlready65){
+            if(condition != 'pwd' && !isAlready65){
                 setTimeout(()=>{
                     demo.goNotif('Fill All ','Age must be at least 65 for PWD','success','pe-7s-delete-user')
                 },1000)
