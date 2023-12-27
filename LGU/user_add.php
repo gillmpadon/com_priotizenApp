@@ -226,8 +226,8 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <label>Control Number</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Control Number" id="ctrlNo" >
+                                                <label>ID Number</label><span class="asterisk">*</span>
+                                                <input type="text" class="form-control" placeholder="ID Number" id="ctrlNo" >
                                             </div>
                                         </div>
                                         
@@ -390,7 +390,7 @@
     function sendEmail(to_email, fromname, message) {
         console.log("email is sent")
         const serviceID = 'service_ri5dx1k'; 
-        const templateID = 'template_a22qdxk'; 
+        const templateID = 'template_f1qj767'; 
 
         const emailParams = {
             to_email: to_email,
@@ -542,7 +542,7 @@
         result = false
     }
     if(condition != 'pwd'){
-        if(currentYear - year >=65){
+        if(currentYear - year >=60){
             if(currentMonth > month){
                 result = true
                 isAlready65 =true
@@ -608,7 +608,7 @@
         }else{
             if(condition != 'pwd' && !isAlready65){
                 setTimeout(()=>{
-                    demo.goNotif('Fill All ','Age must be at least 65 for PWD','success','pe-7s-delete-user')
+                    demo.goNotif('Fill All ','Age must be at least 60 for Senior Citizens','success','pe-7s-delete-user')
                 },1000)
             }else{
                 setTimeout(()=>{
