@@ -9,13 +9,13 @@ if(!isset($_SESSION['isLogged'])){
     exit();
 }
 
-
-
 $showTable = false;
 $showTable = true;
-$query_user = "SELECT v.*, t.all_data FROM verified v inner join test t on v.app_id=t.user_id where v.conditions like 'pwd' ";
+$query_user = "SELECT v.*, t.all_data FROM verified v inner join test t on v.app_id=t.user_id where v.conditions like 'senior citizen' ";
 $query_result = mysqli_query($conn,$query_user);
 
+$queryValid = "SELECT * FROM valid_id";
+$resultValid = mysqli_query($conn,$queryValid);
 
 ?>
 <!doctype html>
@@ -125,98 +125,49 @@ $query_result = mysqli_query($conn,$query_user);
                     <div class="col-md-12 ">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Reports</h4>
-                                <p class="category">PWD</p>
+                                <h4 class="title">List of Verified User</h4>
+                                <!-- <p class="category">SENIOR</p> -->
                             </div>
                             <div class="content">
                                 <div class="details">
-                                    <button id="downloadBtn">DOWNLOAD</button>
+                                    <button style="display:none;"  id="downloadBtn">DOWNLOAD</button>
                                     <div class="detailsBtn">
-                                        <select name="filter" class="form-control" id="selectFilter">
-                                            <option value="occupation"  <?php echo ($_GET['select']=='occupation')? 'selected': '' ?>>Occupation</option>
-                                            <option value="education"  <?php echo ($_GET['select']=='education')? 'selected': '' ?>>Educational Attainment</option>
-                                            <option value="typedisability"  <?php echo ($_GET['select']=='typedisability')? 'selected': '' ?>>Type of Disability</option>
-                                            <option value="causedisability"  <?php echo ($_GET['select']=='causedisability')? 'selected': '' ?>>Cause of Disability</option>
-                                            <option value="numberdisability" <?php echo ($_GET['select']=='numberdisability')? 'selected': '' ?>>Disability Number</option>
-                                            <option value="employmentstatus" <?php echo ($_GET['select']=='employmentstatus')? 'selected': '' ?>>Status of Employment</option>
-                                            <option value="employmenttypes"  <?php echo ($_GET['select']=='employmenttypes')? 'selected': '' ?>>Types of Employment</option>
-                                            <option value="employmentcategory" <?php echo ($_GET['select']=='employmentcategory')? 'selected': '' ?>>Category of Employment</option>
+                                        <select style="display:none;" name="filter" class="form-control" id="selectFilter">
+                                            
+                                            <option value="education" <?php echo ($_GET['select']=='education')? 'selected': '' ?>>Educational Attainment</option>
+                                            <option value="technical" <?php echo ($_GET['select']=='technical')? 'selected': '' ?>>Technical Skills</option>
+                                            <option value="economic" <?php echo ($_GET['select']=='economic')? 'selected': '' ?>>Economic Profile</option>
+                                            <option value="monthlyincome" <?php echo ($_GET['select']=='monthlyincome')? 'selected': '' ?>>Monthly Income</option>
+                                            <option value="residing" <?php echo($_GET['select']=='residing')? 'selected': '' ?>>Residing With</option>
+                                            <option value="medicalconcern" <?php echo ($_GET['select']=='medicalconcern')? 'selected': '' ?>>Medical Concern</option>
+                                            <option value="problem" <?php echo ($_GET['select']=='problem')? 'selected': '' ?>>Problem Encounter</option>
+                                            <option value="difficulty" <?php echo ($_GET['select']=='difficulty')? 'selected': '' ?>>Difficulty</option>
                                         </select>
-                                        <button id="filterBtn">Show Data</button>
+                                        <button style="display:none;"  id="filterBtn">Show Data</button>
                                     </div>
                                 </div>
                                 <br>
-                                <?php
-                                $select_col = "";
-                                if($_GET['select'] == "occupation"){
-                                    $select_col = "Occupation";
-                                    $select_data = [ 'managers', 'technicians', 'professional', 'clerical', 'service', 'agricultural','trade', 'machine', 'occupation', 'forces', 'job_others'];
-                                }else if($_GET['select'] == "education"){
-                                    $select_col = "Education";
-                                    $select_data = ['none', 'kindergarten', 'elementary', 'junior high school', 'senior high school', 'college', 'vocational', 'post graduate'];
-                                }else if($_GET['select'] == "typedisability"){
-                                    $select_col = "Type of Disability";
-                                    $select_data = ['deaf', 'intellectual', 'learning', 'mental', 'physical', 'pyschosocial', 'speech', 'visual', 'cancer', 'rare'];
-                                }else if($_GET['select'] == "causedisability"){
-                                    $select_col = "Cause of Disability";
-                                    $select_data = ['congenital', 'adhd', 'cerebral', 'palsy', 'down', 'cause_others_1', 'acquired', 'chronic', 'cerebral', 'injury', 'cause_others_2'];
-                                }else if($_GET['select'] == "numberdisability"){
-                                    $select_col = "Disability Number";
-                                    $select_data = ['valid_id'];
-                                }else if($_GET['select'] == "employmentstatus"){
-                                    $select_col = "Employment Status";
-                                    $select_data = ['employed','unemployed','selfemployed'];
-                                }else if($_GET['select'] == "employmenttypes"){
-                                    $select_col = "Employment Types";
-                                    $select_data = ['regular','seasonal','casual'];
-                                }else if($_GET['select'] == "employmentcategory"){
-                                    $select_col = "Employment Category";
-                                    $select_data = ['government','private'];
-                                }
-                                ?>
                                <table id="tableStore">
                                     <tr class="tablehead">
                                         <td>Name</td>
                                         <td>Address</td>
                                         <td>Gender</td>
                                         <td>Email</td>
-                                        <td>Number</td>
-                                        <td>Birthdate</td>
-                                        <td><?php echo $select_col ?></td>
                                     </tr>
                                     <?php
-                                    function findValue($jsonData, $keys) {
-                                        foreach ($keys as $key) {
-                                            if ($jsonData[$key] == "1") {
-                                                return $key;
-                                            }
-                                        }
-                                    
-                                        return "";
-                                    }
-
-                                    if(mysqli_num_rows($query_result)>0){
-                                        while($row = mysqli_fetch_assoc($query_result) ){
-
+                                    if(mysqli_num_rows($resultValid)>0){
+                                        while($row = mysqli_fetch_assoc($resultValid) ){
                                         ?>
                                             <tr>
-                                                
-                                                <?php
-                                                    $data = json_decode($row['all_data'], true); 
-                                                    $resultsData = findValue($data, $select_data)
-                                                ?>
-                                                <td><?php echo $row['lname']." ".$row['fname'] ?></td>
-                                                <td><?php echo $row['brgy']?></td>
-                                                <td><?php echo $row['gender']?></td>
-                                                <td><?php echo $row['email']?></td>
-                                                <td><?php echo $row['number']?></td>
-                                                <td><?php echo $row['bdate']?></td>
-                                                <td><?php echo $resultsData ?></td>
+                                                <td><?php echo $row['user_id'] ?></td>
+                                                <td><?php echo $row['fname']?></td>
+                                                <td><?php echo $row['lname']?></td>
+                                                <td><?php echo $row['user_type']?></td>
                                             </tr>
                                         <?php
-                                        }}else{
+                                    }}else{
                                             echo '<tr><td colspan="7" style="text-align:center;">No Data</td></tr>';
-                                        }
+                                    }
                                     
                                     ?>
                                </table>
@@ -246,7 +197,7 @@ downloadButton.addEventListener('click', function () {
 const filterBtn = document.querySelector('#filterBtn');
 filterBtn.addEventListener('click', ()=>{
     const selectFilter = document.querySelector('#selectFilter').value;
-    window.location.href = `dash_reports_pwd.php?select=${selectFilter}`;
+    window.location.href = `dash_reports_senior.php?select=${selectFilter}`;
 })
 </script>
 
