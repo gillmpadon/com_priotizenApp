@@ -165,16 +165,17 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                     <?php
                                     if(mysqli_num_rows($query_result)>0){
                                         while($row = mysqli_fetch_assoc($query_result)){
-                                        $bill = floor(($row['price'])/(1-($row['discount']/100)));
+                                        $bill = $row['price'] - ($row['price'] * ($row['discount'] / 100));
+
                                         ?>
                                             <tr>
                                                 <td><?php echo $row['name']?></td>
                                                 <td><?php echo $row['conditions']?></td>
                                                 <td><?php echo $row['cname']?></td>
                                                 <td><?php echo date('M j, g:i a', strtotime($row['date']))?></td>
-                                                <td><?php echo $bill ?></td>
-                                                <td><?php echo $row['discount']?></td>
                                                 <td><?php echo $row['price']?></td>
+                                                <td><?php echo $row['discount']?></td>
+                                                <td><?php echo $bill ?></td>
                                             </tr>
                                         <?php
                                         }}else{
