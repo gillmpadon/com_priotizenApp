@@ -149,10 +149,10 @@ $resultValid = mysqli_query($conn,$queryValid);
                                 <br>
                                <table id="tableStore">
                                     <tr class="tablehead">
-                                        <td>Name</td>
-                                        <td>Address</td>
-                                        <td>Gender</td>
-                                        <td>Email</td>
+                                        <td>Control No</td>
+                                        <td>First Name</td>
+                                        <td>Last Name</td>
+                                        <td>User Type</td>
                                     </tr>
                                     <?php
                                     if(mysqli_num_rows($resultValid)>0){

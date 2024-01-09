@@ -1,6 +1,6 @@
-<footer class="footer">
+<footer class="footer" style="display:none">
             <div class="container-fluid">
-                <nav class="pull-left">
+                <nav class="pull-left" >
                     <ul>
                         <li>
                             <a href="dashboard.php">
@@ -23,12 +23,11 @@
                             </a>
                         </li>
                         <li>
-                          <a href="../priotizen_app/index.html">
+                          <a href="../priotizen_app/index.html" target="_blank">
                                 Priotizen App
                             </a>
                         </li>
                     </ul>
                 </nav>
-                
             </div>
-        </footer>
+</footer>

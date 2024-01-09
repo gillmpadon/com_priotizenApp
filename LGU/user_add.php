@@ -443,6 +443,10 @@
     function generateUID() {
     return Math.random().toString(36).substring(2);
     }
+    function containsOnlyNumbers(input) {
+    const numberRegex = /^(\d+-)*\d+$/ ;
+    return numberRegex.test(input);
+    }
     
     const user_id = generateUID()
     const admin_id = <?php echo $admin_id ?>;
@@ -515,61 +519,72 @@
     }
     if(condition != 'pwd'){
         if(currentYear - year >=60){
-            if(currentMonth > month){
+            if(currentYear - year ==60){
+                if(currentMonth > month){
                 result = true
                 isAlready65 =true
-            }else if(currentMonth == month){
-            if(currentDay >= day){
-                result = true
-                isAlready65 = true
-            }else{
-                result = false
+                }else if(currentMonth == month){
+                if(currentDay >= day){
+                    result = true
+                    isAlready65 = true
+                }else{
+                    result = false
+                }
             }
+            }else{
+                isAlready65 = true
             }
         }else{
             result = false
         }
     }
     if(result && isValidEmail){
-        fetch(`../priotizen_app/backend/verified.php?id=${ctrlNo}&type=${condition}&fname=${fname}&lname=${lname}`,{
+        const isValidNationalId = containsOnlyNumbers(valid_id)
+        if(!isValidNationalId){
+            setTimeout(()=>{
+                    demo.goNotif('Invalid National ID or ID Number ','The Input should not contain any characters','success','pe-7s-delete-user')
+            },1000)
+        }else{
+            fetch(`../priotizen_app/backend/verified.php?id=${ctrlNo}&type=${condition}&fname=${fname}&lname=${lname}`,{
             method: 'GET'
-        })
-        .then( res => res.json())
-        .then( results=>{
-            if(results=="Success"){
-                console.log(results);
-            fetch('./backend/user.php',{
-            method: 'POST',
-            body: formData
             })
-            .then( response => response.json())
-            .then( result =>{
-                if(result=="Successful"){
-                    const message =`
-                        Hey there! Congratulations your account is now ready for use in Priotizen! To get started, we need to verify your email address.
-                        Click the link to verify your email address https://pig-tidy-gradually.ngrok-free.app/edsa-priotizen/priotizen_app/signin.php?verify=${user_id} 
-                        Please do not share this link with anyone.
-                        Greetings from Quezone.`
-                    sendEmail(email, "Verify user", message)
-                    goSuccess()
-                    setTimeout(()=>{
-                        const id = `id=${user_id}`
-                        if(condition == "pwd"){
-                            window.location.href=`table_pwd.php?${id}&action=create`
-                        }else{
-                            window.location.href=`table_senior.php?${id}&action=create`
-                        }
-                    },2000)
+            .then( res => res.json())
+            .then( results=>{
+                if(results=="Success"){
+                    console.log(results);
+                fetch('./backend/user.php',{
+                method: 'POST',
+                body: formData
+                })
+                .then( response => response.json())
+                .then( result =>{
+                    if(result=="Successful"){
+                        const message =`
+                            Hey there! Congratulations your account is now ready for use in Priotizen! To get started, we need to verify your email address.
+                            Click the link to verify your email address https://pig-tidy-gradually.ngrok-free.app/edsa-priotizen/priotizen_app/signin.php?verify=${user_id} 
+                            Please do not share this link with anyone.
+                            Greetings from Quezone.`
+                        sendEmail(email, "Verify user", message)
+                        goSuccess()
+                        setTimeout(()=>{
+                            const id = `id=${user_id}`
+                            // if(condition == "pwd"){
+                            //     window.location.href=`table_pwd.php?${id}&action=create`
+                            // }else{
+                            //     window.location.href=`table_senior.php?${id}&action=create`
+                            // }
+                        },2000)
+                    }else{
+                        goError()
+                        console.log(result)
+                        console.log("error here")
+                    }
+                })
                 }else{
-                    goError()
-                    console.log(result)
-                    console.log("error here")
+                    demo.goNotif('Control No or Condition Error ','Number and Condition not exists  in Database','success','pe-7s-delete-user')
                 }
             })
-            }else{
-                demo.goNotif('Control No or Condition Error ','Number and Condition not exists  in Database','success','pe-7s-delete-user')
-            }
-        })
+        }
 
 
     }else{
@@ -579,6 +594,7 @@
                 },1000)
         }else{
             if(condition != 'pwd' && !isAlready65){
+                console.log(first)
                 setTimeout(()=>{
                     demo.goNotif('Fill All ','Age must be at least 60 for Senior Citizens','success','pe-7s-delete-user')
                 },1000)

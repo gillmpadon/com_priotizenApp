@@ -136,6 +136,7 @@ $result = mysqli_query($conn,$query);
                                         while($row = mysqli_fetch_assoc($result)){
                                             extract($row);
                                             $color = $account_status!="Pending"? "#fba423" : "#f01c05";
+                                            $account_status = $account_status=="Pending"? "Pending":"Accessed";
                                             echo "<tr class='row_data' onclick=\"goToPage('$account_id')\">
                                             <td>$count</td>
                                             <td>$fname $mi $lname</td>

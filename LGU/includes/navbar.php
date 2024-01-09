@@ -68,6 +68,37 @@
                     </ul> -->
 
                     <ul class="nav navbar-nav navbar-right" style="display:flex; align-items:center;">
+                        <?php
+                        if(isset($_SESSION['isLogged'])){
+                        ?>
+                            <li>
+                                <a href="dashboard.php">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="table.php">
+                                    User List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="table_user.php">
+                                    Admin List
+                                </a>
+                            </li>
+                            <li>
+                                <a href="list.php">
+                                    Valid ID List
+                                </a>
+                            </li>
+                            <li>
+                            <a href="../priotizen_app/index.html" target="_blank">
+                                    Priotizen App
+                                </a>
+                            </li>
+                        <?php
+                        }
+                        ?>
                         <li>
                            <a href="user_edit_admin.php?account_type=admin&user_id=<?php echo $_SESSION['user_id']; ?>">
                                     <?php

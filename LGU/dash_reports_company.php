@@ -16,10 +16,12 @@ $startDateStr = $startDate->format('Y-m-d');
 $startDate = $endDateStr;
 $endDate = $startDateStr;
 $filter_date = " ";
-if(isset($_GET['startDate']) && $_GET['endDate']){
+if(isset($_GET['startDate']) && $_GET['endDate'] && $_GET['store_id']){
     $startDate = $_GET['startDate'];
     $endDate = $_GET['endDate'];
-    $filter_date = " where r.date >= '$startDate' and r.date <= '$endDate'";
+    $store_id = $_GET['store_id'];
+    $store_pick = $store_id=="all"? "": "and c.store_id= '$store_id'";
+    $filter_date = " where r.date >= '$startDate' and r.date <= '$endDate' $store_pick";
 }
  $showTable = false;
     $showTable = true;
@@ -34,6 +36,8 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
     }else{
         $highest_user = "None 0";
     }
+    $queryStore = "SELECT c.name , c.store_id from company c inner join account a on c.store_id = a.account_id";
+    $resultStore = mysqli_query($conn, $queryStore);
     // echo $query_user;
 ?>
 <!doctype html>
@@ -147,10 +151,22 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                             <div class="content">
                                 <div class="details">
                                     <button id="downloadBtn">DOWNLOAD</button>
+                                    <select class="form-control" name="shopname" id="store_id" style="width: 20em">
+                                        <option value="all" selected>All Store</option>
+                                    <?php
+                                    if(mysqli_num_rows($resultStore)>0){
+                                        while($assocStore = mysqli_fetch_assoc($resultStore)){
+                                            $store_id = $assocStore['store_id'];
+                                            $store_name = $assocStore['name'];
+                                            echo "<option value='$store_id'>$store_name</option>";
+                                        }
+                                    }else{
+                                        echo "<option value='none'>None</option>";
+                                    }
+                                    ?>
+
+                                    </select>
                                     <div class="date_details">
-                                        <?php
-                                        
-                                        ?>
                                         <input type="date" name="" id="startDate" <?php echo $filter_date == "" ? "" : 'value="' . date('Y-m-d', strtotime($startDate)) . '"'; ?>>
                                         <p>To</p>
                                         <input type="date" name="" id="endDate" <?php echo $filter_date == "" ? "" : 'value="' . date('Y-m-d', strtotime($endDate)) . '"'; ?>>
@@ -167,7 +183,7 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                         <td>Name</td>
                                         <td>Address</td>
                                         <td>Contact</td>
-                                        <td>Account ID</td>
+                                        <td>Store ID</td>
                                         <td>Date</td>
                                         <td>Discounts</td>
                                         <td>Payments</td>
@@ -220,7 +236,8 @@ const filterBtn = document.querySelector('#filterBtn');
 filterBtn.addEventListener('click', ()=>{
     const startDate = document.querySelector('#startDate').value;
     const endDate = document.querySelector('#endDate').value;
-    window.location.href = `dash_reports_user.php?startDate=${startDate}&endDate=${endDate}`;
+    const store_id = document.querySelector('#store_id').value;
+    window.location.href = `dash_reports_company.php?startDate=${startDate}&endDate=${endDate}&store_id=${store_id}`;
 })
 </script>
 
