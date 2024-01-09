@@ -158,6 +158,30 @@
     </div>
 </div>
 
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script> 
+<script>
+        emailjs.init('wNOaPZ8yBLfSbRF8O'); 
+
+function sendEmail(to_email, fromname, message) {
+    console.log("email is sent")
+    const serviceID = 'service_ri5dx1k'; 
+    const templateID = 'template_f1qj767'; 
+
+    const emailParams = {
+        to_email: to_email,
+        from_name: fromname, 
+        message: message,
+    };
+
+    emailjs.send(serviceID, templateID, emailParams)
+        .then(function(response) {
+            console.log('Email sent successfully!', response);
+        })
+        .catch(function(error) {
+            console.error('Error sending email:', error);
+        });
+}
+</script>
 <script>
     const setImage = document.getElementById('setImage')
     const imageInput = document.getElementById('imageInput');
@@ -223,6 +247,12 @@
             .then(response => response.json())
             .then( result => {
                 if(result=="Successful"){
+                    const message =`
+                        Hey there! Congratulations your account which is a Store account is now ready for use in Priotizen! To get started, we need to verify your email address.
+                        Click the link to verify your email address https://pig-tidy-gradually.ngrok-free.app/edsa-priotizen/priotizen_app/signin.php?verify=${unique_id} 
+                        Please do not share this link with anyone.
+                        Greetings from Quezone.`
+                    sendEmail(email.value, "Verify Store", message)
                 goSuccess()
                 setTimeout(()=>{
                     window.location.href = "table_user.php"
