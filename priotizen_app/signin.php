@@ -82,12 +82,17 @@
               }
               
             }else if(account_type=="company"){
-              createToast("success","Login Successful")
-              const {company_id , ...rest} = result
-              setCookie('company', company_id)
-              setTimeout(()=>{
-              window.location.href = `../store/${(isfirstlogin =="0")? "changepass" :"entry"}.php?company_id=${company_id}&user_type=store`;
-            },2000)
+              const {company_id , account_status, ...rest} = result
+              console.log(result)
+              if(account_status =="Pending"){
+                createToast("success","Account not Verified")
+              }else{
+                createToast("success","Login Successful")
+                setCookie('company', company_id)
+                setTimeout(()=>{
+                window.location.href = `../store/${(isfirstlogin =="0")? "changepass" :"entry"}.php?company_id=${company_id}&user_type=store`;
+              },2000)
+              }
             }
             else{
               createToast("success","Login Successful")

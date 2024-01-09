@@ -28,12 +28,13 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
                 $arr["isVerified"] = $account_status;
             }  else if($assoc['account_type'] == 'company'){
                 $arr["account_type"] = $assoc['account_type'];
-                $queryAccount = "SELECT c.*, a.isfirstlogin FROM company c inner join account a on c.store_id= a.account_id where a.email = '$email'";
+                $queryAccount = "SELECT c.*, a.isfirstlogin, a.account_status FROM company c inner join account a on c.store_id= a.account_id where a.email = '$email'";
                 $resultAcccount = mysqli_query($conn, $queryAccount);
                 $assocAccount = mysqli_fetch_assoc($resultAcccount);
                 $arr["message"] = "Successful";
                 $arr['company_id'] = $assocAccount['store_id'];
                 $arr["isfirstlogin"] = $assocAccount['isfirstlogin'];
+                $arr["account_status"] = $assocAccount['account_status'];
             }else{
                 $arr["message"] = "Successful";
                 $arr["account_type"] = "admin";
