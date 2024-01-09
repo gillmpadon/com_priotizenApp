@@ -594,7 +594,6 @@
                 },1000)
         }else{
             if(condition != 'pwd' && !isAlready65){
-                console.log(first)
                 setTimeout(()=>{
                     demo.goNotif('Fill All ','Age must be at least 60 for Senior Citizens','success','pe-7s-delete-user')
                 },1000)

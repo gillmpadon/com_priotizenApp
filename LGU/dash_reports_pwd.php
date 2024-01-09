@@ -13,7 +13,7 @@ if(!isset($_SESSION['isLogged'])){
 
 $showTable = false;
 $showTable = true;
-$query_user = "SELECT v.*, t.all_data FROM verified v inner join test t on v.app_id=t.user_id where v.conditions like 'pwd' ";
+$query_user = "SELECT v.*, t.all_data FROM verified v inner join test t on v.app_id=t.user_id inner join account a on a.account_id = v.app_id where v.conditions like 'pwd' ";
 $query_result = mysqli_query($conn,$query_user);
 
 
