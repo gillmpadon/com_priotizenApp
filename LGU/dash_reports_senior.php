@@ -173,6 +173,7 @@ $query_result = mysqli_query($conn,$query_user);
                                 ?>
                                <table id="tableStore">
                                     <tr class="tablehead">
+                                        <td>No</td>
                                         <td>Name</td>
                                         <td>Address</td>
                                         <td>Gender</td>
@@ -193,6 +194,7 @@ $query_result = mysqli_query($conn,$query_user);
                                     }
 
                                     if(mysqli_num_rows($query_result)>0){
+                                        $counter = 1;
                                         while($row = mysqli_fetch_assoc($query_result) ){
 
                                         ?>
@@ -202,6 +204,7 @@ $query_result = mysqli_query($conn,$query_user);
                                                     $data = json_decode($row['all_data'], true); 
                                                     $resultsData = findValue($data, $select_data)
                                                 ?>
+                                                <td><?php echo $counter ?></td>
                                                 <td><?php echo $row['lname']." ".$row['fname'] ?></td>
                                                 <td><?php echo $row['brgy']?></td>
                                                 <td><?php echo $row['gender']?></td>
@@ -211,6 +214,7 @@ $query_result = mysqli_query($conn,$query_user);
                                                 <td><?php echo str_replace('_', ' ', $resultsData); ?></td>
                                             </tr>
                                         <?php
+                                        $counter++;
                                         }}else{
                                             echo '<tr><td colspan="7" style="text-align:center;">No Data</td></tr>';
                                         }

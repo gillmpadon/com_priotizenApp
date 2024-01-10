@@ -191,9 +191,11 @@ if(isset($_GET['startDate']) && $_GET['endDate'] && $_GET['store_id']){
                                     <?php
                                     
                                     if(mysqli_num_rows($query_result)>0){
+                                        $counter = 1;
                                         while($row = mysqli_fetch_assoc($query_result)){
                                         ?>
                                             <tr>
+                                                <td><?php echo $counter ?></td>
                                                 <td><?php echo $row['name']?></td>
                                                 <td><?php echo $row['address']?></td>
                                                 <td><?php echo $row['number']?></td>
@@ -203,6 +205,7 @@ if(isset($_GET['startDate']) && $_GET['endDate'] && $_GET['store_id']){
                                                 <td><?php echo $row['price']?></td>
                                             </tr>
                                         <?php
+                                        $counter++;
                                         }}else{
                                             echo '<tr><td colspan="7" style="text-align:center;">No Data</td></tr>';
                                         }
