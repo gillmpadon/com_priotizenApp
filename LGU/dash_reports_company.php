@@ -180,6 +180,7 @@ if(isset($_GET['startDate']) && $_GET['endDate'] && $_GET['store_id']){
                                 <br>
                                <table id="tableStore">
                                     <tr class="tablehead">
+                                        <td>No.</td>    
                                         <td>Name</td>
                                         <td>Address</td>
                                         <td>Contact</td>
@@ -187,6 +188,7 @@ if(isset($_GET['startDate']) && $_GET['endDate'] && $_GET['store_id']){
                                         <td>Date</td>
                                         <td>Discounts</td>
                                         <td>Payments</td>
+                                
                                     </tr>
                                     <?php
                                     
