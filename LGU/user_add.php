@@ -209,7 +209,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>National ID</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter National ID Number" id="valid_id" >
+                                                <input type="number" class="form-control" placeholder="Enter National ID Number" id="valid_id" >
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -227,7 +227,7 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>ID Number</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="ID Number" id="ctrlNo" >
+                                                <input type="number" class="form-control" placeholder="ID Number" id="ctrlNo" >
                                             </div>
                                         </div>
                                         
@@ -454,7 +454,7 @@
     app_id.value =user_id
 
     console.log({ user_id, admin_id });
-
+    
     function createProfile(){
     const fname = document.getElementById('fname').value
     const mi = document.getElementById('mi').value;
