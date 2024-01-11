@@ -237,7 +237,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Nationality</label><span class="asterisk">*</span>
-                                                <input type="text" class="form-control" placeholder="Enter nationality" id="nationality">
+                                                <input type="text" class="form-control" placeholder="Enter nationality" id="nationality" value="Filipino" readonly>
                                             </div>
                                         </div>
                                         <div class="col-md-4">

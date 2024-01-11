@@ -168,6 +168,7 @@ if(isset($_GET['startDate']) && $_GET['endDate']){
                                 <br>
                                <table id="tableStore">
                                     <tr class="tablehead">
+                                        <td>No</td>
                                         <td>Name</td>
                                         <td>Address</td>
                                         <td>Contact</td>
